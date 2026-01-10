@@ -1,0 +1,223 @@
+:root {
+    --color-primary: #71e29693; /* Navbar, primary buttons */
+    --color-secondary: #6c757d; /* Secondary buttons, muted text */
+    --color-accent: #9a970c; /* Favorites, highlights */
+    --color-bg: #f8f9fa; /* Body, cards background */
+    --color-text: #08e958 /* Main text */
+    --color-footer: #212121; /* Footer background */
+    --color-footer-text: #066923a9; /* Footer text */
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--color-primary) !important;
+}
+
+    .navbar .nav-link,
+    .navbar-brand {
+        color: #066923a9 !important;
+    }
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-warning {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
+
+/* Cards background */
+.card {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border-radius: 15px;
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+    .card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+
+/* Footer */
+footer {
+    background-color: var(--color-footer);
+    color: var(--color-footer-text);
+}
+
+/* Hero Section */
+.welcome-section {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 70%);
+    color: var(--color-text);
+    border-radius: 16px;
+    padding: 20px 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+    .welcome-section h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .welcome-section p.lead {
+        font-size: 1.25rem;
+        margin-bottom: 15px;
+    }
+
+    .welcome-section .btn {
+        padding: 8px 16px;
+        font-size: 1rem;
+    }
+
+/* Explore Section */
+.explore-section {
+    background-color: #f4fbe5;
+    padding: 20px 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+    .explore-section .section-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .explore-section img {
+        max-width: 90%;
+        max-height: 150px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .explore-section h5 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .explore-section p {
+        font-size: 0.95rem;
+        color: #555;
+    }
+
+/* Footer Quote */
+#footer-quote {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--color-footer-text);
+}
+
+/* Hover Effects */
+.hover-scale {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .hover-scale:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+.btn-heart {
+    transition: transform 0.2s;
+}
+
+    .btn-heart:active {
+        transform: scale(1.6);
+    }
+
+.active-heart {
+    transform: scale(1.4);
+    transition: transform 0.3s;
+}
+
+/* Form Controls */
+.form-control {
+    background-color: #0b4a0e;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.form-label-add-edit {
+    font-weight: bold;
+    color: #495057;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+    outline: none;
+}
+
+/* Quote Button */
+#new-quote-btn {
+    transition: all 0.3s ease;
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+}
+
+    #new-quote-btn:hover {
+        color: #000000;
+        background-color: #ffffff;
+        border-color: #000000;
+        transform: scale(1.1);
+    }
+
+/* Navbar Links */
+.navbar .nav-link {
+    color: #ffffff !important;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+}
+
+/* Responsive Hero */
+@media (max-width: 768px) {
+    .welcome-section h1 {
+        font-size: 2rem;
+    }
+
+    .welcome-section p.lead {
+        font-size: 1rem;
+    }
+}
+
+@media (max-height: 800px) {
+    .welcome-section {
+        padding: 15px;
+    }
+
+    .explore-section {
+        padding: 15px;
+    }
+
+        .explore-section .section-title {
+            font-size: 1.5rem;
+        }
+
+        .explore-section img {
+            max-height: 120px;
+        }
+
+        .explore-section h5 {
+            font-size: 1rem;
+        }
+
+        .explore-section p {
+            font-size: 0.9rem;
+        }
+}

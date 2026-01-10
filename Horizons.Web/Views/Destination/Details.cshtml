@@ -1,0 +1,47 @@
+﻿@using Horizons.Web.ViewModels.Destination
+@model DestinationDetailsViewModel
+
+@{
+    ViewData["Title"] = "Destination Details";
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-5 text-center">
+        <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "~/images/default-image.jpg" : Model.ImageUrl)"
+             class="img-fluid rounded shadow-sm mb-3" style="max-height:300px; object-fit:cover;"
+             alt="@Model.Name" />
+    </div>
+    <div class="col-md-6">
+        <h2>@Model.Name</h2>
+        <p>@Model.Description</p>
+        <p><small>Terrain: @Model.TerrainName</small></p>
+        <p><small>Published On: @Model.PublishedOn</small></p>
+        <p><small>Publisher: @Model.PublisherName</small></p>
+
+        <div class="d-flex gap-2 mt-3">
+            <a asp-controller="Destination" asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+
+            @if (User.Identity.IsAuthenticated && !Model.IsUserPublisher)
+            {
+                <form asp-action="@(Model.IsUserFavourite ? "RemoveFromFavorites" : "AddToFavorites")" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn @(Model.IsUserFavourite ? "btn-danger" : "btn-warning") btn-heart">
+                        @(Model.IsUserFavourite ? "💔 Remove from Favorites" : "❤️ Add to Favorites")
+                    </button>
+                </form>
+            }
+
+            @if (Model.IsUserPublisher)
+            {
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Delete
+                </a>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@using Horizons.Web.ViewModels.Destination;
+@model DestinationDeleteInputModel
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <h3>@Model.Name</h3>
+                <p><strong>Published By:</strong> @Model.Publisher</p>
+                <p class="text-danger mt-3">Are you sure you want to delete <strong>@Model.Name</strong>?</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Confirm Delete
+                    </button>
+                </form>
+                <a asp-controller="Destination" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-warning">
+                    <i class="fas fa-times-circle"></i> Cancel
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
