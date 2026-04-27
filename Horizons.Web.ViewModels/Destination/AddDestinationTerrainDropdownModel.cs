@@ -8,7 +8,7 @@ namespace Horizons.Web.ViewModels.Destination
 {
     public class AddDestinationTerrainDropdownModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; } = null!;
     }
 }

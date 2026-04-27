@@ -22,18 +22,105 @@ namespace Horizons.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Horizons.Data.Models.Destination", b =>
+            modelBuilder.Entity("Horizons.Data.Models.AppUser", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AlternateEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Horizons.Data.Models.Destination", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Continent")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
@@ -60,9 +147,6 @@ namespace Horizons.Data.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<DateTime>("PublishedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("PublisherId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -70,13 +154,18 @@ namespace Horizons.Data.Migrations
                     b.Property<int?>("Rating")
                         .HasColumnType("int");
 
-                    b.Property<int>("TerrainId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TerrainId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double?>("TravelDistance")
                         .HasColumnType("float");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("PublisherId");
 
@@ -87,73 +176,86 @@ namespace Horizons.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("14026a35-d7e6-4fa1-88bd-ba5cafcefd0e"),
+                            CreatedAt = new DateTime(2023, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A beautiful sunny beach with golden sands and clear waters.",
                             ImageUrl = "https://example.com/images/sunny_beach.jpg",
                             IsDeleted = false,
                             Name = "Sunny Beach",
-                            PublishedOn = new DateTime(2023, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                            TerrainId = 2
+                            TerrainId = new Guid("4c8d7f66-c207-42f3-9891-4e0b61cf893d")
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("21255192-cd9f-4d6a-9bab-701ca83d1112"),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A range of mist-covered mountains perfect for hiking and adventure.",
                             ImageUrl = "https://example.com/images/misty_mountains.jpg",
                             IsDeleted = false,
                             Name = "Misty Mountains",
-                            PublishedOn = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                            TerrainId = 1
+                            TerrainId = new Guid("c05899b8-76bd-4871-b7c9-646371fd6075")
                         },
                         new
                         {
-                            Id = 3,
+                            Id = new Guid("eb79643c-47c0-4b16-a9b7-229234880a56"),
+                            CreatedAt = new DateTime(2022, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A stunning historical landmark nestled in the Rila Mountains.",
                             ImageUrl = "https://img.etimg.com/thumb/msid-112831459,width-640,height-480,imgsize-2180890,resizemode-4/rila-monastery-bulgaria.jpg",
                             IsDeleted = false,
                             Name = "Rila Monastery",
-                            PublishedOn = new DateTime(2022, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                            TerrainId = 1
+                            TerrainId = new Guid("aaeb2ecb-afbc-43b3-a3e5-eb0439a0d995")
                         },
                         new
                         {
-                            Id = 4,
+                            Id = new Guid("8530f1c7-4873-4691-9ab3-fb22751621e8"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The sand at Durankulak Beach showcases a pristine golden color, creating a beautiful contrast against the azure waters of the Black Sea.",
                             ImageUrl = "https://travelplanner.ro/blog/wp-content/uploads/2023/01/durankulak-beach-1-850x550.jpg.webp",
                             IsDeleted = false,
                             Name = "Durankulak Beach",
-                            PublishedOn = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                            TerrainId = 2
+                            TerrainId = new Guid("31416cb5-f3a6-4f62-8d69-8feab0abba7f")
                         },
                         new
                         {
-                            Id = 5,
+                            Id = new Guid("0b295dfb-0e57-4155-a6c7-6d5e623d6568"),
+                            CreatedAt = new DateTime(2025, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A mysterious cave located in the Rhodope Mountains.",
                             ImageUrl = "https://detskotobnr.binar.bg/wp-content/uploads/2017/11/Diavolsko_garlo_17.jpg",
                             IsDeleted = false,
                             Name = "Devil's Throat Cave",
-                            PublishedOn = new DateTime(2025, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                            TerrainId = 7
+                            TerrainId = new Guid("84e1827c-2788-4cbb-9420-fd050dd6c66f")
                         });
                 });
 
             modelBuilder.Entity("Horizons.Data.Models.Terrain", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -162,42 +264,58 @@ namespace Horizons.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("3873f343-7bd1-4793-80f0-c152d91bfcb3"),
+                            CreatedAt = new DateTime(2026, 4, 27, 9, 27, 45, 934, DateTimeKind.Utc).AddTicks(38),
+                            IsDeleted = false,
                             Name = "Mountain"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("d5e2ec4d-bb8a-4386-913f-3062bd639dc3"),
+                            CreatedAt = new DateTime(2026, 4, 27, 9, 27, 45, 934, DateTimeKind.Utc).AddTicks(46),
+                            IsDeleted = false,
                             Name = "Beach"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = new Guid("db29456c-4c44-4941-9a42-93a4460312ba"),
+                            CreatedAt = new DateTime(2026, 4, 27, 9, 27, 45, 934, DateTimeKind.Utc).AddTicks(49),
+                            IsDeleted = false,
                             Name = "Forest"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = new Guid("5bd0947b-e47d-470e-96d7-eae80e99d030"),
+                            CreatedAt = new DateTime(2026, 4, 27, 9, 27, 45, 934, DateTimeKind.Utc).AddTicks(56),
+                            IsDeleted = false,
                             Name = "Plain"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = new Guid("72620155-9f88-400a-8006-5884f1ce989f"),
+                            CreatedAt = new DateTime(2026, 4, 27, 9, 27, 45, 934, DateTimeKind.Utc).AddTicks(59),
+                            IsDeleted = false,
                             Name = "Urban"
                         },
                         new
                         {
-                            Id = 6,
+                            Id = new Guid("a2f2d87a-c331-42b5-b327-7e608b1530e2"),
+                            CreatedAt = new DateTime(2026, 4, 27, 9, 27, 45, 934, DateTimeKind.Utc).AddTicks(63),
+                            IsDeleted = false,
                             Name = "Village"
                         },
                         new
                         {
-                            Id = 7,
+                            Id = new Guid("6ecb2163-b17d-461a-92f8-d9ab07af361d"),
+                            CreatedAt = new DateTime(2026, 4, 27, 9, 27, 45, 934, DateTimeKind.Utc).AddTicks(65),
+                            IsDeleted = false,
                             Name = "Cave"
                         },
                         new
                         {
-                            Id = 8,
+                            Id = new Guid("9a41fd60-2b16-4230-84bd-96f335d64358"),
+                            CreatedAt = new DateTime(2026, 4, 27, 9, 27, 45, 934, DateTimeKind.Utc).AddTicks(69),
+                            IsDeleted = false,
                             Name = "Canyon"
                         });
                 });
@@ -207,17 +325,12 @@ namespace Horizons.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("DestinationId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DestinationId1")
-                        .HasColumnType("int");
+                    b.Property<Guid>("DestinationId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "DestinationId");
 
                     b.HasIndex("DestinationId");
-
-                    b.HasIndex("DestinationId1");
 
                     b.ToTable("UsersDestinations");
                 });
@@ -283,12 +396,10 @@ namespace Horizons.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -300,12 +411,10 @@ namespace Horizons.Data.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -323,35 +432,26 @@ namespace Horizons.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("IdentityUser");
 
                     b.HasData(
                         new
                         {
                             Id = "7699db7d-964f-4782-8209-d76562e0fece",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "639842ca-e938-4fbc-ae53-2672aa7744d7",
+                            ConcurrencyStamp = "dda3e2e1-b68e-40fe-98eb-5cd198c3f0d5",
                             Email = "admin@horizons.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@HORIZONS.COM",
                             NormalizedUserName = "ADMIN@HORIZONS.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEDclj+NdzkBSSiv1Z2sFipEBtj+W3SjIkBAQcsYEjB03xgqmXIdXSE0cyK+qpC2dQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMZpM/WmTxyFMbjozvLFmvWqdZAMSzdBL6LZeOzfYMb1rfVsb8h+jBtgzCaEn2oepg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "275da879-7f90-491d-b2a4-49bc0e6b7e35",
+                            SecurityStamp = "56f3aa16-909f-44b3-acd9-0bda929bc994",
                             TwoFactorEnabled = false,
                             UserName = "admin@horizons.com"
                         });
@@ -444,7 +544,11 @@ namespace Horizons.Data.Migrations
 
             modelBuilder.Entity("Horizons.Data.Models.Destination", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Publisher")
+                    b.HasOne("Horizons.Data.Models.AppUser", null)
+                        .WithMany("FavoriteDestinations")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("Horizons.Data.Models.AppUser", "Publisher")
                         .WithMany()
                         .HasForeignKey("PublisherId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -469,12 +573,8 @@ namespace Horizons.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Horizons.Data.Models.Destination", null)
-                        .WithMany("Favorites")
-                        .HasForeignKey("DestinationId1");
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
+                    b.HasOne("Horizons.Data.Models.AppUser", "User")
+                        .WithMany("UsersDestinations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -495,7 +595,7 @@ namespace Horizons.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Horizons.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -504,7 +604,7 @@ namespace Horizons.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Horizons.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -519,7 +619,7 @@ namespace Horizons.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Horizons.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -528,17 +628,22 @@ namespace Horizons.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Horizons.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Horizons.Data.Models.AppUser", b =>
+                {
+                    b.Navigation("FavoriteDestinations");
+
+                    b.Navigation("UsersDestinations");
+                });
+
             modelBuilder.Entity("Horizons.Data.Models.Destination", b =>
                 {
-                    b.Navigation("Favorites");
-
                     b.Navigation("UsersDestinations");
                 });
 

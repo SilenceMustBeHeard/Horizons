@@ -1,6 +1,5 @@
 ﻿using Horizons.Data;
 using Horizons.Data.Models;
-
 using Horizons.Services.Core.Interfaces;
 using Horizons.Web.ViewModels.Destination;
 using Horizons.Web.ViewModels.Map;
@@ -9,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Horizons.Services.Core.Implementations;
@@ -17,41 +15,33 @@ namespace Horizons.Services.Core.Implementations;
 public class DestinationService : IDestinationService
 {
     private readonly ApplicationDbContext context;
-    private readonly UserManager<IdentityUser> userManager;
+    private readonly UserManager<AppUser> userManager;
 
     public DestinationService(ApplicationDbContext context,
-        UserManager<IdentityUser> userManager)
+        UserManager<AppUser> userManager)
     {
         this.context = context;
         this.userManager = userManager;
     }
 
-    public async Task<bool> AddDestinationAsync(
-  DestinationAddInputModel model,
-  string userId)
+    public async Task<bool> AddDestinationAsync(DestinationAddInputModel model, string userId)
     {
         if (string.IsNullOrEmpty(userId))
-        {
             return false;
-        }
 
-        var userExists = await userManager.Users
-            .AnyAsync(u => u.Id == userId);
-
+        var userExists = await userManager.Users.AnyAsync(u => u.Id == userId);
         if (!userExists)
-        {
             return false;
-        }
 
         var destination = new Destination
         {
+            Id = Guid.NewGuid(),
             Name = model.Name,
             Description = model.Description,
             TerrainId = model.TerrainId,
             ImageUrl = model.ImageUrl,
-            PublishedOn = model.PublishedOn,
+            CreatedAt = DateTime.UtcNow,
             PublisherId = userId,
-
             Country = model.Country,
             Continent = model.Continent,
             Latitude = model.Latitude,
@@ -76,25 +66,24 @@ public class DestinationService : IDestinationService
         destination.Description = model.Description;
         destination.ImageUrl = model.ImageUrl;
         destination.TerrainId = model.TerrainId;
-        destination.PublishedOn = model.PublishedOn;
-
+        destination.UpdatedAt = DateTime.UtcNow;
         destination.Country = model.Country;
         destination.Continent = model.Continent;
         destination.Latitude = model.Latitude;
         destination.Longitude = model.Longitude;
         destination.TravelDistance = model.TravelDistance;
 
-        await context.SaveChangesAsync();
-        return true;
+        return await context.SaveChangesAsync() > 0;
     }
 
-    public async Task<IEnumerable<DestinationIndexViewModel>> GetAllDestinationsAsync(string userId)
+    public async Task<IEnumerable<DestinationIndexViewModel>> GetAllDestinationsAsync(string? userId)
     {
         bool isUserValid = !string.IsNullOrEmpty(userId);
 
         return await context.Destinations
             .Include(d => d.Terrain)
             .Include(d => d.UsersDestinations)
+            .Where(d => !d.IsDeleted)
             .AsNoTracking()
             .Select(d => new DestinationIndexViewModel
             {
@@ -109,18 +98,18 @@ public class DestinationService : IDestinationService
             .ToListAsync();
     }
 
-    public async Task<DestinationDetailsViewModel?> GetDestinationDetailsByIdAsync(
-    int? id, string? userId)
+    public async Task<DestinationDetailsViewModel?> GetDestinationDetailsByIdAsync(Guid? id, string? userId)
     {
         if (!id.HasValue)
             return null;
 
         var destination = await context.Destinations
-    .Include(d => d.Terrain)
-    .Include(d => d.UsersDestinations)
-    .Include(d => d.Publisher)
-    .AsNoTracking()
-    .FirstOrDefaultAsync(d => d.Id == id);
+            .Include(d => d.Terrain)
+            .Include(d => d.UsersDestinations)
+            .Include(d => d.Publisher)
+            .Where(d => !d.IsDeleted)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(d => d.Id == id);
 
         if (destination == null)
             return null;
@@ -134,20 +123,21 @@ public class DestinationService : IDestinationService
             Description = destination.Description,
             ImageUrl = destination.ImageUrl,
             TerrainName = destination.Terrain.Name,
-            PublishedOn = destination.PublishedOn.ToString("dd.MM.yyyy"),
-            PublisherName = destination.Publisher.UserName!,
-
+            PublishedOn = destination.CreatedAt.ToString("dd.MM.yyyy"),
+            PublisherName = destination.Publisher?.UserName ?? "Unknown",
             IsUserPublisher = isUserValid && destination.PublisherId == userId,
-            IsUserFavourite = isUserValid &&
-        destination.UsersDestinations.Any(ud => ud.UserId == userId)
+            IsUserFavourite = isUserValid && destination.UsersDestinations.Any(ud => ud.UserId == userId)
         };
     }
 
-    public async Task<DestinationEditInputModel?> GetDestinationForEditAsync(string userId, int id)
+    public async Task<DestinationEditInputModel?> GetDestinationForEditAsync(string? userId, Guid id)
     {
+        if (string.IsNullOrEmpty(userId))
+            return null;
+
         return await context.Destinations
             .AsNoTracking()
-            .Where(d => d.Id == id && d.PublisherId == userId)
+            .Where(d => d.Id == id && d.PublisherId == userId && !d.IsDeleted)
             .Select(d => new DestinationEditInputModel
             {
                 Id = d.Id,
@@ -155,8 +145,7 @@ public class DestinationService : IDestinationService
                 Description = d.Description,
                 ImageUrl = d.ImageUrl,
                 TerrainId = d.TerrainId,
-                PublishedOn = d.PublishedOn,
-
+                PublishedOn = d.CreatedAt,
                 Country = d.Country ?? string.Empty,
                 Continent = d.Continent ?? string.Empty,
                 Latitude = d.Latitude ?? 0,
@@ -166,11 +155,11 @@ public class DestinationService : IDestinationService
             .FirstOrDefaultAsync();
     }
 
-    public async Task<bool> IsUserPublisherAsync(int destinationId, string userId)
+    public async Task<bool> IsUserPublisherAsync(Guid destinationId, string userId)
     {
         var destination = await context.Destinations
             .AsNoTracking()
-            .SingleOrDefaultAsync(d => d.Id == destinationId);
+            .FirstOrDefaultAsync(d => d.Id == destinationId && !d.IsDeleted);
 
         if (destination == null)
             return false;
@@ -178,22 +167,25 @@ public class DestinationService : IDestinationService
         return destination.PublisherId == userId;
     }
 
-    public async Task<DestinationDeleteInputModel?> GetDestinationForDeleteAsync(string? userId, int id)
+    public async Task<DestinationDeleteInputModel?> GetDestinationForDeleteAsync(string? userId, Guid id)
     {
+        if (string.IsNullOrEmpty(userId))
+            return null;
+
         return await context.Destinations
             .Include(d => d.Publisher)
             .AsNoTracking()
-            .Where(d => d.Id == id && d.PublisherId == userId)
+            .Where(d => d.Id == id && d.PublisherId == userId && !d.IsDeleted)
             .Select(d => new DestinationDeleteInputModel
             {
                 Id = d.Id,
                 Name = d.Name,
-                Publisher = d.Publisher.UserName!
+                Publisher = d.Publisher != null ? d.Publisher.UserName! : "Unknown"
             })
             .FirstOrDefaultAsync();
     }
 
-    public async Task<bool> DeleteDestinationAsync(int id, string userId)
+    public async Task<bool> DeleteDestinationAsync(Guid id, string userId)
     {
         var destination = await context.Destinations
             .FirstOrDefaultAsync(d => d.Id == id && d.PublisherId == userId);
@@ -202,12 +194,20 @@ public class DestinationService : IDestinationService
             return false;
 
         destination.IsDeleted = true;
-        await context.SaveChangesAsync();
-        return true;
+        destination.DeletedAt = DateTime.UtcNow;
+        destination.DeletedBy = userId;
+
+        return await context.SaveChangesAsync() > 0;
     }
 
-    public async Task<bool> AddToFavoritesAsync(string userId, int destinationId)
+    public async Task<bool> AddToFavoritesAsync(string userId, Guid destinationId)
     {
+        var destination = await context.Destinations
+            .FirstOrDefaultAsync(d => d.Id == destinationId && !d.IsDeleted);
+
+        if (destination == null)
+            return false;
+
         bool alreadyFavorited = await context.UsersDestinations
             .AnyAsync(ud => ud.UserId == userId && ud.DestinationId == destinationId);
 
@@ -224,7 +224,7 @@ public class DestinationService : IDestinationService
         return await context.SaveChangesAsync() > 0;
     }
 
-    public async Task<bool> RemoveFromFavoritesAsync(string userId, int destinationId)
+    public async Task<bool> RemoveFromFavoritesAsync(string userId, Guid destinationId)
     {
         var entry = await context.UsersDestinations
             .FirstOrDefaultAsync(ud => ud.UserId == userId && ud.DestinationId == destinationId);
@@ -242,7 +242,7 @@ public class DestinationService : IDestinationService
             .Where(ud => ud.UserId == userId)
             .Include(ud => ud.Destination)
                 .ThenInclude(d => d.Terrain)
-
+            .Where(ud => !ud.Destination.IsDeleted)
             .Select(ud => new DestinationFavoriteViewModel
             {
                 Id = ud.Destination.Id,
@@ -258,21 +258,22 @@ public class DestinationService : IDestinationService
         bool isUserValid = !string.IsNullOrEmpty(userId);
 
         return await context.Destinations
-    .Include(d => d.Terrain)
-    .Include(d => d.UsersDestinations)
-    .OrderByDescending(d => d.UsersDestinations.Count)
-    .Take(count)
-    .Select(d => new DestinationIndexViewModel
-    {
-        Id = d.Id,
-        Name = d.Name,
-        ImageUrl = d.ImageUrl,
-        TerrainName = d.Terrain.Name,
-        FavouriteCount = d.UsersDestinations.Count,
-        IsUserPublisher = isUserValid && d.PublisherId == userId,
-        IsUserFavourite = isUserValid && d.UsersDestinations.Any(ud => ud.UserId == userId)
-    })
-    .ToListAsync();
+            .Include(d => d.Terrain)
+            .Include(d => d.UsersDestinations)
+            .Where(d => !d.IsDeleted)
+            .OrderByDescending(d => d.UsersDestinations.Count)
+            .Take(count)
+            .Select(d => new DestinationIndexViewModel
+            {
+                Id = d.Id,
+                Name = d.Name,
+                ImageUrl = d.ImageUrl,
+                TerrainName = d.Terrain.Name,
+                FavouriteCount = d.UsersDestinations.Count,
+                IsUserPublisher = isUserValid && d.PublisherId == userId,
+                IsUserFavourite = isUserValid && d.UsersDestinations.Any(ud => ud.UserId == userId)
+            })
+            .ToListAsync();
     }
 
     public async Task<List<MapDestinationDto>> GetMapDataAsync()
@@ -280,7 +281,6 @@ public class DestinationService : IDestinationService
         return await context.Destinations
             .Where(d => d.Latitude != null && d.Longitude != null && !d.IsDeleted)
             .Include(d => d.UsersDestinations)
-            //.Include(d => d.Comments)
             .Select(d => new MapDestinationDto
             {
                 Id = d.Id,
@@ -291,12 +291,12 @@ public class DestinationService : IDestinationService
                 Longitude = d.Longitude,
                 Description = d.Description,
                 ImageUrl = d.ImageUrl,
-                CreatedAt = d.PublishedOn,
+                CreatedAt = d.CreatedAt,
                 Likes = d.UsersDestinations.Count,
-                //Comments = d.Comments.Count,
+                Comments = 0,
                 Rank = d.Rating,
                 Distance = d.TravelDistance,
-                VisitedDate = d.PublishedOn.ToString("yyyy-MM-dd")
+                VisitedDate = d.CreatedAt.ToString("yyyy-MM-dd")
             })
             .ToListAsync();
     }

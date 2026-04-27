@@ -61,55 +61,55 @@ namespace Horizons.Data.Config
             {
                 new Destination
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     Name = "Sunny Beach",
                     Description = "A beautiful sunny beach with golden sands and clear waters.",
                     ImageUrl = "https://example.com/images/sunny_beach.jpg",
                     PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                    PublishedOn = new DateTime(2023, 2, 12),
-                    TerrainId = 2
+                    CreatedAt = new DateTime(2023, 2, 12),
+                    TerrainId = Guid.NewGuid()
                 },
                 new Destination
                 {
-                    Id = 2,
+                    Id =Guid.NewGuid(),
                     Name = "Misty Mountains",
                     Description = "A range of mist-covered mountains perfect for hiking and adventure.",
                     ImageUrl = "https://example.com/images/misty_mountains.jpg",
                     PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                    PublishedOn = new DateTime(2025, 1, 1),
-                    TerrainId = 1
+                    CreatedAt = new DateTime(2025, 1, 1),
+                    TerrainId = Guid.NewGuid()
                 },
                 new Destination
                 {
-                    Id = 3,
+                    Id =Guid.NewGuid(),
                     Name = "Rila Monastery",
                     Description = "A stunning historical landmark nestled in the Rila Mountains.",
                     ImageUrl = "https://img.etimg.com/thumb/msid-112831459,width-640,height-480,imgsize-2180890,resizemode-4/rila-monastery-bulgaria.jpg",
                     PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                   PublishedOn = new DateTime(2022, 12, 1),
-                    TerrainId = 1,
+                    CreatedAt = new DateTime(2022, 12, 1),
+                    TerrainId = Guid.NewGuid(),
                     IsDeleted = false
                 },
                  new Destination
                 {
-                    Id = 4,
+                    Id = Guid.NewGuid(),
                     Name = "Durankulak Beach",
                     Description = "The sand at Durankulak Beach showcases a pristine golden color, creating a beautiful contrast against the azure waters of the Black Sea.",
                     ImageUrl = "https://travelplanner.ro/blog/wp-content/uploads/2023/01/durankulak-beach-1-850x550.jpg.webp",
                     PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                    PublishedOn = new DateTime(2024, 1, 1),
-                    TerrainId = 2,
+                    CreatedAt = new DateTime(2024, 1, 1),
+                    TerrainId = Guid.NewGuid(),
                     IsDeleted = false
                 },
                 new Destination
                 {
-                    Id = 5,
+                    Id =Guid.NewGuid(),
                     Name = "Devil's Throat Cave",
                     Description = "A mysterious cave located in the Rhodope Mountains.",
                     ImageUrl = "https://detskotobnr.binar.bg/wp-content/uploads/2017/11/Diavolsko_garlo_17.jpg",
                     PublisherId = "7699db7d-964f-4782-8209-d76562e0fece",
-                    PublishedOn = new DateTime(2025, 10, 1),
-                    TerrainId = 7,
+                    CreatedAt = new DateTime(2025, 10, 1),
+                    TerrainId = Guid.NewGuid(),
                     IsDeleted = false
                 }
 

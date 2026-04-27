@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Horizons.Data.Models
 {
-    public class Terrain
+    public class Terrain : BaseDeletableEntity
     {
-        public int Id { get; set; }
+  
 
         [MinLength(ValidationConstants.TerrainNameMinLength)]
         public string Name { get; set; } = null!;

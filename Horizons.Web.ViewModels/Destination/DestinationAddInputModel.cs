@@ -26,7 +26,7 @@ namespace Horizons.Web.ViewModels.Destination
 
         [Required]
         [Display(Name = "Terrain Type")]
-        public int TerrainId { get; set; }
+        public Guid TerrainId { get; set; }
 
         // NEW MAP PROPERTIES
         [Display(Name = "Country")]

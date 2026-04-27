@@ -6,7 +6,7 @@ namespace Horizons.Web.ViewModels.Destination
 {
     public class DestinationEditInputModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [MinLength(ValidationConstants.DestinationNameMinLength)]
@@ -28,7 +28,7 @@ namespace Horizons.Web.ViewModels.Destination
 
         [Required]
         [Display(Name = "Terrain Type")]
-        public int TerrainId { get; set; }
+        public Guid TerrainId { get; set; }
 
         // MAP PROPERTIES
         [Display(Name = "Country")]
@@ -52,7 +52,7 @@ namespace Horizons.Web.ViewModels.Destination
         [Display(Name = "Travel Distance (KM)")]
         public double? TravelDistance { get; set; }
 
-        // FIX: Change this to match your service return type
+     
         public IEnumerable<AddDestinationTerrainDropdownModel>? Terrains { get; set; }
     }
 }

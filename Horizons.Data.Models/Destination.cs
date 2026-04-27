@@ -3,17 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Horizons.Data.Models
 {
-    public class Destination
+    public class Destination : BaseDeletableEntity
     {
-        public int Id { get; set; }
-
         [MinLength(ValidationConstants.DestinationNameMinLength)]
         public string Name { get; set; } = null!;
 
@@ -22,19 +16,11 @@ namespace Horizons.Data.Models
 
         public string? ImageUrl { get; set; }
 
-        public string PublisherId { get; set; } = null!;
+        public string PublisherId { get; set; } = null!; 
+        public virtual AppUser Publisher { get; set; } = null!;
 
-        public virtual IdentityUser Publisher { get; set; } = null!;
-
-        public DateTime PublishedOn { get; set; }
-
-        public int TerrainId { get; set; }
-
+        public Guid TerrainId { get; set; }
         public virtual Terrain Terrain { get; set; } = null!;
-
-        public bool IsDeleted { get; set; } = false;
-
-
 
         [Display(Name = "Country")]
         public string? Country { get; set; }
@@ -57,12 +43,7 @@ namespace Horizons.Data.Models
         [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
         public int? Rating { get; set; }
 
-       
-        //public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
-
-        
-        public virtual ICollection<UserDestination> Favorites => UsersDestinations;
-
+        // Navigation property for favorites
         public virtual ICollection<UserDestination> UsersDestinations { get; set; } = new HashSet<UserDestination>();
     }
 }

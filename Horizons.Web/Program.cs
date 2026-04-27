@@ -1,11 +1,12 @@
+using Horizons.Data;
+using Horizons.Data.Models;
+using Horizons.Services.Core.Implementations;
+using Horizons.Services.Core.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 namespace Horizons.Web
 {
-    using Horizons.Data;
-   
-    using Horizons.Services.Core.Implementations;
-    using Horizons.Services.Core.Interfaces;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
     public class Program
     {
         public static void Main(string[] args)
@@ -21,33 +22,24 @@ namespace Horizons.Web
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            // Register Identity with AppUser
+            builder.Services.AddDefaultIdentity<AppUser>(options =>
             {
-                // development ease options
+                // Development ease options
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
-
-                // production ease options
-                //options.SignIn.RequireConfirmedAccount = true;
-                // options.Password.RequiredLength = 16;
-                //options.Password.RequiredUniqueChars = 3;
-                //options.Password.RequireDigit = true;
-                //options.Password.RequireNonAlphanumeric = true;
-                //options.Password.RequireUppercase = true;
-                //options.Password.RequireLowercase = true;
-                
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+            // Register services
             builder.Services.AddScoped<IDestinationService, DestinationService>();
-
             builder.Services.AddScoped<ITerrainService, TerrainService>();
 
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
@@ -55,11 +47,11 @@ namespace Horizons.Web
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
+                app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -67,6 +59,7 @@ namespace Horizons.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
             app.UseAuthentication();
             app.UseAuthorization();
 

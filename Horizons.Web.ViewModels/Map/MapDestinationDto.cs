@@ -2,7 +2,7 @@
 {
     public class MapDestinationDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Country { get; set; }
         public string? Continent { get; set; }

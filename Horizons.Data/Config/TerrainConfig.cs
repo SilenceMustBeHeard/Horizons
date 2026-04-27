@@ -36,14 +36,14 @@ public void Configure(EntityTypeBuilder<Terrain> builder)
         {
             var seedTerrain = new List<Terrain>()
             { 
-              new Terrain  { Id = 1, Name = "Mountain" },
-              new Terrain  { Id = 2, Name = "Beach" },
-               new Terrain { Id = 3, Name = "Forest" },
-                new Terrain { Id = 4, Name = "Plain" },
-                new Terrain { Id = 5, Name = "Urban" },
-                new Terrain { Id = 6, Name = "Village" },
-                new Terrain { Id = 7, Name = "Cave" },
-                new Terrain { Id = 8, Name = "Canyon" }
+              new Terrain  { Id = Guid.NewGuid(), Name = "Mountain" },
+              new Terrain  { Id = Guid.NewGuid(), Name = "Beach" },
+               new Terrain { Id = Guid.NewGuid(), Name = "Forest" },
+                new Terrain { Id = Guid.NewGuid(), Name = "Plain" },
+                new Terrain { Id = Guid.NewGuid(), Name = "Urban" },
+                new Terrain { Id = Guid.NewGuid(), Name = "Village" },
+                new Terrain { Id = Guid.NewGuid(), Name = "Cave" },
+                new Terrain { Id = Guid.NewGuid(), Name = "Canyon" }
             };
 
             return seedTerrain;
