@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Horizons.Data.Models\Horizons.Data.Models.csproj" />
-    <ProjectReference Include="..\Horizons.GCommon\Horizons.GCommon.csproj" />
+    <ProjectReference Include="..\Horizons.GCommon\Horizons.Data.Common.csproj" />
   </ItemGroup>
 
 </Project>

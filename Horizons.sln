@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.35122.118
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11716.220 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Data", "Horizons.D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8B8A0EA8-62C4-430A-831B-1938CEE1EE39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.GCommon", "Horizons.GCommon\Horizons.GCommon.csproj", "{483E42EB-206C-445D-A634-36AF08697409}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Data.Common", "Horizons.GCommon\Horizons.Data.Common.csproj", "{483E42EB-206C-445D-A634-36AF08697409}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Services.Core", "Horizons.Services.Core\Horizons.Services.Core.csproj", "{E9C25734-2A13-4622-80A8-70CCD111FC8E}"
 EndProject
@@ -57,6 +57,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1B3F3E87-51F2-4BC6-81B7-F9A0850A64C5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{483E42EB-206C-445D-A634-36AF08697409} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{E9C25734-2A13-4622-80A8-70CCD111FC8E} = {8B8A0EA8-62C4-430A-831B-1938CEE1EE39}
 		{CC408A46-5524-4418-A246-ADF07399AAED} = {6C059CC7-B8CD-48F4-AAD5-C74605D4A66C}
 		{B5FD021C-4930-4C3E-9CB7-E517B66DF35D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}

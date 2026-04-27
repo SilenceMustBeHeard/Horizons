@@ -1,0 +1,1031 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-04-27T05:46:10.9170667Z",
+  "analysisEndTime": "2026-04-27T05:46:15.4329246Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 6,
+      "issues": 4,
+      "incidents": 33,
+      "effort": 33
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 6,
+        "Optional": 0,
+        "Potential": 27,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 15,
+        "Project": 6,
+        "Api": 12
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "Horizons.Data\\Horizons.Data.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 9,
+      "properties": {
+        "appName": "Horizons.Data",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 10,
+        "numberOfCodeFiles": 10,
+        "linesTotal": 2177,
+        "linesOfCode": 2177,
+        "totalApiScanned": 2701,
+        "minLinesOfCodeToChange": 3,
+        "maxLinesOfCodeToChange": 3
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "d2e635bc-1a9b-4ca7-9a87-d5b05af30a35",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Data\\Horizons.Data.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.7",
+              "protected": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Data\\Horizons.Data.csproj",
+            "snippet": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.7",
+            "protectedSnippet": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.7",
+            "label": "Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "02a7728d-9fe0-4567-acdd-094dcccbab74",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Data\\Horizons.Data.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.SqlServer, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.7",
+              "protected": "Microsoft.EntityFrameworkCore.SqlServer, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Data\\Horizons.Data.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.SqlServer, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.7",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.SqlServer, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.7",
+            "label": "Microsoft.EntityFrameworkCore.SqlServer 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.SqlServer",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "6a26ed22-2a5c-4ddb-bd97-4d44f56920b8",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Data\\Horizons.Data.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.Tools, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.7",
+              "protected": "Microsoft.EntityFrameworkCore.Tools, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Data\\Horizons.Data.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.Tools, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.7",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.Tools, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.7",
+            "label": "Microsoft.EntityFrameworkCore.Tools 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.Tools",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "71d2c1cc-77eb-4abe-bf2d-8260c90326bf",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Data\\Horizons.Data.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+              "protected": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Data\\Horizons.Data.csproj",
+            "snippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "protectedSnippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "label": "Microsoft.Extensions.Identity.Stores 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Identity.Stores",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "d240b3c0-692a-4034-bb5b-8826a2d79caf",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Data\\Horizons.Data.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4",
+              "protected": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4"
+            },
+            "kind": "File",
+            "path": "Horizons.Data\\Horizons.Data.csproj",
+            "snippet": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4",
+            "protectedSnippet": "Newtonsoft.Json, 13.0.3\n\nRecommendation:\n\nRemove Newtonsoft.Json, and replace with new package Newtonsoft.Json 13.0.4",
+            "label": "Newtonsoft.Json 13.0.3",
+            "properties": {
+              "PackageId": "Newtonsoft.Json",
+              "PackageVersion": "13.0.3",
+              "PackageNewVersion": "13.0.4",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "bc131555-1b6b-4746-ad28-316f7ee1a899",
+          "ruleId": "Project.0002",
+          "projectPath": "Horizons.Data\\Horizons.Data.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "Horizons.Data\\Horizons.Data.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "926629aa-e9f6-4daf-b715-28570d33bcae",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6",
+          "projectPath": "Horizons.Data\\Horizons.Data.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": ": base(options)",
+              "protected": "M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)"
+            },
+            "kind": "File",
+            "path": "Horizons.Data\\ApplicationDbContext.cs",
+            "snippet": ": base(options)",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)",
+            "label": "M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 11,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "52544a0a-f029-49f6-8217-21964fc9f1c5",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6",
+          "projectPath": "Horizons.Data\\Horizons.Data.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": ": base(options)",
+              "protected": "M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)"
+            },
+            "kind": "File",
+            "path": "Horizons.Data\\ApplicationDbContext.cs",
+            "snippet": ": base(options)",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)",
+            "label": "M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 11,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "f16d0cd7-1678-4f14-bae5-f05047275ffa",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6",
+          "projectPath": "Horizons.Data\\Horizons.Data.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "IdentityDbContext",
+              "protected": "T:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext"
+            },
+            "kind": "File",
+            "path": "Horizons.Data\\ApplicationDbContext.cs",
+            "snippet": "IdentityDbContext",
+            "protectedSnippet": "T:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext",
+            "label": "T:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 8,
+            "column": 40
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "Horizons.Data.Models\\Horizons.Data.Models.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "Horizons.Data.Models",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 3,
+        "numberOfCodeFiles": 3,
+        "linesTotal": 89,
+        "linesOfCode": 89,
+        "totalApiScanned": 72,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "e9a3caf7-ff94-4205-a983-1d90e13af807",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Data.Models\\Horizons.Data.Models.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+              "protected": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Data.Models\\Horizons.Data.Models.csproj",
+            "snippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "protectedSnippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "label": "Microsoft.Extensions.Identity.Stores 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Identity.Stores",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "944f1cc4-0e2c-4f1e-b4c0-168799d1db88",
+          "ruleId": "Project.0002",
+          "projectPath": "Horizons.Data.Models\\Horizons.Data.Models.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "Horizons.Data.Models\\Horizons.Data.Models.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "Horizons.GCommon\\Horizons.GCommon.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "Horizons.GCommon",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 1,
+        "numberOfCodeFiles": 1,
+        "linesTotal": 24,
+        "linesOfCode": 24,
+        "totalApiScanned": 6,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "6335240f-edd2-474b-81ca-c277c73f2af2",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.GCommon\\Horizons.GCommon.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+              "protected": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.GCommon\\Horizons.GCommon.csproj",
+            "snippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "protectedSnippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "label": "Microsoft.Extensions.Identity.Stores 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Identity.Stores",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "703456d5-445f-41dc-a9d2-b55affafde5d",
+          "ruleId": "Project.0002",
+          "projectPath": "Horizons.GCommon\\Horizons.GCommon.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "Horizons.GCommon\\Horizons.GCommon.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "Horizons.Services.Core\\Horizons.Services.Core.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "Horizons.Services.Core",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 4,
+        "numberOfCodeFiles": 4,
+        "linesTotal": 384,
+        "linesOfCode": 384,
+        "totalApiScanned": 400,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "04422f62-f3f9-49ae-a331-54d928416d11",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Services.Core\\Horizons.Services.Core.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+              "protected": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Services.Core\\Horizons.Services.Core.csproj",
+            "snippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "protectedSnippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "label": "Microsoft.Extensions.Identity.Stores 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Identity.Stores",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "1bd6be49-8400-4df2-a665-111c8f3c9c27",
+          "ruleId": "Project.0002",
+          "projectPath": "Horizons.Services.Core\\Horizons.Services.Core.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "Horizons.Services.Core\\Horizons.Services.Core.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "Horizons.Web\\Horizons.Web.csproj",
+      "startingProject": true,
+      "issues": 4,
+      "storyPoints": 16,
+      "properties": {
+        "appName": "Horizons.Web",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 31,
+        "numberOfCodeFiles": 19,
+        "linesTotal": 3895,
+        "linesOfCode": 920,
+        "totalApiScanned": 5819,
+        "minLinesOfCodeToChange": 9,
+        "maxLinesOfCodeToChange": 9
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "3ade9154-d96b-4c2c-ba43-d25c7f7cab38",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.11\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 10.0.7",
+              "protected": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.11\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Horizons.Web.csproj",
+            "snippet": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.11\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 10.0.7",
+            "protectedSnippet": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.11\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 10.0.7",
+            "label": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 8.0.11",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+              "PackageVersion": "8.0.11",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "8c73394f-09ea-4098-b82b-0d64fcc7c088",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.7",
+              "protected": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Horizons.Web.csproj",
+            "snippet": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.7",
+            "protectedSnippet": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.7",
+            "label": "Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "0118bb60-9303-4373-a2df-bfa068d730d4",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Identity.UI, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.UI, and replace with new package Microsoft.AspNetCore.Identity.UI 10.0.7",
+              "protected": "Microsoft.AspNetCore.Identity.UI, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.UI, and replace with new package Microsoft.AspNetCore.Identity.UI 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Horizons.Web.csproj",
+            "snippet": "Microsoft.AspNetCore.Identity.UI, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.UI, and replace with new package Microsoft.AspNetCore.Identity.UI 10.0.7",
+            "protectedSnippet": "Microsoft.AspNetCore.Identity.UI, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.UI, and replace with new package Microsoft.AspNetCore.Identity.UI 10.0.7",
+            "label": "Microsoft.AspNetCore.Identity.UI 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.UI",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "cf98eaa4-8385-4466-974e-6f35a0e207d1",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.SqlServer, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.7",
+              "protected": "Microsoft.EntityFrameworkCore.SqlServer, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Horizons.Web.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.SqlServer, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.7",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.SqlServer, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.7",
+            "label": "Microsoft.EntityFrameworkCore.SqlServer 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.SqlServer",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "fc922cee-59d8-4355-9d8e-275f6af5ae90",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.Tools, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.7",
+              "protected": "Microsoft.EntityFrameworkCore.Tools, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Horizons.Web.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.Tools, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.7",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.Tools, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.7",
+            "label": "Microsoft.EntityFrameworkCore.Tools 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.Tools",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "4b489cd3-83f7-4558-a871-61cf721c947a",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+              "protected": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Horizons.Web.csproj",
+            "snippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "protectedSnippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "label": "Microsoft.Extensions.Identity.Stores 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Identity.Stores",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "ab9559a3-8823-47a0-960a-5cd1c212d75d",
+          "ruleId": "Project.0002",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Horizons.Web.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "6447bb39-a531-4381-a819-7335cbf03bc0",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Exception diagnostics are suppressed when IExceptionHandler.TryHandleAsync returns true ",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.UseExceptionHandler(\u0022/Home/Error\u0022);",
+              "protected": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Program.cs",
+            "snippet": "app.UseExceptionHandler(\u0022/Home/Error\u0022);",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "label": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/aspnet-core/10/exception-handler-diagnostics-suppressed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 59,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "fe6c8672-561f-4670-b5ae-30cc9b0cd2ab",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.UseMigrationsEndPoint();",
+              "protected": "T:Microsoft.AspNetCore.Builder.MigrationsEndPointExtensions"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Program.cs",
+            "snippet": "app.UseMigrationsEndPoint();",
+            "protectedSnippet": "T:Microsoft.AspNetCore.Builder.MigrationsEndPointExtensions",
+            "label": "T:Microsoft.AspNetCore.Builder.MigrationsEndPointExtensions",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 55,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "e7b823a7-f521-4e0f-b198-c5987d8ec9af",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.UseMigrationsEndPoint();",
+              "protected": "M:Microsoft.AspNetCore.Builder.MigrationsEndPointExtensions.UseMigrationsEndPoint(Microsoft.AspNetCore.Builder.IApplicationBuilder)"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Program.cs",
+            "snippet": "app.UseMigrationsEndPoint();",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Builder.MigrationsEndPointExtensions.UseMigrationsEndPoint(Microsoft.AspNetCore.Builder.IApplicationBuilder)",
+            "label": "M:Microsoft.AspNetCore.Builder.MigrationsEndPointExtensions.UseMigrationsEndPoint(Microsoft.AspNetCore.Builder.IApplicationBuilder)",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 55,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "347d5540-c326-4511-8e85-90297f421708",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.UI, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.UI, 8.0.6",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDefaultIdentity\u003CIdentityUser\u003E(options =\u003E\r\n            {\r\n                // development ease options\r\n                options.SignIn.RequireConfirmedAccount = false;\r\n                options.Password.RequireDigit = false;\r\n                options.Password.RequireNonAlphanumeric = false;\r\n                options.Password.RequireUppercase = false;\r\n                options.Password.RequireLowercase = false;\r\n\r\n                // production ease options\r\n                //options.SignIn.RequireConfirmedAccount = true;\r\n                // options.Password.RequiredLength = 16;\r\n                //options.Password.RequiredUniqueChars = 3;\r\n                //options.Password.RequireDigit = true;\r\n                //options.Password.RequireNonAlphanumeric = true;\r\n                //options.Password.RequireUppercase = true;\r\n                //options.Password.RequireLowercase = true;\r\n                \r\n            })\r\n                .AddEntityFrameworkStores\u003CApplicationDbContext\u003E();",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Program.cs",
+            "snippet": "builder.Services.AddDefaultIdentity\u003CIdentityUser\u003E(options =\u003E\r\n            {\r\n                // development ease options\r\n                options.SignIn.RequireConfirmedAccount = false;\r\n                options.Password.RequireDigit = false;\r\n                options.Password.RequireNonAlphanumeric = false;\r\n                options.Password.RequireUppercase = false;\r\n                options.Password.RequireLowercase = false;\r\n\r\n                // production ease options\r\n                //options.SignIn.RequireConfirmedAccount = true;\r\n                // options.Password.RequiredLength = 16;\r\n                //options.Password.RequiredUniqueChars = 3;\r\n                //options.Password.RequireDigit = true;\r\n                //options.Password.RequireNonAlphanumeric = true;\r\n                //options.Password.RequireUppercase = true;\r\n                //options.Password.RequireLowercase = true;\r\n                \r\n            })\r\n                .AddEntityFrameworkStores\u003CApplicationDbContext\u003E();",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.UI",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 22,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "06a7a173-6b11-41eb-ae2d-a872062303aa",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.UI, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.UI, 8.0.6",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDefaultIdentity\u003CIdentityUser\u003E(options =\u003E\r\n            {\r\n                // development ease options\r\n                options.SignIn.RequireConfirmedAccount = false;\r\n                options.Password.RequireDigit = false;\r\n                options.Password.RequireNonAlphanumeric = false;\r\n                options.Password.RequireUppercase = false;\r\n                options.Password.RequireLowercase = false;\r\n\r\n                // production ease options\r\n                //options.SignIn.RequireConfirmedAccount = true;\r\n                // options.Password.RequiredLength = 16;\r\n                //options.Password.RequiredUniqueChars = 3;\r\n                //options.Password.RequireDigit = true;\r\n                //options.Password.RequireNonAlphanumeric = true;\r\n                //options.Password.RequireUppercase = true;\r\n                //options.Password.RequireLowercase = true;\r\n                \r\n            })\r\n                .AddEntityFrameworkStores\u003CApplicationDbContext\u003E();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Identity.IdentityOptions})"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Program.cs",
+            "snippet": "builder.Services.AddDefaultIdentity\u003CIdentityUser\u003E(options =\u003E\r\n            {\r\n                // development ease options\r\n                options.SignIn.RequireConfirmedAccount = false;\r\n                options.Password.RequireDigit = false;\r\n                options.Password.RequireNonAlphanumeric = false;\r\n                options.Password.RequireUppercase = false;\r\n                options.Password.RequireLowercase = false;\r\n\r\n                // production ease options\r\n                //options.SignIn.RequireConfirmedAccount = true;\r\n                // options.Password.RequiredLength = 16;\r\n                //options.Password.RequiredUniqueChars = 3;\r\n                //options.Password.RequireDigit = true;\r\n                //options.Password.RequireNonAlphanumeric = true;\r\n                //options.Password.RequireUppercase = true;\r\n                //options.Password.RequireLowercase = true;\r\n                \r\n            })\r\n                .AddEntityFrameworkStores\u003CApplicationDbContext\u003E();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Identity.IdentityOptions})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Identity.IdentityOptions})",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.UI",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 22,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "6b32288e-d203-4956-9f27-c984d73a3b2c",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDefaultIdentity\u003CIdentityUser\u003E(options =\u003E\r\n            {\r\n                // development ease options\r\n                options.SignIn.RequireConfirmedAccount = false;\r\n                options.Password.RequireDigit = false;\r\n                options.Password.RequireNonAlphanumeric = false;\r\n                options.Password.RequireUppercase = false;\r\n                options.Password.RequireLowercase = false;\r\n\r\n                // production ease options\r\n                //options.SignIn.RequireConfirmedAccount = true;\r\n                // options.Password.RequiredLength = 16;\r\n                //options.Password.RequiredUniqueChars = 3;\r\n                //options.Password.RequireDigit = true;\r\n                //options.Password.RequireNonAlphanumeric = true;\r\n                //options.Password.RequireUppercase = true;\r\n                //options.Password.RequireLowercase = true;\r\n                \r\n            })\r\n                .AddEntityFrameworkStores\u003CApplicationDbContext\u003E();",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Program.cs",
+            "snippet": "builder.Services.AddDefaultIdentity\u003CIdentityUser\u003E(options =\u003E\r\n            {\r\n                // development ease options\r\n                options.SignIn.RequireConfirmedAccount = false;\r\n                options.Password.RequireDigit = false;\r\n                options.Password.RequireNonAlphanumeric = false;\r\n                options.Password.RequireUppercase = false;\r\n                options.Password.RequireLowercase = false;\r\n\r\n                // production ease options\r\n                //options.SignIn.RequireConfirmedAccount = true;\r\n                // options.Password.RequiredLength = 16;\r\n                //options.Password.RequiredUniqueChars = 3;\r\n                //options.Password.RequireDigit = true;\r\n                //options.Password.RequireNonAlphanumeric = true;\r\n                //options.Password.RequireUppercase = true;\r\n                //options.Password.RequireLowercase = true;\r\n                \r\n            })\r\n                .AddEntityFrameworkStores\u003CApplicationDbContext\u003E();",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 22,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "b8c1f328-0112-4041-89c1-6e91c22a1942",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDefaultIdentity\u003CIdentityUser\u003E(options =\u003E\r\n            {\r\n                // development ease options\r\n                options.SignIn.RequireConfirmedAccount = false;\r\n                options.Password.RequireDigit = false;\r\n                options.Password.RequireNonAlphanumeric = false;\r\n                options.Password.RequireUppercase = false;\r\n                options.Password.RequireLowercase = false;\r\n\r\n                // production ease options\r\n                //options.SignIn.RequireConfirmedAccount = true;\r\n                // options.Password.RequiredLength = 16;\r\n                //options.Password.RequiredUniqueChars = 3;\r\n                //options.Password.RequireDigit = true;\r\n                //options.Password.RequireNonAlphanumeric = true;\r\n                //options.Password.RequireUppercase = true;\r\n                //options.Password.RequireLowercase = true;\r\n                \r\n            })\r\n                .AddEntityFrameworkStores\u003CApplicationDbContext\u003E();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Program.cs",
+            "snippet": "builder.Services.AddDefaultIdentity\u003CIdentityUser\u003E(options =\u003E\r\n            {\r\n                // development ease options\r\n                options.SignIn.RequireConfirmedAccount = false;\r\n                options.Password.RequireDigit = false;\r\n                options.Password.RequireNonAlphanumeric = false;\r\n                options.Password.RequireUppercase = false;\r\n                options.Password.RequireLowercase = false;\r\n\r\n                // production ease options\r\n                //options.SignIn.RequireConfirmedAccount = true;\r\n                // options.Password.RequiredLength = 16;\r\n                //options.Password.RequiredUniqueChars = 3;\r\n                //options.Password.RequireDigit = true;\r\n                //options.Password.RequireNonAlphanumeric = true;\r\n                //options.Password.RequireUppercase = true;\r\n                //options.Password.RequireLowercase = true;\r\n                \r\n            })\r\n                .AddEntityFrameworkStores\u003CApplicationDbContext\u003E();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 22,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "c7ecf2ac-a012-4244-a910-57dce5c3c254",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDatabaseDeveloperPageExceptionFilter();",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Program.cs",
+            "snippet": "builder.Services.AddDatabaseDeveloperPageExceptionFilter();",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 20,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "646a55fb-7c87-4cba-a159-8781a4f0ecda",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6",
+          "projectPath": "Horizons.Web\\Horizons.Web.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDatabaseDeveloperPageExceptionFilter();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter(Microsoft.Extensions.DependencyInjection.IServiceCollection)"
+            },
+            "kind": "File",
+            "path": "Horizons.Web\\Program.cs",
+            "snippet": "builder.Services.AddDatabaseDeveloperPageExceptionFilter();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 20,
+            "column": 12
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "Horizons.Web.ViewModels\\Horizons.Web.ViewModels.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "Horizons.Web.ViewModels",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 9,
+        "numberOfCodeFiles": 9,
+        "linesTotal": 168,
+        "linesOfCode": 168,
+        "totalApiScanned": 132,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "9c71bed6-1bd8-40d1-af06-baa7a9932144",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Horizons.Web.ViewModels\\Horizons.Web.ViewModels.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+              "protected": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7"
+            },
+            "kind": "File",
+            "path": "Horizons.Web.ViewModels\\Horizons.Web.ViewModels.csproj",
+            "snippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "protectedSnippet": "Microsoft.Extensions.Identity.Stores, 8.0.16\n\nRecommendation:\n\nRemove Microsoft.Extensions.Identity.Stores, and replace with new package Microsoft.Extensions.Identity.Stores 10.0.7",
+            "label": "Microsoft.Extensions.Identity.Stores 8.0.16",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Identity.Stores",
+              "PackageVersion": "8.0.16",
+              "PackageNewVersion": "10.0.7",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "5df4e6cd-d232-4d4c-b533-a5f51f3a7ed3",
+          "ruleId": "Project.0002",
+          "projectPath": "Horizons.Web.ViewModels\\Horizons.Web.ViewModels.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "Horizons.Web.ViewModels\\Horizons.Web.ViewModels.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "API is source incompatible for selected .NET version: requires code changes to compile successfully when targeting a new version, such as removing obsolete APIs or changing method signatures.",
+      "label": "Source incompatible for selected .NET version",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.",
+      "label": "Behavioral change in selected .NET version",
+      "severity": "Potential",
+      "effort": 1
+    }
+  }
+}

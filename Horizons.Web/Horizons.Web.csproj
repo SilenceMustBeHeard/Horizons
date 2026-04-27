@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Horizons-0b7fcf7e-c2d7-4a45-8c70-1ea5b1f0c3b9</UserSecretsId>
@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Horizons.Data\Horizons.Data.csproj" />
-    <ProjectReference Include="..\Horizons.GCommon\Horizons.GCommon.csproj" />
+    <ProjectReference Include="..\Horizons.GCommon\Horizons.Data.Common.csproj" />
     <ProjectReference Include="..\Horizons.Services.Core\Horizons.Services.Core.csproj" />
   </ItemGroup>
 
