@@ -1,7 +1,9 @@
-﻿using Horizons.Services.Core.Contracts;
+﻿
+using Horizons.Services.Core.Interfaces;
 using Horizons.Web.ViewModels.Destination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 
 namespace Horizons.Web.Controllers
@@ -44,7 +46,15 @@ namespace Horizons.Web.Controllers
 
         }
 
-
+      
+        [HttpGet("api/destinations/map-data")]
+        public async Task<IActionResult> GetMapData()
+        {
+            var destinations = await destinationService.GetMapDataAsync();
+            return Ok(destinations);
+        }
+               
+        
 
         [HttpGet]
         [AllowAnonymous]
@@ -96,22 +106,20 @@ namespace Horizons.Web.Controllers
         {
             try
             {
+                // Validate ModelState FIRST
+                if (!ModelState.IsValid)
+                {
+                    inputModel.Terrains = await terrainService.GetAllTerrainsDropdownAsync();
+                    return View(inputModel);
+                }
+
                 string? userId = GetUserId();
                 if (userId == null)
                 {
                     return RedirectToAction("Login", "Account");
                 }
 
-                if (!ModelState.IsValid)
-                {
-                    inputModel.Terrains = await terrainService
-                        .GetAllTerrainsDropdownAsync();
-
-                    return View(inputModel);
-                }
-
-                bool addResult = await destinationService
-                    .AddDestinationAsync(inputModel, userId);
+                bool addResult = await destinationService.AddDestinationAsync(inputModel, userId);
 
                 if (!addResult)
                 {
@@ -187,16 +195,23 @@ namespace Horizons.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            var destination = await destinationService.GetDestinationForDeleteAsync(GetUserId(), id.Value);
+            string? userId = GetUserId();
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var destination = await destinationService.GetDestinationForDeleteAsync(userId, id.Value);
             if (destination == null)
             {
-                return RedirectToAction("Details");
+                return RedirectToAction("Details", new { id = id.Value });
             }
 
             return View(destination);
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             string? userId = GetUserId();
@@ -208,18 +223,18 @@ namespace Horizons.Web.Controllers
             bool isPublisher = await destinationService.IsUserPublisherAsync(id, userId);
             if (!isPublisher)
             {
-                return Forbid(); 
+                return Forbid();
             }
 
             bool result = await destinationService.DeleteDestinationAsync(id, userId);
             if (!result)
             {
+                TempData["ErrorMessage"] = "Failed to delete destination.";
                 return RedirectToAction("Index");
             }
 
-            TempData["SuccessMessage"] = "Destination successfully deleted.";
+            TempData["SuccessMessage"] = "Destination successfully deleted!";
             return RedirectToAction("Index");
-
         }
         [HttpGet]
         [Authorize]

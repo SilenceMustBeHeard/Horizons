@@ -1,6 +1,7 @@
 ﻿using Horizons.Web.ViewModels.Destination;
+using Horizons.Web.ViewModels.Map;
 
-namespace Horizons.Services.Core.Contracts
+namespace Horizons.Services.Core.Interfaces
 {
 
 
@@ -31,6 +32,7 @@ namespace Horizons.Services.Core.Contracts
         Task<IEnumerable<DestinationFavoriteViewModel>> GetUserFavoriteDestinationsAsync(string userId);
         Task<bool> RemoveFromFavoritesAsync(string userId, int destinationId);
         Task<bool> AddToFavoritesAsync(string userId, int destinationId);
+        Task<List<MapDestinationDto>> GetMapDataAsync();
 
 
     }

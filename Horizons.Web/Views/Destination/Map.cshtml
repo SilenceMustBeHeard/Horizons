@@ -1,0 +1,335 @@
+﻿@using Horizons.Data.Models
+@model IEnumerable<Destination>
+@{
+    ViewData["Title"] = "Travel Map - Horizons";
+}
+
+<div class="map-hero-section">
+    <div class="hero-overlay">
+        <h1 class="hero-title animate-text">Explore the World</h1>
+        <p class="hero-subtitle">Every pin tells a story. Every route is an adventure.</p>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number" id="destinationCount">0</span>
+                <span class="stat-label">Destinations</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" id="countriesCount">0</span>
+                <span class="stat-label">Countries</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" id="totalDistance">0</span>
+                <span class="stat-label">KM Traveled</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="map-container-wrapper">
+    <div class="map-sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-map-marked-alt"></i>
+            <h3>Destinations</h3>
+            <button class="btn-filter" id="toggleFilter">
+                <i class="fas fa-filter"></i>
+            </button>
+        </div>
+        
+        <div class="filter-panel" id="filterPanel">
+            <input type="text" id="searchDestinations" placeholder="Search destinations..." class="search-input">
+            <div class="filter-tags">
+                <button class="filter-tag active" data-filter="all">All</button>
+                <button class="filter-tag" data-filter="asia">🌏 Asia</button>
+                <button class="filter-tag" data-filter="europe">🇪🇺 Europe</button>
+                <button class="filter-tag" data-filter="north-america">🌎 N.America</button>
+                <button class="filter-tag" data-filter="south-america">🌎 S.America</button>
+                <button class="filter-tag" data-filter="africa">🦁 Africa</button>
+                <button class="filter-tag" data-filter="oceania">🏝️ Oceania</button>
+            </div>
+        </div>
+        
+        <div class="destinations-list" id="destinationsList">
+            <!-- Dynamic list will be populated here -->
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i> Loading destinations...
+            </div>
+        </div>
+    </div>
+    
+    <div id="travelMap" class="interactive-map"></div>
+</div>
+
+<!-- Destination Quick View Modal -->
+<div class="modal fade" id="destinationModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content glass-modal">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let map;
+        let markers = [];
+        let destinations = [];
+        let currentRoute = null;
+        
+        // Initialize map
+        function initMap() {
+            map = L.map('travelMap').setView([20, 0], 2);
+            
+            // Premium map tiles (CartoDB Voyager for clean look)
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+            
+            // Add mini map for context
+            L.control.scale().addTo(map);
+            
+            // Add geocoder for search
+            L.Control.geocoder({
+                defaultMarkGeocode: false,
+                placeholder: 'Search anywhere...',
+                errorMessage: 'Location not found'
+            }).addTo(map);
+            
+            fetchDestinations();
+        }
+        
+        // Fetch destinations from your API
+        async function fetchDestinations() {
+            try {
+                const response = await fetch('/api/destinations/map-data');
+                const data = await response.json();
+                destinations = data;
+                updateStats(data);
+                populateDestinationsList(data);
+                addMarkersToMap(data);
+            } catch (error) {
+                console.error('Error fetching destinations:', error);
+            }
+        }
+        
+        // Add markers with custom popups
+        function addMarkersToMap(destinations) {
+            destinations.forEach(dest => {
+                // Custom marker icon based on continent
+                const markerIcon = L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div class="marker-content" style="background: ${getMarkerColor(dest.continent)}">
+                           <i class="fas fa-map-pin"></i>
+                           </div>`,
+                    iconSize: [30, 30],
+                    popupAnchor: [0, -15]
+                });
+                
+                const marker = L.marker([dest.latitude, dest.longitude], { icon: markerIcon })
+                    .addTo(map)
+                    .bindPopup(createPopupContent(dest));
+                
+                marker.on('click', () => {
+                    highlightDestination(dest.id);
+                    showDestinationPreview(dest);
+                });
+                
+                markers.push({ marker, data: dest });
+            });
+            
+            // Draw travel routes between destinations
+            drawTravelRoutes(destinations);
+        }
+        
+        function createPopupContent(dest) {
+            return `
+                <div class="custom-popup">
+                    <img src="${dest.imageUrl}" alt="${dest.name}" class="popup-image">
+                    <div class="popup-content">
+                        <h4>${dest.name}</h4>
+                        <p class="popup-location"><i class="fas fa-map-marker-alt"></i> ${dest.country}, ${dest.continent}</p>
+                        <p class="popup-description">${dest.description.substring(0, 100)}...</p>
+                        <div class="popup-stats">
+                            <span><i class="fas fa-heart"></i> ${dest.likes || 0}</span>
+                            <span><i class="fas fa-comment"></i> ${dest.comments || 0}</span>
+                        </div>
+                        <button class="btn-view-details" data-id="${dest.id}">Explore Journey →</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Draw route connection between destinations
+        function drawTravelRoutes(destinations) {
+            if (destinations.length < 2) return;
+            
+            // Sort by visited date (assuming you have this data)
+            const sorted = [...destinations].sort((a,b) => new Date(a.visitedDate) - new Date(b.visitedDate));
+            
+            const waypoints = sorted.map(dest => L.latLng(dest.latitude, dest.longitude));
+            
+            currentRoute = L.Routing.control({
+                waypoints: waypoints,
+                routeWhileDragging: false,
+                showAlternatives: false,
+                lineOptions: {
+                    styles: [{ color: '#ff6b6b', opacity: 0.8, weight: 4 }],
+                    extendToWaypoints: true,
+                    missingRouteTolerance: 0
+                },
+                createMarker: function() { return null; } // Don't create markers for route
+            }).addTo(map);
+        }
+        
+        // Populate sidebar with destinations list
+        function populateDestinationsList(destinations) {
+            const container = document.getElementById('destinationsList');
+            container.innerHTML = destinations.map(dest => `
+                <div class="dest-card" data-id="${dest.id}" data-continent="${dest.continent}">
+                    <div class="dest-card-image">
+                        <img src="${dest.imageUrl}" alt="${dest.name}" loading="lazy">
+                        <div class="dest-card-overlay">
+                            <span class="dest-rank">#${dest.rank || 'featured'}</span>
+                        </div>
+                    </div>
+                    <div class="dest-card-content">
+                        <h4>${dest.name}</h4>
+                        <p class="dest-location"><i class="fas fa-map-marker-alt"></i> ${dest.country}</p>
+                        <p class="dest-excerpt">${dest.description.substring(0, 80)}...</p>
+                        <div class="dest-meta">
+                            <span><i class="fas fa-calendar"></i> ${new Date(dest.createdAt).toLocaleDateString()}</span>
+                            <button class="btn-locate" data-lat="${dest.latitude}" data-lng="${dest.longitude}">
+                                <i class="fas fa-crosshairs"></i> Locate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Add event listeners
+            document.querySelectorAll('.btn-locate').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const lat = parseFloat(btn.dataset.lat);
+                    const lng = parseFloat(btn.dataset.lng);
+                    map.setView([lat, lng], 12);
+                    map.panTo([lat, lng], { animate: true, duration: 1.0 });
+                    
+                    // Add pulsing animation to marker
+                    const marker = markers.find(m =>
+                        Math.abs(m.data.latitude - lat) < 0.001 &&
+                        Math.abs(m.data.longitude - lng) < 0.001
+                    );
+                    if (marker) marker.marker.openPopup();
+                });
+            });
+            
+            // Animate cards with GSAP
+            gsap.from('.dest-card', {
+                opacity: 0,
+                y: 50,
+                stagger: 0.05,
+                duration: 0.6,
+                scrollTrigger: {
+                    trigger: '#destinationsList',
+                    start: 'top 80%'
+                }
+            });
+        }
+        
+        // Helper functions
+        function getMarkerColor(continent) {
+            const colors = {
+                'asia': '#ff6b6b',
+                'europe': '#4ecdc4',
+                'north-america': '#45b7d1',
+                'south-america': '#96ceb4',
+                'africa': '#f9ca24',
+                'oceania': '#f0932b'
+            };
+            return colors[continent.toLowerCase()] || '#78c2ad';
+        }
+        
+        function updateStats(destinations) {
+            const uniqueCountries = [...new Set(destinations.map(d => d.country))];
+            const totalKm = destinations.reduce((sum, d) => sum + (d.distance || 0), 0);
+            
+            document.getElementById('destinationCount').textContent = destinations.length;
+            document.getElementById('countriesCount').textContent = uniqueCountries.length;
+            
+            // Animate number counter
+            animateNumber('totalDistance', 0, totalKm, 2000);
+        }
+        
+        function animateNumber(elementId, start, end, duration) {
+            const element = document.getElementById(elementId);
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    clearInterval(timer);
+                    element.textContent = Math.round(end).toLocaleString();
+                } else {
+                    element.textContent = Math.round(current).toLocaleString();
+                }
+            }, 16);
+        }
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            
+            // Filter functionality
+            document.querySelectorAll('.filter-tag').forEach(tag => {
+                tag.addEventListener('click', (e) => {
+                    const filter = tag.dataset.filter;
+                    document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+                    tag.classList.add('active');
+                    
+                    if (filter === 'all') {
+                        document.querySelectorAll('.dest-card').forEach(card => card.style.display = '');
+                        markers.forEach(m => m.marker.addTo(map));
+                    } else {
+                        document.querySelectorAll('.dest-card').forEach(card => {
+                            if (card.dataset.continent === filter) {
+                                card.style.display = '';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                        markers.forEach(m => {
+                            if (m.data.continent === filter) {
+                                m.marker.addTo(map);
+                            } else {
+                                map.removeLayer(m.marker);
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Search functionality
+            document.getElementById('searchDestinations').addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                document.querySelectorAll('.dest-card').forEach(card => {
+                    const title = card.querySelector('h4').textContent.toLowerCase();
+                    const location = card.querySelector('.dest-location').textContent.toLowerCase();
+                    if (title.includes(searchTerm) || location.includes(searchTerm)) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+}

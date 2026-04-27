@@ -1,25 +1,64 @@
 ﻿@using Horizons.Web.ViewModels.Destination;
 @model DestinationDeleteInputModel
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body text-center">
-                <h3>@Model.Name</h3>
-                <p><strong>Published By:</strong> @Model.Publisher</p>
-                <p class="text-danger mt-3">Are you sure you want to delete <strong>@Model.Name</strong>?</p>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <form asp-action="Delete" method="post">
-                    <input type="hidden" asp-for="Id" />
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash"></i> Confirm Delete
-                    </button>
-                </form>
-                <a asp-controller="Destination" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-warning">
-                    <i class="fas fa-times-circle"></i> Cancel
-                </a>
+@{
+    ViewData["Title"] = "Delete Destination";
+}
+
+<div class="container" style="margin-top: 60px;">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-center" style="background: var(--sport-light); border: 1px solid var(--sport-border);">
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: var(--sport-danger);"></i>
+                    </div>
+                    
+                    <h3 class="mb-3" style="color: var(--sport-danger);">
+                        <i class="fas fa-skull-crossbones"></i> DELETE DESTINATION
+                    </h3>
+                    
+                    <div class="p-3 mb-4" style="background: var(--sport-dark); border-radius: 10px;">
+                        <h4 class="mb-2">@Model.Name</h4>
+                        <p class="mb-0">
+                            <i class="fas fa-user"></i> <strong>Published By:</strong> @Model.Publisher
+                        </p>
+                    </div>
+                    
+                    <div class="alert alert-danger" role="alert" style="background: rgba(255, 51, 102, 0.1); border: 1px solid var(--sport-danger); color: var(--sport-text);">
+                        <i class="fas fa-skull"></i>
+                        <strong>WARNING!</strong> This action cannot be undone. Are you sure you want to permanently delete <strong>@Model.Name</strong>?
+                    </div>
+                </div>
+                
+                <div class="card-footer p-4 d-flex gap-3 justify-content-center" style="background: var(--sport-darker); border-top: 1px solid var(--sport-border);">
+                    <form asp-action="Delete" method="post" class="d-inline">
+                        <input type="hidden" asp-for="Id" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> YES, DELETE IT
+                        </button>
+                    </form>
+                    
+                    <a asp-controller="Destination" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                        <i class="fas fa-shield-alt"></i> CANCEL, KEEP IT
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Animation for warning icon -->
+<script>
+    // Add pulsing animation to warning icon
+    const warningIcon = document.querySelector('.fa-exclamation-triangle');
+    if (warningIcon) {
+        setInterval(() => {
+            warningIcon.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                warningIcon.style.transform = 'scale(1)';
+            }, 300);
+        }, 1000);
+    }
+</script>
+

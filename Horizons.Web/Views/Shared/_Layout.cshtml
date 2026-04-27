@@ -7,18 +7,35 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Horizons</title>
+    <title>@ViewData["Title"] - Horizons | Adventure Awaits</title>
     <link href="~/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Horizons.styles.css" asp-append-version="true" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <!-- GSAP for smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- For markers -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
+    
+    <!-- Google Fonts - Sporty & Bold -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 sport-theme">
     <header>
-        <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark sport-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Destination" asp-action="Index">
-                    <i class="fas fa-globe"></i> Horizons
+                <a class="navbar-brand sport-brand" asp-controller="Destination" asp-action="Index">
+                    <i class="fas fa-mountain"></i>
+                    <span>HORIZONS</span>
+                    <i class="fas fa-bolt"></i>
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,36 +45,48 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Destination" asp-action="Index">
-                                <i class="fas fa-home"></i> Home
+                            <a class="nav-link sport-nav-link" asp-controller="Destination" asp-action="Index">
+                                <i class="fas fa-compass"></i> EXPLORE
                             </a>
                         </li>
 
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">Destinations</a>
-                                <div class="dropdown-menu">
+                                <a class="nav-link sport-nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
+                                    <i class="fas fa-flag-checkered"></i> DESTINATIONS
+                                </a>
+                                <div class="dropdown-menu sport-dropdown">
                                     <a class="dropdown-item" asp-controller="Destination" asp-action="Index">
-                                        <i class="fas fa-list"></i> All Destinations
+                                        <i class="fas fa-globe-americas"></i> All Destinations
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-controller="Destination" asp-action="Add">
-                                        <i class="fas fa-plus"></i> Add Destination
+                                        <i class="fas fa-plus-circle"></i> Add Destination
                                     </a>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Destination" asp-action="Favorites">
-                                    <i class="fas fa-heart"></i> Favorites
+                                <a class="nav-link sport-nav-link" asp-controller="Destination" asp-action="Favorites">
+                                    <i class="fas fa-trophy"></i> FAVORITES
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sport-nav-link" asp-controller="Destination" asp-action="Map">
+                                    <i class="fas fa-map-marked-alt"></i> LIVE MAP
                                 </a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Destination" asp-action="Index">
-                                    <i class="fas fa-list"></i> All Destinations
+                                <a class="nav-link sport-nav-link" asp-controller="Destination" asp-action="Index">
+                                    <i class="fas fa-list"></i> DESTINATIONS
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sport-nav-link" asp-controller="Destination" asp-action="Map">
+                                    <i class="fas fa-map-marked-alt"></i> LIVE MAP
                                 </a>
                             </li>
                         }
@@ -70,20 +99,30 @@
         </nav>
     </header>
 
-    <div class="container flex-grow-1">
-        <main role="main" class="pb-3">
+    <div class="container-fluid flex-grow-1 px-0">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="bg-dark text-white py-2 mt-auto">
-        <div class="container d-flex justify-content-between align-items-center">
-            <span>&copy; @DateTime.Now.Year - Horizons</span>
-            <div class="d-flex align-items-center">
-                <span id="footer-quote" class="me-2">Loading...</span>
-                <button id="new-quote-btn" class="btn btn-outline-light btn-sm">
-                    <i class="fas fa-sync-alt"></i> New Quote
-                </button>
+    <footer class="sport-footer">
+        <div class="container-fluid">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-mountain"></i>
+                    <span>HORIZONS</span>
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="footer-quote-section">
+                    <i class="fas fa-quote-left"></i>
+                    <span id="footer-quote" class="footer-quote-text">PUSH YOUR LIMITS</span>
+                    <button id="new-quote-btn" class="sport-btn-small">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <div class="footer-copyright">
+                    &copy; @DateTime.Now.Year - HORIZONS ADVENTURE
+                </div>
             </div>
         </div>
     </footer>

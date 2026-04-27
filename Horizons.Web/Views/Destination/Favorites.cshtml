@@ -1,56 +1,60 @@
 ﻿@using Horizons.Web.ViewModels.Destination
 @model IEnumerable<DestinationFavoriteViewModel>
 
-
-
-
- @{
-    ViewData["Title"] = "Favorite Destinations";
+@{
+    ViewData["Title"] = "Favorites";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3" style="margin-top: 20px;">
-    <h2>@ViewData["Title"]</h2>
-</div>
-<hr />
-
-@if (Model == null || !Model.Any())
-{
-    <div class="text-center mt-5">
-        <h4>You don't have any favorite destinations yet!</h4>
-        <p class="text-muted">Start exploring and adding destinations to your favorites.</p>
+<div class="container" style="margin-top: 40px;">
+    <div class="text-center mb-4">
+        <h2><i class="fas fa-trophy"></i> MY FAVORITE DESTINATIONS</h2>
+        <p class="text-muted">Your ultimate adventure bucket list</p>
     </div>
-}
-else
-{
-    @foreach (var destination in Model)
+    <hr style="border-color: var(--sport-primary);" />
+
+    @if (Model == null || !Model.Any())
     {
-        <div class="row align-items-center mb-4 py-3" style="border-bottom: 1px solid #ccc;">
-            <div class="col-md-2 text-center">
-                @if (!string.IsNullOrEmpty(@destination.ImageUrl))
-                {
-                    <img src="@destination.ImageUrl" class="img-fluid" style="max-height: 100px; object-fit: contain;" alt="@destination.Name" />
-                }
-                else
-                {
-                    <img src="~/images/default-image.jpg" class="img-fluid" style="max-height: 100px; object-fit: contain;" alt="No Image Available" />
-                }
-            </div>
-            <div class="col-md-4 text-start">
-                <h5 class="mb-0">@destination.Name</h5>
-                <p class="text-muted mb-0"><small>Terrain: @destination.Terrain</small></p>
-            </div>
-            <div class="col-md-4 text-end">
-                <form asp-controller="Destination" asp-action="RemoveFromFavorites" asp-route-id="@destination.Id" method="post" style="display:inline;">
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash"></i> Remove
-                    </button>
-                </form>
-            </div>
+        <div class="text-center mt-5 p-5" style="background: var(--sport-light); border-radius: 15px;">
+            <i class="fas fa-heart-broken" style="font-size: 4rem; color: var(--sport-primary);"></i>
+            <h4 class="mt-3">NO FAVORITES YET</h4>
+            <p class="text-muted">Start exploring and add destinations to your favorites!</p>
+            <a asp-controller="Destination" asp-action="Index" class="btn btn-primary mt-3">
+                <i class="fas fa-compass"></i> EXPLORE DESTINATIONS
+            </a>
         </div>
     }
-}
-<div class="text-center mt-5">
-    <a asp-controller="Destination" asp-action="Index" class="btn btn-primary mt-3">
-        <i class="fas fa-arrow-left"></i> Back to Destinations
-    </a>
-</div> 
+    else
+    {
+        <div class="favorites-container">
+            @foreach (var destination in Model)
+            {
+                <div class="favorite-item row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <img src="@(!string.IsNullOrEmpty(destination.ImageUrl) ? destination.ImageUrl : "/images/default-image.jpg")"
+                             class="img-fluid" style="max-height: 80px; object-fit: cover; border-radius: 8px;"
+                             alt="@destination.Name" />
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="mb-0">@destination.Name</h5>
+                        <p class="text-muted mb-0">
+                            <i class="fas fa-mountain"></i> @destination.Terrain
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <form asp-controller="Destination" asp-action="RemoveFromFavorites" asp-route-id="@destination.Id" method="post">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> REMOVE
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+        
+        <div class="text-center mt-5">
+            <a asp-controller="Destination" asp-action="Index" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> BACK TO DESTINATIONS
+            </a>
+        </div>
+    }
+</div>

@@ -5,46 +5,179 @@
     ViewData["Title"] = "Edit Destination";
 }
 
-<h2>@ViewData["Title"]</h2>
-<hr />
+<div class="container" style="margin-top: 40px;">
+    <div class="text-center mb-4">
+        <h2><i class="fas fa-edit"></i> EDIT DESTINATION</h2>
+        <p class="text-muted">Update your adventure story</p>
+    </div>
+    <hr style="border-color: var(--sport-primary);" />
 
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <form asp-action="Edit" method="post">
-            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-lg-10">
+            <form asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="PublishedOn" /> 
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="PublishedOn" />
 
-            <div class="mb-3">
-                <label asp-for="Name" class="form-label">Name</label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+                <!-- Basic Information Section -->
+                <div class="section-header mb-3">
+                    <i class="fas fa-info-circle"></i> BASIC INFORMATION
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <label asp-for="Name" class="form-label-add-edit">
+                            <i class="fas fa-flag-checkered"></i> DESTINATION NAME
+                        </label>
+                        <input asp-for="Name" class="form-control" placeholder="e.g., Everest Base Camp" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
-            <div class="mb-3">
-                <label asp-for="Description" class="form-label">Description</label>
-                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
+                    <div class="col-sm-6 mb-3">
+                        <label asp-for="TerrainId" class="form-label-add-edit">
+                            <i class="fas fa-mountain"></i> TERRAIN TYPE
+                        </label>
+                        <select asp-for="TerrainId" class="form-control" asp-items="@(new SelectList(Model.Terrains, "Id", "Name"))">
+                            <option value="">-- SELECT TERRAIN --</option>
+                        </select>
+                        <span asp-validation-for="TerrainId" class="text-danger"></span>
+                    </div>
+                </div>
 
-            <div class="mb-3">
-                <label asp-for="ImageUrl" class="form-label">Image URL</label>
-                <input asp-for="ImageUrl" class="form-control" placeholder="Optional" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label-add-edit">
+                        <i class="fas fa-align-left"></i> ADVENTURE STORY
+                    </label>
+                    <textarea asp-for="Description" class="form-control" rows="5" placeholder="Describe your incredible journey..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
 
-            <div class="mb-3">
-                <label asp-for="TerrainId" class="form-label">Select Terrain</label>
-                <select asp-for="TerrainId" class="form-control" asp-items="@(new SelectList(Model.Terrains, "Id", "Name"))">
-                    <option value="">-- Select Terrain --</option>
-                </select>
-                <span asp-validation-for="TerrainId" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="ImageUrl" class="form-label-add-edit">
+                        <i class="fas fa-image"></i> IMAGE URL
+                    </label>
+                    <input asp-for="ImageUrl" class="form-control" placeholder="https://..." />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <div class="mt-3">
+                            <div class="image-preview-container">
+                                <img id="imagePreview" src="@Model.ImageUrl" alt="Preview" class="image-preview"
+                                     onerror="this.src='/images/default-image.jpg'" />
+                                <p class="text-muted small mt-2">Current image preview</p>
+                            </div>
+                        </div>
+                    }
+                </div>
 
-            <button type="submit" class="btn btn-primary w-100">
-                <i class="fas fa-save"></i> Save Changes
-            </button>
-        </form>
+                <!-- Map Location Section -->
+                <div class="section-header mb-3 mt-4">
+                    <i class="fas fa-map-marked-alt"></i> MAP LOCATION
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <label asp-for="Country" class="form-label-add-edit">
+                            <i class="fas fa-globe"></i> COUNTRY
+                        </label>
+                        <input asp-for="Country" class="form-control" placeholder="e.g., Nepal, Japan, Italy" />
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label asp-for="Continent" class="form-label-add-edit">
+                            <i class="fas fa-map"></i> CONTINENT
+                        </label>
+                        <select asp-for="Continent" class="form-control">
+                            <option value="">-- SELECT CONTINENT --</option>
+                            <option value="Asia">🌏 Asia</option>
+                            <option value="Europe">🇪🇺 Europe</option>
+                            <option value="North America">🌎 North America</option>
+                            <option value="South America">🌎 South America</option>
+                            <option value="Africa">🦁 Africa</option>
+                            <option value="Oceania">🏝️ Oceania</option>
+                            <option value="Antarctica">❄️ Antarctica</option>
+                        </select>
+                        <span asp-validation-for="Continent" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <label asp-for="Latitude" class="form-label-add-edit">
+                            <i class="fas fa-arrow-up"></i> LATITUDE
+                        </label>
+                        <input asp-for="Latitude" class="form-control" placeholder="e.g., 27.9881" step="any" />
+                        <span asp-validation-for="Latitude" class="text-danger"></span>
+                        <small class="text-muted">Range: -90 to 90 (use negative for South)</small>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label asp-for="Longitude" class="form-label-add-edit">
+                            <i class="fas fa-arrow-right"></i> LONGITUDE
+                        </label>
+                        <input asp-for="Longitude" class="form-control" placeholder="e.g., 86.9250" step="any" />
+                        <span asp-validation-for="Longitude" class="text-danger"></span>
+                        <small class="text-muted">Range: -180 to 180 (use negative for West)</small>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="TravelDistance" class="form-label-add-edit">
+                        <i class="fas fa-road"></i> TRAVEL DISTANCE (KM)
+                    </label>
+                    <input asp-for="TravelDistance" class="form-control" placeholder="e.g., 150" step="any" />
+                    <span asp-validation-for="TravelDistance" class="text-danger"></span>
+                    <small class="text-muted">Optional: Distance from previous destination</small>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary flex-grow-1">
+                        <i class="fas fa-save"></i> SAVE CHANGES
+                    </button>
+                    <a asp-controller="Destination" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> CANCEL
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // Live image preview
+        const imageUrlInput = document.getElementById('ImageUrl');
+        const imagePreview = document.getElementById('imagePreview');
+        
+        if (imageUrlInput && imagePreview) {
+            imageUrlInput.addEventListener('input', function() {
+                const url = this.value;
+                if (url) {
+                    imagePreview.src = url;
+                    imagePreview.onerror = function() {
+                        this.src = '/images/default-image.jpg';
+                    };
+                }
+            });
+        }
+        
+        // Optional: Live map preview when coordinates are entered
+        function previewCoordinates() {
+            const lat = document.getElementById('Latitude').value;
+            const lng = document.getElementById('Longitude').value;
+            
+            if (lat && lng) {
+                console.log(`Updated coordinates: ${lat}, ${lng}`);
+                // You can add a map preview here if desired
+            }
+        }
+        
+        document.getElementById('Latitude')?.addEventListener('change', previewCoordinates);
+        document.getElementById('Longitude')?.addEventListener('change', previewCoordinates);
+    </script>
+}
+

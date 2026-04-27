@@ -2,36 +2,38 @@
 @model IEnumerable<DestinationIndexViewModel>
 
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Home - Adventure Dashboard";
 }
 
 <!-- Hero Section -->
 <section class="welcome-section text-center py-5">
     <div class="container">
-        <h1>Explore the World with Horizons</h1>
-        <p class="lead">Discover amazing destinations, add them to your favorites, and start your adventure today!</p>
-        <a asp-controller="Destination" asp-action="Index" class="btn btn-primary btn-lg mt-3">Start Exploring</a>
+        <h1>EXPLORE THE WORLD<br>WITH HORIZONS</h1>
+        <p class="lead">Discover amazing destinations, conquer new challenges, and start your adventure today!</p>
+        <a asp-controller="Destination" asp-action="Index" class="btn btn-primary btn-lg mt-3">
+            <i class="fas fa-compass"></i> START EXPLORING
+        </a>
     </div>
 </section>
 
 <!-- Featured Destinations -->
 <section class="explore-section py-5">
     <div class="container">
-        <h2 class="section-title text-center mb-4">Featured Destinations</h2>
+        <h2 class="section-title text-center mb-5">⚡ FEATURED DESTINATIONS ⚡</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach (var dest in Model.Take(6))
             {
                 <div class="col">
-                    <div class="card hover-scale h-100 shadow-sm">
-                        <img src="@(string.IsNullOrEmpty(dest.ImageUrl) ? "~/images/default-image.jpg" : dest.ImageUrl)"
-                             class="card-img-top" style="height:200px; object-fit:cover;" alt="@dest.Name" />
+                    <div class="card hover-scale h-100">
+                        <img src="@(string.IsNullOrEmpty(dest.ImageUrl) ? "/images/default-image.jpg" : dest.ImageUrl)"
+                             class="card-img-top" alt="@dest.Name" />
                         <div class="card-body text-center">
                             <h5 class="card-title">@dest.Name</h5>
-                            <p class="text-muted">@dest.TerrainName</p>
+                            <p class="card-text text-muted">@dest.TerrainName</p>
 
-                            <div class="d-flex justify-content-center gap-2 mt-2">
-                                <a asp-action="Details" asp-route-id="@dest.Id" class="btn btn-sm btn-primary">
-                                    View
+                            <div class="d-flex justify-content-center gap-2 mt-3">
+                                <a asp-action="Details" asp-route-id="@dest.Id" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye"></i> EXPLORE
                                 </a>
 
                                 @if (User.Identity.IsAuthenticated)
@@ -43,7 +45,7 @@
                                             <form asp-action="AddToFavorites" method="post" class="d-inline">
                                                 <input type="hidden" name="id" value="@dest.Id" />
                                                 <button type="submit" class="btn btn-warning btn-sm btn-heart">
-                                                    ❤️
+                                                    <i class="fas fa-heart"></i>
                                                 </button>
                                             </form>
                                         }
@@ -52,7 +54,7 @@
                                             <form asp-action="RemoveFromFavorites" method="post" class="d-inline">
                                                 <input type="hidden" name="id" value="@dest.Id" />
                                                 <button type="submit" class="btn btn-danger btn-sm btn-heart active-heart">
-                                                    💔
+                                                    <i class="fas fa-heart-broken"></i>
                                                 </button>
                                             </form>
                                         }

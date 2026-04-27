@@ -30,6 +30,12 @@ namespace Horizons.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Continent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -43,6 +49,12 @@ namespace Horizons.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Longitude")
+                        .HasColumnType("float");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -55,8 +67,14 @@ namespace Horizons.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("Rating")
+                        .HasColumnType("int");
+
                     b.Property<int>("TerrainId")
                         .HasColumnType("int");
+
+                    b.Property<double?>("TravelDistance")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -192,9 +210,14 @@ namespace Horizons.Data.Migrations
                     b.Property<int>("DestinationId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DestinationId1")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId", "DestinationId");
 
                     b.HasIndex("DestinationId");
+
+                    b.HasIndex("DestinationId1");
 
                     b.ToTable("UsersDestinations");
                 });
@@ -320,15 +343,15 @@ namespace Horizons.Data.Migrations
                         {
                             Id = "7699db7d-964f-4782-8209-d76562e0fece",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "127beed2-f804-4bcd-958b-e0572f8accd4",
+                            ConcurrencyStamp = "639842ca-e938-4fbc-ae53-2672aa7744d7",
                             Email = "admin@horizons.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@HORIZONS.COM",
                             NormalizedUserName = "ADMIN@HORIZONS.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEK8YyzpRgnLPLZcfy/+IGgACkVUFQ/1nlSytO5WBZnmXv7qzGyEdLyY6QiBjDeB64A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEDclj+NdzkBSSiv1Z2sFipEBtj+W3SjIkBAQcsYEjB03xgqmXIdXSE0cyK+qpC2dQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3d6c519f-ac62-4d8a-958a-f9b7d85a9d10",
+                            SecurityStamp = "275da879-7f90-491d-b2a4-49bc0e6b7e35",
                             TwoFactorEnabled = false,
                             UserName = "admin@horizons.com"
                         });
@@ -446,6 +469,10 @@ namespace Horizons.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Horizons.Data.Models.Destination", null)
+                        .WithMany("Favorites")
+                        .HasForeignKey("DestinationId1");
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -510,6 +537,8 @@ namespace Horizons.Data.Migrations
 
             modelBuilder.Entity("Horizons.Data.Models.Destination", b =>
                 {
+                    b.Navigation("Favorites");
+
                     b.Navigation("UsersDestinations");
                 });
 

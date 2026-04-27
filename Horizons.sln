@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Data.Models", "Hor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Web", "Horizons.Web\Horizons.Web.csproj", "{1C9A3160-C444-7127-6C6F-993A709154CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Services.Common", "Horizons.Services.Common\Horizons.Services.Common.csproj", "{1CE85D61-FA24-4F7A-8C8D-F012F5AADAB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{1C9A3160-C444-7127-6C6F-993A709154CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C9A3160-C444-7127-6C6F-993A709154CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C9A3160-C444-7127-6C6F-993A709154CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE85D61-FA24-4F7A-8C8D-F012F5AADAB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE85D61-FA24-4F7A-8C8D-F012F5AADAB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE85D61-FA24-4F7A-8C8D-F012F5AADAB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE85D61-FA24-4F7A-8C8D-F012F5AADAB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{CC408A46-5524-4418-A246-ADF07399AAED} = {6C059CC7-B8CD-48F4-AAD5-C74605D4A66C}
 		{B5FD021C-4930-4C3E-9CB7-E517B66DF35D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{1C9A3160-C444-7127-6C6F-993A709154CD} = {6C059CC7-B8CD-48F4-AAD5-C74605D4A66C}
+		{1CE85D61-FA24-4F7A-8C8D-F012F5AADAB6} = {8B8A0EA8-62C4-430A-831B-1938CEE1EE39}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1DC45BE4-BD41-4951-82C9-76C3F4E7A3C6}

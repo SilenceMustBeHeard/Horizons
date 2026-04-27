@@ -1,5 +1,6 @@
 ﻿using Horizons.Data;
-using Horizons.Services.Core.Contracts;
+
+using Horizons.Services.Core.Interfaces;
 using Horizons.Web.ViewModels.Destination;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Horizons.Services.Core
+namespace Horizons.Services.Core.Implementations
 {
     public class TerrainService : ITerrainService
     {

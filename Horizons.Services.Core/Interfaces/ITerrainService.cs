@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Horizons.Services.Core.Contracts
+namespace Horizons.Services.Core.Interfaces
 {
     public interface ITerrainService
     {
