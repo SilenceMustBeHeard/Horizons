@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Horizons.Data.Models;
+using System.Text.Json;
 
 namespace Horizons.Data.Seeding;
 
