@@ -6,12 +6,13 @@ namespace Horizons.Data.Models
 {
     public class Destination : BaseDeletableEntity
     {
-        [MinLength(ValidationConstants.DestinationNameMinLength)]
+        [MinLength(ValidationConstants.DestinationNameMinLength, ErrorMessage = "Name is too short")]
         public string Name { get; set; } = null!;
 
-        [MinLength(ValidationConstants.DestinationDescriptionMinLength)]
+        [MinLength(ValidationConstants.DestinationDescriptionMinLength, ErrorMessage = "Description is too short")]
         public string Description { get; set; } = null!;
 
+        [Url(ErrorMessage = "Please enter a valid URL")]
         public string? ImageUrl { get; set; }
 
         public string PublisherId { get; set; } = null!;

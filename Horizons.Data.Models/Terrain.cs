@@ -8,7 +8,7 @@ namespace Horizons.Data.Models
     {
 
 
-        [MinLength(ValidationConstants.TerrainNameMinLength)]
+        [MinLength(ValidationConstants.TerrainNameMinLength, ErrorMessage = "Name is too short")]
         public string Name { get; set; } = null!;
 
 
