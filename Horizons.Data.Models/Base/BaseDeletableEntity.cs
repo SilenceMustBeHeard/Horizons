@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Horizons.Data.Models;
+namespace Horizons.Data.Models.Base;
 
 public abstract class BaseDeletableEntity : BaseEntity
 {

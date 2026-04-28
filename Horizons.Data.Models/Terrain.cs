@@ -1,4 +1,5 @@
-﻿using Horizons.GCommon;
+﻿using Horizons.Data.Models.Base;
+using Horizons.GCommon;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,8 +18,8 @@ namespace Horizons.Data.Models
 
     
 
-        public virtual ICollection<Destination> Destinations 
-        { get; set; } = new HashSet<Destination>();
+        public virtual ICollection<Destination> Destinations { get; set; }
+         = new HashSet<Destination>();
 
     }
 }

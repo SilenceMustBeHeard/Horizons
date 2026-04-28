@@ -1,5 +1,5 @@
 using Horizons.Data;
-using Horizons.Data.Models;
+using Horizons.Data.Models.Base;
 using Horizons.Services.Core.Implementations;
 using Horizons.Services.Core.Interfaces;
 using Microsoft.AspNetCore.Identity;

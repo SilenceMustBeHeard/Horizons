@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Horizons.Data.Models.Messages;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Horizons.Data.Models;
+namespace Horizons.Data.Models.Base;
 
 public class AppUser : IdentityUser
 {
@@ -22,4 +23,21 @@ public class AppUser : IdentityUser
 
     public virtual ICollection<Destination> FavoriteDestinations { get; set; } 
         = new HashSet<Destination>();
+
+
+
+    // Navigation properties for messages
+    public virtual ICollection<SystemInboxMessage> ReceivedSystemMessages { get; set; }
+        = new HashSet<SystemInboxMessage>();
+
+    public virtual ICollection<SystemInboxMessage> SentSystemMessages { get; set; }
+        = new HashSet<SystemInboxMessage>();
+
+    public virtual ICollection<ContactMessage> ReceivedContactMessages { get; set; }
+        = new HashSet<ContactMessage>();
+
+    public virtual ICollection<ContactMessage> SentContactMessages { get; set; }
+        = new HashSet<ContactMessage>();
+
+
 }

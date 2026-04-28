@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Horizons.Data.Models.Base;
+using Microsoft.AspNetCore.Identity;
 using System;
 
 namespace Horizons.Data.Models;

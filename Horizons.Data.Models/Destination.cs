@@ -1,4 +1,5 @@
-﻿using Horizons.GCommon;
+﻿using Horizons.Data.Models.Base;
+using Horizons.GCommon;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,7 @@ namespace Horizons.Data.Models
         public int? Rating { get; set; }
 
         // Navigation property for favorites
-        public virtual ICollection<UserDestination> UsersDestinations { get; set; } = new HashSet<UserDestination>();
+        public virtual ICollection<UserDestination> UsersDestinations { get; set; }
+            = new HashSet<UserDestination>();
     }
 }

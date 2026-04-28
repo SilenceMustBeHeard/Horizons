@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Horizons.GCommon\Horizons.Data.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interactions\" />
+  </ItemGroup>
+
 </Project>
