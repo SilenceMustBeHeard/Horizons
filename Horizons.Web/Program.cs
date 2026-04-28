@@ -84,8 +84,7 @@ public class Program
             IdentitySeeder.SeedAdminAsync(userManager).GetAwaiter().GetResult();
             IdentitySeeder.SeedManagerAsync(userManager).GetAwaiter().GetResult();
 
-            // Seed terrain data
-            DbSeeder.SeedTerrainAsync(context).GetAwaiter().GetResult();
+            DbSeeder.SeedAllAsync(context).GetAwaiter().GetResult();
         }
 
         app.Run();
