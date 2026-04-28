@@ -3,20 +3,15 @@
 using Horizons.Services.Core.Interfaces;
 using Horizons.Web.ViewModels.Destination;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Horizons.Services.Core.Implementations
 {
     public class TerrainService : ITerrainService
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly AppDbContext dbContext;
 
 
-        public TerrainService(ApplicationDbContext dbContext)
+        public TerrainService(AppDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

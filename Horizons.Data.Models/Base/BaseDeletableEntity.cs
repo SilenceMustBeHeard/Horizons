@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Horizons.Data.Models.Base;
+﻿namespace Horizons.Data.Models.Base;
 
 public abstract class BaseDeletableEntity : BaseEntity
 {

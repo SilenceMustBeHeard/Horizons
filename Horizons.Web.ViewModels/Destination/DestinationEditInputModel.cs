@@ -1,6 +1,6 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
 using Horizons.GCommon;
+using System.ComponentModel.DataAnnotations;
 
 namespace Horizons.Web.ViewModels.Destination
 {
@@ -52,7 +52,7 @@ namespace Horizons.Web.ViewModels.Destination
         [Display(Name = "Travel Distance (KM)")]
         public double? TravelDistance { get; set; }
 
-     
+
         public IEnumerable<AddDestinationTerrainDropdownModel>? Terrains { get; set; }
     }
 }

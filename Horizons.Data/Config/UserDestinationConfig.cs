@@ -13,7 +13,7 @@ namespace Horizons.Data.Config
             builder.HasQueryFilter(ud => !ud.Destination.IsDeleted);
 
             builder.HasOne(ud => ud.User)
-                   .WithMany(u => u.UsersDestinations) 
+                   .WithMany(u => u.UsersDestinations)
                    .HasForeignKey(ud => ud.UserId)
                    .OnDelete(DeleteBehavior.Restrict);
 

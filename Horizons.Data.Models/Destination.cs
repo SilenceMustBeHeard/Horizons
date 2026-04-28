@@ -1,8 +1,5 @@
 ﻿using Horizons.Data.Models.Base;
 using Horizons.GCommon;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Horizons.Data.Models
@@ -17,7 +14,7 @@ namespace Horizons.Data.Models
 
         public string? ImageUrl { get; set; }
 
-        public string PublisherId { get; set; } = null!; 
+        public string PublisherId { get; set; } = null!;
         public virtual AppUser Publisher { get; set; } = null!;
 
         public Guid TerrainId { get; set; }

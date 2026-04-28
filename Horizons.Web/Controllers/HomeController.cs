@@ -1,11 +1,9 @@
 ﻿namespace Horizons.Web.Controllers
 {
-    using System.Diagnostics;
-
-    using ViewModels;
-
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+    using ViewModels;
 
     public class HomeController : Controller
     {

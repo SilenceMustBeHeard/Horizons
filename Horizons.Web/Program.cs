@@ -2,7 +2,6 @@ using Horizons.Data;
 using Horizons.Data.Models.Base;
 using Horizons.Services.Core.Implementations;
 using Horizons.Services.Core.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Horizons.Web
@@ -17,7 +16,7 @@ namespace Horizons.Web
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -32,7 +31,7 @@ namespace Horizons.Web
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             })
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<AppDbContext>();
 
             // Register services
             builder.Services.AddScoped<IDestinationService, DestinationService>();

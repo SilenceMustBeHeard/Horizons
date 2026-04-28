@@ -2,23 +2,17 @@
 using Horizons.GCommon;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Horizons.GCommon;
 
 
 namespace Horizons.Data.Config
 {
     public class DestinationConfig : IEntityTypeConfiguration<Destination>
     {
-      
+
 
         public void Configure(EntityTypeBuilder<Destination> builder)
         {
-          builder.HasKey(d => d.Id);
+            builder.HasKey(d => d.Id);
 
             builder.Property(d => d.Name)
                      .IsRequired()
@@ -33,8 +27,8 @@ namespace Horizons.Data.Config
 
             builder.Property(d => d.PublisherId)
                         .IsRequired();
-           builder.Property(d=>d.IsDeleted)
-                        .HasDefaultValue(false);
+            builder.Property(d => d.IsDeleted)
+                         .HasDefaultValue(false);
 
             builder.HasQueryFilter(d => !d.IsDeleted);
 
@@ -120,6 +114,5 @@ namespace Horizons.Data.Config
     }
 }
 
-   
-   
-        
+
+

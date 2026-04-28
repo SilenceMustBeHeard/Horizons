@@ -6,19 +6,15 @@ using Horizons.Web.ViewModels.Destination;
 using Horizons.Web.ViewModels.Map;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Horizons.Services.Core.Implementations;
 
 public class DestinationService : IDestinationService
 {
-    private readonly ApplicationDbContext context;
+    private readonly AppDbContext context;
     private readonly UserManager<AppUser> userManager;
 
-    public DestinationService(ApplicationDbContext context,
+    public DestinationService(AppDbContext context,
         UserManager<AppUser> userManager)
     {
         this.context = context;

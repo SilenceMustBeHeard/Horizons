@@ -1,7 +1,5 @@
 ﻿using Horizons.Data.Models.Messages;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Horizons.Data.Models.Base;
@@ -21,7 +19,7 @@ public class AppUser : IdentityUser
     public virtual ICollection<UserDestination> UsersDestinations { get; set; }
         = new HashSet<UserDestination>();
 
-    public virtual ICollection<Destination> FavoriteDestinations { get; set; } 
+    public virtual ICollection<Destination> FavoriteDestinations { get; set; }
         = new HashSet<Destination>();
 
 

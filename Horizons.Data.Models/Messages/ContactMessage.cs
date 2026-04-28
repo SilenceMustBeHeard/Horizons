@@ -1,8 +1,5 @@
 ﻿using Horizons.Data.Models.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Horizons.Data.Models.Messages;
 
