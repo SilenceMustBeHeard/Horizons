@@ -7,65 +7,172 @@
 
 <div class="container details-container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-11 col-lg-10">
+            <!-- Hero Badge -->
             <div class="text-center mb-4">
                 <span class="detail-badge">
                     <i class="fas fa-flag-checkered"></i> DESTINATION SPOTLIGHT
                 </span>
             </div>
-            
+
+            <!-- Big Hero Image Section -->
+            <div class="hero-image-container mb-4">
+                <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/default-image.jpg" : Model.ImageUrl)"
+                     class="details-hero-image img-fluid rounded shadow-lg"
+                     alt="@Model.Name" />
+                <div class="hero-image-overlay">
+                    <h1 class="hero-image-title">@Model.Name</h1>
+                </div>
+            </div>
+
             <div class="row">
-                <div class="col-md-6">
-                    <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/default-image.jpg" : Model.ImageUrl)"
-                         class="details-image img-fluid rounded shadow-lg"
-                         alt="@Model.Name" />
+                <!-- Left Column - Details -->
+                <div class="col-md-7">
+                    <div class="destination-info">
+                        <div class="info-section">
+                            <h3><i class="fas fa-align-left" style="color: var(--sport-primary);"></i> About This Adventure</h3>
+                            <p class="destination-description">@Model.Description</p>
+                        </div>
+
+                        <div class="info-grid mt-4">
+                            <div class="info-card">
+                                <i class="fas fa-mountain"></i>
+                                <div>
+                                    <strong>TERRAIN</strong>
+                                    <span>@Model.TerrainName</span>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>
+                                    <strong>PUBLISHED</strong>
+                                    <span>@Model.PublishedOn</span>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <i class="fas fa-user"></i>
+                                <div>
+                                    <strong>ADVENTURER</strong>
+                                    <span>@Model.PublisherName</span>
+                                </div>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.Country))
+                            {
+                                <div class="info-card">
+                                    <i class="fas fa-globe"></i>
+                                    <div>
+                                        <strong>COUNTRY</strong>
+                                        <span>@Model.Country</span>
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Continent))
+                            {
+                                <div class="info-card">
+                                    <i class="fas fa-map"></i>
+                                    <div>
+                                        <strong>CONTINENT</strong>
+                                        <span>@Model.Continent</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <h2><i class="fas fa-map-marker-alt" style="color: var(--sport-primary);"></i> @Model.Name</h2>
-                    <p class="lead" style="color: var(--sport-text-muted);">@Model.Description</p>
-                    
-                    <div class="mt-4 p-3" style="background: var(--sport-light); border-radius: 10px;">
-                        <p><strong><i class="fas fa-mountain"></i> TERRAIN:</strong> @Model.TerrainName</p>
-                        <p><strong><i class="fas fa-calendar-alt"></i> PUBLISHED:</strong> @Model.PublishedOn</p>
-                        <p><strong><i class="fas fa-user"></i> ADVENTURER:</strong> @Model.PublisherName</p>
+
+                <!-- Right Column - Map & Actions -->
+                <div class="col-md-5">
+                    <!-- Google Maps Card -->
+                    <div class="map-card">
+                        <h4><i class="fas fa-map-marked-alt"></i> Location</h4>
+                        
+                        @if (Model.Latitude.HasValue && Model.Longitude.HasValue)
+                        {
+                            <div class="map-placeholder text-center p-4" style="background: var(--sport-dark); border-radius: 12px;">
+                                <i class="fas fa-map-marker-alt" style="font-size: 3rem; color: var(--sport-primary);"></i>
+                                <p class="mt-2 mb-1"><strong>Coordinates:</strong></p>
+                                <p class="mb-2">@Model.Latitude.Value.ToString("0.0000"), @Model.Longitude.Value.ToString("0.0000")</p>
+                                <small class="text-muted">Click below to view on Google Maps</small>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="map-placeholder text-center p-4" style="background: var(--sport-dark); border-radius: 12px;">
+                                <i class="fas fa-map" style="font-size: 3rem; color: var(--sport-primary);"></i>
+                                <p class="mt-2">Location coordinates not available</p>
+                            </div>
+                        }
+                        
+                        <div class="map-actions mt-2">
+                            @if (Model.Latitude.HasValue && Model.Longitude.HasValue)
+                            {
+                                <a href="https://www.google.com/maps/search/?api=1&query=@Model.Latitude,@Model.Longitude"
+                                       target="_blank"
+                                       class="btn-map-direction">
+                                    <i class="fas fa-directions"></i> Get Directions
+                                </a>
+                                <a href="https://www.google.com/maps/place/@Model.Latitude,@Model.Longitude"
+                                       target="_blank"
+                                       class="btn-map-view">
+                                    <i class="fas fa-external-link-alt"></i> Open in Google Maps
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="text-center w-100 text-muted">
+                                    <i class="fas fa-map-pin"></i> Map location coming soon
+                                </div>
+                            }
+                        </div>
                     </div>
 
-                    <div class="d-flex gap-2 mt-4">
-                        <a asp-controller="Destination" asp-action="Index" class="btn btn-secondary">
-                            <i class="fas fa-arrow-left"></i> BACK
-                        </a>
-
-                        @if (User.Identity.IsAuthenticated && !Model.IsUserPublisher)
-                        {
-                            <form asp-action="@(Model.IsUserFavourite ? "RemoveFromFavorites" : "AddToFavorites")" method="post" class="d-inline">
-                                <input type="hidden" name="id" value="@Model.Id" />
-                                <button type="submit" class="btn @(Model.IsUserFavourite ? "btn-danger" : "btn-warning") btn-heart">
-                                    @if (Model.IsUserFavourite)
-                                    {
-                                        <i class="fas fa-heart-broken"></i>
-                                       @*  Add to Favorites *@
-                                        }
-                                    else
-                                    {
-                                        <i class="fas fa-heart"></i>
-                                     @*    Remove from Favorites *@
-                                        }
-                                </button>
-                            </form>
-                        }
-
-                        @if (Model.IsUserPublisher)
-                        {
-                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
-                                <i class="fas fa-edit"></i> EDIT
-                            </a>
-                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
-                                <i class="fas fa-trash"></i> DELETE
-                            </a>
-                        }
+                    <!-- Stats Card -->
+                    <div class="stats-card mt-3">
+                        <div class="stat-item">
+                            <i class="fas fa-heart" style="color: var(--sport-primary);"></i>
+                            <span id="favoriteCount">@(Model.FavoriteCount ?? 0)</span>
+                            <small>Adventurers ❤️ this</small>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons mt-4">
+                <a asp-controller="Destination" asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> BACK TO EXPLORE
+                </a>
+
+                @if (User.Identity.IsAuthenticated && !Model.IsUserPublisher)
+                {
+                    <form asp-action="@(Model.IsUserFavourite ? "RemoveFromFavorites" : "AddToFavorites")" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <button type="submit" class="btn @(Model.IsUserFavourite ? "btn-danger" : "btn-warning") btn-heart">
+                            @if (Model.IsUserFavourite)
+                            {
+                                <i class="fas fa-heart-broken"></i>
+                                <span> REMOVE FROM FAVORITES</span>
+                            }
+                            else
+                            {
+                                <i class="fas fa-heart"></i>
+                                <span> ADD TO FAVORITES</span>
+                            }
+                        </button>
+                    </form>
+                }
+
+                @if (Model.IsUserPublisher)
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> EDIT
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> DELETE
+                    </a>
+                }
             </div>
         </div>
     </div>
 </div>
+

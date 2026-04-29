@@ -123,7 +123,13 @@ public class DestinationService : IDestinationService
             PublishedOn = destination.CreatedAt.ToString("dd.MM.yyyy"),
             PublisherName = destination.Publisher?.UserName ?? "Unknown",
             IsUserPublisher = isUserValid && destination.PublisherId == userId,
-            IsUserFavourite = isUserValid && destination.UsersDestinations.Any(ud => ud.UserId == userId)
+            IsUserFavourite = isUserValid && destination.UsersDestinations.Any(ud => ud.UserId == userId),
+            FavoriteCount = destination.UsersDestinations.Count,
+
+            Latitude = destination.Latitude,
+            Longitude = destination.Longitude,
+            Country = destination.Country,
+            Continent = destination.Continent
         };
     }
 

@@ -4,8 +4,9 @@
     {
         public string Description { get; set; } = null!;
         public string PublishedOn { get; set; } = null!;
-
         public string PublisherName { get; set; } = null!;
+        public int? FavoriteCount { get; set; }
 
+      
     }
 }
