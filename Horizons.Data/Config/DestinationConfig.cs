@@ -11,6 +11,7 @@ public class DestinationConfig : IEntityTypeConfiguration<Destination>
     {
         builder.HasKey(d => d.Id);
 
+        // Relationships only
         builder.HasOne(d => d.Publisher)
                .WithMany()
                .HasForeignKey(d => d.PublisherId)
@@ -19,6 +20,12 @@ public class DestinationConfig : IEntityTypeConfiguration<Destination>
         builder.HasOne(d => d.Terrain)
                .WithMany(t => t.Destinations)
                .HasForeignKey(d => d.TerrainId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+        // One-to-many with Favorites
+        builder.HasMany(d => d.Favorites)
+               .WithOne(f => f.Destination)
+               .HasForeignKey(f => f.DestinationId)
                .OnDelete(DeleteBehavior.Restrict);
 
         // Soft delete filter

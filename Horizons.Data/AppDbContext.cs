@@ -15,7 +15,8 @@ public class AppDbContext : IdentityDbContext<AppUser>
 
     public DbSet<Destination> Destinations { get; set; }
     public DbSet<Terrain> Terrains { get; set; }
-    public DbSet<UserDestination> UsersDestinations { get; set; }
+ 
+    public virtual DbSet<Favorite> Favorites { get; set; } = null!;
     public virtual DbSet<ContactMessage> ContactMessages { get; set; } = null!;
     public virtual DbSet<SystemInboxMessage> SystemInboxMessages { get; set; } = null!;
 

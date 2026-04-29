@@ -16,15 +16,13 @@ public class AppUser : IdentityUser
     public string? AlternateEmail { get; set; }
 
 
-    public virtual ICollection<UserDestination> UsersDestinations { get; set; }
-        = new HashSet<UserDestination>();
-
-    public virtual ICollection<Destination> FavoriteDestinations { get; set; }
-        = new HashSet<Destination>();
 
 
 
-    // Navigation properties for messages
+    // Navigation properties 
+    public virtual ICollection<Favorite> Favorites { get; set; }
+        = new HashSet<Favorite>();
+
     public virtual ICollection<SystemInboxMessage> ReceivedSystemMessages { get; set; }
         = new HashSet<SystemInboxMessage>();
 

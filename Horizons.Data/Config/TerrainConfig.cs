@@ -10,7 +10,7 @@ public class TerrainConfig : IEntityTypeConfiguration<Terrain>
     {
         builder.HasKey(t => t.Id);
 
-        // Relationships only
+        // One-to-many relationship
         builder.HasMany(t => t.Destinations)
                .WithOne(d => d.Terrain)
                .HasForeignKey(d => d.TerrainId)

@@ -105,9 +105,6 @@ namespace Horizons.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Continent")
                         .HasColumnType("nvarchar(max)");
 
@@ -161,13 +158,49 @@ namespace Horizons.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
-
                     b.HasIndex("PublisherId");
 
                     b.HasIndex("TerrainId");
 
                     b.ToTable("Destinations");
+                });
+
+            modelBuilder.Entity("Horizons.Data.Models.Favorite", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("DestinationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DestinationId");
+
+                    b.HasIndex("UserId", "DestinationId")
+                        .IsUnique();
+
+                    b.ToTable("Favorites");
                 });
 
             modelBuilder.Entity("Horizons.Data.Models.Messages.ContactMessage", b =>
@@ -339,21 +372,6 @@ namespace Horizons.Data.Migrations
                     b.ToTable("Terrains");
                 });
 
-            modelBuilder.Entity("Horizons.Data.Models.UserDestination", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("DestinationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "DestinationId");
-
-                    b.HasIndex("DestinationId");
-
-                    b.ToTable("UsersDestinations");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -493,10 +511,6 @@ namespace Horizons.Data.Migrations
 
             modelBuilder.Entity("Horizons.Data.Models.Destination", b =>
                 {
-                    b.HasOne("Horizons.Data.Models.Base.AppUser", null)
-                        .WithMany("FavoriteDestinations")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("Horizons.Data.Models.Base.AppUser", "Publisher")
                         .WithMany()
                         .HasForeignKey("PublisherId")
@@ -512,6 +526,25 @@ namespace Horizons.Data.Migrations
                     b.Navigation("Publisher");
 
                     b.Navigation("Terrain");
+                });
+
+            modelBuilder.Entity("Horizons.Data.Models.Favorite", b =>
+                {
+                    b.HasOne("Horizons.Data.Models.Destination", "Destination")
+                        .WithMany("Favorites")
+                        .HasForeignKey("DestinationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Horizons.Data.Models.Base.AppUser", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Destination");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Horizons.Data.Models.Messages.ContactMessage", b =>
@@ -555,25 +588,6 @@ namespace Horizons.Data.Migrations
                     b.Navigation("Receiver");
 
                     b.Navigation("Sender");
-                });
-
-            modelBuilder.Entity("Horizons.Data.Models.UserDestination", b =>
-                {
-                    b.HasOne("Horizons.Data.Models.Destination", "Destination")
-                        .WithMany("UsersDestinations")
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Horizons.Data.Models.Base.AppUser", "User")
-                        .WithMany("UsersDestinations")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Destination");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -629,7 +643,7 @@ namespace Horizons.Data.Migrations
 
             modelBuilder.Entity("Horizons.Data.Models.Base.AppUser", b =>
                 {
-                    b.Navigation("FavoriteDestinations");
+                    b.Navigation("Favorites");
 
                     b.Navigation("ReceivedContactMessages");
 
@@ -638,13 +652,11 @@ namespace Horizons.Data.Migrations
                     b.Navigation("SentContactMessages");
 
                     b.Navigation("SentSystemMessages");
-
-                    b.Navigation("UsersDestinations");
                 });
 
             modelBuilder.Entity("Horizons.Data.Models.Destination", b =>
                 {
-                    b.Navigation("UsersDestinations");
+                    b.Navigation("Favorites");
                 });
 
             modelBuilder.Entity("Horizons.Data.Models.Terrain", b =>

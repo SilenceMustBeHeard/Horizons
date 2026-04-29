@@ -53,7 +53,7 @@ public class DestinationServiceManagement : IDestinationServiceManagement
     {
         return await context.Destinations
             .Include(d => d.Terrain)
-            .Include(d => d.UsersDestinations)
+            .Include(d => d.Favorites)
             .Include(d => d.Publisher)
             .AsNoTracking()
             .Select(d => new DestinationIndexViewModel
@@ -62,7 +62,7 @@ public class DestinationServiceManagement : IDestinationServiceManagement
                 Name = d.Name,
                 ImageUrl = d.ImageUrl,
                 TerrainName = d.Terrain.Name,
-                FavouriteCount = d.UsersDestinations.Count,
+                FavouriteCount = d.Favorites.Count,
                 IsUserPublisher = true,
                 IsUserFavourite = false
             })
@@ -73,7 +73,7 @@ public class DestinationServiceManagement : IDestinationServiceManagement
     {
         var destination = await context.Destinations
             .Include(d => d.Terrain)
-            .Include(d => d.UsersDestinations)
+            .Include(d => d.Favorites)
             .Include(d => d.Publisher)
             .AsNoTracking()
             .FirstOrDefaultAsync(d => d.Id == id);
@@ -92,7 +92,7 @@ public class DestinationServiceManagement : IDestinationServiceManagement
             PublisherName = destination.Publisher?.UserName ?? "Unknown",
             IsUserPublisher = true,
             IsUserFavourite = false,
-            FavoriteCount = destination.UsersDestinations.Count,
+            FavoriteCount = destination.Favorites.Count,
             Latitude = destination.Latitude,
             Longitude = destination.Longitude,
             Country = destination.Country,

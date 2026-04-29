@@ -26,7 +26,7 @@ public class DestinationService : IDestinationService
 
         return await context.Destinations
             .Include(d => d.Terrain)
-            .Include(d => d.UsersDestinations)
+            .Include(d => d.Favorites)
             .Where(d => !d.IsDeleted)
             .AsNoTracking()
             .Select(d => new DestinationIndexViewModel
@@ -35,9 +35,9 @@ public class DestinationService : IDestinationService
                 Name = d.Name,
                 ImageUrl = d.ImageUrl,
                 TerrainName = d.Terrain.Name,
-                FavouriteCount = d.UsersDestinations.Count,
+                FavouriteCount = d.Favorites.Count,
                 IsUserPublisher = isUserValid && d.PublisherId == userId,
-                IsUserFavourite = isUserValid && d.UsersDestinations.Any(ud => ud.UserId == userId)
+                IsUserFavourite = isUserValid && d.Favorites.Any(f => f.UserId == userId)
             })
             .ToListAsync();
     }
@@ -49,7 +49,7 @@ public class DestinationService : IDestinationService
 
         var destination = await context.Destinations
             .Include(d => d.Terrain)
-            .Include(d => d.UsersDestinations)
+            .Include(d => d.Favorites)
             .Include(d => d.Publisher)
             .Where(d => !d.IsDeleted)
             .AsNoTracking()
@@ -70,8 +70,8 @@ public class DestinationService : IDestinationService
             PublishedOn = destination.CreatedAt.ToString("dd.MM.yyyy"),
             PublisherName = destination.Publisher?.UserName ?? "Unknown",
             IsUserPublisher = isUserValid && destination.PublisherId == userId,
-            IsUserFavourite = isUserValid && destination.UsersDestinations.Any(ud => ud.UserId == userId),
-            FavoriteCount = destination.UsersDestinations.Count,
+            IsUserFavourite = isUserValid && destination.Favorites.Any(f => f.UserId == userId),
+            FavoriteCount = destination.Favorites.Count,
             Latitude = destination.Latitude,
             Longitude = destination.Longitude,
             Country = destination.Country,
@@ -85,9 +85,9 @@ public class DestinationService : IDestinationService
 
         return await context.Destinations
             .Include(d => d.Terrain)
-            .Include(d => d.UsersDestinations)
+            .Include(d => d.Favorites)
             .Where(d => !d.IsDeleted)
-            .OrderByDescending(d => d.UsersDestinations.Count)
+            .OrderByDescending(d => d.Favorites.Count)
             .Take(count)
             .Select(d => new DestinationIndexViewModel
             {
@@ -95,9 +95,9 @@ public class DestinationService : IDestinationService
                 Name = d.Name,
                 ImageUrl = d.ImageUrl,
                 TerrainName = d.Terrain.Name,
-                FavouriteCount = d.UsersDestinations.Count,
+                FavouriteCount = d.Favorites.Count,
                 IsUserPublisher = isUserValid && d.PublisherId == userId,
-                IsUserFavourite = isUserValid && d.UsersDestinations.Any(ud => ud.UserId == userId)
+                IsUserFavourite = isUserValid && d.Favorites.Any(f => f.UserId == userId)
             })
             .ToListAsync();
     }
@@ -106,7 +106,7 @@ public class DestinationService : IDestinationService
     {
         return await context.Destinations
             .Where(d => d.Latitude != null && d.Longitude != null && !d.IsDeleted)
-            .Include(d => d.UsersDestinations)
+            .Include(d => d.Favorites)
             .Select(d => new MapDestinationDto
             {
                 Id = d.Id,
@@ -118,7 +118,7 @@ public class DestinationService : IDestinationService
                 Description = d.Description,
                 ImageUrl = d.ImageUrl,
                 CreatedAt = d.CreatedAt,
-                Likes = d.UsersDestinations.Count,
+                Likes = d.Favorites.Count,
                 Comments = 0,
                 Rank = d.Rating,
                 Distance = d.TravelDistance,
@@ -129,17 +129,17 @@ public class DestinationService : IDestinationService
 
     public async Task<IEnumerable<DestinationFavoriteViewModel>> GetUserFavoriteDestinationsAsync(string userId)
     {
-        return await context.UsersDestinations
-            .Where(ud => ud.UserId == userId)
-            .Include(ud => ud.Destination)
+        return await context.Favorites
+            .Where(f => f.UserId == userId)
+            .Include(f => f.Destination)
                 .ThenInclude(d => d.Terrain)
-            .Where(ud => !ud.Destination.IsDeleted)
-            .Select(ud => new DestinationFavoriteViewModel
+            .Where(f => !f.Destination.IsDeleted)
+            .Select(f => new DestinationFavoriteViewModel
             {
-                Id = ud.Destination.Id,
-                Name = ud.Destination.Name,
-                Terrain = ud.Destination.Terrain.Name,
-                ImageUrl = ud.Destination.ImageUrl
+                Id = f.Destination.Id,
+                Name = f.Destination.Name,
+                Terrain = f.Destination.Terrain.Name,
+                ImageUrl = f.Destination.ImageUrl
             })
             .ToListAsync();
     }
@@ -152,31 +152,31 @@ public class DestinationService : IDestinationService
         if (destination == null)
             return false;
 
-        bool alreadyFavorited = await context.UsersDestinations
-            .AnyAsync(ud => ud.UserId == userId && ud.DestinationId == destinationId);
+        bool alreadyFavorited = await context.Favorites
+            .AnyAsync(f => f.UserId == userId && f.DestinationId == destinationId);
 
         if (alreadyFavorited)
             return false;
 
-        var userDestination = new UserDestination
+        var favorite = new Favorite
         {
             UserId = userId,
             DestinationId = destinationId
         };
 
-        await context.UsersDestinations.AddAsync(userDestination);
+        await context.Favorites.AddAsync(favorite);
         return await context.SaveChangesAsync() > 0;
     }
 
     public async Task<bool> RemoveFromFavoritesAsync(string userId, Guid destinationId)
     {
-        var entry = await context.UsersDestinations
-            .FirstOrDefaultAsync(ud => ud.UserId == userId && ud.DestinationId == destinationId);
+        var entry = await context.Favorites
+            .FirstOrDefaultAsync(f => f.UserId == userId && f.DestinationId == destinationId);
 
         if (entry == null)
             return false;
 
-        context.UsersDestinations.Remove(entry);
+        context.Favorites.Remove(entry);
         return await context.SaveChangesAsync() > 0;
     }
 
