@@ -30,4 +30,8 @@
     <ProjectReference Include="..\Horizons.Services.Core\Horizons.Services.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\" />
+  </ItemGroup>
+
 </Project>
