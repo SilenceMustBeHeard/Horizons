@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Horizons.Data.Repositories.Implementations.Implementations;
+namespace Horizons.Data.Repositories.Implementations.Interactions;
 
 public class FavoriteRepository :
          RepositoryAsync<Favorite, Guid>,
