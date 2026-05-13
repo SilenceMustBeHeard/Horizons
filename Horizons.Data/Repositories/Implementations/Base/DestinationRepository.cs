@@ -154,4 +154,24 @@ public class DestinationRepository : RepositoryAsync<Destination, Guid>, IDestin
                 Rating = d.Rating
             })
             .ToListAsync();
+    // Add to favorites
+    public async Task AddFavoriteAsync(Favorite favorite)
+    {
+        await _context.Favorites.AddAsync(favorite);
+        await _context.SaveChangesAsync();
+    }
+    // Remove from favorites 
+    public async Task<bool> RemoveFromFavoritesAsync(string userId, Guid destinationId)
+    {
+        var favorite = await _context.Favorites
+            .FirstOrDefaultAsync(f => f.UserId == userId && f.DestinationId == destinationId && !f.IsDeleted);
+
+        if (favorite == null) return false;
+
+        favorite.IsDeleted = true;
+        favorite.DeletedAt = DateTime.UtcNow;
+
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }

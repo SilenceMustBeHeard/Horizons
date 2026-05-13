@@ -24,6 +24,8 @@ public interface IDestinationRepository : IFullRepositoryAsync<Destination, Guid
     Task<IEnumerable<Destination>> GetUserFavoriteDestinationsAsync(string userId);
     Task<bool> IsUserFavoriteAsync(string userId, Guid destinationId);
     Task<int> GetFavoritesCountAsync(Guid destinationId);
+    Task AddFavoriteAsync(Favorite favorite);
+    Task<bool> RemoveFromFavoritesAsync(string userId, Guid destinationId);
 
     // Search
     Task<IEnumerable<Destination>> SearchDestinationsAsync(string searchTerm);

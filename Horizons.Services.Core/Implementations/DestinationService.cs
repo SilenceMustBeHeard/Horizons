@@ -1,6 +1,7 @@
 ﻿using Horizons.Data;
 using Horizons.Data.Models;
 using Horizons.Data.Models.Base;
+using Horizons.Data.Repositories.Interfaces.Base;
 using Horizons.Services.Core.Interfaces;
 using Horizons.Web.ViewModels.Destination;
 using Horizons.Web.ViewModels.Map;
@@ -11,54 +12,48 @@ namespace Horizons.Services.Core.Implementations;
 
 public class DestinationService : IDestinationService
 {
-    protected readonly AppDbContext context;
-    protected readonly UserManager<AppUser> userManager;
+    protected readonly UserManager<AppUser> _userManager;
+    protected readonly IDestinationRepository _destinationRepository;
 
-    public DestinationService(AppDbContext context, UserManager<AppUser> userManager)
+    public DestinationService(UserManager<AppUser> userManager, IDestinationRepository destinationRepository)
     {
-        this.context = context;
-        this.userManager = userManager;
+        _userManager = userManager;
+        _destinationRepository = destinationRepository;
     }
 
     public async Task<IEnumerable<DestinationIndexViewModel>> GetAllDestinationsAsync(string? userId)
     {
-        bool isUserValid = !string.IsNullOrEmpty(userId);
-
-        return await context.Destinations
-            .Include(d => d.Terrain)
-            .Include(d => d.Favorites)
+        var query = _destinationRepository.Query()
             .Where(d => !d.IsDeleted)
-            .AsNoTracking()
-            .Select(d => new DestinationIndexViewModel
-            {
-                Id = d.Id,
-                Name = d.Name,
-                ImageUrl = d.ImageUrl,
-                TerrainName = d.Terrain.Name,
-                FavouriteCount = d.Favorites.Count,
-                IsUserPublisher = isUserValid && d.PublisherId == userId,
-                IsUserFavourite = isUserValid && d.Favorites.Any(f => f.UserId == userId)
-            })
-            .ToListAsync();
+            .Include(d => d.Terrain)
+            .Include(d => d.Favorites);
+
+        var destinations = await query.ToListAsync();
+
+        return destinations.Select(d => new DestinationIndexViewModel
+        {
+            Id = d.Id,
+            Name = d.Name,
+            ImageUrl = d.ImageUrl,
+            TerrainName = d.Terrain?.Name ?? string.Empty,
+            FavouriteCount = d.Favorites.Count(f => !f.IsDeleted),
+            IsUserPublisher = d.PublisherId == userId,
+            IsUserFavourite = userId != null && d.Favorites.Any(f => f.UserId == userId && !f.IsDeleted)
+        });
     }
 
     public async Task<DestinationDetailsViewModel?> GetDestinationDetailsByIdAsync(Guid? id, string? userId)
     {
-        if (!id.HasValue)
-            return null;
+        if (!id.HasValue) return null;
 
-        var destination = await context.Destinations
+        var destination = await _destinationRepository.Query()
+            .Where(d => d.Id == id && !d.IsDeleted)
             .Include(d => d.Terrain)
-            .Include(d => d.Favorites)
             .Include(d => d.Publisher)
-            .Where(d => !d.IsDeleted)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(d => d.Id == id);
+            .Include(d => d.Favorites)
+            .FirstOrDefaultAsync();
 
-        if (destination == null)
-            return null;
-
-        bool isUserValid = !string.IsNullOrEmpty(userId);
+        if (destination == null) return null;
 
         return new DestinationDetailsViewModel
         {
@@ -66,12 +61,12 @@ public class DestinationService : IDestinationService
             Name = destination.Name,
             Description = destination.Description,
             ImageUrl = destination.ImageUrl,
-            TerrainName = destination.Terrain.Name,
-            PublishedOn = destination.CreatedAt.ToString("dd.MM.yyyy"),
-            PublisherName = destination.Publisher?.UserName ?? "Unknown",
-            IsUserPublisher = isUserValid && destination.PublisherId == userId,
-            IsUserFavourite = isUserValid && destination.Favorites.Any(f => f.UserId == userId),
-            FavoriteCount = destination.Favorites.Count,
+            TerrainName = destination.Terrain?.Name ?? string.Empty,
+            PublishedOn = destination.CreatedAt.ToString("MMMM dd, yyyy"),
+            PublisherName = destination.Publisher?.FullName ?? "Unknown",
+            IsUserPublisher = destination.PublisherId == userId,
+            IsUserFavourite = userId != null && destination.Favorites.Any(f => f.UserId == userId && !f.IsDeleted),
+            FavoriteCount = destination.Favorites.Count(f => !f.IsDeleted),
             Latitude = destination.Latitude,
             Longitude = destination.Longitude,
             Country = destination.Country,
@@ -81,114 +76,99 @@ public class DestinationService : IDestinationService
 
     public async Task<IEnumerable<DestinationIndexViewModel>> GetTopDestinationsAsync(string? userId, int count)
     {
-        bool isUserValid = !string.IsNullOrEmpty(userId);
-
-        return await context.Destinations
+        var topDestinations = await _destinationRepository.Query()
+            .Where(d => !d.IsDeleted)
             .Include(d => d.Terrain)
             .Include(d => d.Favorites)
-            .Where(d => !d.IsDeleted)
-            .OrderByDescending(d => d.Favorites.Count)
+            .OrderByDescending(d => d.Favorites.Count(f => !f.IsDeleted))
             .Take(count)
-            .Select(d => new DestinationIndexViewModel
-            {
-                Id = d.Id,
-                Name = d.Name,
-                ImageUrl = d.ImageUrl,
-                TerrainName = d.Terrain.Name,
-                FavouriteCount = d.Favorites.Count,
-                IsUserPublisher = isUserValid && d.PublisherId == userId,
-                IsUserFavourite = isUserValid && d.Favorites.Any(f => f.UserId == userId)
-            })
             .ToListAsync();
+
+        return topDestinations.Select(d => new DestinationIndexViewModel
+        {
+            Id = d.Id,
+            Name = d.Name,
+            ImageUrl = d.ImageUrl,
+            TerrainName = d.Terrain?.Name ?? string.Empty,
+            FavouriteCount = d.Favorites.Count(f => !f.IsDeleted),
+            IsUserPublisher = d.PublisherId == userId,
+            IsUserFavourite = userId != null && d.Favorites.Any(f => f.UserId == userId && !f.IsDeleted)
+        });
     }
 
     public async Task<List<MapDestinationDto>> GetMapDataAsync()
     {
-        return await context.Destinations
-            .Where(d => d.Latitude != null && d.Longitude != null && !d.IsDeleted)
-            .Include(d => d.Favorites)
+        return await _destinationRepository.Query()
+            .Where(d => !d.IsDeleted && d.Latitude.HasValue && d.Longitude.HasValue)
             .Select(d => new MapDestinationDto
             {
                 Id = d.Id,
                 Name = d.Name,
-                Country = d.Country ?? "Unknown",
-                Continent = d.Continent ?? "Unknown",
-                Latitude = d.Latitude,
-                Longitude = d.Longitude,
                 Description = d.Description,
                 ImageUrl = d.ImageUrl,
-                CreatedAt = d.CreatedAt,
-                Likes = d.Favorites.Count,
-                Comments = 0,
-                Rank = d.Rating,
-                Distance = d.TravelDistance,
-                VisitedDate = d.CreatedAt.ToString("yyyy-MM-dd")
+                Country = d.Country ?? string.Empty,
+                Continent = d.Continent ?? string.Empty,
+                Latitude = d.Latitude,
+                Longitude = d.Longitude,
+                Likes = d.Favorites.Count(f => !f.IsDeleted),
+                
             })
             .ToListAsync();
     }
 
     public async Task<IEnumerable<DestinationFavoriteViewModel>> GetUserFavoriteDestinationsAsync(string userId)
     {
-        return await context.Favorites
-            .Where(f => f.UserId == userId)
-            .Include(f => f.Destination)
-                .ThenInclude(d => d.Terrain)
-            .Where(f => !f.Destination.IsDeleted)
-            .Select(f => new DestinationFavoriteViewModel
+        var favorites = await _destinationRepository.Query()
+            .Where(d => !d.IsDeleted && d.Favorites.Any(f => f.UserId == userId && !f.IsDeleted))
+            .Include(d => d.Terrain)
+            .Select(d => new DestinationFavoriteViewModel
             {
-                Id = f.Destination.Id,
-                Name = f.Destination.Name,
-                Terrain = f.Destination.Terrain.Name,
-                ImageUrl = f.Destination.ImageUrl
+                Id = d.Id,
+                Name = d.Name,
+                Terrain = d.Terrain != null ? d.Terrain.Name : string.Empty,
+                ImageUrl = d.ImageUrl
             })
             .ToListAsync();
+
+        return favorites;
     }
 
     public async Task<bool> AddToFavoritesAsync(string userId, Guid destinationId)
     {
-        var destination = await context.Destinations
-            .FirstOrDefaultAsync(d => d.Id == destinationId && !d.IsDeleted);
+        var existing = await _destinationRepository.Query()
+            .Where(d => d.Id == destinationId)
+            .SelectMany(d => d.Favorites)
+            .AnyAsync(f => f.UserId == userId && !f.IsDeleted);
 
-        if (destination == null)
-            return false;
-
-        bool alreadyFavorited = await context.Favorites
-            .AnyAsync(f => f.UserId == userId && f.DestinationId == destinationId);
-
-        if (alreadyFavorited)
-            return false;
+        if (existing) return false;
 
         var favorite = new Favorite
         {
+            Id = Guid.NewGuid(),
             UserId = userId,
-            DestinationId = destinationId
+            DestinationId = destinationId,
+            CreatedAt = DateTime.UtcNow,
+            IsDeleted = false
         };
 
-        await context.Favorites.AddAsync(favorite);
-        return await context.SaveChangesAsync() > 0;
+        await _destinationRepository.AddFavoriteAsync(favorite);
+        return true;
     }
 
     public async Task<bool> RemoveFromFavoritesAsync(string userId, Guid destinationId)
     {
-        var entry = await context.Favorites
-            .FirstOrDefaultAsync(f => f.UserId == userId && f.DestinationId == destinationId);
-
-        if (entry == null)
-            return false;
-
-        context.Favorites.Remove(entry);
-        return await context.SaveChangesAsync() > 0;
+        return await _destinationRepository.RemoveFromFavoritesAsync(userId, destinationId);
     }
 
     public async Task<bool> IsUserPublisherAsync(Guid destinationId, string userId)
     {
-        var destination = await context.Destinations
-            .AsNoTracking()
-            .FirstOrDefaultAsync(d => d.Id == destinationId && !d.IsDeleted);
+        if (string.IsNullOrEmpty(userId)) return false;
 
-        if (destination == null)
-            return false;
+        var destination = await _destinationRepository.Query()
+            .Where(d => d.Id == destinationId && !d.IsDeleted)
+            .Select(d => new { d.PublisherId })
+            .FirstOrDefaultAsync();
 
-        return destination.PublisherId == userId;
+        return destination?.PublisherId == userId;
     }
 }
