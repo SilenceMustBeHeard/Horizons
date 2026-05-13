@@ -1,11 +1,15 @@
 using Horizons.Data;
 using Horizons.Data.Models;
 using Horizons.Data.Models.Base;
+using Horizons.Data.Repositories.Implementations.Base;
+using Horizons.Data.Repositories.Interfaces.Base;
 using Horizons.Data.Seeding;
 using Horizons.Services.Core.Implementations;
 using Horizons.Services.Core.Interfaces;
+using Horizons.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Horizons.Web;
 
@@ -37,8 +41,11 @@ public class Program
         .AddRoles<IdentityRole>() // Add roles support
         .AddEntityFrameworkStores<AppDbContext>();
 
-        // Register services
-        builder.Services.AddScoped<IDestinationService, DestinationService>();
+        builder.Services.RegisterRepositories(typeof(ITerrainRepository).Assembly);
+        builder.Services.RegisterServices(typeof(IDestinationService).Assembly);
+
+
+        // 📌 Ръчна регистрация за сървисите, които не са в същия assembly (TerrainService)
         builder.Services.AddScoped<ITerrainService, TerrainService>();
 
         builder.Services.AddControllersWithViews();
