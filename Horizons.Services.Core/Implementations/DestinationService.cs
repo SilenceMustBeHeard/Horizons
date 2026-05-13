@@ -14,12 +14,93 @@ public class DestinationService : IDestinationService
 {
     protected readonly UserManager<AppUser> _userManager;
     protected readonly IDestinationRepository _destinationRepository;
+    private readonly AppDbContext _context;
 
-    public DestinationService(UserManager<AppUser> userManager, IDestinationRepository destinationRepository)
+    public DestinationService(UserManager<AppUser> userManager,
+        AppDbContext context,
+        IDestinationRepository destinationRepository)
     {
+        _context= context;
         _userManager = userManager;
         _destinationRepository = destinationRepository;
     }
+    public async Task<bool> AddDestinationAsync(DestinationAddInputModel model, string userId)
+    {
+        if (string.IsNullOrEmpty(userId))
+            return false;
+
+        var userExists = await _userManager.Users.AnyAsync(u => u.Id == userId);
+        if (!userExists)
+            return false;
+
+        var destination = new Destination
+        {
+            Id = Guid.NewGuid(),
+            Name = model.Name,
+            Description = model.Description,
+            TerrainId = model.TerrainId,
+            ImageUrl = model.ImageUrl,
+            CreatedAt = DateTime.UtcNow,
+            PublisherId = userId,
+            Country = model.Country,
+            Continent = model.Continent,
+            Latitude = model.Latitude,
+            Longitude = model.Longitude,
+            TravelDistance = model.TravelDistance,
+            IsDeleted = false
+        };
+
+        await _context.Destinations.AddAsync(destination);
+        return await _context.SaveChangesAsync() > 0;
+    }
+
+    public async Task<DestinationEditInputModel?> GetDestinationForEditAsync(string? userId, Guid id)
+    {
+        if (string.IsNullOrEmpty(userId))
+            return null;
+
+        return await _context.Destinations
+            .AsNoTracking()
+            .Where(d => d.Id == id && d.PublisherId == userId)
+            .Select(d => new DestinationEditInputModel
+            {
+                Id = d.Id,
+                Name = d.Name,
+                Description = d.Description,
+                ImageUrl = d.ImageUrl,
+                TerrainId = d.TerrainId,
+                PublishedOn = d.CreatedAt,
+                Country = d.Country ?? string.Empty,
+                Continent = d.Continent ?? string.Empty,
+                Latitude = d.Latitude ?? 0,
+                Longitude = d.Longitude ?? 0,
+                TravelDistance = d.TravelDistance
+            })
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task<bool> EditDestinationAsync(DestinationEditInputModel model, string userId)
+    {
+        var destination = await _context.Destinations
+            .FirstOrDefaultAsync(d => d.Id == model.Id && d.PublisherId == userId);
+
+        if (destination == null)
+            return false;
+
+        destination.Name = model.Name;
+        destination.Description = model.Description;
+        destination.ImageUrl = model.ImageUrl;
+        destination.TerrainId = model.TerrainId;
+        destination.UpdatedAt = DateTime.UtcNow;
+        destination.Country = model.Country;
+        destination.Continent = model.Continent;
+        destination.Latitude = model.Latitude;
+        destination.Longitude = model.Longitude;
+        destination.TravelDistance = model.TravelDistance;
+
+        return await _context.SaveChangesAsync() > 0;
+    }
+
 
     public async Task<IEnumerable<DestinationIndexViewModel>> GetAllDestinationsAsync(string? userId)
     {

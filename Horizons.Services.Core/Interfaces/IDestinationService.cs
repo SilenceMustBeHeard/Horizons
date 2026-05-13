@@ -11,6 +11,12 @@ public interface IDestinationService
     Task<IEnumerable<DestinationIndexViewModel>> GetTopDestinationsAsync(string? userId, int count);
     Task<List<MapDestinationDto>> GetMapDataAsync();
 
+    // Create
+    Task<bool> AddDestinationAsync(DestinationAddInputModel model, string userId);
+    // Update
+    Task<DestinationEditInputModel?> GetDestinationForEditAsync(string? userId, Guid id);
+    Task<bool> EditDestinationAsync(DestinationEditInputModel model, string userId);
+
     // Favorites
     Task<IEnumerable<DestinationFavoriteViewModel>> GetUserFavoriteDestinationsAsync(string userId);
     Task<bool> AddToFavoritesAsync(string userId, Guid destinationId);
