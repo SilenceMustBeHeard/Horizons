@@ -73,8 +73,7 @@ namespace Horizons.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Add()
         {
-            try
-            {
+          
                 var terrains = await terrainService.GetAllTerrainsDropdownAsync();
                 var viewModel = new DestinationAddInputModel
                 {
@@ -82,6 +81,26 @@ namespace Horizons.Web.Controllers
                     Terrains = terrains
                 };
                 return View(viewModel);
+       
+            
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Add(DestinationAddInputModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    model.Terrains = await terrainService.GetAllTerrainsDropdownAsync();
+                    return View(model);
+                }
+                string? userId = GetUserId(); if (string.IsNullOrEmpty(userId))
+                    return RedirectToAction("Login", "Account");
+                await destinationService.AddDestinationAsync(model, userId);
+                TempData["SuccessMessage"] = "Destination added successfully!";
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception)
             {
@@ -89,10 +108,10 @@ namespace Horizons.Web.Controllers
             }
         }
 
-       
-       
 
-        
+
+
+
 
 
 
@@ -104,6 +123,8 @@ namespace Horizons.Web.Controllers
             try
             {
                 string? userId = GetUserId(); if (string.IsNullOrEmpty(userId))
+
+
                     return RedirectToAction("Login", "Account");
 
                 var favorites = await destinationService.GetUserFavoriteDestinationsAsync(userId);
