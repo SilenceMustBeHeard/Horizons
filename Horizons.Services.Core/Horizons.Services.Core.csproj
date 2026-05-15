@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Horizons.Web.ViewModels\Horizons.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Account\" />
+  </ItemGroup>
+
 </Project>
