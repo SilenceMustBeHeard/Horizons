@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.3.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -23,10 +25,6 @@
     <ProjectReference Include="..\Horizons.Data\Horizons.Data.csproj" />
     <ProjectReference Include="..\Horizons.GCommon\Horizons.Data.Common.csproj" />
     <ProjectReference Include="..\Horizons.Web.ViewModels\Horizons.Web.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Interfaces\Account\" />
   </ItemGroup>
 
 </Project>
