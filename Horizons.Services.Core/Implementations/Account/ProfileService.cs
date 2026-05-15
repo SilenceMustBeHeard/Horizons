@@ -1,5 +1,6 @@
 ﻿using Horizons.Data.Models.Base;
 using Horizons.Services.Core.Interfaces.Account;
+using Horizons.Services.Core.Interfaces.Messages;
 using Horizons.Web.ViewModels.Account.Messages;
 using Horizons.Web.ViewModels.Account.Profile;
 using Microsoft.AspNetCore.Identity;
