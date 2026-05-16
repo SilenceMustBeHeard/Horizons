@@ -1,6 +1,7 @@
 ﻿using Horizons.Services.Core.Interfaces.Account;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SendGrid;
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
