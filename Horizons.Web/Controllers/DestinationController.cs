@@ -1,21 +1,24 @@
-﻿using Horizons.Services.Core.Interfaces;
+﻿using Horizons.Data.Models.Base;
+using Horizons.Services.Core.Interfaces;
 using Horizons.Web.ViewModels.Destination;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Horizons.Web.Controllers
 {
     public class DestinationController : BaseController
     {
-        private readonly IDestinationService destinationService;
-        private readonly ITerrainService terrainService;
+        private readonly IDestinationService _destinationService;
+        private readonly ITerrainService _terrainService;
 
-        public DestinationController(
-            IDestinationService destinationService,
-            ITerrainService terrainService)
+        public DestinationController(UserManager<AppUser> userManager, IDestinationService destinationService,
+            ITerrainService terrainService) : base(userManager)
         {
-            this.destinationService = destinationService;
-            this.terrainService = terrainService;
+            _destinationService = destinationService;
+            _terrainService = terrainService;
+           
+
         }
 
         [HttpGet]
@@ -24,7 +27,7 @@ namespace Horizons.Web.Controllers
         {
             try
             {
-                string? userId = GetUserId(); var destinations = await destinationService.GetAllDestinationsAsync(userId);
+                string? userId = GetUserId(); var destinations = await  _destinationService.GetAllDestinationsAsync(userId);
                 return View(destinations);
             }
             catch (Exception)
@@ -38,7 +41,7 @@ namespace Horizons.Web.Controllers
         {
             try
             {
-                var destinations = await destinationService.GetMapDataAsync();
+                var destinations = await _destinationService.GetMapDataAsync();
                 return Ok(destinations);
             }
             catch (Exception ex)
@@ -56,7 +59,7 @@ namespace Horizons.Web.Controllers
                 if (id == null)
                     return RedirectToAction("Index", "Home");
 
-                string? userId = GetUserId(); var destination = await destinationService.GetDestinationDetailsByIdAsync(id, userId);
+                string? userId = GetUserId(); var destination = await _destinationService.GetDestinationDetailsByIdAsync(id, userId);
 
                 if (destination == null)
                     return RedirectToAction("Index", "Home");
@@ -74,7 +77,7 @@ namespace Horizons.Web.Controllers
         public async Task<IActionResult> Add()
         {
           
-                var terrains = await terrainService.GetAllTerrainsDropdownAsync();
+                var terrains = await _terrainService.GetAllTerrainsDropdownAsync();
                 var viewModel = new DestinationAddInputModel
                 {
                     PublishedOn = DateTime.UtcNow,
@@ -93,12 +96,12 @@ namespace Horizons.Web.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    model.Terrains = await terrainService.GetAllTerrainsDropdownAsync();
+                    model.Terrains = await _terrainService.GetAllTerrainsDropdownAsync();
                     return View(model);
                 }
                 string? userId = GetUserId(); if (string.IsNullOrEmpty(userId))
                     return RedirectToAction("Login", "Account");
-                await destinationService.AddDestinationAsync(model, userId);
+                await _destinationService.AddDestinationAsync(model, userId);
                 TempData["SuccessMessage"] = "Destination added successfully!";
                 return RedirectToAction(nameof(Index));
             }
@@ -127,7 +130,7 @@ namespace Horizons.Web.Controllers
 
                     return RedirectToAction("Login", "Account");
 
-                var favorites = await destinationService.GetUserFavoriteDestinationsAsync(userId);
+                var favorites = await _destinationService.GetUserFavoriteDestinationsAsync(userId);
                 return View(favorites);
             }
             catch (Exception)
@@ -145,7 +148,7 @@ namespace Horizons.Web.Controllers
                 string? userId = GetUserId(); if (string.IsNullOrEmpty(userId))
                     return RedirectToAction("Login", "Account");
 
-                await destinationService.AddToFavoritesAsync(userId, id);
+                await _destinationService.AddToFavoritesAsync(userId, id);
                 return RedirectToAction(nameof(Details), new { id });
             }
             catch (Exception)
@@ -163,7 +166,7 @@ namespace Horizons.Web.Controllers
                 string? userId = GetUserId(); if (string.IsNullOrEmpty(userId))
                     return RedirectToAction("Login", "Account");
 
-                bool result = await destinationService.RemoveFromFavoritesAsync(userId, id);
+                bool result = await _destinationService.RemoveFromFavoritesAsync(userId, id);
                 return RedirectToAction(nameof(Favorites));
             }
             catch (Exception)
