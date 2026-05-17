@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Services.Common", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Web.Infrastructure", "Horizons.Web.Infrastructure\Horizons.Web.Infrastructure.csproj", "{49BD7D90-5AB4-4EC7-AE39-518C968ACB13}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{67737F28-622B-4A0F-8ECD-400B7E1DD5C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.API.Web", "Horizons.API\Horizons.API.Web.csproj", "{927BB9CD-7B6B-4655-8E2A-FD5889899C3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{49BD7D90-5AB4-4EC7-AE39-518C968ACB13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49BD7D90-5AB4-4EC7-AE39-518C968ACB13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49BD7D90-5AB4-4EC7-AE39-518C968ACB13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{927BB9CD-7B6B-4655-8E2A-FD5889899C3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{927BB9CD-7B6B-4655-8E2A-FD5889899C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{927BB9CD-7B6B-4655-8E2A-FD5889899C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{927BB9CD-7B6B-4655-8E2A-FD5889899C3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +84,7 @@ Global
 		{1C9A3160-C444-7127-6C6F-993A709154CD} = {6C059CC7-B8CD-48F4-AAD5-C74605D4A66C}
 		{1CE85D61-FA24-4F7A-8C8D-F012F5AADAB6} = {8B8A0EA8-62C4-430A-831B-1938CEE1EE39}
 		{49BD7D90-5AB4-4EC7-AE39-518C968ACB13} = {6C059CC7-B8CD-48F4-AAD5-C74605D4A66C}
+		{927BB9CD-7B6B-4655-8E2A-FD5889899C3E} = {67737F28-622B-4A0F-8ECD-400B7E1DD5C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1DC45BE4-BD41-4951-82C9-76C3F4E7A3C6}
