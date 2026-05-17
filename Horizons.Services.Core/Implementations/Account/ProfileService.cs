@@ -1,4 +1,5 @@
 ﻿using Horizons.Data.Models.Base;
+using Horizons.Data.Repositories.Interfaces.Account;
 using Horizons.Services.Core.Interfaces.Account;
 using Horizons.Services.Core.Interfaces.Messages;
 using Horizons.Web.ViewModels.Account.Messages;

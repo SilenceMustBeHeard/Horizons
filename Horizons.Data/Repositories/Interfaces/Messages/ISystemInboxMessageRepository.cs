@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Horizons.Data.Repositories.Interfaces.Messages;
 
- public interface ISystemInboxMessageRepository : IFullRepositoryAsync<SystemInboxMessage, Guid
+ public interface ISystemInboxMessageRepository : IFullRepositoryAsync<SystemInboxMessage, Guid>
  {
        
  }
