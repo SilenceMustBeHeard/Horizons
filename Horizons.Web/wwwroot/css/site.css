@@ -1224,3 +1224,72 @@ hr {
         justify-content: center;
     }
 }
+
+/*==== CARDS ====*/
+
+
+
+.stat-card {
+    background: var(--sport-light);
+    border: 1px solid var(--sport-border);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+    .stat-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--sport-primary);
+        box-shadow: 0 10px 30px rgba(255,51,102,0.2);
+    }
+
+.featured-card {
+    background: var(--sport-light);
+    border: 1px solid var(--sport-border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+    .featured-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--sport-primary);
+    }
+
+.featured-card-img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.featured-card-body {
+    padding: 1.25rem;
+}
+
+.featured-card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.featured-card-terrain {
+    font-size: 0.8rem;
+    color: var(--sport-primary);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--sport-primary);
+    background: transparent;
+    color: var(--sport-text);
+}
+
+    .btn-outline-primary:hover {
+        background: var(--sport-gradient);
+        border-color: transparent;
+        color: white;
+    }
+
+.cta-section {
+    margin-bottom: 0;
+}
