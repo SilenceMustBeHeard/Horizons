@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Page Not Found - Horizons";
+}
+
+<div class="error-page-wrapper">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="error-card text-center p-5">
+                    <!-- Lost Compass Animation -->
+                    <div class="error-animation mb-4">
+                        <div class="lost-compass">
+                            <i class="fas fa-map-marker-alt fa-4x" style="color: var(--sport-primary);"></i>
+                        </div>
+                    </div>
+
+                    <div class="error-badge mb-3">
+                        <span class="badge-adventure">
+                            <i class="fas fa-map-marked-alt me-1"></i> 404 - DESTINATION NOT FOUND
+                        </span>
+                    </div>
+
+                    <h1 class="display-1 fw-bold" style="color: var(--sport-primary);">404</h1>
+                    <h2 class="error-title">Lost in the Wild</h2>
+                    <p class="error-description">The destination you're looking for doesn't exist on our map.</p>
+
+                    <div class="search-box mb-4">
+                        <form asp-controller="Destination" asp-action="Index" method="get" class="d-flex gap-2">
+                            <input type="text" name="search" class="form-control search-input" 
+                                   placeholder="Search for a destination..." aria-label="Search">
+                            <button type="submit" class="btn-adventure-primary" style="padding: 10px 20px;">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="popular-links p-3 mb-4" style="background: var(--sport-dark); border-radius: 12px;">
+                        <h6 class="text-accent mb-2">
+                            <i class="fas fa-star me-1"></i> Popular Destinations:
+                        </h6>
+                        <div class="d-flex gap-2 justify-content-center flex-wrap">
+                            <a asp-controller="Destination" asp-action="Index" class="tag-link">All Destinations</a>
+                            <a asp-controller="Destination" asp-action="Map" class="tag-link">Interactive Map</a>
+                            <a asp-controller="Home" asp-action="Index" class="tag-link">Basecamp</a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a asp-controller="Home" asp-action="Index" class="btn-adventure-primary">
+                            <i class="fas fa-home me-2"></i> Return to Basecamp
+                        </a>
+                        <button onclick="history.back()" class="btn-adventure-secondary">
+                            <i class="fas fa-arrow-left me-2"></i> Go Back
+                        </button>
+                    </div>
+
+                    <div class="mt-4">
+                        <small class="text-muted">
+                            <i class="fas fa-mountain text-primary me-1"></i>
+                            Horizons Adventure Co.
+                            <i class="fas fa-bolt text-primary ms-1"></i>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🗺️ Horizons - 404 Not Found');
+        
+        // Animate search input placeholder
+        const searchInput = document.querySelector('.search-input');
+        if (searchInput) {
+            const placeholders = ['Everest?', 'Santorini?', 'Amazon?', 'Tokyo?'];
+            let index = 0;
+            
+            setInterval(() => {
+                if (!searchInput.value) {
+                    searchInput.placeholder = 'Search for ' + placeholders[index];
+                    index = (index + 1) % placeholders.length;
+                }
+            }, 3000);
+        }
+    });
+</script>

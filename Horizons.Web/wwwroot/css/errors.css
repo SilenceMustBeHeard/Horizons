@@ -1,0 +1,718 @@
+/*==== Not Implemented ====*/
+@keyframes gearSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.construction-gear i:first-child {
+    animation: gearSpin 3s linear infinite;
+}
+
+.construction-gear i:last-child {
+    animation: gearSpin 3s linear infinite reverse;
+}
+
+/*=== Not Found ===*/
+@keyframes lostPulse {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+.lost-compass {
+    animation: lostPulse 1.5s ease-in-out infinite;
+    display: inline-block;
+}
+
+.search-input {
+    background: var(--sport-dark);
+    border: 1px solid var(--sport-border);
+    color: var(--sport-text);
+    border-radius: 50px;
+    padding: 10px 20px;
+}
+
+    .search-input:focus {
+        border-color: var(--sport-primary);
+        box-shadow: 0 0 0 2px rgba(255,51,102,0.2);
+        outline: none;
+    }
+
+.tag-link {
+    background: var(--sport-dark);
+    color: var(--sport-text-muted);
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+    .tag-link:hover {
+        background: var(--sport-primary);
+        color: white;
+    }
+
+
+
+/*=== Not Allowed ===*/
+.access-denied {
+    background: linear-gradient(135deg, #0a0f1c 0%, #1a0f1c 100%);
+    position: relative;
+}
+
+.grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(255,51,102,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,51,102,0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(40px, 40px);
+    }
+}
+
+.scan-line {
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, rgba(255,51,102,0.2), transparent);
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scan {
+    0% {
+        top: -50%;
+    }
+
+    100% {
+        top: 150%;
+    }
+}
+
+.security-lock {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+}
+
+.lock-body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 80px;
+    color: var(--sport-danger);
+}
+
+.lock-shackle {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 50px;
+    border: 8px solid var(--sport-danger);
+    border-bottom: none;
+    border-radius: 20px 20px 0 0;
+    animation: shake 1s infinite;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(-52%) rotate(5deg);
+    }
+
+    75% {
+        transform: translateX(-48%) rotate(-5deg);
+    }
+}
+
+.lock-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,51,102,0.2), transparent);
+    animation: pulse 2s infinite;
+}
+
+.terminal {
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 400px;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    border: 1px solid var(--sport-primary);
+}
+
+.terminal-line {
+    color: #0f0;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+    .terminal-line .invalid {
+        color: var(--sport-danger);
+    }
+
+.blink {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.typing {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typing 3s steps(30, end) infinite;
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+
+    50% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 14px;
+    background: #0f0;
+    animation: cursorBlink 1s infinite;
+    margin-left: 2px;
+}
+
+@keyframes cursorBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.error-code {
+    font-size: 100px;
+    font-weight: 900;
+    color: var(--sport-danger);
+    text-shadow: 0 0 20px rgba(255,51,102,0.5);
+    letter-spacing: 10px;
+}
+
+.error-title {
+    font-size: 36px;
+    letter-spacing: 8px;
+    color: var(--sport-text);
+    margin: 20px 0;
+}
+
+.error-message {
+    color: var(--sport-text-muted);
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+
+/*=== Bad Request===*/
+.error-page-wrapper {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    background: var(--sport-dark);
+}
+
+.error-card {
+    background: var(--sport-light);
+    border: 1px solid var(--sport-border);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+@keyframes compassSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.compass-spin {
+    animation: compassSpin 3s infinite ease-in-out;
+    display: inline-block;
+}
+
+.badge-adventure {
+    background: linear-gradient(135deg, var(--sport-primary), var(--sport-secondary));
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.error-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: var(--sport-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.error-subtitle {
+    font-size: 1.1rem;
+    color: var(--sport-accent);
+    margin-bottom: 1rem;
+}
+
+.error-description {
+    color: var(--sport-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.adventure-tips {
+    background: var(--sport-dark);
+    border-left: 4px solid var(--sport-primary);
+    border-radius: 12px;
+}
+
+.text-accent {
+    color: var(--sport-accent);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+}
+
+.btn-adventure-primary {
+    background: var(--sport-gradient);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .btn-adventure-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255,51,102,0.3);
+        color: white;
+    }
+
+.btn-adventure-secondary {
+    background: transparent;
+    border: 2px solid var(--sport-primary);
+    color: var(--sport-text);
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .btn-adventure-secondary:hover {
+        background: var(--sport-primary);
+        color: white;
+        transform: translateY(-3px);
+    }
+
+
+
+
+/*=== Server Error ===*/
+.server-error {
+    background: linear-gradient(135deg, #0a1a2a 0%, #1a0a1a 100%);
+    position: relative;
+}
+
+.glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient( 0deg, transparent, transparent 2px, rgba(255,51,102,0.05) 2px, rgba(255,51,102,0.05) 4px );
+    pointer-events: none;
+    animation: glitchScan 0.2s infinite;
+}
+
+@keyframes glitchScan {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(4px);
+    }
+}
+
+.static-noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="10" height="10" fill="rgba(255,255,255,0.02)"/><rect x="20" y="30" width="5" height="5" fill="rgba(255,255,255,0.03)"/><rect x="50" y="10" width="8" height="8" fill="rgba(255,255,255,0.02)"/><rect x="70" y="60" width="6" height="6" fill="rgba(255,255,255,0.03)"/><rect x="30" y="80" width="12" height="12" fill="rgba(255,255,255,0.02)"/></svg>') repeat;
+    opacity: 0.1;
+    pointer-events: none;
+    animation: staticFlicker 0.1s infinite;
+}
+
+@keyframes staticFlicker {
+    0%, 100% {
+        opacity: 0.1;
+    }
+
+    50% {
+        opacity: 0.05;
+    }
+}
+
+.avalanche-container {
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.mountain-scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    width: 0;
+    height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 120px solid #2a4a5f;
+}
+
+    .mountain::before {
+        content: '';
+        position: absolute;
+        top: -60px;
+        left: -40px;
+        width: 0;
+        height: 0;
+        border-left: 40px solid transparent;
+        border-right: 40px solid transparent;
+        border-bottom: 60px solid #3a6a7f;
+    }
+
+.mountain-back {
+    left: 60%;
+    transform: scale(0.7);
+    opacity: 0.5;
+}
+
+.snow-slab {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to bottom, #fff, #ddd);
+    animation: shake 0.3s infinite;
+}
+
+.avalanche-particles {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.snowball {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: avalanche 1.5s infinite;
+}
+
+    .snowball:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+        width: 8px;
+        height: 8px;
+    }
+
+    .snowball:nth-child(2) {
+        left: 30%;
+        animation-delay: 0.3s;
+        width: 12px;
+        height: 12px;
+    }
+
+    .snowball:nth-child(3) {
+        left: 50%;
+        animation-delay: 0.6s;
+        width: 6px;
+        height: 6px;
+    }
+
+    .snowball:nth-child(4) {
+        left: 70%;
+        animation-delay: 0.2s;
+        width: 14px;
+        height: 14px;
+    }
+
+    .snowball:nth-child(5) {
+        left: 85%;
+        animation-delay: 0.5s;
+        width: 10px;
+        height: 10px;
+    }
+
+@keyframes avalanche {
+    0% {
+        transform: translateY(-50px) translateX(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(150px) translateX(50px);
+        opacity: 0;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-3px);
+    }
+
+    75% {
+        transform: translateX(3px);
+    }
+}
+
+.error-code-500 {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+    .error-code-500 span {
+        font-size: 100px;
+        font-weight: 900;
+        font-family: 'Orbitron', monospace;
+        display: inline-block;
+    }
+
+.code-5 {
+    background: var(--sport-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shakeCode 0.5s infinite;
+}
+
+.code-0-1 {
+    color: var(--sport-danger);
+    animation: glitchCode 1s infinite;
+}
+
+.code-0-2 {
+    color: var(--sport-primary);
+    animation: glitchCode 1s infinite reverse;
+}
+
+@keyframes shakeCode {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes glitchCode {
+    0%, 100% {
+        transform: skew(0deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: skew(5deg);
+        opacity: 0.7;
+    }
+}
+
+.system-error {
+    background: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 400px;
+    margin: 20px auto;
+    font-family: 'Courier New', monospace;
+    border-left: 3px solid var(--sport-danger);
+    text-align: left;
+}
+
+.log-line {
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: #0f0;
+}
+
+.error-text {
+    color: var(--sport-danger);
+    animation: blink 0.5s infinite;
+}
+
+.blink-text {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.auto-rescue {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    text-align: center;
+}
+
+.rescue-progress {
+    height: 4px;
+    background: var(--sport-dark);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.rescue-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--sport-gradient);
+    transition: width 0.1s linear;
+}
+
+.rescue-text {
+    font-size: 10px;
+    color: var(--sport-text-muted);
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .error-code-500 span {
+        font-size: 50px;
+    }
+
+    .error-title {
+        font-size: 20px;
+    }
+
+    .mountain-scene {
+        transform: scale(0.6);
+        top: -40px;
+    }
+
+    .avalanche-container {
+        height: 100px;
+    }
+
+    .system-error {
+        margin: 10px auto;
+    }
+
+    .auto-rescue {
+        bottom: 100px;
+    }
+}

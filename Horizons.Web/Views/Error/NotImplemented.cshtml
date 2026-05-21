@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Under Construction - Horizons";
+    string featureName = ViewBag.FeatureName ?? "This destination";
+}
+
+<div class="error-page-wrapper">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="error-card text-center p-5">
+                    <!-- Construction Animation -->
+                    <div class="error-animation mb-4">
+                        <div class="construction-gear">
+                            <i class="fas fa-hard-hat fa-3x" style="color: var(--sport-warning);"></i>
+                            <i class="fas fa-tools fa-3x ms-2" style="color: var(--sport-primary);"></i>
+                        </div>
+                    </div>
+
+                    <div class="error-badge mb-3">
+                        <span class="badge-adventure" style="background: var(--sport-warning); color: var(--sport-dark);">
+                            <i class="fas fa-tools me-1"></i> 501 - UNDER CONSTRUCTION
+                        </span>
+                    </div>
+
+                    <h1 class="error-title">Trail Being Built</h1>
+                    <p class="error-subtitle">@featureName is currently being scouted</p>
+                    <p class="error-description">Our adventure team is working hard to map this destination. Check back soon!</p>
+
+                    <div class="progress-container mb-4">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-muted">Trail Completion</small>
+                            <small class="text-warning" id="progressPercent">0%</small>
+                        </div>
+                        <div class="progress" style="height: 8px; background: var(--sport-dark); border-radius: 10px;">
+                            <div class="progress-bar" id="buildingProgress" 
+                                 role="progressbar" style="width: 0%; background: var(--sport-gradient); border-radius: 10px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="estimated-time p-3 mb-4" style="background: var(--sport-dark); border-radius: 12px;">
+                        <div class="d-flex align-items-center justify-content-center gap-2">
+                            <i class="fas fa-clock text-warning"></i>
+                            <span class="small">Estimated completion: <strong id="estimatedTime">~10 minutes</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a asp-controller="Home" asp-action="Index" class="btn-adventure-primary">
+                            <i class="fas fa-home me-2"></i> Return to Basecamp
+                        </a>
+                        <button onclick="history.back()" class="btn-adventure-secondary">
+                            <i class="fas fa-arrow-left me-2"></i> Go Back
+                        </button>
+                    </div>
+
+                    <div class="mt-4">
+                        <small class="text-muted">
+                            <i class="fas fa-mountain text-primary me-1"></i>
+                            Horizons Adventure Co.
+                            <i class="fas fa-bolt text-primary ms-1"></i>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚧 Horizons - Under Construction');
+        
+        let progress = 0;
+        const progressBar = document.getElementById('buildingProgress');
+        const progressPercent = document.getElementById('progressPercent');
+        const estimatedTime = document.getElementById('estimatedTime');
+        
+        const statusMessages = [
+            '🏔️ Scouting location...',
+            '🗺️ Mapping trails...',
+            '📸 Taking photos...',
+            '✍️ Writing guide...',
+            '🎨 Designing badge...',
+            '✅ Final checks...'
+        ];
+        
+        let messageIndex = 0;
+        
+        const interval = setInterval(() => {
+            if (progress < 100) {
+                progress += Math.random() * 5;
+                if (progress > 100) progress = 100;
+                
+                progressBar.style.width = progress + '%';
+                progressPercent.textContent = Math.floor(progress) + '%';
+                
+                const remainingMinutes = Math.ceil((100 - progress) / 12);
+                if (remainingMinutes > 0) {
+                    estimatedTime.textContent = `~${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''}`;
+                } else {
+                    estimatedTime.textContent = 'Almost ready!';
+                }
+            } else {
+                clearInterval(interval);
+                estimatedTime.textContent = 'Coming soon! 🎉';
+            }
+        }, 400);
+    });
+</script>

@@ -1,0 +1,139 @@
+﻿@{
+    ViewData["Title"] = "Server Error - Horizons";
+}
+
+<div class="fullscreen-error server-error">
+    <div class="glitch-overlay"></div>
+    <div class="static-noise"></div>
+
+    <div class="error-content">
+        <div class="avalanche-container">
+            <div class="mountain-scene">
+                <div class="mountain"></div>
+                <div class="mountain mountain-back"></div>
+                <div class="snow-slab"></div>
+                <div class="avalanche-particles">
+                    <div class="snowball"></div>
+                    <div class="snowball"></div>
+                    <div class="snowball"></div>
+                    <div class="snowball"></div>
+                    <div class="snowball"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-code error-code-500">
+            <span class="code-5">5</span>
+            <span class="code-0 code-0-1">0</span>
+            <span class="code-0 code-0-2">0</span>
+        </div>
+
+        <h1 class="error-title">AVALANCHE! ⚠️</h1>
+        <div class="system-error">
+            <div class="error-log">
+                <div class="log-line">> SYSTEM: <span class="error-text">CRITICAL FAILURE</span></div>
+                <div class="log-line">> SERVICE: <span class="blink-text">UNRESPONSIVE</span></div>
+                <div class="log-line">> RESCUE TEAM: <span id="rescueStatus">DISPATCHING</span></div>
+            </div>
+        </div>
+        <p class="error-message">Our basecamp experienced an unexpected avalanche. The technical rescue team is already on the way.</p>
+
+        <div class="action-buttons">
+            <a asp-controller="Home" asp-action="Index" class="btn-adventure pulse-btn">
+                <i class="fas fa-campground"></i>
+                <span>WAIT AT BASECAMP</span>
+            </a>
+            <button onclick="location.reload()" class="btn-adventure secondary" id="retryBtn">
+                <i class="fas fa-hand-holding-heart"></i>
+                <span>TRY RESCUE</span>
+            </button>
+        </div>
+
+        <div class="auto-rescue">
+            <div class="rescue-progress">
+                <div class="rescue-bar" id="rescueBar"></div>
+            </div>
+            <div class="rescue-text" id="rescueText">Attempting rescue in <span id="countdown">10</span>s</div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let countdown = 10;
+        const countdownElement = document.getElementById('countdown');
+        const rescueBar = document.getElementById('rescueBar');
+        const rescueStatus = document.getElementById('rescueStatus');
+        const retryBtn = document.getElementById('retryBtn');
+
+        const statusMessages = [
+            'DISPATCHING', 'EN ROUTE', 'SCANNING', 'CLEARING DEBRIS', 'ALMOST THERE', 'RESCUING'
+        ];
+
+        let statusIndex = 0;
+
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+            rescueBar.style.width = ((10 - countdown) / 10 * 100) + '%';
+
+            // Update rescue status text
+            if (countdown <= 8 && countdown > 5) {
+                rescueStatus.textContent = statusMessages[1];
+                rescueStatus.style.color = 'var(--sport-warning)';
+            } else if (countdown <= 5 && countdown > 2) {
+                rescueStatus.textContent = statusMessages[2];
+                rescueStatus.style.color = 'var(--sport-accent)';
+            } else if (countdown <= 2 && countdown > 0) {
+                rescueStatus.textContent = statusMessages[3];
+                rescueStatus.style.color = '#0f0';
+            } else if (countdown === 0) {
+                rescueStatus.textContent = 'RESCUE SUCCESS!';
+                rescueStatus.style.color = '#0f0';
+            }
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('rescueText').innerHTML = '🔄 Reloading basecamp...';
+                setTimeout(() => {
+                    location.reload();
+                }, 500);
+            }
+        }, 1000);
+
+        retryBtn.addEventListener('click', () => {
+            clearInterval(countdownInterval);
+            document.querySelector('.auto-rescue').innerHTML = '<div class="rescue-text">🔄 Manual rescue initiated...</div>';
+            setTimeout(() => {
+                location.reload();
+            }, 500);
+        });
+
+        // Add emergency sirens effect
+        const siren = document.createElement('div');
+        siren.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255,51,102,0.3);
+            animation: sirenPulse 0.5s infinite;
+            pointer-events: none;
+            z-index: 100;
+        `;
+        document.querySelector('.server-error').appendChild(siren);
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @@keyframes sirenPulse {
+                0%, 100% { box-shadow: 0 0 0 0 rgba(255,51,102,0.4); }
+                50% { box-shadow: 0 0 0 20px rgba(255,51,102,0); }
+            }
+        `;
+        document.head.appendChild(style);
+    });
+</script>

@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Access Denied - Horizons";
+}
+
+<div class="fullscreen-error access-denied">
+    <div class="grid-overlay"></div>
+    <div class="scan-line"></div>
+    
+    <div class="error-content">
+        <div class="security-lock">
+            <div class="lock-body">
+                <i class="fas fa-lock"></i>
+                <div class="lock-shackle"></div>
+            </div>
+            <div class="lock-pulse"></div>
+        </div>
+
+        <div class="error-code" data-text="403">403</div>
+        <h1 class="error-title">ACCESS DENIED</h1>
+        <div class="terminal">
+            <div class="terminal-line">> ACCESS_TOKEN: <span class="blink">MISSING</span></div>
+            <div class="terminal-line">> PERMISSION_LEVEL: <span class="invalid">INSUFFICIENT</span></div>
+            <div class="terminal-line typing">> VERIFYING CREDENTIALS<span class="cursor"></span></div>
+        </div>
+        <p class="error-message">This sector requires elite clearance. Your expedition credentials don't grant access here.</p>
+
+        <div class="action-buttons">
+            <a asp-controller="Home" asp-action="Index" class="btn-adventure">
+                <i class="fas fa-shield-alt"></i>
+                <span>RETURN TO SAFE ZONE</span>
+            </a>
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn-adventure secondary">
+                <i class="fas fa-id-card"></i>
+                <span>UPGRADE CREDENTIALS</span>
+            </a>
+        </div>
+    </div>
+</div>
