@@ -1,20 +1,410 @@
 /*==== Not Implemented ====*/
-@keyframes gearSpin {
+
+
+.under-construction {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1508 100%);
+    position: relative;
+}
+
+/* Header Section */
+.error-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.error-code {
+    font-size: 100px;
+    font-weight: 900;
+    font-family: 'Orbitron', monospace;
+    background: var(--sport-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+}
+
+.error-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0,0,0,0.6);
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1px solid var(--sport-warning);
+    margin-top: 10px;
+}
+
+    .error-badge i {
+        color: var(--sport-warning);
+        font-size: 14px;
+    }
+
+    .error-badge span {
+        color: var(--sport-warning);
+        font-size: 12px;
+        letter-spacing: 2px;
+        font-weight: bold;
+    }
+
+.error-title {
+    font-size: 36px;
+    letter-spacing: 6px;
+    margin: 15px 0 10px;
+    background: var(--sport-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.error-subtitle {
+    color: var(--sport-text-muted);
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* Construction Sign */
+.construction-sign {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: rgba(0,0,0,0.7);
+    padding: 12px 28px;
+    border-radius: 50px;
+    border: 2px solid var(--sport-warning);
+    margin: 20px auto;
+    width: fit-content;
+    animation: signPulse 1.5s infinite;
+}
+
+@keyframes signPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255,206,103,0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 15px rgba(255,206,103,0);
+    }
+}
+
+.construction-sign i {
+    color: var(--sport-warning);
+    font-size: 18px;
+}
+
+.construction-sign span {
+    color: var(--sport-warning);
+    font-size: 14px;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+/* Progress Section */
+.progress-section {
+    max-width: 400px;
+    margin: 30px auto;
+    background: rgba(0,0,0,0.4);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid rgba(255,206,103,0.2);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 12px;
+}
+
+.progress-title {
+    color: var(--sport-text-muted);
+    letter-spacing: 1px;
+}
+
+    .progress-title i {
+        margin-right: 6px;
+        color: var(--sport-warning);
+    }
+
+.progress-percentage {
+    color: var(--sport-warning);
+    font-weight: bold;
+    font-family: 'Orbitron', monospace;
+}
+
+.progress-bar-container {
+    position: relative;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--sport-gradient);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.progress-bar-glint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: glint 2s infinite;
+}
+
+@keyframes glint {
     0% {
-        transform: rotate(0deg);
+        transform: translateX(-100%);
     }
 
     100% {
-        transform: rotate(360deg);
+        transform: translateX(100%);
     }
 }
 
-.construction-gear i:first-child {
-    animation: gearSpin 3s linear infinite;
+.progress-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-.construction-gear i:last-child {
-    animation: gearSpin 3s linear infinite reverse;
+.detail-item {
+    font-size: 11px;
+    color: var(--sport-text-muted);
+}
+
+    .detail-item i {
+        margin-right: 6px;
+        color: var(--sport-warning);
+    }
+
+    .detail-item strong {
+        color: var(--sport-text);
+    }
+
+/* Status Panel */
+.status-panel {
+    max-width: 400px;
+    margin: 20px auto;
+    background: rgba(0,0,0,0.6);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,206,103,0.2);
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: rgba(0,0,0,0.5);
+    border-bottom: 1px solid rgba(255,206,103,0.2);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+    .status-header i {
+        color: var(--sport-warning);
+    }
+
+    .status-header span {
+        color: var(--sport-text-muted);
+    }
+
+.status-messages {
+    height: 100px;
+    overflow-y: auto;
+    padding: 10px 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+}
+
+.message-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+    color: var(--sport-text-muted);
+    opacity: 0.8;
+    animation: fadeInMessage 0.3s ease;
+}
+
+    .message-item.new-message {
+        opacity: 1;
+        color: var(--sport-warning);
+    }
+
+.message-time {
+    color: var(--sport-warning);
+    font-weight: bold;
+}
+
+.message-text {
+    word-break: break-word;
+}
+
+@keyframes fadeInMessage {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Custom scrollbar for status panel */
+.status-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.status-messages::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+}
+
+.status-messages::-webkit-scrollbar-thumb {
+    background: var(--sport-warning);
+    border-radius: 4px;
+}
+
+/* Error Message */
+.error-message {
+    color: var(--sport-text-muted);
+    max-width: 450px;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn-adventure {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--sport-gradient);
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--sport-warning);
+    color: var(--sport-warning);
+}
+
+.btn-adventure:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 10px 25px rgba(255,206,103,0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,206,103,0.1);
+}
+
+/* Floating Particles */
+.construction-particle {
+    position: absolute;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.5;
+    }
+
+    80% {
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 60px;
+    }
+
+    .error-title {
+        font-size: 20px;
+        letter-spacing: 3px;
+    }
+
+    .error-subtitle {
+        font-size: 13px;
+    }
+
+    .construction-sign {
+        padding: 8px 20px;
+    }
+
+        .construction-sign span {
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .construction-sign i {
+            font-size: 12px;
+        }
+
+    .progress-section, .status-panel {
+        margin: 15px auto;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .btn-adventure {
+        padding: 10px 24px;
+    }
+
+    .error-message {
+        font-size: 12px;
+        padding: 0 20px;
+    }
 }
 
 /*=== Not Found ===*/

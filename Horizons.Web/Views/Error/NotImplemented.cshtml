@@ -1,112 +1,195 @@
 ﻿@{
     ViewData["Title"] = "Under Construction - Horizons";
-    string featureName = ViewBag.FeatureName ?? "This destination";
+    string featureName = ViewBag.FeatureName ?? "this destination";
 }
 
-<div class="error-page-wrapper">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="error-card text-center p-5">
-                    <!-- Construction Animation -->
-                    <div class="error-animation mb-4">
-                        <div class="construction-gear">
-                            <i class="fas fa-hard-hat fa-3x" style="color: var(--sport-warning);"></i>
-                            <i class="fas fa-tools fa-3x ms-2" style="color: var(--sport-primary);"></i>
-                        </div>
-                    </div>
+<div class="fullscreen-error under-construction">
+    <div class="construction-overlay"></div>
 
-                    <div class="error-badge mb-3">
-                        <span class="badge-adventure" style="background: var(--sport-warning); color: var(--sport-dark);">
-                            <i class="fas fa-tools me-1"></i> 501 - UNDER CONSTRUCTION
-                        </span>
-                    </div>
+    <div class="error-content">
+        <!-- Header Section -->
+        <div class="error-header">
+            <div class="error-code">501</div>
+            <div class="error-badge">
+                <i class="fas fa-hard-hat"></i>
+                <span>UNDER CONSTRUCTION</span>
+                <i class="fas fa-tools"></i>
+            </div>
+        </div>
 
-                    <h1 class="error-title">Trail Being Built</h1>
-                    <p class="error-subtitle">@featureName is currently being scouted</p>
-                    <p class="error-description">Our adventure team is working hard to map this destination. Check back soon!</p>
+        <!-- Main Message -->
+        <h1 class="error-title">TRAIL BEING BUILT</h1>
+        <p class="error-subtitle">@featureName is currently under development</p>
 
-                    <div class="progress-container mb-4">
-                        <div class="d-flex justify-content-between mb-1">
-                            <small class="text-muted">Trail Completion</small>
-                            <small class="text-warning" id="progressPercent">0%</small>
-                        </div>
-                        <div class="progress" style="height: 8px; background: var(--sport-dark); border-radius: 10px;">
-                            <div class="progress-bar" id="buildingProgress" 
-                                 role="progressbar" style="width: 0%; background: var(--sport-gradient); border-radius: 10px;">
-                            </div>
-                        </div>
-                    </div>
+        <!-- Construction Sign -->
+        <div class="construction-sign">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>CONSTRUCTION ZONE</span>
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
 
-                    <div class="estimated-time p-3 mb-4" style="background: var(--sport-dark); border-radius: 12px;">
-                        <div class="d-flex align-items-center justify-content-center gap-2">
-                            <i class="fas fa-clock text-warning"></i>
-                            <span class="small">Estimated completion: <strong id="estimatedTime">~10 minutes</strong></span>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a asp-controller="Home" asp-action="Index" class="btn-adventure-primary">
-                            <i class="fas fa-home me-2"></i> Return to Basecamp
-                        </a>
-                        <button onclick="history.back()" class="btn-adventure-secondary">
-                            <i class="fas fa-arrow-left me-2"></i> Go Back
-                        </button>
-                    </div>
-
-                    <div class="mt-4">
-                        <small class="text-muted">
-                            <i class="fas fa-mountain text-primary me-1"></i>
-                            Horizons Adventure Co.
-                            <i class="fas fa-bolt text-primary ms-1"></i>
-                        </small>
-                    </div>
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <span class="progress-title">
+                    <i class="fas fa-chart-line"></i> Trail Completion
+                </span>
+                <span class="progress-percentage" id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="buildProgress"></div>
+                <div class="progress-bar-glint"></div>
+            </div>
+            <div class="progress-details">
+                <div class="detail-item">
+                    <i class="fas fa-users"></i>
+                    <span>Workers: <strong id="workerCount">4</strong></span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-chart-simple"></i>
+                    <span>Status: <strong id="buildStatus">Building</strong></span>
                 </div>
             </div>
+        </div>
+
+        <!-- Status Messages -->
+        <div class="status-panel">
+            <div class="status-header">
+                <i class="fas fa-terminal"></i>
+                <span>LIVE BUILD LOG</span>
+            </div>
+            <div id="statusMessages" class="status-messages">
+                <div class="message-item">
+                    <span class="message-time">></span>
+                    <span class="message-text">Initializing construction sequence...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <p class="error-message">Our expedition team is working hard to build this adventure. Check back soon for an epic experience!</p>
+
+        <!-- Action Button -->
+        <div class="action-buttons">
+            <a asp-controller="Home" asp-action="Index" class="btn-adventure btn-primary">
+                <i class="fas fa-home"></i>
+                <span>RETURN TO BASECAMP</span>
+            </a>
+          
         </div>
     </div>
 </div>
 
-
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('🚧 Horizons - Under Construction');
-        
+    document.addEventListener('DOMContentLoaded', () => {
         let progress = 0;
-        const progressBar = document.getElementById('buildingProgress');
+        const progressBar = document.getElementById('buildProgress');
         const progressPercent = document.getElementById('progressPercent');
-        const estimatedTime = document.getElementById('estimatedTime');
-        
-        const statusMessages = [
-            '🏔️ Scouting location...',
-            '🗺️ Mapping trails...',
-            '📸 Taking photos...',
-            '✍️ Writing guide...',
-            '🎨 Designing badge...',
-            '✅ Final checks...'
+        const workerCountSpan = document.getElementById('workerCount');
+        const buildStatusSpan = document.getElementById('buildStatus');
+        const statusContainer = document.getElementById('statusMessages');
+
+        const statusMessagesList = [
+            { text: '🏔️ Surveying terrain...', status: 'Surveying' },
+            { text: '🗺️ Mapping trails...', status: 'Mapping' },
+            { text: '📸 Scouting viewpoints...', status: 'Scouting' },
+            { text: '✍️ Writing adventure guide...', status: 'Writing' },
+            { text: '🎨 Designing expedition badge...', status: 'Designing' },
+            { text: '🏕️ Setting up basecamp...', status: 'Setting Up' },
+            { text: '🪨 Clearing obstacles...', status: 'Clearing' },
+            { text: '🌲 Marking trails...', status: 'Marking' },
+            { text: '📷 Capturing panoramas...', status: 'Capturing' },
+            { text: '✨ Adding final touches...', status: 'Polishing' }
         ];
-        
+
         let messageIndex = 0;
-        
+        let workers = 4;
+
+        function addStatusMessage(message) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message-item new-message';
+            msgDiv.innerHTML = `
+                <span class="message-time">></span>
+                <span class="message-text">${message}</span>
+            `;
+            statusContainer.appendChild(msgDiv);
+
+            // Scroll to bottom
+            statusContainer.scrollTop = statusContainer.scrollHeight;
+
+            // Animate in
+            setTimeout(() => {
+                msgDiv.classList.remove('new-message');
+            }, 100);
+
+            // Remove old messages (keep last 5)
+            while (statusContainer.children.length > 6) {
+                statusContainer.removeChild(statusContainer.firstChild);
+            }
+        }
+
+        function updateBuildStatus(progressVal) {
+            if (progressVal < 20) return 'Planning';
+            if (progressVal < 40) return 'Surveying';
+            if (progressVal < 60) return 'Building';
+            if (progressVal < 80) return 'Polishing';
+            return 'Finalizing';
+        }
+
         const interval = setInterval(() => {
             if (progress < 100) {
-                progress += Math.random() * 5;
+                progress += Math.random() * 4 + 1;
                 if (progress > 100) progress = 100;
-                
+
                 progressBar.style.width = progress + '%';
                 progressPercent.textContent = Math.floor(progress) + '%';
-                
-                const remainingMinutes = Math.ceil((100 - progress) / 12);
-                if (remainingMinutes > 0) {
-                    estimatedTime.textContent = `~${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''}`;
-                } else {
-                    estimatedTime.textContent = 'Almost ready!';
+
+                // Update build status
+                const currentStatus = updateBuildStatus(progress);
+                buildStatusSpan.textContent = currentStatus;
+
+                // Add random status messages
+                if (Math.random() > 0.65) {
+                    const msg = statusMessagesList[messageIndex % statusMessagesList.length];
+                    addStatusMessage(msg.text);
+
+                    // Update worker count based on progress
+                    const newWorkerCount = Math.min(4 + Math.floor(progress / 20), 10);
+                    if (newWorkerCount !== workers) {
+                        workers = newWorkerCount;
+                        workerCountSpan.textContent = workers;
+                        addStatusMessage(`👷 ${workers} workers now on site`);
+                    }
+
+                    messageIndex++;
                 }
             } else {
                 clearInterval(interval);
-                estimatedTime.textContent = 'Coming soon! 🎉';
+                addStatusMessage('✅ Trail complete! Launching soon! 🎉');
+                buildStatusSpan.textContent = 'Complete!';
+                buildStatusSpan.style.color = '#0f0';
             }
-        }, 400);
+        }, 700);
+
+        // Create floating construction particles
+        for(let i = 0; i < 60; i++) {
+            const dust = document.createElement('div');
+            dust.className = 'construction-particle';
+            dust.style.cssText = `
+                position: absolute;
+                width: ${Math.random() * 6 + 2}px;
+                height: ${Math.random() * 6 + 2}px;
+                background: ${Math.random() > 0.7 ? 'var(--sport-warning)' : 'rgba(255,206,103,0.4)'};
+                border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                opacity: ${Math.random() * 0.4};
+                animation: floatParticle ${Math.random() * 10 + 8}s linear infinite;
+                animation-delay: ${Math.random() * 5}s;
+                pointer-events: none;
+                z-index: 0;
+            `;
+            document.querySelector('.under-construction').appendChild(dust);
+        }
     });
 </script>
