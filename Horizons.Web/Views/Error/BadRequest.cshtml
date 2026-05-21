@@ -2,89 +2,114 @@
     ViewData["Title"] = "Bad Request - Horizons";
 }
 
-<div class="error-page-wrapper">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="error-card text-center p-5">
-                    <!-- Adventure Compass Animation -->
-                    <div class="error-animation mb-4">
-                        <div class="compass-spin">
-                            <i class="fas fa-compass fa-4x" style="color: var(--sport-primary);"></i>
-                        </div>
-                    </div>
+<div class="fullscreen-error bad-request">
+    <div class="error-background">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+    </div>
 
-                    <div class="error-badge mb-3">
-                        <span class="badge-adventure">
-                            <i class="fas fa-exclamation-triangle me-1"></i> 400 - BAD REQUEST
-                        </span>
-                    </div>
+    <div class="error-content">
+        <!-- Header Section -->
+        <div class="error-header">
+            <div class="error-code">400</div>
+            <div class="error-badge">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>BAD REQUEST</span>
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+        </div>
 
-                    <h1 class="error-title">Off Trail!</h1>
-                    <p class="error-subtitle">Your request got lost in the wilderness</p>
-                    <p class="error-description">The path you took doesn't lead to any destination. Let's get you back on track!</p>
+        <!-- Main Message -->
+        <h1 class="error-title">OFF TRAIL!</h1>
+        <p class="error-subtitle">Your request got lost in the wilderness</p>
 
-                    <div class="adventure-tips p-4 mb-4 text-start">
-                        <h6 class="text-accent mb-3">
-                            <i class="fas fa-map-marked-alt me-2"></i> Navigation Tips:
-                        </h6>
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-2">
-                                <i class="fas fa-check-circle text-success me-2"></i>
-                                Check your coordinates (URL) for typos
-                            </li>
-                            <li class="mb-2">
-                                <i class="fas fa-check-circle text-success me-2"></i>
-                                Clear your expedition gear (browser cache)
-                            </li>
-                            <li class="mb-2">
-                                <i class="fas fa-check-circle text-success me-2"></i>
-                                Start a new journey from our basecamp
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a asp-controller="Home" asp-action="Index" class="btn-adventure-primary">
-                            <i class="fas fa-home me-2"></i> Return to Basecamp
-                        </a>
-                        <button onclick="history.back()" class="btn-adventure-secondary">
-                            <i class="fas fa-arrow-left me-2"></i> Go Back
-                        </button>
-                    </div>
-
-                    <div class="mt-4">
-                        <small class="text-muted">
-                            <i class="fas fa-mountain text-primary me-1"></i>
-                            Horizons Adventure Co.
-                            <i class="fas fa-bolt text-primary ms-1"></i>
-                        </small>
-                    </div>
+        <!-- Compass Animation -->
+        <div class="compass-container">
+            <div class="compass-ring">
+                <div class="compass-needle">
+                    <i class="fas fa-long-arrow-alt-up"></i>
+                </div>
+                <div class="compass-circle">
+                    <span>N</span><span>E</span><span>S</span><span>W</span>
                 </div>
             </div>
+            <div class="compass-glitch">OFF COURSE</div>
+        </div>
+
+        <!-- Navigation Tips Panel -->
+        <div class="tips-panel">
+            <div class="tips-header">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>NAVIGATION TIPS</span>
+            </div>
+            <div class="tips-list">
+                <div class="tip-item">
+                    <i class="fas fa-search"></i>
+                    <span>Check your coordinates (URL) for typos</span>
+                </div>
+                <div class="tip-item">
+                    <i class="fas fa-broom"></i>
+                    <span>Clear your expedition gear (browser cache)</span>
+                </div>
+                <div class="tip-item">
+                    <i class="fas fa-flag-checkered"></i>
+                    <span>Start a new journey from our basecamp</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Radar Section -->
+        <div class="radar-section">
+            <div class="radar">
+                <div class="radar-sweep"></div>
+                <div class="radar-dot"></div>
+                <div class="radar-dot dot2"></div>
+            </div>
+            <div class="radar-text">Searching for correct path...</div>
+        </div>
+
+        <!-- Description -->
+        <p class="error-message">The path you took doesn't lead to any destination. Let's get you back on track!</p>
+
+        <!-- Action Button -->
+        <div class="action-buttons">
+            <a asp-controller="Home" asp-action="Index" class="btn-adventure btn-primary">
+                <i class="fas fa-home"></i>
+                <span>RETURN TO BASECAMP</span>
+            </a>
+           
         </div>
     </div>
 </div>
 
-
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('🏔️ Horizons - Bad Request Page');
-        
-        // Add mountain dust particles
-        for(let i = 0; i < 30; i++) {
+    document.addEventListener('DOMContentLoaded', () => {
+        // Create floating particles
+        for(let i = 0; i < 60; i++) {
             const particle = document.createElement('div');
-            particle.innerHTML = '✦';
-            particle.style.position = 'fixed';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.color = 'var(--sport-primary)';
-            particle.style.opacity = Math.random() * 0.3;
-            particle.style.fontSize = Math.random() * 10 + 8 + 'px';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '0';
-            document.body.appendChild(particle);
+            particle.className = 'error-particle';
+            particle.style.cssText = `
+                position: absolute;
+                width: ${Math.random() * 4 + 1}px;
+                height: ${Math.random() * 4 + 1}px;
+                background: var(--sport-primary);
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                opacity: ${Math.random() * 0.5};
+                border-radius: 50%;
+                animation: floatParticle ${Math.random() * 8 + 4}s linear infinite;
+                animation-delay: ${Math.random() * 5}s;
+                pointer-events: none;
+            `;
+            document.querySelector('.bad-request').appendChild(particle);
+        }
+
+        // Radar dot animation
+        const dot2 = document.querySelector('.radar-dot.dot2');
+        if (dot2) {
+            setInterval(() => {
+                dot2.style.opacity = Math.random() > 0.5 ? '0.8' : '0';
+            }, 500);
         }
     });
 </script>
