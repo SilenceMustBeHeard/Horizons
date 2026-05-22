@@ -1293,3 +1293,330 @@ hr {
 .cta-section {
     margin-bottom: 0;
 }
+
+
+/* ==================== AUTH PAGES (Login/Register) ==================== */
+
+.fullscreen-auth {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #0a0f1c 0%, #1a1a2e 100%);
+}
+
+/* Background Animation */
+.auth-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.mountains-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, transparent 0%, rgba(10,15,28,0.5) 100%);
+    pointer-events: none;
+}
+
+.auth-container {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.auth-card {
+    max-width: 450px;
+    width: 100%;
+    background: rgba(26,35,53,0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,51,102,0.3);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    transition: transform 0.3s;
+}
+
+.register-card {
+    max-width: 550px;
+}
+
+.auth-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--sport-primary);
+}
+
+/* Header */
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+    .auth-icon i:first-child {
+        color: var(--sport-primary);
+        margin-right: 10px;
+    }
+
+    .auth-icon i:last-child {
+        color: var(--sport-accent);
+    }
+
+.auth-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    background: var(--sport-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+}
+
+.auth-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--sport-gradient);
+    margin: 0 auto 15px;
+    border-radius: 3px;
+}
+
+.auth-subtitle {
+    color: var(--sport-text-muted);
+    font-size: 14px;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+    .form-row .form-group {
+        flex: 1;
+    }
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--sport-text);
+    margin-bottom: 8px;
+}
+
+    .form-label i {
+        color: var(--sport-primary);
+        font-size: 12px;
+    }
+
+.auth-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(10,15,28,0.8);
+    border: 1px solid var(--sport-border);
+    border-radius: 12px;
+    color: var(--sport-text);
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+    .auth-input:focus {
+        outline: none;
+        border-color: var(--sport-primary);
+        box-shadow: 0 0 0 3px rgba(255,51,102,0.2);
+    }
+
+    .auth-input::placeholder {
+        color: var(--sport-text-muted);
+        opacity: 0.5;
+    }
+
+/* Form Options */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: 25px;
+}
+
+    .checkbox-label input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+.checkmark {
+    position: absolute;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background: rgba(10,15,28,0.8);
+    border: 1px solid var(--sport-border);
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.checkbox-label:hover input ~ .checkmark {
+    border-color: var(--sport-primary);
+}
+
+.checkbox-label input:checked ~ .checkmark {
+    background: var(--sport-gradient);
+    border-color: transparent;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-label input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-text {
+    font-size: 13px;
+    color: var(--sport-text-muted);
+}
+
+.forgot-link {
+    font-size: 12px;
+    color: var(--sport-accent);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+    .forgot-link:hover {
+        color: var(--sport-primary);
+    }
+
+/* Buttons */
+.btn-auth {
+    width: 100%;
+    padding: 14px;
+    border-radius: 50px;
+    font-family: 'Orbitron', monospace;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: var(--sport-gradient);
+    color: white;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255,51,102,0.3);
+    }
+
+/* Footer */
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-text {
+    font-size: 13px;
+    color: var(--sport-text-muted);
+}
+
+.auth-link {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--sport-primary);
+    text-decoration: none;
+    margin-left: 5px;
+    transition: color 0.3s;
+}
+
+    .auth-link:hover {
+        color: var(--sport-accent);
+        text-decoration: underline;
+    }
+
+/* Validation Styles */
+.text-danger {
+    color: var(--sport-danger) !important;
+    font-size: 11px;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .auth-card {
+        padding: 25px;
+    }
+
+    .auth-title {
+        font-size: 22px;
+        letter-spacing: 2px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .btn-auth {
+        padding: 12px;
+        font-size: 11px;
+    }
+
+    .form-options {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}

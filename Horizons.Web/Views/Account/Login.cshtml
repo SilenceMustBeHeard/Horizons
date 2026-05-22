@@ -1,0 +1,73 @@
+﻿﻿@using Horizons.Web.ViewModels.Account.Profile
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login - Horizons";
+}
+
+<div class="fullscreen-auth">
+    <div class="auth-background">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+        <div class="mountains-bg"></div>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-icon">
+                    <i class="fas fa-mountain"></i>
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h1 class="auth-title">WELCOME BACK</h1>
+                <div class="auth-divider"></div>
+                <p class="auth-subtitle">Sign in to continue your adventure</p>
+            </div>
+
+            <form asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label">
+                        <i class="fas fa-envelope"></i> Email Address
+                    </label>
+                    <input asp-for="Email" class="form-control auth-input" placeholder="adventurer@horizons.com" />
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="form-label">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <input asp-for="Password" type="password" class="form-control auth-input" placeholder="Enter your password" />
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input asp-for="RememberMe" type="checkbox" />
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">Remember Me</span>
+                    </label>
+                    <a asp-action="ForgotPassword" class="forgot-link">
+                        <i class="fas fa-key"></i> Forgot Password?
+                    </a>
+                </div>
+
+                <button type="submit" class="btn-auth btn-primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>LOGIN TO DASHBOARD</span>
+                </button>
+
+                <div class="auth-footer">
+                    <span class="footer-text">Don't have an account?</span>
+                    <a asp-action="Register" class="auth-link">JOIN THE EXPEDITION</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
