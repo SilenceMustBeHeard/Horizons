@@ -12,12 +12,20 @@
                 <h1 class="display-4">WELCOME TO<br>HORIZONS</h1>
                 <p class="lead">Discover the world's most breathtaking destinations and start your adventure today!</p>
                 <div class="mt-4">
-                    <a href="/Identity/Account/Register" class="btn btn-primary btn-lg mx-2">
-                        <i class="fas fa-rocket"></i> START YOUR ADVENTURE
-                    </a>
-                    <a asp-controller="Destination" asp-action="Map" class="btn btn-outline-primary btn-lg mx-2">
-                        <i class="fas fa-map-marked-alt"></i> EXPLORE THE MAP
-                    </a>
+                    <!-- Call to Action -->
+                    <div class="cta-section py-5 my-4">
+                        <div class="container text-center">
+                            <div class="cta-content p-5 rounded-4" style="background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(0,212,255,0.05)); border: 1px solid var(--sport-primary);">
+                                <h2 class="mb-3">Ready for Your Next Adventure?</h2>
+                                <p class="lead mb-4">Join our community of explorers and share your journey with the world.</p>
+                                <a asp-controller="Destination" asp-action="Index" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-globe"></i> EXPLORE ALL DESTINATIONS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -76,19 +84,6 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Call to Action -->
-<div class="cta-section py-5 my-4">
-    <div class="container text-center">
-        <div class="cta-content p-5 rounded-4" style="background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(0,212,255,0.05)); border: 1px solid var(--sport-primary);">
-            <h2 class="mb-3">Ready for Your Next Adventure?</h2>
-            <p class="lead mb-4">Join our community of explorers and share your journey with the world.</p>
-            <a asp-controller="Destination" asp-action="Index" class="btn btn-primary btn-lg">
-                <i class="fas fa-globe"></i> EXPLORE ALL DESTINATIONS
-            </a>
         </div>
     </div>
 </div>
