@@ -5,13 +5,35 @@
     ViewData["Title"] = "Home - Adventure Dashboard";
 }
 
+<style>
+    /* Temporary fix for button sizes on this page only */
+    .card-body .btn-primary {
+        padding: 6px 16px !important;
+        font-size: 0.75rem !important;
+        font-weight: 600 !important;
+        border-radius: 50px !important;
+    }
+
+    .card-body .btn-warning,
+    .card-body .btn-danger {
+        padding: 6px 12px !important;
+        font-size: 0.75rem !important;
+        border-radius: 50px !important;
+    }
+
+    .hero-btn {
+        padding: 12px 28px !important;
+        font-size: 1rem !important;
+    }
+</style>
+
 <!-- Hero Section -->
 <section class="welcome-section text-center py-5">
     <div class="container">
         <h1>EXPLORE THE WORLD<br>WITH HORIZONS</h1>
         <p class="lead">Discover amazing destinations, conquer new challenges, and start your adventure today!</p>
-        <a asp-controller="Destination" asp-action="Index" class="btn btn-primary btn-lg mt-3">
-            <i class="fas fa-compass"></i> START EXPLORING
+        <a asp-controller="Destination" asp-action="Index" class="btn btn-primary btn-lg mt-3 hero-btn">
+            <i class="fas fa-compass me-2"></i> START EXPLORING
         </a>
     </div>
 </section>
@@ -25,15 +47,15 @@
             {
                 <div class="col">
                     <div class="card hover-scale h-100">
-                        <img src="@(string.IsNullOrEmpty(dest.ImageUrl) ? "/images/default-image.jpg" : dest.ImageUrl)"
+                        <img src="@(string.IsNullOrEmpty(dest.ImageUrl) ? "https://cdn-icons-png.freepik.com/512/11542/11542598.png" : dest.ImageUrl)"
                              class="card-img-top" alt="@dest.Name" />
                         <div class="card-body text-center">
                             <h5 class="card-title">@dest.Name</h5>
-                            <p class="card-text text-muted">@dest.TerrainName</p>
+                            <p class="card-text text-muted small">@dest.TerrainName</p>
 
                             <div class="d-flex justify-content-center gap-2 mt-3">
                                 <a asp-action="Details" asp-route-id="@dest.Id" class="btn btn-primary">
-                                    <i class="fas fa-eye"></i> EXPLORE
+                                    <i class="fas fa-eye me-1"></i> EXPLORE
                                 </a>
 
                                 @if (User.Identity.IsAuthenticated)
@@ -44,7 +66,7 @@
                                         {
                                             <form asp-action="AddToFavorites" method="post" class="d-inline">
                                                 <input type="hidden" name="id" value="@dest.Id" />
-                                                <button type="submit" class="btn btn-warning btn-sm btn-heart">
+                                                <button type="submit" class="btn btn-warning btn-heart">
                                                     <i class="fas fa-heart"></i>
                                                 </button>
                                             </form>
@@ -53,7 +75,7 @@
                                         {
                                             <form asp-action="RemoveFromFavorites" method="post" class="d-inline">
                                                 <input type="hidden" name="id" value="@dest.Id" />
-                                                <button type="submit" class="btn btn-danger btn-sm btn-heart active-heart">
+                                                <button type="submit" class="btn btn-danger btn-heart active-heart">
                                                     <i class="fas fa-heart-broken"></i>
                                                 </button>
                                             </form>
