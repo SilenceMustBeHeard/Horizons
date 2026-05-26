@@ -4,40 +4,44 @@ async function loadFeaturedDestinations() {
         const response = await fetch('/api/destinations/map-data');
         const destinations = await response.json();
 
-        // Take top 4 destinations by likes
+        // Take top 6 destinations by likes for featured section
         const topDestinations = destinations
             .sort((a, b) => (b.likes || 0) - (a.likes || 0))
-            .slice(0, 4);
+            .slice(0, 6);
 
         const container = $('#featured-destinations');
         container.empty();
 
         if (topDestinations.length === 0) {
-            container.html('<div class="col-12 text-center"><p class="text-muted">No destinations yet. Be the first to add one!</p></div>');
+            container.html('<div class="col-12 text-center"><p class="text-muted">No destinations yet. Be the first to share your journey!</p></div>');
             return;
         }
 
-        const row = $('<div class="row g-4"></div>');
+        const row = $('<div class="destinations-grid"></div>');
 
         topDestinations.forEach(dest => {
-            const col = $(`
-                    <div class="col-lg-3 col-md-6">
-                        <div class="featured-card">
-                            <img src="${dest.imageUrl || '/images/default-image.jpg'}" class="featured-card-img" alt="${dest.name}">
-                            <div class="featured-card-body">
-                                <h5 class="featured-card-title">${dest.name}</h5>
-                                <p class="featured-card-terrain"><i class="fas fa-location-dot"></i> ${dest.country}</p>
-                                <div class="mt-2">
-                                    <i class="fas fa-heart" style="color: var(--sport-primary);"></i> ${dest.likes || 0} adventurers
-                                </div>
-                                <a href="/Destination/Details/${dest.id}" class="btn btn-sm btn-primary w-100 mt-3">
-                                    <i class="fas fa-eye"></i> View Destination
-                                </a>
-                            </div>
+            const card = $(`
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="${dest.imageUrl || '/images/default-image.jpg'}" alt="${escapeHtml(dest.name)}" loading="lazy">
+                        <span class="destination-badge">
+                            <i class="fas fa-heart"></i> ${dest.likes || 0}
+                        </span>
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-location">
+                            <i class="fas fa-map-marker-alt"></i> ${escapeHtml(dest.country || 'Unknown')}
+                        </div>
+                        <h3 class="destination-title">${escapeHtml(dest.name)}</h3>
+                        <p class="destination-description">${escapeHtml((dest.description || '').substring(0, 120))}${(dest.description || '').length > 120 ? '...' : ''}</p>
+                        <div class="destination-meta">
+                            <span><i class="fas fa-calendar"></i> ${dest.createdAt ? new Date(dest.createdAt).toLocaleDateString() : 'Recently'}</span>
+                            <a href="/Destination/Details/${dest.id}" class="btn btn-outline btn-sm">Read Story →</a>
                         </div>
                     </div>
-                `);
-            row.append(col);
+                </div>
+            `);
+            row.append(card);
         });
 
         container.append(row);
@@ -45,6 +49,16 @@ async function loadFeaturedDestinations() {
         console.error('Error loading featured destinations:', error);
         $('#featured-destinations').html('<div class="col-12 text-center"><p class="text-muted">Unable to load featured destinations.</p></div>');
     }
+}
+
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function (m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
 }
 
 $(document).ready(function () {

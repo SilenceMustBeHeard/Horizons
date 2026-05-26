@@ -1,17 +1,15 @@
-﻿//  INITIALIZATION 
+﻿
+
 document.addEventListener('DOMContentLoaded', function () {
-    initAnimations();
+    initNavbarScroll();
     initScrollProgress();
     initFooterQuote();
-    initFormValidation();
-    initHoverEffects();
     initHeartButtons();
+    initImageFadeIn();
+    initMobileMenu();
 });
 
-//  GSAP Registration 
-gsap.registerPlugin(ScrollTrigger);
-
-//  DEBOUNCE HELPER (prevents excessive function calls) 
+//  UTILITIES 
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -24,7 +22,6 @@ function debounce(func, wait) {
     };
 }
 
-//  THROTTLE HELPER 
 function throttle(func, limit) {
     let inThrottle;
     return function (...args) {
@@ -36,114 +33,37 @@ function throttle(func, limit) {
     };
 }
 
-//  CARD ANIMATIONS 
-function initAnimations() {
-    // Use CSS transitions instead of GSAP for better performance
-    const cards = document.querySelectorAll('.dest-card, .sport-card');
-    cards.forEach(card => {
-        card.style.transition = 'transform 0.3s ease';
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'scale(1.02)';
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'scale(1)';
-        });
-    });
-}
-
-//  HEART BUTTON ANIMATION 
-function initHeartButtons() {
-    const heartBtns = document.querySelectorAll('.btn-heart');
-    if (heartBtns.length === 0) return;
-
-    heartBtns.forEach(btn => {
-        btn.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            // Simple CSS animation instead of GSAP particles
-            this.classList.add('active-heart');
-            setTimeout(() => this.classList.remove('active-heart'), 300);
-
-            // Submit form after animation
-            const form = this.closest('form');
-            if (form) setTimeout(() => form.submit(), 150);
-        });
-    });
-}
-
-//  FOOTER QUOTE 
-const sportQuotes = [
-    "Push beyond your limits. Adventure awaits.",
-    "Life is either a daring adventure or nothing at all.",
-    "Go where you feel most alive.",
-    "Fear is just excitement without breath.",
-    "The only impossible journey is the one you never begin.",
-    "Escape the ordinary. Embrace the extraordinary.",
-    "Your comfort zone is not your friend.",
-    "Adventure: the best way to learn.",
-    "Don't count the days, make the days count.",
-    "Leave nothing but footprints, take nothing but memories."
-];
-
-let currentQuoteIndex = Math.floor(Math.random() * sportQuotes.length);
-
-function initFooterQuote() {
-    const quoteElement = document.getElementById("footer-quote");
-    const newQuoteBtn = document.getElementById("new-quote-btn");
-
-    if (quoteElement) {
-        quoteElement.textContent = sportQuotes[currentQuoteIndex];
-    }
-
-    if (newQuoteBtn) {
-        newQuoteBtn.addEventListener("click", () => {
-            let newIndex;
-            do {
-                newIndex = Math.floor(Math.random() * sportQuotes.length);
-            } while (newIndex === currentQuoteIndex && sportQuotes.length > 1);
-
-            currentQuoteIndex = newIndex;
-
-            if (quoteElement) {
-                quoteElement.style.opacity = '0';
-                setTimeout(() => {
-                    quoteElement.textContent = sportQuotes[currentQuoteIndex];
-                    quoteElement.style.opacity = '1';
-                }, 150);
-            }
-        });
-    }
-}
-
 //  NAVBAR SCROLL EFFECT 
-const navbar = document.querySelector(".sport-navbar");
-if (navbar) {
+function initNavbarScroll() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+
     const handleScroll = throttle(() => {
         if (window.scrollY > 20) {
-            navbar.style.padding = "0.5rem 2rem";
-            navbar.style.background = "rgba(10, 15, 28, 0.98)";
+            navbar.style.padding = '0.5rem 2rem';
+            navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
         } else {
-            navbar.style.padding = "0.8rem 2rem";
-            navbar.style.background = "rgba(10, 15, 28, 0.95)";
+            navbar.style.padding = '1rem 2rem';
+            navbar.style.boxShadow = 'none';
         }
     }, 50);
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 }
 
-//  SCROLL PROGRESS INDICATOR 
+//  SCROLL PROGRESS 
 function initScrollProgress() {
     const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
     progressBar.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
         width: 0%;
         height: 3px;
-        background: var(--sport-gradient);
-        z-index: 9999;
-        transition: width 0.05s linear;
-        pointer-events: none;
+        background: var(--accent-primary);
+        z-index: 1001;
+        transition: width 0.1s linear;
     `;
     document.body.appendChild(progressBar);
 
@@ -157,83 +77,178 @@ function initScrollProgress() {
     window.addEventListener('scroll', updateProgress);
 }
 
+//  FOOTER QUOTE 
+const travelQuotes = [
+    "Not all those who wander are lost.",
+    "The world is a book, and those who do not travel read only one page.",
+    "Adventure is worthwhile in itself.",
+    "Take only memories, leave only footprints.",
+    "Travel far enough to meet yourself.",
+    "Wherever you go becomes a part of you somehow.",
+    "Life is either a daring adventure or nothing at all.",
+    "Wander often, wonder always.",
+    "Collect moments, not things.",
+    "The journey is the destination."
+];
+
+let currentQuoteIndex = Math.floor(Math.random() * travelQuotes.length);
+
+function initFooterQuote() {
+    const quoteElement = document.getElementById('footer-quote');
+    const newQuoteBtn = document.getElementById('new-quote-btn');
+
+    if (quoteElement) {
+        quoteElement.textContent = travelQuotes[currentQuoteIndex];
+    }
+
+    if (newQuoteBtn) {
+        newQuoteBtn.addEventListener('click', () => {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * travelQuotes.length);
+            } while (newIndex === currentQuoteIndex && travelQuotes.length > 1);
+
+            currentQuoteIndex = newIndex;
+
+            if (quoteElement) {
+                quoteElement.style.opacity = '0';
+                setTimeout(() => {
+                    quoteElement.textContent = travelQuotes[currentQuoteIndex];
+                    quoteElement.style.opacity = '1';
+                }, 150);
+            }
+        });
+    }
+}
+
+//  HEART BUTTONS (Favorites) 
+function initHeartButtons() {
+    const heartBtns = document.querySelectorAll('.btn-heart, .favorite-btn');
+
+    heartBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            if (this.tagName === 'BUTTON' || this.tagName === 'A') {
+                // Let the form submit normally, just add animation
+                this.classList.add('active');
+                setTimeout(() => this.classList.remove('active'), 300);
+            }
+        });
+    });
+}
+
+//  IMAGE FADE-IN ON LOAD 
+function initImageFadeIn() {
+    const images = document.querySelectorAll('img');
+
+    images.forEach(img => {
+        if (img.complete) {
+            img.style.opacity = '1';
+        } else {
+            img.style.opacity = '0';
+            img.addEventListener('load', () => {
+                img.style.transition = 'opacity 0.3s ease';
+                img.style.opacity = '1';
+            });
+        }
+    });
+}
+
+//  MOBILE MENU IMPROVEMENTS 
+function initMobileMenu() {
+    const toggler = document.querySelector('.navbar-toggler');
+    const collapse = document.querySelector('.navbar-collapse');
+
+    if (toggler && collapse) {
+        // Close menu when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth < 992) {
+                if (!collapse.contains(e.target) && !toggler.contains(e.target)) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(collapse);
+                    if (bsCollapse && collapse.classList.contains('show')) {
+                        bsCollapse.hide();
+                    }
+                }
+            }
+        });
+    }
+}
+//  SMOOTH SCROLL 
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
 //  FORM VALIDATION 
 function initFormValidation() {
-    const forms = document.querySelectorAll("form");
-    if (forms.length === 0) return;
+    const forms = document.querySelectorAll('form');
 
     forms.forEach(form => {
-        form.addEventListener("submit", (e) => {
+        form.addEventListener('submit', (e) => {
             let hasError = false;
-            const inputs = form.querySelectorAll("input, textarea, select");
+            const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
 
             inputs.forEach(input => {
-                if (!input.checkValidity()) {
+                if (!input.value.trim()) {
                     hasError = true;
-                    input.classList.add("is-invalid");
+                    input.classList.add('is-invalid');
 
-                    // Simple CSS animation instead of GSAP
+                    // Add shake animation
                     input.style.transform = 'translateX(0)';
-                    input.style.transition = 'transform 0.2s ease';
-                    input.style.transform = 'translateX(5px)';
+                    input.style.transform = 'translateX(4px)';
                     setTimeout(() => {
                         if (input) input.style.transform = '';
                     }, 200);
 
-                    setTimeout(() => input.classList.remove("is-invalid"), 2000);
+                    setTimeout(() => input.classList.remove('is-invalid'), 2000);
+                } else {
+                    input.classList.remove('is-invalid');
                 }
             });
 
             if (hasError) e.preventDefault();
         });
-    });
-}
 
-//  HOVER SCALE EFFECT (CSS only) 
-function initHoverEffects() {
-    const hoverElements = document.querySelectorAll(".hover-scale");
-    if (hoverElements.length === 0) return;
-
-    hoverElements.forEach(el => {
-        el.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-
-        el.addEventListener('mouseenter', () => {
-            el.style.transform = 'translateY(-5px) scale(1.02)';
-            el.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)';
-        });
-
-        el.addEventListener('mouseleave', () => {
-            el.style.transform = 'none';
-            el.style.boxShadow = 'none';
+        // Real-time validation
+        const inputs = form.querySelectorAll('input[required], textarea[required]');
+        inputs.forEach(input => {
+            input.addEventListener('input', function () {
+                if (this.value.trim()) {
+                    this.classList.remove('is-invalid');
+                }
+            });
         });
     });
 }
 
-//  HERO SECTION ANIMATION 
-const heroSection = document.querySelector('.sport-hero, .welcome-section');
-if (heroSection) {
-    const heroBadge = document.querySelector('.hero-badge');
-    const heroTitle = document.querySelector('.hero-title, .welcome-section h1');
-    const heroSubtitle = document.querySelector('.hero-subtitle, .welcome-section .lead');
-    const heroBtn = document.querySelector('.sport-btn, .welcome-section .btn');
+// Initialize validation when dynamic content loads
+document.addEventListener('DOMContentLoaded', initFormValidation);
 
-    if (heroBadge) heroBadge.style.opacity = '1';
-    if (heroTitle) heroTitle.style.opacity = '1';
-    if (heroSubtitle) heroSubtitle.style.opacity = '1';
-    if (heroBtn) heroBtn.style.opacity = '1';
+//  STATS COUNTER ANIMATION 
+function animateNumber(element, start, end, duration) {
+    if (!element) return;
+    const range = end - start;
+    const increment = range / (duration / 16);
+    let current = start;
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= end) {
+            clearInterval(timer);
+            element.textContent = Math.round(end).toLocaleString();
+        } else {
+            element.textContent = Math.round(current).toLocaleString();
+        }
+    }, 16);
 }
 
-//  PARALLAX EFFECT (disabled by default) 
-// Uncomment only if needed and use throttling
-/*
-const hero = document.querySelector('.sport-hero');
-if (hero) {
-    const parallaxScroll = throttle(() => {
-        const scrolled = window.pageYOffset;
-        hero.style.backgroundPositionY = scrolled * 0.3 + 'px';
-    }, 50);
-    window.addEventListener('scroll', parallaxScroll);
-}
-*/
+// Expose to global scope
+window.animateNumber = animateNumber;
 
-console.log('🏔️ Horizons - Adventure theme loaded');
+console.log('✨ Wanderlog - Modern Travel Blog Loaded');

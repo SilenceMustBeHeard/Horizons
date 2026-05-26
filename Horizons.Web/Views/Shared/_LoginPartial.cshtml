@@ -1,4 +1,4 @@
-﻿@using Horizons.Data.Models.Base
+﻿﻿@using Horizons.Data.Models.Base
 @using Microsoft.AspNetCore.Identity
 @using Horizons.Data.Models
 @inject SignInManager<AppUser> SignInManager
@@ -6,44 +6,55 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="dropdown">
-        <button class="btn btn-link nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user-astronaut"></i>
-            @{
-                var userName = UserManager.GetUserName(User);
-                var displayName = userName?.Split('@')[0] ?? "Adventurer";
-            }
-            @displayName
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end sport-dropdown">
-            <li>
-                <a class="dropdown-item" asp-controller="Account" asp-action="Manage" title="Manage">
-                    <i class="fas fa-user-cog"></i> Profile
-                </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <form asp-controller="Account" asp-action="Logout" method="post">
-                    <button type="submit" class="dropdown-item">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
-                </form>
-            </li>
-        </ul>
+    <div class="user-menu">
+        <div class="dropdown">
+            <button class="user-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle"></i>
+                <span class="user-name">
+                    @{
+                        var userName = UserManager.GetUserName(User);
+                        var displayName = userName?.Split('@')[0] ?? "Explorer";
+                    }
+                    @displayName
+                </span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="Manage">
+                        <i class="fas fa-user-cog"></i> Profile Settings
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-controller="Destination" asp-action="Favorites">
+                        <i class="fas fa-heart"></i> My Favorites
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-controller="Destination" asp-action="Add">
+                        <i class="fas fa-plus-circle"></i> Add Destination
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit" class="dropdown-item logout-item">
+                            <i class="fas fa-sign-out-alt"></i> Sign Out
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     </div>
 }
 else
 {
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link sport-nav-link" asp-controller="Account" asp-action="Register">
-                <i class="fas fa-user-plus"></i> REGISTER
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link sport-nav-link" asp-controller="Account" asp-action="Login">
-                <i class="fas fa-sign-in-alt"></i> LOGIN
-            </a>
-        </li>
-    </ul>
+    <div class="auth-links">
+        <a asp-controller="Account" asp-action="Login" class="nav-link login-link">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+        </a>
+        <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-sm">
+            <i class="fas fa-user-plus"></i> Join
+        </a>
+    </div>
 }
