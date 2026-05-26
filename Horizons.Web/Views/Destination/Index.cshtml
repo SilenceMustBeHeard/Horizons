@@ -5,28 +5,6 @@
     ViewData["Title"] = "Home - Adventure Dashboard";
 }
 
-<style>
-    /* Temporary fix for button sizes on this page only */
-    .card-body .btn-primary {
-        padding: 6px 16px !important;
-        font-size: 0.75rem !important;
-        font-weight: 600 !important;
-        border-radius: 50px !important;
-    }
-
-    .card-body .btn-warning,
-    .card-body .btn-danger {
-        padding: 6px 12px !important;
-        font-size: 0.75rem !important;
-        border-radius: 50px !important;
-    }
-
-    .hero-btn {
-        padding: 12px 28px !important;
-        font-size: 1rem !important;
-    }
-</style>
-
 <!-- Hero Section -->
 <section class="welcome-section text-center py-5">
     <div class="container">
@@ -54,7 +32,7 @@
                             <p class="card-text text-muted small">@dest.TerrainName</p>
 
                             <div class="d-flex justify-content-center gap-2 mt-3">
-                                <a asp-action="Details" asp-route-id="@dest.Id" class="btn btn-primary">
+                                <a asp-action="Details" asp-route-id="@dest.Id" class="btn btn-primary btn-lg">
                                     <i class="fas fa-eye me-1"></i> EXPLORE
                                 </a>
 
