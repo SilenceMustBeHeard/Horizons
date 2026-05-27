@@ -693,7 +693,58 @@ img {
     background: var(--accent-tertiary);
     border-radius: 4px;
 }
-/* ==================== AUTH PAGES STYLES ==================== */
+/* View All Button Container */
+.view-all-container {
+    margin-top: 2rem;
+}
+
+    .view-all-container .btn-outline {
+        border: 1px solid var(--border-light);
+        background: transparent;
+        padding: 0.75rem 2rem;
+    }
+
+        .view-all-container .btn-outline:hover {
+            border-color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: white;
+        }
+
+    .view-all-container .text-accent {
+        color: var(--accent-primary);
+        text-decoration: none;
+    }
+
+        .view-all-container .text-accent:hover {
+            text-decoration: underline;
+        }
+
+/* Additional styles for empty state and link */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+}
+
+    .empty-state i {
+        font-size: 4rem;
+        color: var(--accent-primary);
+        opacity: 0.5;
+        margin-bottom: 1rem;
+    }
+
+.btn-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+    .btn-link:hover {
+        text-decoration: underline;
+    }
+/*  AUTH PAGES STYLES  */
 
 .auth-wrapper {
     min-height: 100vh;

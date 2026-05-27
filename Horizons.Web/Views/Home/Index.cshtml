@@ -1,5 +1,8 @@
-﻿﻿@{
-ViewData["Title"] = "Horizons - Modern Travel Stories";
+﻿﻿@using Horizons.Web.ViewModels.Home
+@model HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Horizons - Modern Travel Stories";
 }
 
 <!-- Hero Section -->
@@ -13,22 +16,19 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
                 <a asp-controller="Destination" asp-action="Index" class="btn btn-primary">
                     <i class="fas fa-globe-americas"></i> Explore Destinations
                 </a>
-              @*   <a asp-controller="Destination" asp-action="Map" class="btn btn-outline">
-                    <i class="fas fa-map-marked-alt"></i> View Map
-                </a> *@
             </div>
         </div>
         <div class="hero-stats">
             <div class="stat-item">
-                <span class="stat-number" id="heroDestinationsCount">0</span>
+                <span class="stat-number">@Model.TotalDestinations</span>
                 <span class="stat-label">Destinations</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number" id="heroCountriesCount">0</span>
+                <span class="stat-number">@Model.TotalCountries</span>
                 <span class="stat-label">Countries</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number" id="heroStoriesCount">0</span>
+                <span class="stat-number">@Model.TotalStories</span>
                 <span class="stat-label">Travel Stories</span>
             </div>
         </div>
@@ -50,8 +50,7 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
                     <i class="fas fa-mountain"></i>
                 </div>
                 <h3 class="category-title">Mountains</h3>
-                <p class="category-count" id="mountainsCount">0 destinations</p>
-                <div class="category-overlay"></div>
+                <p class="category-count">@Model.MountainsCount destinations</p>
             </div>
 
             <div class="category-card" data-category="beaches">
@@ -59,8 +58,7 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
                     <i class="fas fa-umbrella-beach"></i>
                 </div>
                 <h3 class="category-title">Beaches</h3>
-                <p class="category-count" id="beachesCount">0 destinations</p>
-                <div class="category-overlay"></div>
+                <p class="category-count">@Model.BeachesCount destinations</p>
             </div>
 
             <div class="category-card" data-category="forests">
@@ -68,8 +66,7 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
                     <i class="fas fa-tree"></i>
                 </div>
                 <h3 class="category-title">Forests</h3>
-                <p class="category-count" id="forestsCount">0 destinations</p>
-                <div class="category-overlay"></div>
+                <p class="category-count">@Model.ForestsCount destinations</p>
             </div>
 
             <div class="category-card" data-category="urban">
@@ -77,8 +74,7 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
                     <i class="fas fa-city"></i>
                 </div>
                 <h3 class="category-title">Urban</h3>
-                <p class="category-count" id="urbanCount">0 destinations</p>
-                <div class="category-overlay"></div>
+                <p class="category-count">@Model.UrbanCount destinations</p>
             </div>
 
             <div class="category-card" data-category="deserts">
@@ -86,8 +82,7 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
                     <i class="fas fa-sun"></i>
                 </div>
                 <h3 class="category-title">Deserts</h3>
-                <p class="category-count" id="desertsCount">0 destinations</p>
-                <div class="category-overlay"></div>
+                <p class="category-count">@Model.DesertsCount destinations</p>
             </div>
 
             <div class="category-card" data-category="lakes">
@@ -95,13 +90,11 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
                     <i class="fas fa-water"></i>
                 </div>
                 <h3 class="category-title">Lakes</h3>
-                <p class="category-count" id="lakesCount">0 destinations</p>
-                <div class="category-overlay"></div>
+                <p class="category-count">@Model.LakesCount destinations</p>
             </div>
         </div>
     </div>
 </section>
-
 <!-- Featured Destinations Section -->
 <section class="featured-section">
     <div class="container">
@@ -111,15 +104,75 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
             <p class="section-subtitle">Most loved destinations by our community</p>
         </div>
 
-        <div id="featured-destinations" class="destinations-grid">
-            <div class="loading-spinner">
-                <div class="spinner"></div>
-                <p>Loading destinations...</p>
+        @{
+            // Determine how many to show based on authentication
+            int maxToShow = User.Identity.IsAuthenticated ? 6 : 3;
+            var featuredToShow = Model.FeaturedDestinations.Take(maxToShow);
+        }
+
+        @if (featuredToShow.Any())
+        {
+            <div class="destinations-grid">
+                @foreach (var dest in featuredToShow)
+                {
+                    <div class="destination-card">
+                        <div class="destination-image">
+                            <img src="@(string.IsNullOrEmpty(dest.ImageUrl) ? "/images/default-image.jpg" : dest.ImageUrl)"
+                                 alt="@dest.Name"
+                                 loading="lazy"
+                                 onerror="this.src='/images/default-image.jpg'">
+                            <span class="destination-badge">
+                                <i class="fas fa-heart"></i> @dest.Likes
+                            </span>
+                        </div>
+                        <div class="destination-content">
+                            <div class="destination-location">
+                                <i class="fas fa-map-marker-alt"></i> @(string.IsNullOrEmpty(dest.Country) ? "Unknown" : dest.Country)
+                            </div>
+                            <h3 class="destination-title">@dest.Name</h3>
+                            <p class="destination-description">
+                                @(string.IsNullOrEmpty(dest.Description) ? "No description available" : dest.Description)
+                            </p>
+                            <div class="destination-meta">
+                                <span><i class="fas fa-calendar"></i> @dest.CreatedAt.ToString("MMM dd, yyyy")</span>
+                                <a href="/Destination/Details/@dest.Id" class="btn-link">
+                                    Read Story <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
-        </div>
+
+            @if (!User.Identity.IsAuthenticated && Model.FeaturedDestinations.Count() > 3)
+            {
+                <div class="view-all-container text-center mt-5">
+                    <div class="d-flex flex-column align-items-center gap-3">
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-primary w-100" style="max-width: 280px;">
+                            <i class="fas fa-sign-in-alt"></i> Sign in to share yours
+                        </a>
+                        <a asp-controller="Destination" asp-action="Index" 
+                        class="btn btn-primary btn-sm">
+                            <i class="fas fa-globe"></i> See all destinations →
+                        </a>
+                    </div>
+                    <p class="text-muted mt-3 small">
+                        <i class="fas fa-heart" style="color: var(--accent-primary);"></i>
+                        Join our community of travelers
+                    </p>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-state">
+                <i class="fas fa-compass"></i>
+                <p>No destinations yet. Be the first to share your journey!</p>
+                <a asp-controller="Destination" asp-action="Add" class="btn btn-primary">Share Your Story</a>
+            </div>
+        }
     </div>
 </section>
-
 <!-- CTA Section -->
 <section class="cta-section">
     <div class="container">
@@ -129,11 +182,11 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
                 <h2 class="cta-title">Share Your Travel Story</h2>
                 <p class="cta-description">Every journey has a story worth telling. Share your adventures, inspire others, and become part of a growing community of travel enthusiasts.</p>
                 <div class="cta-buttons">
-                    <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-sm">
-                        <i class="fas fa-user-plus"></i> Share
+                    <a asp-controller="Destination" asp-action="Add" class="btn btn-primary">
+                        <i class="fas fa-plus-circle"></i> Share Your Story
                     </a>
-                    <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-sm">
-                        <i class="fas fa-user-plus"></i> Join
+                    <a asp-controller="Account" asp-action="Register" class="btn btn-outline">
+                        <i class="fas fa-user-plus"></i> Join for Free
                     </a>
                 </div>
             </div>
@@ -150,65 +203,15 @@ ViewData["Title"] = "Horizons - Modern Travel Stories";
     </div>
 </section>
 
+
 @section Scripts {
     <script>
-        // Load stats for hero section
-        async function loadStats() {
-            try {
-                const response = await fetch('/api/destinations/map-data');
-                const destinations = await response.json();
-
-                const uniqueCountries = [...new Set(destinations.map(d => d.country).filter(c => c))];
-                const totalStories = destinations.length;
-
-                animateNumber(document.getElementById('heroDestinationsCount'), 0, totalStories, 1000);
-                animateNumber(document.getElementById('heroCountriesCount'), 0, uniqueCountries.length, 1000);
-                animateNumber(document.getElementById('heroStoriesCount'), 0, totalStories, 1000);
-
-                // Update category counts (simplified - based on terrain)
-                const terrains = {
-                    'mountains': destinations.filter(d => (d.terrain || '').toLowerCase().includes('mountain')).length,
-                    'beaches': destinations.filter(d => (d.terrain || '').toLowerCase().includes('beach')).length,
-                    'forests': destinations.filter(d => (d.terrain || '').toLowerCase().includes('forest')).length,
-                    'urban': destinations.filter(d => (d.terrain || '').toLowerCase().includes('urban') || (d.terrain || '').toLowerCase().includes('city')).length,
-                    'deserts': destinations.filter(d => (d.terrain || '').toLowerCase().includes('desert')).length,
-                    'lakes': destinations.filter(d => (d.terrain || '').toLowerCase().includes('lake')).length
-                };
-
-                for (const [key, count] of Object.entries(terrains)) {
-                    const element = document.getElementById(`${key}Count`);
-                    if (element) element.textContent = `${count} destinations`;
-                }
-            } catch (error) {
-                console.error('Error loading stats:', error);
-            }
-        }
-
-        function animateNumber(element, start, end, duration) {
-            if (!element) return;
-            const range = end - start;
-            const increment = range / (duration / 16);
-            let current = start;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= end) {
-                    clearInterval(timer);
-                    element.textContent = Math.round(end).toLocaleString();
-                } else {
-                    element.textContent = Math.round(current).toLocaleString();
-                }
-            }, 16);
-        }
-
-        // Category card click handlers
+        // Category card click handlers - redirect to destination index with terrain filter
         document.querySelectorAll('.category-card').forEach(card => {
             card.addEventListener('click', () => {
                 const category = card.dataset.category;
                 window.location.href = `/Destination/Index?terrain=${category}`;
             });
         });
-
-        // Load stats on page load
-        document.addEventListener('DOMContentLoaded', loadStats);
     </script>
 }
