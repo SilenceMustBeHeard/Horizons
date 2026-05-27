@@ -17,4 +17,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Horizons.Data\Horizons.Data.csproj" />
+    <ProjectReference Include="..\Horizons.Web.ViewModels\Horizons.Web.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
