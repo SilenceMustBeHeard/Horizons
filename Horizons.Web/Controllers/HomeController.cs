@@ -1,35 +1,20 @@
-﻿namespace Horizons.Web.Controllers
+﻿using Horizons.Services.Core.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Horizons.Web.Controllers;
+
+public class HomeController : Controller
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using System.Diagnostics;
-    using ViewModels;
+    private readonly IHomeService _homeService;
 
-    public class HomeController : Controller
+    public HomeController(IHomeService homeService)
     {
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Index()
-        {
+        _homeService = homeService;
+    }
 
-            try
-            {
-                if (User?.Identity != null && User.Identity.IsAuthenticated)
-                {
-                    return RedirectToAction("Index", "Destination");
-                }
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Index", "Error");
-            }
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    public async Task<IActionResult> Index()
+    {
+        var model = await _homeService.GetHomePageDataAsync();
+        return View(model);
     }
 }
