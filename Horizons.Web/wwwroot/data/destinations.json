@@ -2,7 +2,7 @@
   {
     "name": "Mount Everest Base Camp",
     "description": "Trek to the foot of the world's highest peak, standing at 5,364 meters. Experience the breathtaking Himalayas and the unique Sherpa culture.",
-    "imageUrl": "https://images.unsplash.com/photo-1522165078649-823cf4dbaf46",
+    "imageUrl": "https://i.natgeofe.com/n/2dc54f0a-0786-4593-86b3-fd06a50d1851/everest-basecamp-life-er-camp.jpg",
     "terrainId": "11111111-1111-1111-1111-111111111111",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Nepal",
@@ -16,7 +16,7 @@
   {
     "name": "Santorini Caldera",
     "description": "Famous for its stunning white-washed buildings with blue domes overlooking the Aegean Sea. Perfect for sunset viewing and romantic getaways.",
-    "imageUrl": "https://images.unsplash.com/photo-1570077188670-6c650e58d240",
+    "imageUrl": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0b/f9/f6/7e.jpg",
     "terrainId": "22222222-2222-2222-2222-222222222222",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Greece",
@@ -30,7 +30,7 @@
   {
     "name": "Amazon Rainforest",
     "description": "Explore the world's largest tropical rainforest, home to incredible biodiversity. Experience jungle treks, wildlife spotting, and indigenous culture.",
-    "imageUrl": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5",
+    "imageUrl": "https://imgs.mongabay.com/wp-content/uploads/sites/20/2024/12/18204154/amazon_241209144749x-1-1200x800.jpg",
     "terrainId": "33333333-3333-3333-3333-333333333333",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Brazil",
@@ -58,7 +58,7 @@
   {
     "name": "Tokyo Cityscape",
     "description": "A mesmerizing blend of ultra-modern and traditional, from neon-lit skyscrapers to ancient temples. Experience the vibrant energy of Japan's capital.",
-    "imageUrl": "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc",
+    "imageUrl": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf",
     "terrainId": "55555555-5555-5555-5555-555555555555",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Japan",
@@ -72,7 +72,7 @@
   {
     "name": "Hallstatt Village",
     "description": "A picturesque village nestled between the Hallstätter See and the Dachstein mountains. Known for its charming alpine houses and salt mining history.",
-    "imageUrl": "https://images.unsplash.com/photo-1591535952609-b1388996a7aa",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIk23SN6hwkB_AEr8_lpzBB9umWAMWlBj3oAuV-yOTAHl01k-MMyoaGnc&s=10",
     "terrainId": "66666666-6666-6666-6666-666666666666",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Austria",
@@ -86,7 +86,7 @@
   {
     "name": "Waitomo Glowworm Caves",
     "description": "Magical underground caves illuminated by thousands of glowworms. Take a boat ride through the darkness watching these natural lights.",
-    "imageUrl": "https://images.unsplash.com/photo-1624207290854-5826f84b5ef2",
+    "imageUrl": "https://images.squarespace-cdn.com/content/v1/596b2969d2b85786e6892853/1634189600881-C8WJ6IH3WSQSSRR3XS6E/6D2A8317.jpg?format=1500w",
     "terrainId": "77777777-7777-7777-7777-777777777777",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "New Zealand",
@@ -100,7 +100,7 @@
   {
     "name": "Grand Canyon",
     "description": "A steep-sided canyon carved by the Colorado River, known for its overwhelming size and intricate landscape. Hike, raft, or take a helicopter tour.",
-    "imageUrl": "https://images.unsplash.com/photo-1505852903341-fc8d3db10436",
+    "imageUrl": "https://www.onthegotours.com/repository/Grand-Canyon--Arizona--USA-286041455289605.jpg",
     "terrainId": "88888888-8888-8888-8888-888888888888",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "USA",
@@ -114,7 +114,7 @@
   {
     "name": "Plitvice Lakes National Park",
     "description": "A forest reserve in central Croatia known for a chain of 16 terraced lakes joined by waterfalls. Walk along wooden footbridges across the crystal-clear water.",
-    "imageUrl": "https://images.unsplash.com/photo-1563620915-8e103d4ee7c2",
+    "imageUrl": "https://www.insightvacations.com/blog/wp-content/uploads/2025/07/Large-Plitvice-Lakes-National-Park-Waterfalls-Croatia-1004029948.jpg",
     "terrainId": "33333333-3333-3333-3333-333333333333",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Croatia",
@@ -156,7 +156,7 @@
   {
     "name": "Bora Bora Lagoon",
     "description": "Known for its stunning turquoise lagoon protected by a coral reef and luxurious overwater bungalows. A true South Pacific paradise.",
-    "imageUrl": "https://images.unsplash.com/photo-1516534775068-ba3e7458af70",
+    "imageUrl": "https://cdn.britannica.com/16/60016-050-5D8447C8/peaks-Bora-Bora-Society-Islands-lagoon-French-Polynesia.jpg",
     "terrainId": "22222222-2222-2222-2222-222222222222",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "French Polynesia",
@@ -170,7 +170,7 @@
   {
     "name": "Black Forest",
     "description": "A dense, magical forest in southwestern Germany known for fairy tales, cuckoo clocks, and scenic hiking trails through pine trees and meadows.",
-    "imageUrl": "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d",
+    "imageUrl": "https://images.squarespace-cdn.com/content/v1/5b3fe49df8370a3a890259e8/a81fc6af-a2c4-4c23-a9a7-e5bc1bd799ad/TribergFalls03_Germany_TheWeithouse.jpg",
     "terrainId": "33333333-3333-3333-3333-333333333333",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Germany",
@@ -184,7 +184,7 @@
   {
     "name": "Mongolian Steppe",
     "description": "Vast, untouched grasslands where nomadic herders still live in traditional gers. Experience the endless horizon and star-filled night skies.",
-    "imageUrl": "https://images.unsplash.com/photo-1548690312-e3b507d8c110",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuhZRJvwarhTQgR-P7OkEDJYAVjzM6nBm_uyxLq63uGWyb5_nnMOyrpXTq&s=10",
     "terrainId": "44444444-4444-4444-4444-444444444444",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Mongolia",
@@ -212,7 +212,7 @@
   {
     "name": "Cinque Terre",
     "description": "Five colorful fishing villages perched on the rugged Italian Riviera coastline. Connected by scenic hiking trails and a railway.",
-    "imageUrl": "https://images.unsplash.com/photo-1486592293654-6c2f09d52eee",
+    "imageUrl": "https://voyagefox.net/wp-content/uploads/2025/04/cinque-terre-harbor-riomaggiore.jpg",
     "terrainId": "66666666-6666-6666-6666-666666666666",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Italy",
@@ -226,7 +226,7 @@
   {
     "name": "Son Doong Cave",
     "description": "The world's largest cave passage, located deep in the Vietnamese jungle. Features its own river, jungle, and climate inside.",
-    "imageUrl": "https://images.unsplash.com/photo-1572293864960-d2b1e3b6b42c",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw5cEdejrrsTDQ5UmOeNz424kJ_c8gwqgEf79fRNsW6D98ikMEvRZf0Tg&s=10",
     "terrainId": "77777777-7777-7777-7777-777777777777",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Vietnam",
@@ -240,7 +240,7 @@
   {
     "name": "Antelope Canyon",
     "description": "A stunning slot canyon in the American Southwest, known for its wave-like structure and light beams that shine down from openings above.",
-    "imageUrl": "https://images.unsplash.com/photo-1505238680356-667803448bb6",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWbDRQkXKfAHW-IkmiZCsc0Cs_9Wrk6b6PIT_JdAGc6faEm-lvvDboNcQe&s=10",
     "terrainId": "88888888-8888-8888-8888-888888888888",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "USA",
@@ -254,7 +254,7 @@
   {
     "name": "Fjord Norway",
     "description": "Dramatic fjords carved by glaciers, with towering cliffs, cascading waterfalls, and serene blue waters. A UNESCO World Heritage site.",
-    "imageUrl": "https://images.unsplash.com/photo-1501594894457-d7eb6ff93dba",
+    "imageUrl": "https://www.discover-the-world.com/app/uploads/2024/09/norway-aurlandsfjord-by-foap-vn-2.jpg",
     "terrainId": "11111111-1111-1111-1111-111111111111",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Norway",
@@ -282,7 +282,7 @@
   {
     "name": "Redwood National Park",
     "description": "Home to the tallest trees on Earth, ancient coastal redwoods that soar over 350 feet. Hike among these gentle giants.",
-    "imageUrl": "https://images.unsplash.com/photo-1500279936346-f1cae7b6d2c6",
+    "imageUrl": "https://images.squarespace-cdn.com/content/v1/650e32085ef4386d767d0c32/9d36ff86-fb25-4bb2-b0a5-9747bf9e794a/DSC04094-2.jpg",
     "terrainId": "33333333-3333-3333-3333-333333333333",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "USA",
@@ -324,7 +324,7 @@
   {
     "name": "Zhangjiajie Mountains",
     "description": "The inspiration for the floating Hallelujah Mountains in Avatar. Towering sandstone pillars covered in lush greenery.",
-    "imageUrl": "https://images.unsplash.com/photo-1562941651-cd5cd1afd3bf",
+    "imageUrl": "https://cdn.theatlantic.com/media/img/photo/2018/05/travel-monday-a-photo-trip-to-zhang/z01_1021238707-1/original.jpg",
     "terrainId": "11111111-1111-1111-1111-111111111111",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "China",
@@ -338,7 +338,7 @@
   {
     "name": "Colca Canyon",
     "description": "One of the world's deepest canyons, twice as deep as the Grand Canyon. Home to majestic Andean condors and terracing.",
-    "imageUrl": "https://images.unsplash.com/photo-1585123334904-845d60e6b9e9",
+    "imageUrl": "https://www.backpackadventures.org/wp-content/uploads/2017/04/IMG_7451-1024x768.jpg",
     "terrainId": "88888888-8888-8888-8888-888888888888",
     "publisherId": "ed453d54-37ab-4e45-94ff-73fbe0fd82b7",
     "country": "Peru",

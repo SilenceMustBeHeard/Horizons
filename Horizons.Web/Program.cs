@@ -5,95 +5,201 @@ using Horizons.Data.Repositories.Implementations.Base;
 using Horizons.Data.Repositories.Interfaces.Base;
 using Horizons.Data.Seeding;
 using Horizons.Services.Core.Implementations;
+using Horizons.Services.Core.Implementations.Account;
 using Horizons.Services.Core.Interfaces;
+using Horizons.Services.Core.Interfaces.Account;
 using Horizons.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+using SendGrid;
 
-namespace Horizons.Web;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
+// Connection string
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+// Add DbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(connectionString));
+
+// Add HttpClient factory
+builder.Services.AddHttpClient();
+
+// Add Identity
+builder.Services.AddDefaultIdentity<AppUser>(options =>
 {
-    public static void Main(string[] args)
+    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedEmail = true;
+
+    // password settings
+    options.Password.RequireDigit = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequiredLength = 10;
+    options.Password.RequiredUniqueChars = 4;
+
+    // lockout settings
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+
+    // user settings
+    options.User.RequireUniqueEmail = true;
+    options.User.AllowedUserNameCharacters =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<AppDbContext>();
+
+// Authorization
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", p => p.RequireRole("Admin"));
+    options.AddPolicy("ManagerPolicy", p => p.RequireRole("Manager"));
+});
+
+// Session
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.Cookie.Name = "Horizons.Session";
+});
+
+builder.Services.AddHttpContextAccessor();
+
+// Repositories & Services
+builder.Services.RegisterRepositories(typeof(ITerrainRepository).Assembly);
+builder.Services.RegisterServices(typeof(IDestinationService).Assembly);
+
+builder.Services.AddScoped<ITerrainService, TerrainService>();
+
+// SendGrid
+builder.Services.AddSingleton(sp =>
+{
+    var apiKey = builder.Configuration["SendGrid:ApiKey"];
+    if (string.IsNullOrEmpty(apiKey))
     {
-        var builder = WebApplication.CreateBuilder(args);
+        apiKey = builder.Configuration.GetValue<string>("SendGrid:ApiKey");
+    }
 
-        // Add services to the container.
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    if (string.IsNullOrEmpty(apiKey))
+    {
+        throw new InvalidOperationException("SendGrid API Key is missing. Add it via: dotnet user-secrets set \"SendGrid:ApiKey\" \"YOUR_KEY\"");
+    }
 
-        builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(connectionString));
+    return new SendGridClient(apiKey);
+});
 
-        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
-        // Register Identity with AppUser
-        builder.Services.AddDefaultIdentity<AppUser>(options =>
+// MVC
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+// Configure error handling
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
+// Health Checks
+builder.Services.AddHealthChecks();
+
+var app = builder.Build();
+
+// Seed Roles, Users and Data
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    // Apply migrations first
+    await context.Database.MigrateAsync();
+
+    // Seed Identity (Roles and Users)
+    await IdentitySeeder.SeedRolesAsync(roleManager);
+    await IdentitySeeder.SeedAdminAsync(userManager);
+    await IdentitySeeder.SeedManagerAsync(userManager);
+
+    // Seed Destinations - ONLY if table is empty
+    if (!await context.Destinations.AnyAsync())
+    {
+        try
         {
-            // Development ease options
-            options.SignIn.RequireConfirmedAccount = false;
-            options.Password.RequireDigit = false;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequireUppercase = false;
-            options.Password.RequireLowercase = false;
-        })
-        .AddRoles<IdentityRole>() // Add roles support
-        .AddEntityFrameworkStores<AppDbContext>();
-
-        builder.Services.RegisterRepositories(typeof(ITerrainRepository).Assembly);
-        builder.Services.RegisterServices(typeof(IDestinationService).Assembly);
-
-
-        // 📌 Ръчна регистрация за сървисите, които не са в същия assembly (TerrainService)
-        builder.Services.AddScoped<ITerrainService, TerrainService>();
-
-        builder.Services.AddControllersWithViews();
-        builder.Services.AddRazorPages();
-
-        var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseMigrationsEndPoint();
-            app.UseDeveloperExceptionPage();
+            await DbSeeder.SeedAllAsync(context);
+            Console.WriteLine("✅ Database seeding completed successfully!");
         }
-        else
+        catch (Exception ex)
         {
-            app.UseExceptionHandler("/Home/Error");
-            app.UseHsts();
+            Console.WriteLine($"❌ Seeding failed: {ex.Message}");
+            throw;
         }
-
-        app.UseHttpsRedirection();
-        app.UseStaticFiles();
-        app.UseRouting();
-        app.UseAuthentication();
-        app.UseAuthorization();
-
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
-        app.MapRazorPages();
-
-        // Seed data
-        using (var scope = app.Services.CreateScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-            // Apply pending migrations
-            context.Database.Migrate();
-
-            // Seed identity data
-            IdentitySeeder.SeedRolesAsync(roleManager).GetAwaiter().GetResult();
-            IdentitySeeder.SeedAdminAsync(userManager).GetAwaiter().GetResult();
-            IdentitySeeder.SeedManagerAsync(userManager).GetAwaiter().GetResult();
-
-            DbSeeder.SeedAllAsync(context).GetAwaiter().GetResult();
-        }
-
-        app.Run();
+    }
+    else
+    {
+        Console.WriteLine("📦 Destinations already exist. Skipping data seeding.");
     }
 }
+
+// Static files with .glb support
+var provider = new FileExtensionContentTypeProvider();
+provider.Mappings[".glb"] = "model/gltf-binary";
+
+// Configure error handling middleware
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error/500");
+    app.UseHsts();
+}
+else
+{
+    app.UseDeveloperExceptionPage();
+}
+
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
+app.UseHttpsRedirection();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = provider
+});
+
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseSession();
+
+// Custom error handling for 404
+app.Use(async (context, next) =>
+{
+    await next();
+    if (context.Response.StatusCode == 404 && !context.Response.HasStarted)
+    {
+        context.Items["originalPath"] = context.Request.Path;
+        context.Request.Path = "/Error/404";
+        await next();
+    }
+});
+
+// Routing
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Health Check endpoint
+app.MapHealthChecks("/health");
+
+await app.RunAsync();

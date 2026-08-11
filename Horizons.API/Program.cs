@@ -3,6 +3,7 @@ using Horizons.Data;
 using Horizons.Data.Models.Base;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace Horizons.API.Web;
 
@@ -20,7 +21,7 @@ public class Program
 
         // DbContext
         builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(connectionString));
+            options.UseNpgsql(connectionString));
 
 
 
