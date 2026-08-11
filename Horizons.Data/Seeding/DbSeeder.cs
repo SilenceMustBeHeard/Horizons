@@ -48,12 +48,11 @@ public static class DbSeeder
                 if (terrain.Id == Guid.Empty)
                     terrain.Id = Guid.NewGuid();
                 terrain.IsDeleted = false;
-
             }
 
             await context.Terrains.AddRangeAsync(terrains);
             await context.SaveChangesAsync();
-            Console.WriteLine($"? Seeded {terrains.Count} terrains from file.");
+            Console.WriteLine($"✅ Seeded {terrains.Count} terrains from file.");
         }
         finally
         {
@@ -71,6 +70,13 @@ public static class DbSeeder
                 Console.WriteLine("Destinations already exist. Skipping.");
                 return;
             }
+
+            var admin = await context.Users.FirstOrDefaultAsync(u => u.Email == "admin@horizons.com");
+            if (admin == null)
+            {
+                throw new Exception("Admin user not found. Please seed Identity first.");
+            }
+            var publisherId = admin.Id;
 
             var jsonPath = Path.Combine(
                 Directory.GetCurrentDirectory(),
@@ -100,18 +106,21 @@ public static class DbSeeder
 
                 if (destination.Id == Guid.Empty)
                     destination.Id = Guid.NewGuid();
+
                 var terrainExists = await context.Terrains.AnyAsync(t => t.Id == destination.TerrainId);
                 if (!terrainExists)
                 {
                     throw new Exception($"TerrainId {destination.TerrainId} does not exist for destination: {destination.Name}");
                 }
 
+                destination.PublisherId = publisherId;
+
                 destination.IsDeleted = false;
             }
 
             await context.Destinations.AddRangeAsync(destinations);
             await context.SaveChangesAsync();
-            Console.WriteLine($"? Seeded {destinations.Count} destinations from file.");
+            Console.WriteLine($"✅ Seeded {destinations.Count} destinations from file.");
         }
         finally
         {
@@ -119,15 +128,13 @@ public static class DbSeeder
         }
     }
 
-   
-
     public static async Task SeedAllAsync(AppDbContext context)
     {
-        Console.WriteLine("?? Starting database seeding from files...");
+        Console.WriteLine("🔄 Starting database seeding from files...");
 
-        await SeedTerrainsAsync(context); 
-        await SeedDestinationsAsync(context); 
-       
-        Console.WriteLine("? Database seeding completed!");
+        await SeedTerrainsAsync(context);
+        await SeedDestinationsAsync(context);
+
+        Console.WriteLine("✅ Database seeding completed!");
     }
 }
