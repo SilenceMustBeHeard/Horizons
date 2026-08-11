@@ -36,7 +36,7 @@ public static class IdentitySeeder
                 EmailConfirmed = true
             };
 
-            var result = await userManager.CreateAsync(admin, "Admin123!");
+            var result = await userManager.CreateAsync(admin, DefaultPassword);
             if (!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
@@ -67,7 +67,12 @@ public static class IdentitySeeder
                 AlternateEmail = managerAlternateEmail,
                 EmailConfirmed = true
             };
-            await userManager.CreateAsync(manager, DefaultPassword);
+            var result = await userManager.CreateAsync(manager, DefaultPassword);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new Exception($"Manager creation failed: {errors}");
+            }
         }
 
         if (!await userManager.IsInRoleAsync(manager, "Manager"))
