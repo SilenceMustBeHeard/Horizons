@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Base;
+using Horizons.Data.Models.Base;
 
 namespace Horizons.Data.Models;
 

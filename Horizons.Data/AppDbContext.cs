@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models;
+using Horizons.Data.Models;
 using Horizons.Data.Models.Base;
 using Horizons.Data.Models.Messages;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

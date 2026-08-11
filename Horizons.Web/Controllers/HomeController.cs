@@ -1,4 +1,4 @@
-﻿using Horizons.Services.Core.Interfaces;
+using Horizons.Services.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Horizons.Web.Controllers;

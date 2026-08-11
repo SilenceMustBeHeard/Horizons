@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Messages;
+using Horizons.Data.Models.Messages;
 using Horizons.Data.Repositories.Implementations.Base;
 using Horizons.Data.Repositories.Interfaces.Messages;
 using System;

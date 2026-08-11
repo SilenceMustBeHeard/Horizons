@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Base;
+using Horizons.Data.Models.Base;
 using Horizons.Services.Core.Interfaces.Account;
 using Horizons.Services.Core.Interfaces.Messages;
 using Microsoft.AspNetCore.Authorization;
@@ -72,7 +72,7 @@ public class ProfileControllerApi : ControllerBase
             return BadRequest(new { error = "You must be logged in to perform this action." });
         }
 
-        // Маркирай като прочетено
+        // ???????? ???? ?????????
         await _contactMessageClientService.MarkAsReadAsync(id, user.Id);
 
         var viewModel = await _contactMessageClientService.GetMessageDetailsAsync(id, user.Id);

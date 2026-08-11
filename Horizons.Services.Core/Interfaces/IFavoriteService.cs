@@ -1,4 +1,4 @@
-﻿using Horizons.Web.ViewModels;
+using Horizons.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;

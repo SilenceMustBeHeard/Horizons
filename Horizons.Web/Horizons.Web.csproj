@@ -1,39 +1,37 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-Horizons-0b7fcf7e-c2d7-4a45-8c70-1ea5b1f0c3b9</UserSecretsId>
-    <StartupObject>Horizons.Web.Program</StartupObject>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>aspnet-Horizons-0b7fcf7e-c2d7-4a45-8c70-1ea5b1f0c3b9</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
-    <PackageReference Include="SendGrid" Version="9.29.3" />
-  
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
+		<PackageReference Include="SendGrid" Version="9.29.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Horizons.Data\Horizons.Data.csproj" />
-    <ProjectReference Include="..\Horizons.GCommon\Horizons.Data.Common.csproj" />
-    <ProjectReference Include="..\Horizons.Services.Core\Horizons.Services.Core.csproj" />
-    <ProjectReference Include="..\Horizons.Web.Infrastructure\Horizons.Web.Infrastructure.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Horizons.Data\Horizons.Data.csproj" />
+		<ProjectReference Include="..\Horizons.Data.Common\Horizons.Data.Common.csproj" />
+		<ProjectReference Include="..\Horizons.Services.Core\Horizons.Services.Core.csproj" />
+		<ProjectReference Include="..\Horizons.Web.Infrastructure\Horizons.Web.Infrastructure.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Areas\Admin\" />
+	</ItemGroup>
 
 </Project>

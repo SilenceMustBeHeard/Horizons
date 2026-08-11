@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Repositories.Interfaces.Messages;
+using Horizons.Data.Repositories.Interfaces.Messages;
 using Horizons.Services.Core.Interfaces.Messages;
 using Horizons.Web.ViewModels.Account.Messages;
 using Microsoft.EntityFrameworkCore;

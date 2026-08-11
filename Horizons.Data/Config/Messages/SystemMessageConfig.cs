@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Messages;
+using Horizons.Data.Models.Messages;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Horizons.Data.Config.Messages;

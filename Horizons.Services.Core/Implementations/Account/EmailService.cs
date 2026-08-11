@@ -1,4 +1,4 @@
-﻿using Horizons.Services.Common.Validators;
+using Horizons.Services.Common.Validators;
 using Horizons.Services.Core.Interfaces.Account;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;

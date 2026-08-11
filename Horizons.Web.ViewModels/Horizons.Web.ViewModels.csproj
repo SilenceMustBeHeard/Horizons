@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Horizons.Data.Models\Horizons.Data.Models.csproj" />
-    <ProjectReference Include="..\Horizons.GCommon\Horizons.Data.Common.csproj" />
+    <ProjectReference Include="..\Horizons.Data.Common\Horizons.Data.Common.csproj" />
   </ItemGroup>
 
 </Project>

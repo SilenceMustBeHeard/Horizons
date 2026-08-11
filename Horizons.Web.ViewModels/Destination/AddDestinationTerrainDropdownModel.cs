@@ -1,4 +1,4 @@
-﻿namespace Horizons.Web.ViewModels.Destination
+namespace Horizons.Web.ViewModels.Destination
 {
     public class AddDestinationTerrainDropdownModel
     {

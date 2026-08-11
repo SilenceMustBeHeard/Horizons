@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.5.11716.220
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Data", "Horizons.D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8B8A0EA8-62C4-430A-831B-1938CEE1EE39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Data.Common", "Horizons.GCommon\Horizons.Data.Common.csproj", "{483E42EB-206C-445D-A634-36AF08697409}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Data.Common", "Horizons.Data.Common\Horizons.Data.Common.csproj", "{483E42EB-206C-445D-A634-36AF08697409}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horizons.Services.Core", "Horizons.Services.Core\Horizons.Services.Core.csproj", "{E9C25734-2A13-4622-80A8-70CCD111FC8E}"
 EndProject

@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Messages;
+using Horizons.Data.Models.Messages;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 

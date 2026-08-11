@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Base;
+using Horizons.Data.Models.Base;
 using System.ComponentModel.DataAnnotations;
 
 namespace Horizons.Data.Models.Messages;

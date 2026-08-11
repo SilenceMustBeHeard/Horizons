@@ -1,4 +1,4 @@
-﻿using Horizons.Web.ViewModels.Account.Profile;
+using Horizons.Web.ViewModels.Account.Profile;
 using System;
 using System.Collections.Generic;
 using System.Text;

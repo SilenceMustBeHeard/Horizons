@@ -1,4 +1,4 @@
-﻿using Horizons.Web.ViewModels.Home;
+using Horizons.Web.ViewModels.Home;
 
 namespace Horizons.Services.Core.Interfaces;
 

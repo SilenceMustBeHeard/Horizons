@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Base;
+using Horizons.Data.Models.Base;
 using Horizons.Services.Core.Interfaces.Account;
 using Microsoft.AspNetCore.Identity;
 using System;

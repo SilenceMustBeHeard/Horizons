@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Common.Enums;
+using Horizons.Data.Common.Enums;
 using Horizons.Data.Models.Base;
 using Horizons.Data.Models.Messages;
 using Horizons.Data.Repositories.Interfaces.Messages;
@@ -67,7 +67,7 @@ public class ContactMessageClientService : IContactMessageClientService
             .Query()
             .Include(m => m.Sender)
             .Include(m => m.RespondedBy)
-            .Include(m => m.Receiver)  // <- Добави това за да вземеш receiver данните
+            .Include(m => m.Receiver)  // <- ?????? ???? ?? ?? ?????? receiver ???????
             .Where(m => m.SenderId == userId && !string.IsNullOrEmpty(m.Response))
             .OrderByDescending(m => m.CreatedAt)
             .Select(m => new ContactMessageDetailsViewModel
@@ -78,7 +78,7 @@ public class ContactMessageClientService : IContactMessageClientService
                 SenderName = m.Sender!.FullName ?? "Unknown",
                 SenderEmail = m.Sender!.Email ?? string.Empty,
                 ReceiverName = m.Receiver!.FullName ?? "Admin",
-                ReceiverEmail = m.Receiver!.Email ?? string.Empty,  // <- Вече е динамично!
+                ReceiverEmail = m.Receiver!.Email ?? string.Empty,  // <- ???? ? ?????????!
                 IsRead = m.IsRead,
                 IsReadByAdmin = m.IsReadByAdmin,
                 CreatedOn = m.CreatedAt,
