@@ -1,4 +1,4 @@
-﻿using Horizons.Services.Core.Interfaces;
+using Horizons.Services.Core.Interfaces;
 using Horizons.Web.ViewModels.Destination;
 
 namespace Horizons.Services.Core.Admin.Interfaces;

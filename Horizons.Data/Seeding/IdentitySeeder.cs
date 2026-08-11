@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Base;
+using Horizons.Data.Models.Base;
 using Microsoft.AspNetCore.Identity;
 
 namespace Horizons.Data.Seeding;
@@ -7,7 +7,7 @@ public static class IdentitySeeder
 {
     private const string DefaultPassword = "1234567890";
 
-    // 1️⃣ Seed Roles
+    // 1?? Seed Roles
     public static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
     {
         string[] roles = { "Admin", "Manager", "User" };
@@ -19,7 +19,7 @@ public static class IdentitySeeder
         }
     }
 
-    // 2️⃣ Seed Admin
+    // 2?? Seed Admin
     public static async Task SeedAdminAsync(UserManager<AppUser> userManager)
     {
         const string adminEmail = "admin@horizons.com";
@@ -42,7 +42,7 @@ public static class IdentitySeeder
             await userManager.AddToRoleAsync(admin, "Admin");
     }
 
-    // 3️⃣ Seed Manager
+    // 3?? Seed Manager
     public static async Task SeedManagerAsync(UserManager<AppUser> userManager)
     {
         const string managerEmail = "manager@horizons.com";

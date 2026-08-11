@@ -1,5 +1,5 @@
-﻿using Horizons.Data.Models;
-using Horizons.GCommon;
+using Horizons.Data.Models;
+using Horizons.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

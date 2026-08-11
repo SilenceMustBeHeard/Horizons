@@ -1,4 +1,4 @@
-﻿using Horizons.Web.ViewModels.Destination;
+using Horizons.Web.ViewModels.Destination;
 using Horizons.Web.ViewModels.Map;
 
 namespace Horizons.Services.Core.Interfaces;

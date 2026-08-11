@@ -1,4 +1,4 @@
-﻿using Horizons.Services.Core.Interfaces.Account;
+using Horizons.Services.Core.Interfaces.Account;
 using Horizons.Web.ViewModels.Account.Profile;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

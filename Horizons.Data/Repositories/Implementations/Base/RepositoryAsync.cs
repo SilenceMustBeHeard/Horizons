@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Repositories.Interfaces.CRUD;
+using Horizons.Data.Repositories.Interfaces.CRUD;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

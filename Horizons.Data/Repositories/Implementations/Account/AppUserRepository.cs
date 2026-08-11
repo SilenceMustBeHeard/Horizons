@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Base;
+using Horizons.Data.Models.Base;
 using Horizons.Data.Repositories.Implementations.Base;
 using Horizons.Data.Repositories.Interfaces.Account;
 using Microsoft.EntityFrameworkCore;

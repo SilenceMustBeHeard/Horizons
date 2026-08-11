@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Horizons.Web.Infrastructure.Extensions;
@@ -60,7 +60,7 @@ public static class ServiceCollectionExtensions
 
             if (repoInterface == null)
             {
-                // ⚠️ skip instead of crash
+                // ?? skip instead of crash
                 continue;
             }
 

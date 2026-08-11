@@ -1,4 +1,4 @@
-﻿using Horizons.Data;
+using Horizons.Data;
 using Horizons.Data.Models;
 using Horizons.Data.Models.Base;
 using Horizons.Services.Core.Admin.Interfaces;

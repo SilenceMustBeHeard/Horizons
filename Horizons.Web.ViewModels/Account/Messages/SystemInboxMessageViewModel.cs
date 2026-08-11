@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Common.Enums;
+using Horizons.Data.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

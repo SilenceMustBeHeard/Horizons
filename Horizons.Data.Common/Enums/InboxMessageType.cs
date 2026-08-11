@@ -1,4 +1,4 @@
-﻿namespace Horizons.Data.Common.Enums;
+namespace Horizons.Data.Common.Enums;
 
 public enum InboxMessageType
 {

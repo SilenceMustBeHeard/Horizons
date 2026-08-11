@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Base;
+using Horizons.Data.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models;
+using Horizons.Data.Models;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 
@@ -53,7 +53,7 @@ public static class DbSeeder
 
             await context.Terrains.AddRangeAsync(terrains);
             await context.SaveChangesAsync();
-            Console.WriteLine($"✅ Seeded {terrains.Count} terrains from file.");
+            Console.WriteLine($"? Seeded {terrains.Count} terrains from file.");
         }
         finally
         {
@@ -111,7 +111,7 @@ public static class DbSeeder
 
             await context.Destinations.AddRangeAsync(destinations);
             await context.SaveChangesAsync();
-            Console.WriteLine($"✅ Seeded {destinations.Count} destinations from file.");
+            Console.WriteLine($"? Seeded {destinations.Count} destinations from file.");
         }
         finally
         {
@@ -123,11 +123,11 @@ public static class DbSeeder
 
     public static async Task SeedAllAsync(AppDbContext context)
     {
-        Console.WriteLine("🌱 Starting database seeding from files...");
+        Console.WriteLine("?? Starting database seeding from files...");
 
         await SeedTerrainsAsync(context); 
         await SeedDestinationsAsync(context); 
        
-        Console.WriteLine("✅ Database seeding completed!");
+        Console.WriteLine("? Database seeding completed!");
     }
 }
