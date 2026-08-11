@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copy csproj files and restore dependencies
-COPY Horizons.Data.Common/Horizons.Data.Common.csproj Horizons.Data.Common/
+COPY Horizons.GCommon/Horizons.GCommon.csproj Horizons.GCommon/
 COPY Horizons.Data.Models/Horizons.Data.Models.csproj Horizons.Data.Models/
 COPY Horizons.Data/Horizons.Data.csproj Horizons.Data/
 COPY Horizons.Services.Common/Horizons.Services.Common.csproj Horizons.Services.Common/
