@@ -1,4 +1,4 @@
-﻿namespace Horizons.GCommon
+namespace Horizons.Data.Common
 {
     public static class ValidationConstants
     {

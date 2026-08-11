@@ -1,4 +1,4 @@
-﻿using Horizons.Web.ViewModels.Account.Messages;
+using Horizons.Web.ViewModels.Account.Messages;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;

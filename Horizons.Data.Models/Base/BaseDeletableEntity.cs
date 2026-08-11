@@ -1,4 +1,4 @@
-﻿namespace Horizons.Data.Models.Base;
+namespace Horizons.Data.Models.Base;
 
 public abstract class BaseDeletableEntity : BaseEntity
 {

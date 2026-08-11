@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models;
+using Horizons.Data.Models;
 using Horizons.Data.Repositories.Interfaces.Interactions;
 using Horizons.Services.Core.Interfaces;
 using Horizons.Web.ViewModels;

@@ -1,5 +1,5 @@
-﻿using Horizons.Data.Models.Base;
-using Horizons.GCommon;
+using Horizons.Data.Models.Base;
+using Horizons.Data.Common;
 using System.ComponentModel.DataAnnotations;
 
 namespace Horizons.Data.Models

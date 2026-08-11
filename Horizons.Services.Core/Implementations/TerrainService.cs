@@ -1,4 +1,4 @@
-﻿using Horizons.Data;
+using Horizons.Data;
 using Horizons.Data.Repositories.Interfaces.Base;
 using Horizons.Services.Core.Interfaces;
 using Horizons.Web.ViewModels.Destination;

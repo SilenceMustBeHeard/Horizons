@@ -1,4 +1,4 @@
-﻿namespace Horizons.Web.ViewModels
+namespace Horizons.Web.ViewModels
 {
     public class ErrorViewModel
     {

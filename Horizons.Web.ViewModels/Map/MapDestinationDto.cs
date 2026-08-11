@@ -1,4 +1,4 @@
-﻿namespace Horizons.Web.ViewModels.Map
+namespace Horizons.Web.ViewModels.Map
 {
     public class MapDestinationDto
     {

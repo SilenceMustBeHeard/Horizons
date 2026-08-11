@@ -1,5 +1,5 @@
-﻿
-using Horizons.GCommon;
+
+using Horizons.Data.Common;
 using System.ComponentModel.DataAnnotations;
 
 namespace Horizons.Web.ViewModels.Destination

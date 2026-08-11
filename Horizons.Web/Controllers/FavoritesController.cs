@@ -1,4 +1,4 @@
-﻿using Horizons.Services.Core.Interfaces;
+using Horizons.Services.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -31,8 +31,8 @@ public class FavoritesController : Controller
         bool isNowFavorited = await _favoriteService.ToggleFavoriteAsync(userId, id);
 
         TempData["Success"] = isNowFavorited
-            ? "✨ Added to your favorites!"
-            : "🗑️ Removed from your favorites.";
+            ? "? Added to your favorites!"
+            : "??? Removed from your favorites.";
 
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
         {

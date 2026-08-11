@@ -1,4 +1,4 @@
-﻿using Horizons.Web.ViewModels.Destination;
+using Horizons.Web.ViewModels.Destination;
 
 namespace Horizons.Web.ViewModels.Home
 {

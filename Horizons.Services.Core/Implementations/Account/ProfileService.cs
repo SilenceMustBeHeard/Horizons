@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models.Base;
+using Horizons.Data.Models.Base;
 using Horizons.Data.Repositories.Interfaces.Account;
 using Horizons.Services.Core.Admin.Interfaces.Messages;
 using Horizons.Services.Core.Interfaces.Account;

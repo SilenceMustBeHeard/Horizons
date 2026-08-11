@@ -1,4 +1,4 @@
-﻿namespace Horizons.Services.Common;
+namespace Horizons.Services.Common;
 
 public static class ContinentHelper
 {

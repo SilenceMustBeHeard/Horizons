@@ -1,4 +1,4 @@
-﻿using Horizons.Data.Models;
+using Horizons.Data.Models;
 using Horizons.Data.Repositories.Interfaces.CRUD;
 using System;
 using System.Collections.Generic;
