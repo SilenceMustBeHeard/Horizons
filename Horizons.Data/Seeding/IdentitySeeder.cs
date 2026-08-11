@@ -5,7 +5,7 @@ namespace Horizons.Data.Seeding;
 
 public static class IdentitySeeder
 {
-    private const string DefaultPassword = "1234567890";
+    private const string DefaultPassword = "Horizons12345!@#$%";
 
     // 1?? Seed Roles
     public static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
@@ -35,7 +35,16 @@ public static class IdentitySeeder
                 AlternateEmail = adminAlternateEmail,
                 EmailConfirmed = true
             };
-            await userManager.CreateAsync(admin, DefaultPassword);
+
+            var result = await userManager.CreateAsync(admin, "Admin123!");
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new Exception($"Admin creation failed: {errors}");
+            }
+
+            
+            admin = await userManager.FindByEmailAsync(adminEmail) ?? throw new Exception("Admin not found after creation");
         }
 
         if (!await userManager.IsInRoleAsync(admin, "Admin"))
