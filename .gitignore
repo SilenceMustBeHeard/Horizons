@@ -66,7 +66,7 @@ appsettings.Production.json
 # ==============================
 .env
 .env.dev
-.docker-compose.dev
+.docker-compose.dev.yml
 Dockerfile.dev
 .env.local
 *.env.dev
