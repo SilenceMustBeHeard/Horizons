@@ -122,7 +122,6 @@ public class DestinationService : IDestinationService
             IsUserFavourite = userId != null && d.Favorites.Any(f => f.UserId == userId && !f.IsDeleted)
         });
     }
-
     public async Task<DestinationDetailsViewModel?> GetDestinationDetailsByIdAsync(Guid? id, string? userId)
     {
         if (!id.HasValue) return null;

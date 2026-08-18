@@ -24,10 +24,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Horizons.Data.Models\Horizons.Data.Models.csproj" />
 		<ProjectReference Include="..\Horizons.Data\Horizons.Data.csproj" />
 		<ProjectReference Include="..\Horizons.Data.Common\Horizons.Data.Common.csproj" />
 		<ProjectReference Include="..\Horizons.Services.Core\Horizons.Services.Core.csproj" />
 		<ProjectReference Include="..\Horizons.Web.Infrastructure\Horizons.Web.Infrastructure.csproj" />
+		<ProjectReference Include="..\Horizons.Web.ViewModels\Horizons.Web.ViewModels.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
