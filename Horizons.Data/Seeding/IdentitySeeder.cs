@@ -43,7 +43,6 @@ public static class IdentitySeeder
                 throw new Exception($"Admin creation failed: {errors}");
             }
 
-            
             admin = await userManager.FindByEmailAsync(adminEmail) ?? throw new Exception("Admin not found after creation");
         }
 
@@ -67,12 +66,15 @@ public static class IdentitySeeder
                 AlternateEmail = managerAlternateEmail,
                 EmailConfirmed = true
             };
+
             var result = await userManager.CreateAsync(manager, DefaultPassword);
             if (!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
                 throw new Exception($"Manager creation failed: {errors}");
             }
+
+            manager = await userManager.FindByEmailAsync(managerEmail) ?? throw new Exception("Manager not found after creation");
         }
 
         if (!await userManager.IsInRoleAsync(manager, "Manager"))

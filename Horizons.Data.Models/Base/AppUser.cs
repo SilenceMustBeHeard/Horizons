@@ -12,6 +12,7 @@ public class AppUser : IdentityUser
     public string? LastName { get; set; }
     public string? Address { get; set; }
 
+
     [EmailAddress(ErrorMessage = "Invalid email address")]
     public string? AlternateEmail { get; set; }
 
