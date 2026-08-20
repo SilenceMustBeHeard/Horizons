@@ -1,12 +1,11 @@
 using Horizons.Data.Models.Base;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace Horizons.Data.Seeding;
 
 public static class IdentitySeeder
 {
-    private const string DefaultPassword = "Horizons12345!@#$%";
-
     // 1?? Seed Roles
     public static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
     {
@@ -20,10 +19,15 @@ public static class IdentitySeeder
     }
 
     // 2?? Seed Admin
-    public static async Task SeedAdminAsync(UserManager<AppUser> userManager)
+    public static async Task SeedAdminAsync(
+        UserManager<AppUser> userManager,
+        IConfiguration configuration)
     {
-        const string adminEmail = "admin@horizons.com";
-        const string adminAlternateEmail = "admin.alt@horizons.com";
+        var adminEmail = configuration["SeedData:AdminEmail"]
+            ?? throw new InvalidOperationException("SeedData:AdminEmail is missing");
+        var adminPassword = configuration["SeedData:AdminPassword"]
+            ?? throw new InvalidOperationException("SeedData:AdminPassword is missing");
+
         var admin = await userManager.FindByEmailAsync(adminEmail);
 
         if (admin == null)
@@ -32,18 +36,19 @@ public static class IdentitySeeder
             {
                 UserName = adminEmail,
                 Email = adminEmail,
-                AlternateEmail = adminAlternateEmail,
+                AlternateEmail = "admin.alt@horizons.com",
                 EmailConfirmed = true
             };
 
-            var result = await userManager.CreateAsync(admin, DefaultPassword);
+            var result = await userManager.CreateAsync(admin, adminPassword);
             if (!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
                 throw new Exception($"Admin creation failed: {errors}");
             }
 
-            admin = await userManager.FindByEmailAsync(adminEmail) ?? throw new Exception("Admin not found after creation");
+            admin = await userManager.FindByEmailAsync(adminEmail)
+                ?? throw new Exception("Admin not found after creation");
         }
 
         if (!await userManager.IsInRoleAsync(admin, "Admin"))
@@ -51,10 +56,15 @@ public static class IdentitySeeder
     }
 
     // 3?? Seed Manager
-    public static async Task SeedManagerAsync(UserManager<AppUser> userManager)
+    public static async Task SeedManagerAsync(
+        UserManager<AppUser> userManager,
+        IConfiguration configuration)
     {
-        const string managerEmail = "manager@horizons.com";
-        const string managerAlternateEmail = "manager.alt@horizons.com";
+        var managerEmail = configuration["SeedData:ManagerEmail"]
+            ?? throw new InvalidOperationException("SeedData:ManagerEmail is missing");
+        var managerPassword = configuration["SeedData:ManagerPassword"]
+            ?? throw new InvalidOperationException("SeedData:ManagerPassword is missing");
+
         var manager = await userManager.FindByEmailAsync(managerEmail);
 
         if (manager == null)
@@ -63,18 +73,19 @@ public static class IdentitySeeder
             {
                 UserName = managerEmail,
                 Email = managerEmail,
-                AlternateEmail = managerAlternateEmail,
+                AlternateEmail = "manager.alt@horizons.com",
                 EmailConfirmed = true
             };
 
-            var result = await userManager.CreateAsync(manager, DefaultPassword);
+            var result = await userManager.CreateAsync(manager, managerPassword);
             if (!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
                 throw new Exception($"Manager creation failed: {errors}");
             }
 
-            manager = await userManager.FindByEmailAsync(managerEmail) ?? throw new Exception("Manager not found after creation");
+            manager = await userManager.FindByEmailAsync(managerEmail)
+                ?? throw new Exception("Manager not found after creation");
         }
 
         if (!await userManager.IsInRoleAsync(manager, "Manager"))
