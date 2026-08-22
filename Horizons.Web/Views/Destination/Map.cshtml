@@ -30,11 +30,11 @@
         <div class="sidebar-header">
             <i class="fas fa-map-marked-alt"></i>
             <h3>Destinations</h3>
-            <button class="btn-filter" id="toggleFilter">
+            <button class="btn-filter" id="toggleFilter" title="Toggle filters">
                 <i class="fas fa-filter"></i>
             </button>
         </div>
-        
+
         <div class="filter-panel" id="filterPanel">
             <input type="text" id="searchDestinations" placeholder="Search destinations..." class="search-input">
             <div class="filter-tags">
@@ -48,206 +48,48 @@
                 <button class="filter-tag" data-filter="antarctica">❄️ Antarctica</button>
             </div>
         </div>
-        
+
         <div class="destinations-list" id="destinationsList">
             <div class="loading-spinner">
                 <i class="fas fa-spinner fa-spin"></i> Loading destinations...
             </div>
         </div>
     </div>
-    
+
     <div id="travelMap" class="interactive-map"></div>
 </div>
 
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 @section Scripts {
     <script>
-        //  GLOBAL VARIABLES 
+      
+        //  GLOBAL VARIABLES
+
         let map = null;
         let markerLayer = null;
         let destinations = [];
         let isMapInitialized = false;
         let currentFilter = 'all';
         let isLoading = false;
-        
-        //  INITIALIZATION 
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!isMapInitialized) {
-                initMap();
-                loadDestinations();
-                setupFilters();
-                setupSearch();
-            }
-        });
-        
-        function initMap() {
-            if (map !== null) return;
-            
-            // Create map instance
-            map = L.map('travelMap', {
-                minZoom: 2,
-                maxZoom: 18,
-                zoomControl: true,
-                fadeAnimation: true,
-                zoomAnimation: true,
-                markerZoomAnimation: true
-            }).setView([20, 0], 2);
-            
-            // Add tile layer
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
-                subdomains: 'abcd',
-                maxZoom: 19
-            }).addTo(map);
-            
-            // Add scale control
-            L.control.scale().addTo(map);
-            
-            // Create marker layer group
-            markerLayer = L.layerGroup().addTo(map);
-            
-            isMapInitialized = true;
-        }
-        
-        //  DATA LOADING 
-        async function loadDestinations() {
-            if (isLoading) return;
-            isLoading = true;
-            
-            try {
-                const response = await fetch('/api/destinations/map-data');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
-                destinations = data;
-                updateStats(data);
-                renderMarkers(data);
-                renderSidebar(data);
-            } catch (error) {
-                console.error('Error fetching destinations:', error);
-                const listEl = document.getElementById('destinationsList');
-                if (listEl) {
-                    listEl.innerHTML = '<div class="text-center p-4 text-danger"><i class="fas fa-exclamation-triangle"></i> Failed to load destinations</div>';
-                }
-            } finally {
-                isLoading = false;
-            }
-        }
-        
-        //  MARKER RENDERING 
-        function renderMarkers(destinationsToRender) {
-            if (!markerLayer) return;
-            
-            // Clear existing markers
-            markerLayer.clearLayers();
-            
-            const filtered = currentFilter === 'all' 
-                ? destinationsToRender 
-                : destinationsToRender.filter(d => (d.continent || '').toLowerCase() === currentFilter);
-            
-            filtered.forEach(dest => {
-                if (!dest.latitude || !dest.longitude) return;
-                
-                const markerColor = getMarkerColor(dest.continent);
-                const customIcon = L.divIcon({
-                    className: 'custom-marker',
-                    html: `<div class="marker-content" style="background: ${markerColor};">
-                           <i class="fas fa-map-pin"></i>
-                           </div>`,
-                    iconSize: [30, 30],
-                    popupAnchor: [0, -15]
-                });
-                
-                const marker = L.marker([dest.latitude, dest.longitude], { icon: customIcon });
-                
-                // Bind popup on hover instead of click
-                marker.bindPopup(createPopupContent(dest), {
-                    maxWidth: 300,
-                    minWidth: 260,
-                    autoPan: true
-                });
-                
-                marker.addTo(markerLayer);
+
+   
+        //  HELPER FUNCTIONS (GLOBAL)
+    
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
             });
         }
-        
-        function createPopupContent(dest) {
-            const description = dest.description ? dest.description.substring(0, 100) : 'No description available';
-            const imageUrl = dest.imageUrl || '/images/default-image.jpg';
-            const escapedName = escapeHtml(dest.name);
-            const escapedCountry = escapeHtml(dest.country || 'Unknown');
-            const escapedContinent = escapeHtml(dest.continent || 'Unknown');
-            const escapedDescription = escapeHtml(description);
-            
-            return `
-                <div class="custom-popup-wrapper">
-                    <div class="popup-image-container">
-                        <img src="${imageUrl}" alt="${escapedName}" class="popup-image" onerror="this.src='/images/default-image.jpg'">
-                    </div>
-                    <div class="popup-content">
-                        <h4 class="popup-title">${escapedName}</h4>
-                        <p class="popup-location">
-                            <i class="fas fa-map-marker-alt"></i> ${escapedCountry}, ${escapedContinent}
-                        </p>
-                        <p class="popup-description">${escapedDescription}...</p>
-                        <div class="popup-stats">
-                            <span class="popup-likes">
-                                <i class="fas fa-heart"></i> ${dest.likes || 0}
-                            </span>
-                        </div>
-                        <a href="/Destination/Details/${dest.id}" class="popup-btn">
-                            Explore Journey <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            `;
-        }
-        
-        //   SIDEBAR RENDERING   
-        function renderSidebar(destinationsToRender) {
-            const container = document.getElementById('destinationsList');
-            if (!container) return;
-            
-            if (destinationsToRender.length === 0) {
-                container.innerHTML = '<div class="text-center p-4">No destinations found</div>';
-                return;
-            }
-            
-            container.innerHTML = destinationsToRender.map(dest => `
-                <div class="dest-card" data-id="${dest.id}" data-continent="${(dest.continent || '').toLowerCase()}" onclick="goToDestination('${dest.id}')">
-                    <div class="dest-card-image">
-                        <img src="${dest.imageUrl || '/images/default-image.jpg'}" alt="${escapeHtml(dest.name)}" loading="lazy" onerror="this.src='/images/default-image.jpg'">
-                        <div class="dest-card-overlay">
-                            <span class="dest-rank">${dest.rank ? '#' + dest.rank : 'featured'}</span>
-                        </div>
-                    </div>
-                    <div class="dest-card-content">
-                        <h4>${escapeHtml(dest.name)}</h4>
-                        <p class="dest-location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(dest.country || 'Unknown')}</p>
-                        <p class="dest-excerpt">${escapeHtml((dest.description || '').substring(0, 80))}...</p>
-                        <div class="dest-meta">
-                            <span><i class="fas fa-calendar"></i> ${dest.createdAt ? new Date(dest.createdAt).toLocaleDateString() : 'Unknown'}</span>
-                            <button class="btn-locate" data-lat="${dest.latitude}" data-lng="${dest.longitude}" onclick="event.stopPropagation(); locateOnMap(${dest.latitude}, ${dest.longitude})">
-                                <i class="fas fa-crosshairs"></i> Locate
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        //  GLOBAL FUNCTIONS 
-        window.goToDestination = function(id) {
-            window.location.href = `/Destination/Details/${id}`;
-        };
-        
-        window.locateOnMap = function(lat, lng) {
-            if (map && !isNaN(lat) && !isNaN(lng)) {
-                map.setView([lat, lng], 12);
-            }
-        };
-        
-        //  HELPER FUNCTIONS 
+
         function getMarkerColor(continent) {
-            const colors = {
+            var colors = {
                 'asia': '#ff6b6b',
                 'europe': '#4ecdc4',
                 'north america': '#45b7d1',
@@ -258,26 +100,13 @@
             };
             return colors[(continent || '').toLowerCase()] || '#78c2ad';
         }
-        
-        function updateStats(destinationsToRender) {
-            const uniqueCountries = [...new Set(destinationsToRender.map(d => d.country).filter(c => c))];
-            const totalKm = destinationsToRender.reduce((sum, d) => sum + (d.distance || 0), 0);
-            
-            const destCount = document.getElementById('destinationCount');
-            const countriesCount = document.getElementById('countriesCount');
-            const totalDistance = document.getElementById('totalDistance');
-            
-            if (destCount) animateNumber(destCount, 0, destinationsToRender.length, 1000);
-            if (countriesCount) animateNumber(countriesCount, 0, uniqueCountries.length, 1000);
-            if (totalDistance) animateNumber(totalDistance, 0, totalKm, 1500);
-        }
-        
+
         function animateNumber(element, start, end, duration) {
             if (!element) return;
-            const range = end - start;
-            const increment = range / (duration / 16);
-            let current = start;
-            const timer = setInterval(() => {
+            var range = end - start;
+            var increment = range / (duration / 16);
+            var current = start;
+            var timer = setInterval(function() {
                 current += increment;
                 if (current >= end) {
                     clearInterval(timer);
@@ -287,61 +116,336 @@
                 }
             }, 16);
         }
-        
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
+
+        function formatDate(dateString) {
+            if (!dateString) return 'Unknown';
+            try {
+                return new Date(dateString).toLocaleDateString();
+            } catch {
+                return 'Unknown';
+            }
+        }
+
+    
+        //  GLOBAL FUNCTIONS (called from inline onclick)
+       
+        window.goToDestination = function(id) {
+            if (id) {
+                window.location.href = '/Destination/Details/' + id;
+            }
+        };
+
+        window.locateOnMap = function(lat, lng) {
+            if (map && !isNaN(lat) && !isNaN(lng)) {
+                map.setView([lat, lng], 12);
+            }
+        };
+
+     
+        //  INITIALIZATION
+ 
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            loadDestinations();
+            setupFilters();
+            setupSearch();
+            setupToggleFilter();
+        });
+
+      
+        //  MAP INIT
+  
+        function initMap() {
+            if (map !== null) return;
+
+            map = L.map('travelMap', {
+                minZoom: 2,
+                maxZoom: 18,
+                zoomControl: true,
+                fadeAnimation: true,
+                zoomAnimation: true,
+                markerZoomAnimation: true
+            }).setView([20, 0], 2);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+
+            L.control.scale().addTo(map);
+
+            markerLayer = L.layerGroup().addTo(map);
+
+            isMapInitialized = true;
+
+            // Handle resize
+            setTimeout(function() {
+                if (map) map.invalidateSize();
+            }, 300);
+        }
+
+  
+        //  DATA LOADING
+   
+        async function loadDestinations() {
+            if (isLoading) return;
+            isLoading = true;
+
+            var listEl = document.getElementById('destinationsList');
+            if (listEl) {
+                listEl.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading destinations...</div>';
+            }
+
+            try {
+                var response = await fetch('/api/destinations/map-data');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.status);
+                }
+                var data = await response.json();
+
+                // Ensure data is array
+                destinations = Array.isArray(data) ? data : [];
+
+                if (destinations.length === 0) {
+                    if (listEl) {
+                        listEl.innerHTML = '<div class="text-center p-4" style="color: var(--text-muted);"><i class="fas fa-map-pin" style="font-size: 2rem; display: block; margin-bottom: 1rem;"></i> No destinations found</div>';
+                    }
+                    return;
+                }
+
+                updateStats(destinations);
+                renderMarkers(destinations);
+                renderSidebar(destinations);
+
+            } catch (error) {
+                console.error('Error fetching destinations:', error);
+                if (listEl) {
+                    listEl.innerHTML = '<div class="text-center p-4" style="color: #dc3545;"><i class="fas fa-exclamation-triangle" style="font-size: 2rem; display: block; margin-bottom: 1rem;"></i> Failed to load destinations<br><small style="color: var(--text-muted);">' + error.message + '</small></div>';
+                }
+            } finally {
+                isLoading = false;
+            }
+        }
+
+      
+        //  UPDATE STATS
+   
+        function updateStats(destinationsToRender) {
+            var uniqueCountries = [];
+            var countrySet = {};
+            var totalKm = 0;
+
+            destinationsToRender.forEach(function(d) {
+                if (d.country && !countrySet[d.country]) {
+                    countrySet[d.country] = true;
+                    uniqueCountries.push(d.country);
+                }
+                if (d.distance) {
+                    totalKm += d.distance;
+                }
+            });
+
+            var destCount = document.getElementById('destinationCount');
+            var countriesCount = document.getElementById('countriesCount');
+            var totalDistance = document.getElementById('totalDistance');
+
+            if (destCount) animateNumber(destCount, 0, destinationsToRender.length, 1000);
+            if (countriesCount) animateNumber(countriesCount, 0, uniqueCountries.length, 1000);
+            if (totalDistance) animateNumber(totalDistance, 0, totalKm, 1500);
+        }
+
+    
+        //  MARKER RENDERING
+      
+        function renderMarkers(destinationsToRender) {
+            if (!markerLayer) return;
+
+            markerLayer.clearLayers();
+
+            var filtered = currentFilter === 'all'
+                ? destinationsToRender
+                : destinationsToRender.filter(function(d) {
+                    return (d.continent || '').toLowerCase() === currentFilter;
+                });
+
+            filtered.forEach(function(dest) {
+                if (!dest.latitude || !dest.longitude) return;
+
+                var markerColor = getMarkerColor(dest.continent);
+                var customIcon = L.divIcon({
+                    className: 'custom-marker',
+                    html: '<div class="marker-content" style="background: ' + markerColor + ';">' +
+                        '<i class="fas fa-map-pin"></i>' +
+                        '</div>',
+                    iconSize: [30, 30],
+                    popupAnchor: [0, -15]
+                });
+
+                var marker = L.marker([dest.latitude, dest.longitude], { icon: customIcon });
+
+                marker.bindPopup(createPopupContent(dest), {
+                    maxWidth: 300,
+                    minWidth: 260,
+                    autoPan: true
+                });
+
+                marker.addTo(markerLayer);
             });
         }
-        
-        //  FILTERS & SEARCH 
+
+        function createPopupContent(dest) {
+            var description = dest.description ? dest.description.substring(0, 100) : 'No description available';
+            var imageUrl = dest.imageUrl || '/images/default-image.jpg';
+            var escapedName = escapeHtml(dest.name);
+            var escapedCountry = escapeHtml(dest.country || 'Unknown');
+            var escapedContinent = escapeHtml(dest.continent || 'Unknown');
+            var escapedDescription = escapeHtml(description);
+            var likes = dest.likes || 0;
+
+            return '<div class="custom-popup-wrapper">' +
+                '<div class="popup-image-container">' +
+                '<img src="' + imageUrl + '" alt="' + escapedName + '" class="popup-image" onerror="this.src=\'/images/default-image.jpg\'">' +
+                '</div>' +
+                '<div class="popup-content">' +
+                '<h4 class="popup-title">' + escapedName + '</h4>' +
+                '<p class="popup-location"><i class="fas fa-map-marker-alt"></i> ' + escapedCountry + ', ' + escapedContinent + '</p>' +
+                '<p class="popup-description">' + escapedDescription + '...</p>' +
+                '<div class="popup-stats">' +
+                '<span class="popup-likes"><i class="fas fa-heart"></i> ' + likes + '</span>' +
+                '</div>' +
+                '<a href="/Destination/Details/' + dest.id + '" class="popup-btn">Explore Journey <i class="fas fa-arrow-right"></i></a>' +
+                '</div>' +
+                '</div>';
+        }
+
+  
+        //  SIDEBAR RENDERING
+     
+        function renderSidebar(destinationsToRender) {
+            var container = document.getElementById('destinationsList');
+            if (!container) return;
+
+            if (destinationsToRender.length === 0) {
+                container.innerHTML = '<div class="text-center p-4" style="color: var(--text-muted);">No destinations found</div>';
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < destinationsToRender.length; i++) {
+                var dest = destinationsToRender[i];
+                var escapedName = escapeHtml(dest.name);
+                var escapedCountry = escapeHtml(dest.country || 'Unknown');
+                var escapedDescription = escapeHtml((dest.description || '').substring(0, 80));
+                var imageUrl = dest.imageUrl || '/images/default-image.jpg';
+                var createdAt = formatDate(dest.createdAt);
+                var continent = (dest.continent || '').toLowerCase();
+                var rank = dest.rank ? '#' + dest.rank : 'featured';
+                var id = dest.id;
+
+                html += '<div class="dest-card" data-id="' + id + '" data-continent="' + continent + '" onclick="goToDestination(\'' + id + '\')">' +
+                    '<div class="dest-card-image">' +
+                    '<img src="' + imageUrl + '" alt="' + escapedName + '" loading="lazy" onerror="this.src=\'/images/default-image.jpg\'">' +
+                    '<div class="dest-card-overlay">' +
+                    '<span class="dest-rank">' + rank + '</span>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="dest-card-content">' +
+                    '<h4>' + escapedName + '</h4>' +
+                    '<p class="dest-location"><i class="fas fa-map-marker-alt"></i> ' + escapedCountry + '</p>' +
+                    '<p class="dest-excerpt">' + escapedDescription + '...</p>' +
+                    '<div class="dest-meta">' +
+                    '<span><i class="fas fa-calendar"></i> ' + createdAt + '</span>' +
+                    '<button class="btn-locate" data-lat="' + dest.latitude + '" data-lng="' + dest.longitude + '" onclick="event.stopPropagation(); window.locateOnMap(' + dest.latitude + ', ' + dest.longitude + ')">' +
+                    '<i class="fas fa-crosshairs"></i> Locate' +
+                    '</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+ 
+        //  FILTERS
+            
         function setupFilters() {
-            const filterTags = document.querySelectorAll('.filter-tag');
-            filterTags.forEach(tag => {
-                tag.addEventListener('click', (e) => {
-                    const filter = tag.dataset.filter;
+            var filterTags = document.querySelectorAll('.filter-tag');
+            filterTags.forEach(function(tag) {
+                tag.addEventListener('click', function(e) {
+                    var filter = tag.dataset.filter;
                     if (currentFilter === filter) return;
-                    
+
                     currentFilter = filter;
-                    
-                    filterTags.forEach(t => t.classList.remove('active'));
+
+                    filterTags.forEach(function(t) {
+                        t.classList.remove('active');
+                    });
                     tag.classList.add('active');
-                    
+
                     // Filter sidebar cards
-                    const cards = document.querySelectorAll('.dest-card');
-                    cards.forEach(card => {
+                    var cards = document.querySelectorAll('.dest-card');
+                    cards.forEach(function(card) {
                         if (filter === 'all') {
                             card.style.display = '';
                         } else {
-                            const cardContinent = card.dataset.continent;
+                            var cardContinent = card.dataset.continent;
                             card.style.display = cardContinent === filter ? '' : 'none';
                         }
                     });
-                    
+
                     // Re-render markers
                     renderMarkers(destinations);
                 });
             });
         }
-        
+
+       
+        //  SEARCH
+       
         function setupSearch() {
-            const searchInput = document.getElementById('searchDestinations');
+            var searchInput = document.getElementById('searchDestinations');
             if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const cards = document.querySelectorAll('.dest-card');
-                    cards.forEach(card => {
-                        const title = card.querySelector('h4')?.textContent.toLowerCase() || '';
-                        const location = card.querySelector('.dest-location')?.textContent.toLowerCase() || '';
+                searchInput.addEventListener('input', function(e) {
+                    var searchTerm = e.target.value.toLowerCase();
+                    var cards = document.querySelectorAll('.dest-card');
+                    cards.forEach(function(card) {
+                        var title = card.querySelector('h4')?.textContent?.toLowerCase() || '';
+                        var location = card.querySelector('.dest-location')?.textContent?.toLowerCase() || '';
                         card.style.display = (title.includes(searchTerm) || location.includes(searchTerm)) ? '' : 'none';
                     });
                 });
             }
         }
+
+        
+        //  TOGGLE FILTER
+       
+        function setupToggleFilter() {
+            var toggleBtn = document.getElementById('toggleFilter');
+            var filterPanel = document.getElementById('filterPanel');
+            if (toggleBtn && filterPanel) {
+                toggleBtn.addEventListener('click', function() {
+                    if (filterPanel.style.display === 'none') {
+                        filterPanel.style.display = 'block';
+                    } else {
+                        filterPanel.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        
+        //  HANDLE WINDOW RESIZE
+       
+        window.addEventListener('resize', function() {
+            if (map) {
+                setTimeout(function() {
+                    map.invalidateSize();
+                }, 100);
+            }
+        });
     </script>
 }
 
