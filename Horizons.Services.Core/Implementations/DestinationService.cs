@@ -150,7 +150,8 @@ public class DestinationService : IDestinationService
             Latitude = destination.Latitude,
             Longitude = destination.Longitude,
             Country = destination.Country,
-            Continent = destination.Continent
+            Continent = destination.Continent,
+            TravelDistance = destination.TravelDistance 
         };
     }
 

@@ -15,7 +15,7 @@
                     @(string.IsNullOrEmpty(Model.Country) ? "Unknown Location" : Model.Country)
                     @if (!string.IsNullOrEmpty(Model.Continent))
                     {
-                        <span class="separator">•</span> 
+                        <span class="separator">•</span>
                         @Model.Continent
                     }
                 </div>
@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <!-- Fun Facts Section (if you have any) -->
+            <!-- Fun Facts Section -->
             <div class="detail-section">
                 <h2 class="detail-section-title">Quick Facts</h2>
                 <div class="facts-grid">
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     }
-                  @*   @if (Model.TravelDistance.HasValue)
+                    @if (Model.TravelDistance.HasValue)
                     {
                         <div class="fact-item">
                             <i class="fas fa-road"></i>
@@ -78,7 +78,34 @@
                                 <span>@Model.TravelDistance.Value.ToString("N0") km</span>
                             </div>
                         </div>
-                    } *@
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Country))
+                    {
+                        <div class="fact-item">
+                            <i class="fas fa-flag"></i>
+                            <div class="fact-content">
+                                <strong>Country</strong>
+                                <span>@Model.Country</span>
+                            </div>
+                        </div>
+                    }
+                    <div class="fact-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="fact-content">
+                            <strong>Published</strong>
+                            <span>@Model.PublishedOn</span>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.PublisherName))
+                    {
+                        <div class="fact-item">
+                            <i class="fas fa-user"></i>
+                            <div class="fact-content">
+                                <strong>Publisher</strong>
+                                <span>@Model.PublisherName</span>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -132,7 +159,7 @@
                 </h3>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <span class="stat-number" id="favoriteCount">@(Model.FavoriteCount ?? 0)</span>
+                        <span class="stat-number">@(Model.FavoriteCount ?? 0)</span>
                         <span class="stat-label">Travelers ❤️ this</span>
                     </div>
                 </div>
@@ -140,25 +167,23 @@
 
             <!-- Action Buttons -->
             <div class="sidebar-card action-card">
-                <div class="action-buttons">
+                <div class="action-buttons d-flex flex-column gap-2">
                     <a asp-controller="Destination" asp-action="Index" class="btn btn-secondary w-100">
                         <i class="fas fa-arrow-left"></i> Back to Explore
                     </a>
 
                     @if (User.Identity.IsAuthenticated && !Model.IsUserPublisher)
                     {
-                        <form asp-action="@(Model.IsUserFavourite ? "RemoveFromFavorites" : "AddToFavorites")" method="post">
+                        <form asp-action="@(Model.IsUserFavourite ? "RemoveFromFavorites" : "AddToFavorites")" method="post" class="w-100">
                             <input type="hidden" name="id" value="@Model.Id" />
                             <button type="submit" class="btn @(Model.IsUserFavourite ? "btn-danger" : "btn-primary") w-100">
                                 @if (Model.IsUserFavourite)
                                 {
-                                    <i class="fas fa-heart-broken"></i>
-                                    
+                                    <text><i class="fas fa-heart-broken"></i> Remove from Favorites</text>
                                 }
                                 else
                                 {
-                                    <i class="fas fa-heart"></i>
-                                   
+                                    <text><i class="fas fa-heart"></i> Add to Favorites</text>
                                 }
                             </button>
                         </form>
@@ -166,7 +191,7 @@
 
                     @if (Model.IsUserPublisher)
                     {
-                        <div class="admin-buttons">
+                        <div class="admin-buttons d-flex flex-column gap-2">
                             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline w-100">
                                 <i class="fas fa-edit"></i> Edit Story
                             </a>
@@ -180,4 +205,3 @@
         </div>
     </div>
 </div>
-

@@ -9,10 +9,11 @@ namespace Horizons.Web.ViewModels
         public bool IsUserPublisher { get; set; }
         public bool IsUserFavourite { get; set; }
 
-        //  properties for map support
+        // Properties for map support
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         public string? Country { get; set; }
         public string? Continent { get; set; }
+        public double? TravelDistance { get; set; }  
     }
 }
