@@ -158,7 +158,7 @@ img {
 .btn-primary {
     background: var(--accent-primary);
     border: none;
-    color: white;
+    color: rgb(186, 46, 11);
 }
 
     .btn-primary:hover {
@@ -214,7 +214,7 @@ img {
 
 /*  HERO SECTION  */
 .hero-section {
-    background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d5 100%);
+    background: linear-gradient(135deg, #b77408 40%, #e8e0d5 600%);
     padding: 80px 0;
     text-align: center;
     margin-bottom: 60px;
@@ -896,7 +896,7 @@ img {
 
 .btn-primary {
     background: var(--accent-primary);
-    color: white;
+    color: rgba(172, 92, 8, 0.673);
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
@@ -1075,7 +1075,7 @@ img {
 
 .detail-hero-content {
     padding: 4rem 0;
-    color: white;
+    color: rgb(148, 123, 11);
 }
 
 .detail-location {

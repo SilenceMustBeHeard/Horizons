@@ -3267,10 +3267,10 @@ textarea.form-control-lg {
 }
 
 .btn-primary {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: #78c2ad;
-    --bs-btn-border-color: #78c2ad;
-    --bs-btn-hover-color: #fff;
+    --bs-btn-color: #d0b909;
+    --bs-btn-bg: #f37209;
+    --bs-btn-border-color: #fa240d;
+    --bs-btn-hover-color: #dbbf0a;
     --bs-btn-hover-bg: #66a593;
     --bs-btn-hover-border-color: #609b8a;
     --bs-btn-focus-shadow-rgb: 140,203,185;
