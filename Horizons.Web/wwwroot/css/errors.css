@@ -309,29 +309,12 @@
     border: none;
 }
 
-.btn-primary {
-    background: var(--sport-gradient);
-    color: rgb(83, 63, 7);
-}
-
-.btn-secondary {
-    background: transparent;
-    border: 2px solid var(--sport-warning);
-    color: var(--sport-warning);
-}
 
 .btn-adventure:hover {
     transform: translateY(-3px);
     filter: brightness(1.1);
 }
 
-.btn-primary:hover {
-    box-shadow: 0 10px 25px rgba(212, 148, 11, 0.826);
-}
-
-.btn-secondary:hover {
-    background: rgba(255,206,103,0.1);
-}
 
 /* Floating Particles */
 .construction-particle {
