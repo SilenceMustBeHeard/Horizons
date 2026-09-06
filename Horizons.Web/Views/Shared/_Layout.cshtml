@@ -1,4 +1,5 @@
-﻿﻿@using Horizons.Data.Models
+﻿﻿
+@using Horizons.Data.Models
 @using Horizons.Data.Models.Base
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<AppUser> SignInManager
@@ -9,118 +10,430 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Horizons - Discover amazing travel destinations around the world. Plan your next adventure with our curated travel guides." />
-    <title>@ViewData["Title"] - Horizons | Travel Blog</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description"
+          content="Horizons - Discover amazing travel destinations around the world. Plan your next adventure with our curated travel guides." />
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>@ViewData["Title"] - Horizons</title>
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <!-- fonts -->
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/home-page.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/map.css" asp-append-version="true" />  
-    <link rel="stylesheet" href="~/css/email-reset.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/errors.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/details.css" asp-append-version="true" />
-    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
 
-    <!-- jQuery (required for some plugins) -->
+
+    <!-- framework -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+
+
+    <!-- icons -->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          rel="stylesheet" />
+
+
+    <!-- leaflet -->
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+
+    <!-- css -->
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/navbar.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/home-page.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/map.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/email-reset.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/errors.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/details.css"
+          asp-append-version="true" />
+
+
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+
+<body>
+
+    <!-- app shell -->
+
+    <div class="app-shell">
+
+
+        <!-- header -->
+
+        <header class="app-header">
+
+            <nav class="app-navbar">
+
+                <div class="navbar-container">
+
+
+                    <!-- brand -->
+
+                    <a class="brand"
+                       asp-controller="Home"
+                       asp-action="Index">
+
+                        <span class="brand-icon">
+                            <i class="fas fa-compass"></i>
+                        </span>
+
+                        <span class="brand-text">
+                            horizons
+                        </span>
+
+                    </a>
+
+
+                    <!-- main navigation -->
+
+                    <div class="main-navigation">
+
+                        <a class="navigation-link"
+                           asp-controller="Destination"
+                           asp-action="Index">
+
+                            <span class="navigation-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </span>
+
+                            <span class="navigation-label">
+                                Discover
+                            </span>
+
+                        </a>
+
+
+                        <a class="navigation-link"
+                           asp-controller="Destination"
+                           asp-action="Map">
+
+                            <span class="navigation-icon">
+                                <i class="fas fa-map"></i>
+                            </span>
+
+                            <span class="navigation-label">
+                                Map
+                            </span>
+
+                        </a>
+
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <!-- contribute -->
+
+                            <div class="navigation-dropdown">
+
+                                <button class="navigation-link navigation-dropdown-trigger"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+
+                                    <span class="navigation-icon">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </span>
+
+                                    <span class="navigation-label">
+                                        Contribute
+                                    </span>
+
+                                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+
+                                </button>
+
+
+                                <ul class="dropdown-menu navigation-menu">
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Destination"
+                                           asp-action="Add">
+
+                                            <i class="fas fa-plus"></i>
+
+                                            <span>
+                                                Add Destination
+                                            </span>
+
+                                        </a>
+                                    </li>
+
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Destination"
+                                           asp-action="Favorites">
+
+                                            <i class="fas fa-heart"></i>
+
+                                            <span>
+                                                My Favorites
+                                            </span>
+
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <!-- user area -->
+
+                    <div class="user-area">
+
+                        <partial name="_LoginPartial" />
+
+                    </div>
+
+
+                    <!-- mobile menu -->
+
+                    <button class="mobile-menu-toggle"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#mobileNavigation"
+                            aria-controls="mobileNavigation"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- mobile navigation -->
+
+                <div class="mobile-navigation collapse"
+                     id="mobileNavigation">
+
+                    <div class="mobile-navigation-inner">
+
+
+                        <a class="mobile-navigation-link"
+                           asp-controller="Destination"
+                           asp-action="Index">
+
+                            <i class="fas fa-globe-americas"></i>
+
+                            <span>
+                                Discover
+                            </span>
+
+                        </a>
+
+
+                        <a class="mobile-navigation-link"
+                           asp-controller="Destination"
+                           asp-action="Map">
+
+                            <i class="fas fa-map"></i>
+
+                            <span>
+                                Map
+                            </span>
+
+                        </a>
+
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <a class="mobile-navigation-link"
+                               asp-controller="Destination"
+                               asp-action="Add">
+
+                                <i class="fas fa-plus-circle"></i>
+
+                                <span>
+                                    Add Destination
+                                </span>
+
+                            </a>
+
+
+                            <a class="mobile-navigation-link"
+                               asp-controller="Destination"
+                               asp-action="Favorites">
+
+                                <i class="fas fa-heart"></i>
+
+                                <span>
+                                    My Favorites
+                                </span>
+
+                            </a>
+                        }
+
+                    </div>
+
+                </div>
+
+            </nav>
+
+        </header>
+
+
+        <!-- main -->
+
+        <main class="app-main">
+
+            @RenderBody()
+
+        </main>
+
+
+        <!-- footer -->
+
+        <footer class="app-footer">
+
+            <div class="footer-container">
+
+
+                <!-- Brand -->
+
+                <div class="footer-brand">
+
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="footer-brand-link">
+
+                        <span class="footer-brand-icon">
+                            <i class="fas fa-compass"></i>
+                        </span>
+
+                        <span class="footer-brand-name">
+                            horizons
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- Quote -->
+
+                <div class="footer-quote">
+
+                    <span class="footer-quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </span>
+
+                    <span id="footer-quote">
+                        The journey is the destination.
+                    </span>
+
+                    <button id="new-quote-btn"
+                            class="footer-quote-refresh"
+                            type="button"
+                            aria-label="New quote">
+
+                        <i class="fas fa-sync-alt"></i>
+
+                    </button>
+
+                </div>
+
+
+                <!-- Copyright -->
+
+                <div class="footer-copyright">
+
+                    <span>
+                        &copy; @DateTime.Now.Year Horizons
+                    </span>
+
+                    <span class="footer-separator">
+                        •
+                    </span>
+
+                    <span>
+                        Explore beyond the obvious.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <!-- global overlay -->
+
+    <div class="app-overlay"
+         aria-hidden="true">
+    </div>
+
+
+    <!-- javascript -->
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                <i class="fas fa-map-marked-alt"></i>
-                horizons
-                <i class="fas fa-mountain"></i>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNavbar">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Destination" asp-action="Index">
-                            <i class="fas fa-globe-americas"></i> Discover
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Destination" asp-action="Map">
-                            <i class="fas fa-map"></i> Map
-                        </a>
-                    </li>
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-plus-circle"></i> Contribute
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Destination" asp-action="Add"><i class="fas fa-plus"></i> Add Destination</a></li>
-                                <li><a class="dropdown-item" asp-controller="Destination" asp-action="Favorites"><i class="fas fa-heart"></i> My Favorites</a></li>
-                            </ul>
-                        </li>
-                    }
-                </ul>
 
-                <!-- User Menu -->
-                <partial name="_LoginPartial" />
-            </div>
-        </div>
-    </nav>
+    <script src="~/js/site.js"
+            asp-append-version="true">
+    </script>
 
-    <!-- Main Content -->
-    <main>
-        @RenderBody()
-    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <i class="fas fa-map-marked-alt"></i> horizons
-                </div>
-                <div class="footer-quote">
-                    <i class="fas fa-quote-left"></i>
-                    <span id="footer-quote">The journey is the destination.</span>
-                    <button id="new-quote-btn" class="btn-icon" aria-label="New quote">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                </div>
-                <div class="footer-copyright">
-                    &copy; @DateTime.Now.Year Horizons
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- toasts -->
 
-    <!-- Custom Scripts -->
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <input type="hidden"
+           id="tempDataSuccess"
+           value="@TempData["Success"]" />
 
-    <!-- TempData Toasts -->
-    <input type="hidden" id="tempDataSuccess" value="@TempData["Success"]" />
-    <input type="hidden" id="tempDataError" value="@TempData["Error"]" />
-    <input type="hidden" id="tempDataWarning" value="@TempData["Warning"]" />
-    <input type="hidden" id="tempDataInfo" value="@TempData["Info"]" />
+    <input type="hidden"
+           id="tempDataError"
+           value="@TempData["Error"]" />
+
+    <input type="hidden"
+           id="tempDataWarning"
+           value="@TempData["Warning"]" />
+
+    <input type="hidden"
+           id="tempDataInfo"
+           value="@TempData["Info"]" />
+
 
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
+
