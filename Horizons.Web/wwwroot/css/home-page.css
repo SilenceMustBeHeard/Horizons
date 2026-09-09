@@ -25,12 +25,12 @@
     background:
         radial-gradient(
             circle at 78% 35%,
-            rgba(99, 193, 116, 0.08),
+            rgba(16, 220, 53, 0.867),
             transparent 32%
         ),
         radial-gradient(
             circle at 15% 70%,
-            rgba(93, 169, 214, 0.045),
+            rgba(8, 154, 39, 0.593),
             transparent 30%
         ),
         linear-gradient(
@@ -57,12 +57,12 @@
 
     background-image:
         linear-gradient(
-            rgba(255, 255, 255, 0.025) 1px,
+            rgba(47, 145, 25, 0.527) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255, 255, 255, 0.025) 1px,
+             rgba(37, 161, 9, 0.859) 1px,
             transparent 1px
         );
 
@@ -71,13 +71,13 @@
     mask-image:
         linear-gradient(
             to bottom,
-            black,
+            rgba(147, 233, 18, 0.59),
             transparent 90%
         );
 }
 
 
-/* cartographic contour lines */
+/* cartographic contour lines (rings)*/
 
 .hero-section::after {
     content: "";
@@ -90,14 +90,14 @@
     right: -180px;
     top: -210px;
 
-    border: 1px solid rgba(99, 193, 116, 0.08);
+    border: 1px solid rgba(17, 48, 22, 0.464);
 
     border-radius: 50%;
 
     box-shadow:
-        0 0 0 38px rgba(99, 193, 116, 0.018),
-        0 0 0 78px rgba(99, 193, 116, 0.014),
-        0 0 0 120px rgba(99, 193, 116, 0.01);
+        0 0 0 38px rgba(40, 131, 57, 0.354),
+        0 0 0 78px rgba(39, 76, 45, 0.431),
+        0 0 0 120px rgba(18, 54, 25, 0.367);
 
     pointer-events: none;
 }
@@ -156,7 +156,7 @@
 .hero-title {
     margin: 0 0 1.25rem;
 
-    color: var(--text-primary);
+    color: #f0fcebd0;
 
     font-family: var(--font-display);
 
@@ -186,7 +186,7 @@
 
     margin-bottom: 2rem;
 
-    color: var(--text-secondary);
+    color:  #f0fcebd0;
 
     font-size: 1.05rem;
 
@@ -314,7 +314,7 @@
 
     margin-bottom: 0.65rem;
 
-    color: var(--primary);
+    color: #e4ece0d0;
 
     font-size: 0.7rem;
     font-weight: 700;
@@ -337,7 +337,7 @@
 /* featured destinations */
 
 .featured-section {
-    background: var(--background);
+    background: #0b220148;
 }
 
 
@@ -380,11 +380,11 @@
 .featured-card:hover {
     transform: translateY(-5px);
 
-    border-color: rgba(99, 193, 116, 0.4);
+    border-color: rgba(45, 164, 9, 0.4);
 
     box-shadow:
         var(--shadow-3),
-        0 0 0 1px rgba(99, 193, 116, 0.05);
+        0 0 0 1px rgba(23, 148, 6, 0.368);
 }
 
 
@@ -423,10 +423,10 @@
     background:
         linear-gradient(
             to top,
-            rgba(11, 15, 14, 0.96) 0%,
-            rgba(11, 15, 14, 0.62) 42%,
-            rgba(11, 15, 14, 0.08) 75%,
-            transparent 100%
+            rgba(42, 105, 8, 0.47) 0%,
+            rgba(11, 137, 4, 0.328) 42%,
+            rgba(5, 170, 16, 0.422) 75%,
+            transparent 90%
         );
 }
 
@@ -536,12 +536,12 @@
     background:
         linear-gradient(
             135deg,
-            rgba(63, 143, 80, 0.14),
-            rgba(22, 29, 27, 0.92) 55%,
-            rgba(17, 23, 22, 0.98)
+            rgba(17, 125, 2, 0.429),
+            rgba(32, 122, 22, 0.411) 55%,
+            rgba(22, 176, 8, 0.363)
         );
 
-    border: 1px solid rgba(99, 193, 116, 0.2);
+    border: 1px solid rgba(9, 152, 35, 0.461);
     border-radius: var(--radius-md);
 
     text-align: center;
@@ -561,13 +561,13 @@
     top: -260px;
     right: -100px;
 
-    border: 1px solid rgba(99, 193, 116, 0.08);
+    border: 1px solid rgba(49, 226, 13, 0.294);
 
     border-radius: 50%;
 
     box-shadow:
-        0 0 0 35px rgba(99, 193, 116, 0.02),
-        0 0 0 70px rgba(99, 193, 116, 0.015);
+        0 0 0 35px rgba(56, 91, 41, 0.401),
+        0 0 0 70px rgba(34, 67, 25, 0.015);
 
     pointer-events: none;
 }
@@ -595,9 +595,9 @@
 
     color: var(--primary);
 
-    background: rgba(99, 193, 116, 0.08);
+    background: rgba(28, 107, 11, 0.506);
 
-    border: 1px solid rgba(99, 193, 116, 0.2);
+    border: 1px solid rgba(50, 114, 62, 0.325);
 
     border-radius: var(--radius-sm);
 
@@ -654,7 +654,7 @@
 
     overflow: hidden;
 
-    background: var(--border-subtle);
+    background: #0e240245;
 
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);

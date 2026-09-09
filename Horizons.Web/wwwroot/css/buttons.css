@@ -14,7 +14,7 @@
     padding: 0 16px;
 
     color: var(--text-primary) !important;
-
+      
     background: var(--surface-3);
 
     border: 1px solid var(--border-default);
@@ -34,7 +34,7 @@
     cursor: pointer;
 
     box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.16);
+        0 1px 2px rgba(36, 89, 3, 0.273);
 
     transition:
         color var(--transition-fast),
@@ -54,7 +54,7 @@
     text-decoration: none;
 
     box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.18);
+        0 3px 10px rgba(74, 227, 3, 0.18);
 
     transform: translateY(-1px);
 }
@@ -63,7 +63,7 @@
     transform: translateY(0);
 
     box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.16);
+        0 1px 3px rgba(31, 201, 5, 0.333);
 }
 
 .btn:focus-visible {
@@ -86,7 +86,7 @@
 /* primary */
 
 .btn-primary {
-    color: #08100a !important;
+    color: #09a40364 !important;
 
     background:
         linear-gradient(
@@ -96,14 +96,14 @@
         );
 
     border-color:
-        rgba(99, 193, 116, 0.7);
+        rgba(41, 134, 10, 0.7);
 
     box-shadow:
         0 2px 8px rgba(63, 143, 80, 0.18);
 }
 
 .btn-primary:hover {
-    color: #08100a !important;
+    color: #249a0a7c !important;
 
     background:
         linear-gradient(
@@ -116,11 +116,11 @@
         rgba(118, 212, 135, 0.85);
 
     box-shadow:
-        0 4px 14px rgba(63, 143, 80, 0.26);
+        0 4px 14px rgba(83, 198, 2, 0.26);
 }
 
 .btn-primary:active {
-    background: var(--primary-dark);
+    background: #249a0a72;
 }
 
 
@@ -158,7 +158,7 @@
     color: var(--text-primary) !important;
 
     background:
-        rgba(99, 193, 116, 0.10);
+        rgba(82, 223, 6, 0.535);
 
     border-color:
         rgba(99, 193, 116, 0.70);
@@ -171,7 +171,7 @@
 /* outline secondary */
 
 .btn-outline-secondary {
-    color: var(--text-secondary) !important;
+    color: #26af0771 !important;
 
     background: transparent;
 
@@ -191,7 +191,7 @@
 /* success */
 
 .btn-success {
-    color: #08100a !important;
+    color: #09e741c2 !important;
 
     background:
         linear-gradient(
@@ -205,7 +205,7 @@
 }
 
 .btn-success:hover {
-    color: #08100a !important;
+    color: #34df349d !important;
 
     background:
         linear-gradient(
@@ -222,24 +222,24 @@
 /* warning */
 
 .btn-warning {
-    color: #171006 !important;
+    color: #be730a84 !important;
 
     background:
         linear-gradient(
             180deg,
             var(--accent),
-            #b98532
+            #b9853287
         );
 
     border-color:
-        rgba(227, 168, 75, 0.65);
+        rgba(229, 142, 3, 0.65);
 
     box-shadow:
-        0 2px 8px rgba(227, 168, 75, 0.14);
+        0 2px 8px rgba(166, 107, 13, 0.515);
 }
 
 .btn-warning:hover {
-    color: #171006 !important;
+    color: #f18d0086 !important;
 
     background:
         linear-gradient(
@@ -259,13 +259,13 @@
 /* danger */
 
 .btn-danger {
-    color: #160807 !important;
+    color: #b05c09 !important;
 
     background:
         linear-gradient(
             180deg,
             var(--danger),
-            #b95147
+            #8e630ec7
         );
 
     border-color:
@@ -273,12 +273,12 @@
 }
 
 .btn-danger:hover {
-    color: #160807 !important;
+    color: #a3160c9a !important;
 
     background:
         linear-gradient(
             180deg,
-            #ea786c,
+            #f23b278e,
             var(--danger)
         );
 
@@ -290,35 +290,35 @@
 /* outline danger */
 
 .btn-outline-danger {
-    color: var(--danger) !important;
+    color: #b00909b2 !important;
 
     background: transparent;
 
     border-color:
-        rgba(224, 107, 95, 0.40);
+        rgba(227, 46, 26, 0.658);
 }
 
 .btn-outline-danger:hover {
-    color: var(--danger) !important;
+    color: #da08089c !important;
 
     background:
-        rgba(224, 107, 95, 0.09);
+        rgba(113, 14, 3, 0.479);
 
     border-color:
-        rgba(224, 107, 95, 0.68);
+        rgba(255, 25, 0, 0.68);
 }
 
 
 /* info  */
 
 .btn-info {
-    color: #071016 !important;
+    color: #0752cc48 !important;
 
     background:
         linear-gradient(
             180deg,
             var(--info),
-            #4384aa
+            #4384aa6b
         );
 
     border-color:
@@ -326,17 +326,17 @@
 }
 
 .btn-info:hover {
-    color: #071016 !important;
+    color: #068feb6d !important;
 
     background:
         linear-gradient(
             180deg,
-            #70b9e0,
+            #0588cf6f,
             var(--info)
         );
 
     border-color:
-        rgba(112, 185, 224, 0.85);
+        rgba(3, 91, 138, 0.473);
 }
 
 
