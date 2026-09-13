@@ -576,41 +576,27 @@
 }
 
 
-/* related destinations */
+/* related destinations */ 
+.related-destinations { margin-top: 3rem; } 
 
-.related-destinations {
-    margin-top: 3rem;
-}
+.related-destinations-header
+ { margin-bottom: 1.25rem; } 
 
+.related-destinations-header 
+h2 { margin: 0; color: var(--text-primary);
 
-.related-destinations-header {
-    margin-bottom: 1.25rem;
-}
-
-
-.related-destinations-header h2 {
-    margin: 0;
-
-    color: var(--text-primary);
-
-    font-family: var(--font-display);
-
-    font-size: 1.6rem;
-    font-weight: 600;
-}
+     font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 600; } 
+      
+      .related-destinations-grid 
+      { display: grid;
+         grid-template-columns: 
+         repeat( auto-fit, minmax
+         (240px, 1fr) ); gap: 1rem; }
 
 
-.related-destinations-grid {
-    display: grid;
 
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(240px, 1fr)
-        );
 
-    gap: 1rem;
-}
 
 
 /* bootstrap compatibility */

@@ -13,8 +13,8 @@
     background:
         linear-gradient(
             180deg,
-            rgba(6, 42, 9, 0.381) 0%,
-            rgba(34, 150, 5, 0.272) 100%
+            rgba(6, 42, 9, 0.254) 0%,
+            rgba(16, 72, 2, 0.272) 100%
         );
 
     border-bottom: 1px solid var(--border-default);
@@ -23,7 +23,7 @@
     -webkit-backdrop-filter: blur(18px);
 
     box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.22);
+        0 4px 20px rgba(3, 175, 17, 0.22);
 }
 
 
@@ -103,7 +103,7 @@
     background:
         linear-gradient(
             135deg,
-            rgba(99, 193, 116, 0.16),
+            rgba(131, 230, 149, 0.16),
             rgba(63, 143, 80, 0.08)
         );
 
@@ -233,13 +233,13 @@
 .navigation-link:hover {
     color: var(--text-primary) !important;
 
-    background: rgba(255, 255, 255, 0.045);
+    background: rgba(1, 92, 11, 0.045);
 
     text-decoration: none;
 }
 
 .navigation-link:focus-visible {
-    outline: 2px solid rgba(99, 193, 116, 0.55);
+    outline: 2px solid rgba(108, 241, 95, 0.55);
     outline-offset: 2px;
 }
 
@@ -328,7 +328,7 @@
 .navigation-dropdown-trigger.show {
     color: var(--text-primary) !important;
 
-    background: rgba(255, 255, 255, 0.045);
+    background: rgba(99, 144, 40, 0.045);
 }
 
 
