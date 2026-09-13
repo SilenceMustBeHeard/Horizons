@@ -157,7 +157,6 @@
     transform: translateX(3px);
 }
 
-
 /* section link */
 
 .section-link {
@@ -783,3 +782,23 @@
 .categories-section .section-header {
     align-items: flex-end;
 }
+
+
+
+
+/* grid */
+
+
+.destinations-grid {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 1.25rem;
+}
+
+
+
