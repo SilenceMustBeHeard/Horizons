@@ -1,5 +1,5 @@
-
 /* destination card */
+/* CHANGED: топъл кафяв градиент вместо зелено-черен */
 
 .card {
     position: relative;
@@ -14,8 +14,8 @@
     background:
         linear-gradient(
             180deg,
-            rgba(29, 38, 35, 0.96),
-            rgba(17, 23, 22, 0.98)
+            rgba(52, 44, 33, 0.96),
+            rgba(26, 22, 17, 0.98)
         );
 
     border: 1px solid var(--border-default);
@@ -34,22 +34,23 @@
 
 
 /* hover */
+/* CHANGED: златен border + топъл hover градиент */
 
 .card:hover {
     transform: translateY(-5px);
 
-    border-color: rgba(99, 193, 116, 0.42);
+    border-color: rgba(217, 184, 118, 0.42);
 
     background:
         linear-gradient(
             180deg,
-            rgba(36, 47, 43, 0.98),
-            rgba(22, 29, 27, 0.99)
+            rgba(64, 54, 40, 0.98),
+            rgba(32, 27, 21, 0.99)
         );
 
     box-shadow:
         var(--shadow-3),
-        0 0 0 1px rgba(99, 193, 116, 0.06);
+        0 0 0 1px rgba(217, 184, 118, 0.06);
 }
 
 
@@ -88,13 +89,15 @@
 
 
 /* image edge / map-like divider */
+/* CHANGED: топъл пергаментов divider */
 
 .card-img-top + .card-body {
-    border-top: 1px solid rgba(255, 255, 255, 0.045);
+    border-top: 1px solid rgba(240, 230, 210, 0.045);
 }
 
 
 /* card body */
+/* CHANGED: топъл кафяв градиент */
 
 .card-body {
     position: relative;
@@ -109,8 +112,8 @@
     background:
         linear-gradient(
             180deg,
-            rgba(22, 29, 27, 0.78),
-            rgba(17, 23, 22, 0.94)
+            rgba(32, 27, 21, 0.78),
+            rgba(26, 22, 17, 0.94)
         );
 }
 
@@ -188,54 +191,56 @@
 
 
 /* favorite button */
+/* CHANGED: по-earth warning тон (мед/карамел) */
 
 .btn-heart.btn-warning {
-    background: rgba(227, 168, 75, 0.12) !important;
+    background: rgba(193, 122, 74, 0.12) !important;
 
-    border-color: rgba(227, 168, 75, 0.42) !important;
+    border-color: rgba(193, 122, 74, 0.42) !important;
 
-    color: var(--accent) !important;
+    color: var(--color-accent) !important;
 }
 
 
 .btn-heart.btn-warning:hover {
-    background: rgba(227, 168, 75, 0.2) !important;
+    background: rgba(193, 122, 74, 0.2) !important;
 
-    border-color: var(--accent) !important;
+    border-color: var(--color-accent) !important;
 
-    color: var(--accent-hover) !important;
+    color: var(--color-accent-hover) !important;
 
     transform: translateY(-1px);
 
     box-shadow:
-        0 4px 14px rgba(227, 168, 75, 0.16);
+        0 4px 14px rgba(10, 8, 6, 0.32);
 }
 
 
 /* active / remove favorite */
+/* CHANGED: earth-danger тон */
 
 .btn-heart.btn-danger,
 .btn-heart.active-heart {
-    background: rgba(224, 107, 95, 0.12) !important;
+    background: rgba(184, 96, 79, 0.12) !important;
 
-    border-color: rgba(224, 107, 95, 0.42) !important;
+    border-color: rgba(184, 96, 79, 0.42) !important;
 
-    color: var(--danger) !important;
+    color: var(--color-danger) !important;
 }
 
 
 .btn-heart.btn-danger:hover,
 .btn-heart.active-heart:hover {
-    background: rgba(224, 107, 95, 0.2) !important;
+    background: rgba(184, 96, 79, 0.2) !important;
 
-    border-color: var(--danger) !important;
+    border-color: var(--color-danger) !important;
 
-    color: #ef8278 !important;
+    color: #c97060 !important;
 
     transform: translateY(-1px);
 
     box-shadow:
-        0 4px 14px rgba(224, 107, 95, 0.15);
+        0 4px 14px rgba(10, 8, 6, 0.35);
 }
 
 
@@ -300,6 +305,8 @@
 }
 
 
+/* CHANGED: топъл кафяв градиент вместо зелено-черен */
+
 .favorite-item {
     position: relative;
 
@@ -310,8 +317,8 @@
     background:
         linear-gradient(
             135deg,
-            rgba(29, 38, 35, 0.96),
-            rgba(17, 23, 22, 0.98)
+            rgba(52, 44, 33, 0.96),
+            rgba(26, 22, 17, 0.98)
         );
 
     border: 1px solid var(--border-default);
@@ -327,16 +334,18 @@
 }
 
 
+/* CHANGED: златен border + топъл hover градиент */
+
 .favorite-item:hover {
     transform: translateY(-2px);
 
-    border-color: rgba(99, 193, 116, 0.32);
+    border-color: rgba(217, 184, 118, 0.32);
 
     background:
         linear-gradient(
             135deg,
-            rgba(36, 47, 43, 0.98),
-            rgba(22, 29, 27, 0.99)
+            rgba(64, 54, 40, 0.98),
+            rgba(32, 27, 21, 0.99)
         );
 
     box-shadow: var(--shadow-1);
