@@ -1,6 +1,5 @@
-
-
 /* auth page */
+
 
 .auth-page {
     position: relative;
@@ -18,12 +17,12 @@
     background:
         radial-gradient(
             circle at 18% 25%,
-            rgba(99, 193, 116, 0.055),
+            rgba(217, 184, 118, 0.055),
             transparent 30%
         ),
         radial-gradient(
             circle at 82% 75%,
-            rgba(93, 169, 214, 0.035),
+            rgba(193, 122, 74, 0.035),
             transparent 28%
         ),
         var(--background);
@@ -31,6 +30,7 @@
 
 
 /* cartographic grid */
+
 
 .auth-page::before {
     content: "";
@@ -44,12 +44,12 @@
 
     background-image:
         linear-gradient(
-            rgba(255, 255, 255, 0.025) 1px,
+            rgba(240, 230, 210, 0.025) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255, 255, 255, 0.025) 1px,
+            rgba(240, 230, 210, 0.025) 1px,
             transparent 1px
         );
 
@@ -58,6 +58,7 @@
 
 
 /* contour circle */
+
 
 .auth-page::after {
     content: "";
@@ -70,13 +71,13 @@
     left: -280px;
     bottom: -320px;
 
-    border: 1px solid rgba(99, 193, 116, 0.07);
+    border: 1px solid rgba(217, 184, 118, 0.07);
 
     border-radius: 50%;
 
     box-shadow:
-        0 0 0 40px rgba(99, 193, 116, 0.015),
-        0 0 0 85px rgba(99, 193, 116, 0.01);
+        0 0 0 40px rgba(217, 184, 118, 0.015),
+        0 0 0 85px rgba(217, 184, 118, 0.01);
 
     pointer-events: none;
 }
@@ -95,6 +96,7 @@
 
 /* auth card */
 
+
 .auth-card {
     position: relative;
 
@@ -103,8 +105,8 @@
     background:
         linear-gradient(
             145deg,
-            rgba(29, 38, 35, 0.98),
-            rgba(17, 23, 22, 0.99)
+            rgba(52, 44, 33, 0.98),
+            rgba(26, 22, 17, 0.99)
         );
 
     border: 1px solid var(--border-default);
@@ -140,6 +142,8 @@
 }
 
 
+
+
 .auth-icon {
     width: 52px;
     height: 52px;
@@ -150,9 +154,9 @@
 
     margin-bottom: 1rem;
 
-    background: rgba(99, 193, 116, 0.07);
+    background: rgba(217, 184, 118, 0.07);
 
-    border: 1px solid rgba(99, 193, 116, 0.18);
+    border: 1px solid rgba(217, 184, 118, 0.18);
     border-radius: var(--radius-sm);
 
     color: var(--primary);
@@ -269,15 +273,17 @@
 }
 
 
+
+
 .auth-form .form-control:focus {
     background: var(--surface-4);
 
-    border-color: rgba(99, 193, 116, 0.55);
+    border-color: rgba(217, 184, 118, 0.55);
 
     color: var(--text-primary);
 
     box-shadow:
-        0 0 0 3px rgba(99, 193, 116, 0.08);
+        0 0 0 3px rgba(217, 184, 118, 0.08);
 }
 
 
@@ -330,11 +336,13 @@
 }
 
 
+
+
 .auth-form .form-check-input:focus {
     border-color: var(--primary);
 
     box-shadow:
-        0 0 0 3px rgba(99, 193, 116, 0.08);
+        0 0 0 3px rgba(217, 184, 118, 0.08);
 }
 
 
@@ -390,6 +398,7 @@
 
 /* validation */
 
+
 .auth-form .text-danger,
 .auth-form .field-validation-error {
     display: block;
@@ -405,7 +414,7 @@
 
 .auth-form .input-validation-error,
 .auth-form .form-control.input-validation-error {
-    border-color: rgba(224, 107, 95, 0.55);
+    border-color: rgba(184, 96, 79, 0.55);
 }
 
 
@@ -414,7 +423,7 @@
     border-color: var(--danger);
 
     box-shadow:
-        0 0 0 3px rgba(224, 107, 95, 0.08);
+        0 0 0 3px rgba(184, 96, 79, 0.08);
 }
 
 
@@ -423,9 +432,9 @@
 
     padding: 0.75rem 0.85rem;
 
-    background: rgba(224, 107, 95, 0.06);
+    background: rgba(184, 96, 79, 0.06);
 
-    border: 1px solid rgba(224, 107, 95, 0.18);
+    border: 1px solid rgba(184, 96, 79, 0.18);
     border-radius: var(--radius-sm);
 
     color: var(--danger);
@@ -531,12 +540,13 @@
 
 /* password requirements */
 
+
 .password-requirements {
     margin-top: 0.65rem;
 
     padding: 0.75rem;
 
-    background: rgba(255, 255, 255, 0.015);
+    background: rgba(240, 230, 210, 0.015);
 
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-sm);
@@ -575,12 +585,13 @@
 
 /* auth success/status */
 
+
 .auth-success {
     padding: 0.85rem;
 
-    background: rgba(99, 193, 116, 0.055);
+    background: rgba(217, 184, 118, 0.055);
 
-    border: 1px solid rgba(99, 193, 116, 0.18);
+    border: 1px solid rgba(217, 184, 118, 0.18);
     border-radius: var(--radius-sm);
 
     color: var(--primary);
@@ -596,12 +607,13 @@
 
 /* auth error */
 
+
 .auth-error {
     padding: 0.85rem;
 
-    background: rgba(224, 107, 95, 0.055);
+    background: rgba(184, 96, 79, 0.055);
 
-    border: 1px solid rgba(224, 107, 95, 0.18);
+    border: 1px solid rgba(184, 96, 79, 0.18);
     border-radius: var(--radius-sm);
 
     color: var(--danger);
@@ -691,19 +703,23 @@
 }
 
 
-.auth-page .alert-danger {
-    background: rgba(224, 107, 95, 0.06);
 
-    border-color: rgba(224, 107, 95, 0.18);
+
+.auth-page .alert-danger {
+    background: rgba(184, 96, 79, 0.06);
+
+    border-color: rgba(184, 96, 79, 0.18);
 
     color: var(--danger);
 }
 
 
-.auth-page .alert-success {
-    background: rgba(99, 193, 116, 0.06);
 
-    border-color: rgba(99, 193, 116, 0.18);
+
+.auth-page .alert-success {
+    background: rgba(217, 184, 118, 0.06);
+
+    border-color: rgba(217, 184, 118, 0.18);
 
     color: var(--primary);
 }
