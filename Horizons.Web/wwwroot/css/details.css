@@ -45,6 +45,7 @@
 
 /* main details card */
 
+
 .details-container {
     position: relative;
 
@@ -53,8 +54,8 @@
     background:
         linear-gradient(
             145deg,
-            rgba(29, 38, 35, 0.98),
-            rgba(17, 23, 22, 0.99)
+            rgba(52, 44, 33, 0.98),
+            rgba(26, 22, 17, 0.99)
         );
 
     border: 1px solid var(--border-default);
@@ -101,6 +102,7 @@
 
 /* image readability */
 
+
 .destination-image-container::after {
     content: "";
 
@@ -112,9 +114,9 @@
     background:
         linear-gradient(
             to bottom,
-            rgba(11, 15, 14, 0.04) 0%,
-            rgba(11, 15, 14, 0.05) 45%,
-            rgba(11, 15, 14, 0.75) 100%
+            rgba(26, 22, 17, 0.04) 0%,
+            rgba(26, 22, 17, 0.05) 45%,
+            rgba(26, 22, 17, 0.75) 100%
         );
 }
 
@@ -329,6 +331,7 @@
 
 /* coordinates */
 
+
 .coordinates {
     display: inline-flex;
     align-items: center;
@@ -340,9 +343,9 @@
 
     padding: 0.45rem 0.65rem;
 
-    background: rgba(99, 193, 116, 0.045);
+    background: rgba(217, 184, 118, 0.045);
 
-    border: 1px solid rgba(99, 193, 116, 0.12);
+    border: 1px solid rgba(217, 184, 118, 0.12);
     border-radius: var(--radius-sm);
 
     color: var(--muted);
@@ -470,9 +473,10 @@
 .destination-tag:hover {
     color: var(--primary);
 
-    background: rgba(99, 193, 116, 0.06);
+   
+    background: rgba(217, 184, 118, 0.06);
 
-    border-color: rgba(99, 193, 116, 0.28);
+    border-color: rgba(217, 184, 118, 0.28);
 }
 
 
@@ -544,14 +548,15 @@
 
 /* danger zone */
 
+
 .destination-danger-zone {
     margin-top: 2rem;
 
     padding: 1rem;
 
-    background: rgba(224, 107, 95, 0.045);
+    background: rgba(184, 96, 79, 0.045);
 
-    border: 1px solid rgba(224, 107, 95, 0.16);
+    border: 1px solid rgba(184, 96, 79, 0.16);
     border-radius: var(--radius-sm);
 }
 
@@ -621,8 +626,9 @@ h2 { margin: 0; color: var(--text-primary);
 .destination-details a {
     color: var(--primary);
 
+  
     text-decoration-color:
-        rgba(99, 193, 116, 0.25);
+        rgba(217, 184, 118, 0.25);
 
     text-underline-offset: 3px;
 }

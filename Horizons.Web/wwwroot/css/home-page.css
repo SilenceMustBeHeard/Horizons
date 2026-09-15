@@ -62,11 +62,12 @@
 
     background: var(--surface-3);
 
-    border-color: rgba(99, 193, 116, 0.4);
+  
+    border-color: rgba(217, 184, 118, 0.4);
 
     box-shadow:
         var(--shadow-3),
-        0 0 0 1px rgba(99, 193, 116, 0.08);
+        0 0 0 1px rgba(217, 184, 118, 0.291);
 }
 
 
@@ -82,9 +83,9 @@
 
     color: var(--primary);
 
-    background: rgba(99, 193, 116, 0.08);
+    background: rgba(217, 184, 118, 0.296);
 
-    border: 1px solid rgba(99, 193, 116, 0.16);
+    border: 1px solid rgba(238, 165, 19, 0.324);
 
     border-radius: var(--radius-sm);
 
@@ -100,9 +101,10 @@
 .category-card:hover .category-icon {
     color: var(--primary-hover);
 
-    background: rgba(99, 193, 116, 0.14);
+   
+    background: rgba(217, 184, 118, 0.595);
 
-    border-color: rgba(99, 193, 116, 0.3);
+    border-color: rgba(217, 184, 118, 0.3);
 }
 
 
@@ -234,6 +236,7 @@
 
 /* featured likes */
 
+
 .featured-card-likes {
     position: absolute;
 
@@ -251,9 +254,11 @@
 
     color: var(--text-primary);
 
-    background: rgba(30, 97, 80, 0.557);
+  
+    background: rgba(128, 68, 9, 0.442);
 
-    border: 1px solid rgba(6, 101, 44, 0.1);
+  
+    border: 1px solid rgba(240, 230, 210, 0.12);
 
     border-radius: var(--radius-pill);
 
@@ -288,6 +293,8 @@
 
 
 /* featured footer */
+
+
 .featured-card-footer {
     display: flex;
     flex-direction: column;
@@ -298,7 +305,8 @@
     margin-top: 0.8rem;
     padding-top: 0.7rem;
 
-    border-top: 1px solid rgba(4, 136, 103, 0.238);
+  
+    border-top: 1px solid rgba(159, 116, 29, 0.51);
 }
 
 .featured-card-date {
@@ -361,9 +369,10 @@
 
     color: var(--primary);
 
-    background: rgba(99, 193, 116, 0.08);
+    
+    background: rgba(235, 171, 43, 0.323);
 
-    border: 1px solid rgba(99, 193, 116, 0.16);
+    border: 1px solid rgba(87, 64, 19, 0.484);
 
     border-radius: var(--radius-sm);
 }
@@ -435,9 +444,10 @@
 
     color: var(--primary);
 
-    background: rgba(99, 193, 116, 0.08);
+  
+    background: rgba(176, 130, 40, 0.294);
 
-    border: 1px solid rgba(99, 193, 116, 0.16);
+    border: 1px solid rgba(217, 184, 118, 0.16);
 
     border-radius: var(--radius-sm);
 
@@ -498,11 +508,12 @@
 
     padding: 4rem;
 
+    
     background:
         linear-gradient(
             135deg,
-            rgba(99, 193, 116, 0.08),
-            rgba(99, 193, 116, 0.025)
+            rgba(233, 167, 35, 0.182),
+            rgba(138, 94, 6, 0.336)
         );
 
     border: 1px solid var(--border-default);
@@ -584,6 +595,7 @@
 
 /* CTA cartographic visual */
 
+
 .cta-visual {
     position: relative;
 
@@ -594,7 +606,7 @@
     background:
         radial-gradient(
             circle at center,
-            rgba(99, 193, 116, 0.08),
+            rgba(217, 184, 118, 0.08),
             transparent 52%
         );
 
@@ -609,13 +621,15 @@
 }
 
 
+
+
 .cta-map-decoration::before,
 .cta-map-decoration::after {
     content: "";
 
     position: absolute;
 
-    border: 1px solid rgba(99, 193, 116, 0.13);
+    border: 1px solid rgba(217, 184, 118, 0.13);
 
     border-radius: 50%;
 }
@@ -643,6 +657,8 @@
 }
 
 
+
+
 .map-line {
     position: absolute;
 
@@ -650,7 +666,7 @@
 
     height: 1px;
 
-    background: rgba(99, 193, 116, 0.14);
+    background: rgba(217, 184, 118, 0.14);
 
     transform-origin: left center;
 }
@@ -686,6 +702,8 @@
 }
 
 
+
+
 .map-marker {
     position: absolute;
 
@@ -698,14 +716,14 @@
 
     color: var(--primary);
 
-    background: rgba(8, 15, 12, 0.9);
+    background: rgba(83, 43, 3, 0.441);
 
-    border: 1px solid rgba(99, 193, 116, 0.35);
+    border: 1px solid rgba(217, 184, 118, 0.35);
 
     border-radius: 50%;
 
     box-shadow:
-        0 0 0 5px rgba(99, 193, 116, 0.05);
+        0 0 0 5px rgba(245, 166, 10, 0.559);
 
     font-size: 0.65rem;
 }
@@ -729,6 +747,8 @@
 }
 
 
+
+
 .map-compass {
     position: absolute;
 
@@ -744,7 +764,7 @@
 
     color: var(--primary);
 
-    border: 1px solid rgba(99, 193, 116, 0.2);
+    border: 1px solid rgba(232, 172, 53, 0.297);
 
     border-radius: 50%;
 
@@ -799,6 +819,3 @@
 
     gap: 1.25rem;
 }
-
-
-

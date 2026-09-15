@@ -1,4 +1,3 @@
-
 /* site */
 
 
@@ -7,68 +6,67 @@
 :root {
 
     /* backgrounds / surfaces */
+   
+    --bg-primary: #1a1611;
+    --bg-secondary: #1f1a14;
 
-    --bg-primary: #0b0f0e;
-    --bg-secondary: #0f1412;
-
-    --surface-1: #111716;
-    --surface-2: #161d1b;
-    --surface-3: #1d2623;
-    --surface-4: #242f2b;
+    --surface-1: #241e17;
+    --surface-2: #2b241b;
+    --surface-3: #342c21;
+    --surface-4: #403628;
 
 
     /* text */
 
-    --text-primary: #e8efec;
-    --text-secondary: #a8b4af;
-    --text-muted: #73817b;
-    --text-disabled: #4d5954;
+    --text-primary: #f0e6d2;
+    --text-secondary: #c4b69a;
+    --text-muted: #8f8065;
+    --text-disabled: #635741;
 
-    --text-on-primary: #08100b;
-    --text-on-accent: #11100b;
+    --text-on-primary: #1a1611;
+    --text-on-accent: #1a1611;
 
 
     /* brand / accent */
+    
+    --color-primary: #d9b876;
+    --color-primary-hover: #e8ca8c;
+    --color-primary-dark: #b8975a;
 
-    --color-primary: #63c174;
-    --color-primary-hover: #76d487;
-    --color-primary-dark: #3f8f50;
+    --color-accent: #c17a4a;
+    --color-accent-hover: #d68e5c;
 
-    --color-accent: #e3a84b;
-    --color-accent-hover: #efb85d;
-
-    --color-info: #5da9d6;
-    --color-success: #63c174;
-    --color-warning: #e3a84b;
-    --color-danger: #e06b5f;
+    --color-info: #7a9bb5;
+    --color-success: #8a9e6b;
+    --color-warning: #d9b876;
+    --color-danger: #b8604f;
 
 
     /* borders */
+    
+    --border-subtle: rgba(240, 230, 210, 0.327);
+    --border-default: rgba(240, 230, 210, 0.256);
+    --border-strong: rgba(240, 230, 210, 0.16);
 
-    --border-subtle: rgba(255, 255, 255, 0.055);
-    --border-default: rgba(255, 255, 255, 0.085);
-    --border-strong: rgba(255, 255, 255, 0.14);
-
-    --border-primary: rgba(99, 193, 116, 0.35);
-    --border-accent: rgba(227, 168, 75, 0.35);
+    --border-primary: rgba(217, 184, 118, 0.35);
+    --border-accent: rgba(193, 122, 74, 0.35);
 
 
-    /* shadows/ elevation */
-
+    /* shadows / elevation */
     --shadow-1:
-        0 2px 8px rgba(0, 0, 0, 0.28);
+        0 2px 8px rgba(63, 48, 33, 0.38);
 
     --shadow-2:
-        0 6px 20px rgba(0, 0, 0, 0.36);
+        0 6px 20px rgba(88, 47, 6, 0.46);
 
     --shadow-3:
-        0 12px 36px rgba(0, 0, 0, 0.46);
+        0 12px 36px rgba(76, 55, 34, 0.58);
 
     --shadow-glow-primary:
-        0 0 0 4px rgba(99, 193, 116, 0.10);
+        0 0 0 4px rgba(217, 184, 118, 0.373);
 
     --shadow-glow-accent:
-        0 0 0 4px rgba(227, 168, 75, 0.10);
+        0 0 0 4px rgba(193, 122, 74, 0.369);
 
 
     /* radius */
@@ -308,13 +306,15 @@ b {
 
 /* selection */
 
+
 ::selection {
-    background: rgba(99, 193, 116, 0.25);
+    background: rgba(217, 184, 118, 0.324);
     color: var(--text-primary);
 }
 
 
 /* scrollbar */
+
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -335,7 +335,7 @@ b {
 
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #303d38;
+    background: #4a3e2d;
 }
 
 
@@ -351,6 +351,7 @@ b {
 
 /* application shell */
 
+
 .app-shell {
     min-height: 100vh;
 
@@ -360,12 +361,12 @@ b {
     background:
         radial-gradient(
             circle at 15% -10%,
-            rgba(99, 193, 116, 0.045),
+            rgba(217, 184, 118, 0.42),
             transparent 32%
         ),
         radial-gradient(
             circle at 90% 0%,
-            rgba(227, 168, 75, 0.025),
+            rgba(193, 122, 74, 0.461),
             transparent 28%
         ),
         var(--bg-primary);
@@ -714,4 +715,3 @@ a:focus:not(:focus-visible) {
         scroll-behavior: auto !important;
     }
 }
-
