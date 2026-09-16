@@ -2,28 +2,34 @@
 
 
 /* Reset */
+
+
 .email-reset-body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #0a0f1c 0%, #1a1a2e 100%);
+    background: linear-gradient(135deg, #1a1611 0%, #2b241b 100%);
     padding: 40px 20px;
 }
 
 /* Container */
+
+
 .email-reset-container {
     max-width: 550px;
     margin: 0 auto;
-    background: rgba(26, 35, 53, 0.95);
+    background: rgba(36, 30, 23, 0.95);
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 51, 102, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(10, 8, 6, 0.55);
+    border: 1px solid rgba(217, 184, 118, 0.3);
 }
 
 /* Header */
+
+
 .email-reset-header {
-    background: linear-gradient(135deg, #FF3366 0%, #FF6B35 50%, #00D4FF 100%);
+    background: linear-gradient(135deg, #d9b876 0%, #c17a4a 50%, #b8975a 100%);
     padding: 30px;
     text-align: center;
 }
@@ -38,33 +44,37 @@
     font-size: 24px;
     font-weight: 800;
     letter-spacing: 3px;
-    color: white;
+    color: #1a1611;
     margin: 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 4px rgba(10, 8, 6, 0.2);
 }
 
 .email-reset-subtitle {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(26, 22, 17, 0.75);
     margin-top: 8px;
     letter-spacing: 1px;
 }
 
 /* Content */
+
+
 .email-reset-content {
     padding: 35px;
-    color: #e0e0e0;
+    color: #c4b69a;
 }
 
 .email-greeting {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 20px;
-    color: white;
+    color: #f0e6d2;
 }
 
+
+
 .email-greeting-name {
-    background: linear-gradient(135deg, #FF3366, #FF6B35);
+    background: linear-gradient(135deg, #d9b876, #c17a4a);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -74,12 +84,14 @@
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 20px;
-    color: #b0b8d0;
+    color: #a8b4af;
 }
 
+
+
 .email-alert-box {
-    background: rgba(0, 212, 255, 0.1);
-    border-left: 3px solid #00D4FF;
+    background: rgba(217, 184, 118, 0.1);
+    border-left: 3px solid #d9b876;
     padding: 15px;
     border-radius: 8px;
     margin: 25px 0;
@@ -87,11 +99,13 @@
 }
 
 .email-alert-icon {
-    color: #00D4FF;
+    color: #d9b876;
     margin-right: 10px;
 }
 
 /* Button */
+
+
 .email-button-container {
     text-align: center;
     margin: 30px 0;
@@ -102,8 +116,8 @@
     align-items: center;
     gap: 10px;
     padding: 14px 32px;
-    background: linear-gradient(135deg, #FF3366, #FF6B35);
-    color: white;
+    background: linear-gradient(135deg, #d9b876, #c17a4a);
+    color: #1a1611;
     text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
@@ -116,12 +130,14 @@
 
     .email-btn-reset:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(255, 51, 102, 0.4);
+        box-shadow: 0 10px 25px rgba(217, 184, 118, 0.35);
     }
 
 /* Fallback Link */
+
+
 .email-fallback-link {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(10, 8, 6, 0.3);
     border-radius: 12px;
     padding: 15px;
     margin: 20px 0;
@@ -130,12 +146,14 @@
 
 .email-fallback-text {
     font-size: 12px;
-    color: #a0a8c0;
+    color: #8f8065;
     margin-bottom: 8px;
 }
 
+
+
 .email-fallback-link a {
-    color: #00D4FF;
+    color: #d9b876;
     text-decoration: none;
     font-size: 12px;
 }
@@ -145,39 +163,46 @@
     }
 
 /* Divider */
+
+
 .email-divider {
     width: 50px;
     height: 2px;
-    background: linear-gradient(90deg, #FF3366, #00D4FF);
+    background: linear-gradient(90deg, #d9b876, #c17a4a);
     margin: 20px auto;
     border-radius: 2px;
 }
 
 /* Notes */
+
+
 .email-note {
     font-size: 12px;
-    color: #a0a8c0;
+    color: #8f8065;
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(240, 230, 210, 0.1);
 }
 
+
 .email-note-icon {
-    color: #FF3366;
+    color: #d9b876;
     margin-right: 5px;
 }
 
 /* Footer */
+
+
 .email-footer {
     text-align: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(10, 8, 6, 0.3);
+    border-top: 1px solid rgba(240, 230, 210, 0.05);
 }
 
 .email-footer-text {
     font-size: 11px;
-    color: #6a7085;
+    color: #635741;
     margin: 5px 0;
 }
 
