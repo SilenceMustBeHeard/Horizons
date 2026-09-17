@@ -2,33 +2,59 @@
 @model DestinationDetailsViewModel
 
 @{
-ViewData["Title"] = Model.Name;
+    ViewData["Title"] = Model.Name;
 }
 
 <div class="destination-details">
 
+    <!-- Back -->
+    <a asp-controller="Destination"
+       asp-action="Index"
+       class="back-link">
+        <i class="fas fa-arrow-left"></i>
+        Back to Explore
+    </a>
 
-<!-- Back -->
-<a asp-controller="Destination"
-   asp-action="Index"
-   class="back-link">
-    <i class="fas fa-arrow-left"></i>
-    Back to Explore
-</a>
+    <!-- Hero -->
+    <article class="destination-hero">
 
-<!-- Main Details Card -->
-<article class="details-container">
+        <!-- Image -->
+        <div class="destination-hero-image">
+            <img src="@(string.IsNullOrEmpty(Model.ImageUrl)
+                        ? "/images/default-image.jpg"
+                        : Model.ImageUrl)"
+                 alt="@Model.Name"
+                 class="destination-image" />
 
-    <!-- Destination Image -->
-    <div class="destination-image-container">
+            @if (User.Identity?.IsAuthenticated == true &&
+                 !Model.IsUserPublisher)
+            {
+                <form asp-action="@(Model.IsUserFavourite
+                                   ? "RemoveFromFavorites"
+                                   : "AddToFavorites")"
+                      method="post"
+                      class="destination-hero-favorite">
 
-        <img src="@(string.IsNullOrEmpty(Model.ImageUrl)
-                    ? "/images/default-image.jpg"
-                    : Model.ImageUrl)"
-             alt="@Model.Name"
-             class="destination-image" />
+                    <input type="hidden"
+                           name="id"
+                           value="@Model.Id" />
 
-        <div class="destination-image-overlay">
+                    <button type="submit"
+                            class="btn-favorite @(Model.IsUserFavourite ? "active" : "")"
+                            aria-pressed="@(Model.IsUserFavourite ? "true" : "false")">
+
+                        <i class="@(Model.IsUserFavourite
+                                    ? "fas fa-heart"
+                                    : "far fa-heart")"></i>
+
+                    </button>
+
+                </form>
+            }
+        </div>
+
+        <!-- Hero Info -->
+        <div class="destination-hero-info">
 
             <div class="destination-location">
                 <i class="fas fa-map-marker-alt"></i>
@@ -44,149 +70,98 @@ ViewData["Title"] = Model.Name;
                 }
             </div>
 
-            @if (User.Identity?.IsAuthenticated == true &&
-                 !Model.IsUserPublisher)
-            {
-                <div class="destination-favorite">
-
-                    <form asp-action="@(Model.IsUserFavourite
-                                       ? "RemoveFromFavorites"
-                                       : "AddToFavorites")"
-                          method="post">
-
-                        <input type="hidden"
-                               name="id"
-                               value="@Model.Id" />
-
-                        <button type="submit"
-                                class="btn @(Model.IsUserFavourite
-                                             ? "btn-danger"
-                                             : "btn-primary")">
-
-                            @if (Model.IsUserFavourite)
-                            {
-                                <i class="fas fa-heart-broken"></i>
-                                <span>Remove from Favorites</span>
-                            }
-                            else
-                            {
-                                <i class="fas fa-heart"></i>
-                                <span>Add to Favorites</span>
-                            }
-
-                        </button>
-
-                    </form>
-
-                </div>
-            }
-
-        </div>
-    </div>
-
-
-    <!-- Content -->
-    <div class="destination-content">
-
-        <!-- Title -->
-        <div class="destination-section">
-
-            <div class="destination-location">
-                <i class="fas fa-mountain"></i>
-                @Model.TerrainName
-            </div>
-
             <h1 class="destination-title">
                 @Model.Name
             </h1>
 
+            @if (!string.IsNullOrWhiteSpace(Model.TerrainName))
+            {
+                <div class="destination-terrain">
+                    <i class="fas fa-mountain"></i>
+                    @Model.TerrainName
+                </div>
+            }
+
             @if (!string.IsNullOrWhiteSpace(Model.Description))
             {
-                <p class="destination-description">
+                <p class="destination-lead">
                     @Model.Description
                 </p>
             }
 
-        </div>
+            <!-- Quick meta -->
+            <div class="destination-hero-meta">
 
-
-        <!-- Meta -->
-        <div class="destination-meta">
-
-            @if (!string.IsNullOrWhiteSpace(Model.PublisherName))
-            {
-                <div class="destination-meta-item">
-
-                    <span class="destination-meta-label">
-                        Publisher
-                    </span>
-
-                    <span class="destination-meta-value">
+                @if (!string.IsNullOrWhiteSpace(Model.PublisherName))
+                {
+                    <div class="hero-meta-item">
                         <i class="fas fa-user"></i>
-                        @Model.PublisherName
-                    </span>
+                        <div>
+                            <span class="hero-meta-label">Publisher</span>
+                            <span class="hero-meta-value">@Model.PublisherName</span>
+                        </div>
+                    </div>
+                }
 
-                </div>
-            }
-
-            <div class="destination-meta-item">
-
-                <span class="destination-meta-label">
-                    Published
-                </span>
-
-                <span class="destination-meta-value">
+                <div class="hero-meta-item">
                     <i class="fas fa-calendar"></i>
-                    @Model.PublishedOn
-                </span>
-
-            </div>
-
-            <div class="destination-meta-item">
-
-                <span class="destination-meta-label">
-                    Favorites
-                </span>
-
-                <span class="destination-meta-value">
-                    <i class="fas fa-heart"></i>
-                    @(Model.FavoriteCount ?? 0)
-                </span>
-
-            </div>
-
-            @if (!string.IsNullOrWhiteSpace(Model.Country))
-            {
-                <div class="destination-meta-item">
-
-                    <span class="destination-meta-label">
-                        Country
-                    </span>
-
-                    <span class="destination-meta-value">
-                        <i class="fas fa-flag"></i>
-                        @Model.Country
-                    </span>
-
+                    <div>
+                        <span class="hero-meta-label">Published</span>
+                        <span class="hero-meta-value">@Model.PublishedOn</span>
+                    </div>
                 </div>
-            }
+
+                <div class="hero-meta-item">
+                    <i class="fas fa-heart"></i>
+                    <div>
+                        <span class="hero-meta-label">Favorites</span>
+                        <span class="hero-meta-value">@(Model.FavoriteCount ?? 0)</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Actions -->
+            <div class="destination-hero-actions">
+
+                <a asp-controller="Destination"
+                   asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Explore
+
+                </a>
+
+                @if (Model.IsUserPublisher)
+                {
+                    <a asp-action="Edit"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-outline-primary">
+
+                        <i class="fas fa-edit"></i>
+                        Edit Story
+
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-outline-danger">
+
+                        <i class="fas fa-trash"></i>
+                        Delete
+
+                    </a>
+                }
+
+            </div>
 
         </div>
 
+    </article>
 
-        <!-- Journey -->
-        <section class="destination-section">
-
-            <h2 class="destination-section-title">
-                The Journey
-            </h2>
-
-            <p>
-                @Model.Description
-            </p>
-
-        </section>
-
+    <!-- Content -->
+    <div class="destination-content">
 
         <!-- Quick Facts -->
         <section class="destination-section">
@@ -195,122 +170,87 @@ ViewData["Title"] = Model.Name;
                 Quick Facts
             </h2>
 
-            <div class="destination-meta">
+            <div class="destination-facts">
 
                 @if (!string.IsNullOrWhiteSpace(Model.Continent))
                 {
-                    <div class="destination-meta-item">
-
-                        <span class="destination-meta-label">
-                            Continent
-                        </span>
-
-                        <span class="destination-meta-value">
-                            <i class="fas fa-globe-americas"></i>
-                            @Model.Continent
-                        </span>
-
-                    </div>
-                }
-
-                @if (Model.TravelDistance.HasValue)
-                {
-                    <div class="destination-meta-item">
-
-                        <span class="destination-meta-label">
-                            Travel Distance
-                        </span>
-
-                        <span class="destination-meta-value">
-                            <i class="fas fa-road"></i>
-                            @Model.TravelDistance.Value.ToString("N0") km
-                        </span>
-
+                    <div class="fact-item">
+                        <i class="fas fa-globe-americas"></i>
+                        <div>
+                            <span class="fact-label">Continent</span>
+                            <span class="fact-value">@Model.Continent</span>
+                        </div>
                     </div>
                 }
 
                 @if (!string.IsNullOrWhiteSpace(Model.Country))
                 {
-                    <div class="destination-meta-item">
-
-                        <span class="destination-meta-label">
-                            Country
-                        </span>
-
-                        <span class="destination-meta-value">
-                            <i class="fas fa-flag"></i>
-                            @Model.Country
-                        </span>
-
+                    <div class="fact-item">
+                        <i class="fas fa-flag"></i>
+                        <div>
+                            <span class="fact-label">Country</span>
+                            <span class="fact-value">@Model.Country</span>
+                        </div>
                     </div>
                 }
 
-                <div class="destination-meta-item">
-
-                    <span class="destination-meta-label">
-                        Published
-                    </span>
-
-                    <span class="destination-meta-value">
-                        <i class="fas fa-calendar-alt"></i>
-                        @Model.PublishedOn
-                    </span>
-
-                </div>
-
-                @if (!string.IsNullOrWhiteSpace(Model.PublisherName))
+                @if (Model.TravelDistance.HasValue)
                 {
-                    <div class="destination-meta-item">
-
-                        <span class="destination-meta-label">
-                            Publisher
-                        </span>
-
-                        <span class="destination-meta-value">
-                            <i class="fas fa-user"></i>
-                            @Model.PublisherName
-                        </span>
-
+                    <div class="fact-item">
+                        <i class="fas fa-road"></i>
+                        <div>
+                            <span class="fact-label">Travel Distance</span>
+                            <span class="fact-value">@Model.TravelDistance.Value.ToString("N0") km</span>
+                        </div>
                     </div>
                 }
+
+                @if (Model.Latitude.HasValue && Model.Longitude.HasValue)
+                {
+                    <div class="fact-item">
+                        <i class="fas fa-crosshairs"></i>
+                        <div>
+                            <span class="fact-label">Coordinates</span>
+                            <span class="fact-value">
+                                @Model.Latitude.Value.ToString("0.0000")°,
+                                @Model.Longitude.Value.ToString("0.0000")°
+                            </span>
+                        </div>
+                    </div>
+                }
+
+                <div class="fact-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div>
+                        <span class="fact-label">Published</span>
+                        <span class="fact-value">@Model.PublishedOn</span>
+                    </div>
+                </div>
 
             </div>
 
         </section>
 
-
-        <!-- Coordinates -->
-        @if (Model.Latitude.HasValue && Model.Longitude.HasValue)
+        <!-- The Journey -->
+        @if (!string.IsNullOrWhiteSpace(Model.Description))
         {
             <section class="destination-section">
 
                 <h2 class="destination-section-title">
-                    Coordinates
+                    The Journey
                 </h2>
 
-                <div class="coordinates">
-
-                    <i class="fas fa-crosshairs"></i>
-
-                    <span>
-                        @Model.Latitude.Value.ToString("0.0000")°
-                    </span>
-
-                    <span>
-                        @Model.Longitude.Value.ToString("0.0000")°
-                    </span>
-
-                </div>
+                <p class="destination-prose">
+                    @Model.Description
+                </p>
 
             </section>
         }
 
-
         <!-- Map -->
-        <section class="destination-map-section">
+        <section class="destination-section">
 
             <h2 class="destination-section-title">
-                <i class="fas fa-map-marked-alt"></i>
                 Location
             </h2>
 
@@ -319,45 +259,27 @@ ViewData["Title"] = Model.Name;
                 <div class="destination-map"
                      data-latitude="@Model.Latitude.Value"
                      data-longitude="@Model.Longitude.Value">
-
                     <div class="map-placeholder">
                         <i class="fas fa-map-marker-alt"></i>
-
                         <div class="coordinates">
-
-                            <span>
-                                @Model.Latitude.Value.ToString("0.0000")°
-                            </span>
-
-                            <span>
-                                @Model.Longitude.Value.ToString("0.0000")°
-                            </span>
-
+                            <span>@Model.Latitude.Value.ToString("0.0000")°</span>
+                            <span>@Model.Longitude.Value.ToString("0.0000")°</span>
                         </div>
                     </div>
-
                 </div>
             }
             else
             {
                 <div class="destination-map">
-
                     <div class="map-placeholder">
                         <i class="fas fa-map-pin"></i>
-
                         <p>Location coordinates not available</p>
-
-                        <small>
-                            Check back soon for updates
-                        </small>
-
+                        <small>Check back soon for updates</small>
                     </div>
-
                 </div>
             }
 
         </section>
-
 
         <!-- Tags -->
         @if (!string.IsNullOrWhiteSpace(Model.TerrainName))
@@ -372,7 +294,6 @@ ViewData["Title"] = Model.Name;
             </div>
         }
 
-
         <!-- Author -->
         @if (!string.IsNullOrWhiteSpace(Model.PublisherName))
         {
@@ -383,101 +304,17 @@ ViewData["Title"] = Model.Name;
                 </span>
 
                 <div>
-
                     <div class="destination-author-label">
                         Published by
                     </div>
-
                     <div class="destination-author-name">
                         @Model.PublisherName
                     </div>
-
                 </div>
 
             </div>
         }
 
-
-        <!-- Actions -->
-        <div class="destination-actions">
-
-            <div class="destination-actions-left">
-
-                <a asp-controller="Destination"
-                   asp-action="Index"
-                   class="btn btn-secondary">
-
-                    <i class="fas fa-arrow-left"></i>
-                    Back to Explore
-
-                </a>
-
-            </div>
-
-
-            <div class="destination-actions-right">
-
-                @if (User.Identity?.IsAuthenticated == true &&
-                     !Model.IsUserPublisher)
-                {
-                    <form asp-action="@(Model.IsUserFavourite
-                                       ? "RemoveFromFavorites"
-                                       : "AddToFavorites")"
-                          method="post">
-
-                        <input type="hidden"
-                               name="id"
-                               value="@Model.Id" />
-
-                        <button type="submit"
-                                class="btn @(Model.IsUserFavourite
-                                             ? "btn-danger"
-                                             : "btn-primary")">
-
-                            @if (Model.IsUserFavourite)
-                            {
-                                <i class="fas fa-heart-broken"></i>
-                                <span>Remove from Favorites</span>
-                            }
-                            else
-                            {
-                                <i class="fas fa-heart"></i>
-                                <span>Add to Favorites</span>
-                            }
-
-                        </button>
-
-                    </form>
-                }
-
-                @if (Model.IsUserPublisher)
-                {
-                    <a asp-action="Edit"
-                       asp-route-id="@Model.Id"
-                       class="btn btn-outline">
-
-                        <i class="fas fa-edit"></i>
-                        Edit Story
-
-                    </a>
-
-                    <a asp-action="Delete"
-                       asp-route-id="@Model.Id"
-                       class="btn btn-danger">
-
-                        <i class="fas fa-trash"></i>
-                        Delete
-
-                    </a>
-                }
-
-            </div>
-
-        </div>
-
     </div>
-
-</article>
-
 
 </div>
