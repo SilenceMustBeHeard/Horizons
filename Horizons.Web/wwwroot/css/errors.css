@@ -1,8 +1,8 @@
 /*==== Not Implemented ====*/
-
+/* CHANGED: топъл пергаментов градиент */
 
 .under-construction {
-    background: linear-gradient(135deg, #1a1611 0%, #2b241b 100%);
+    background: linear-gradient(135deg, #f5efe2 0%, #ede4d2 100%);
     position: relative;
 }
 
@@ -12,39 +12,39 @@
     margin-bottom: 20px;
 }
 
-
+/* CHANGED: златен градиент за code-а */
 
 .error-code {
     font-size: 100px;
     font-weight: 900;
     font-family: 'Orbitron', monospace;
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
+    background: linear-gradient(135deg, #b8934a, #a86238);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     line-height: 1;
 }
 
-
+/* CHANGED: пергаментов badge със златен border */
 
 .error-badge {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    background: rgba(10, 8, 6, 0.6);
+    background: rgba(43, 36, 27, 0.06);
     padding: 8px 20px;
     border-radius: 50px;
-    border: 1px solid #d9b876;
+    border: 1px solid #b8934a;
     margin-top: 10px;
 }
 
     .error-badge i {
-        color: #d9b876;
+        color: #b8934a;
         font-size: 14px;
     }
 
     .error-badge span {
-        color: #d9b876;
+        color: #b8934a;
         font-size: 12px;
         letter-spacing: 2px;
         font-weight: bold;
@@ -54,30 +54,30 @@
     font-size: 36px;
     letter-spacing: 6px;
     margin: 15px 0 10px;
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
+    background: linear-gradient(135deg, #b8934a, #a86238);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
 .error-subtitle {
-    color: var(--text-muted);
+    color: #857659;
     font-size: 16px;
     margin-bottom: 30px;
 }
 
 /* Construction Sign */
-
+/* CHANGED: пергаментов bg със златен border */
 
 .construction-sign {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    background: rgba(10, 8, 6, 0.7);
+    background: rgba(43, 36, 27, 0.06);
     padding: 12px 28px;
     border-radius: 50px;
-    border: 2px solid #d9b876;
+    border: 2px solid #b8934a;
     margin: 20px auto;
     width: fit-content;
     animation: signPulse 1.5s infinite;
@@ -85,36 +85,36 @@
 
 @keyframes signPulse {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(217, 184, 118, 0.4);
+        box-shadow: 0 0 0 0 rgba(184, 147, 74, 0.4);
     }
 
     50% {
-        box-shadow: 0 0 0 15px rgba(217, 184, 118, 0);
+        box-shadow: 0 0 0 15px rgba(184, 147, 74, 0);
     }
 }
 
 .construction-sign i {
-    color: #d9b876;
+    color: #b8934a;
     font-size: 18px;
 }
 
 .construction-sign span {
-    color: #d9b876;
+    color: #b8934a;
     font-size: 14px;
     letter-spacing: 4px;
     font-weight: bold;
 }
 
 /* Progress Section */
-
+/* CHANGED: пергаментов bg със златен border */
 
 .progress-section {
     max-width: 400px;
     margin: 30px auto;
-    background: rgba(10, 8, 6, 0.4);
+    background: rgba(250, 246, 236, 0.7);
     border-radius: 16px;
     padding: 20px;
-    border: 1px solid rgba(217, 184, 118, 0.2);
+    border: 1px solid rgba(184, 147, 74, 0.3);
 }
 
 .progress-header {
@@ -125,17 +125,17 @@
 }
 
 .progress-title {
-    color: var(--text-muted);
+    color: #857659;
     letter-spacing: 1px;
 }
 
     .progress-title i {
         margin-right: 6px;
-        color: #d9b876;
+        color: #b8934a;
     }
 
 .progress-percentage {
-    color: #d9b876;
+    color: #b8934a;
     font-weight: bold;
     font-family: 'Orbitron', monospace;
 }
@@ -143,7 +143,7 @@
 .progress-bar-container {
     position: relative;
     height: 8px;
-    background: rgba(240, 230, 210, 0.1);
+    background: rgba(43, 36, 27, 0.1);
     border-radius: 10px;
     overflow: hidden;
 }
@@ -153,7 +153,7 @@
 .progress-bar-fill {
     width: 0%;
     height: 100%;
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
+    background: linear-gradient(135deg, #b8934a, #a86238);
     border-radius: 10px;
     transition: width 0.3s ease;
 }
@@ -164,7 +164,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(240, 230, 210, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(250, 246, 236, 0.5), transparent);
     animation: glint 2s infinite;
 }
 
@@ -183,33 +183,33 @@
     justify-content: space-between;
     margin-top: 15px;
     padding-top: 12px;
-    border-top: 1px solid rgba(240, 230, 210, 0.1);
+    border-top: 1px solid rgba(43, 36, 27, 0.1);
 }
 
 .detail-item {
     font-size: 11px;
-    color: var(--text-muted);
+    color: #857659;
 }
 
     .detail-item i {
         margin-right: 6px;
-        color: #d9b876;
+        color: #b8934a;
     }
 
     .detail-item strong {
-        color: var(--text-primary);
+        color: #2b241b;
     }
 
 /* Status Panel */
-
+/* CHANGED: пергаментов bg със златен border */
 
 .status-panel {
     max-width: 400px;
     margin: 20px auto;
-    background: rgba(10, 8, 6, 0.6);
+    background: rgba(250, 246, 236, 0.8);
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(217, 184, 118, 0.2);
+    border: 1px solid rgba(184, 147, 74, 0.3);
 }
 
 .status-header {
@@ -217,18 +217,18 @@
     align-items: center;
     gap: 8px;
     padding: 10px 15px;
-    background: rgba(10, 8, 6, 0.5);
-    border-bottom: 1px solid rgba(217, 184, 118, 0.2);
+    background: rgba(43, 36, 27, 0.04);
+    border-bottom: 1px solid rgba(184, 147, 74, 0.25);
     font-size: 11px;
     letter-spacing: 1px;
 }
 
     .status-header i {
-        color: #d9b876;
+        color: #b8934a;
     }
 
     .status-header span {
-        color: var(--text-muted);
+        color: #857659;
     }
 
 .status-messages {
@@ -243,18 +243,18 @@
     display: flex;
     gap: 12px;
     margin-bottom: 8px;
-    color: var(--text-muted);
+    color: #857659;
     opacity: 0.8;
     animation: fadeInMessage 0.3s ease;
 }
 
     .message-item.new-message {
         opacity: 1;
-        color: #d9b876;
+        color: #b8934a;
     }
 
 .message-time {
-    color: #d9b876;
+    color: #b8934a;
     font-weight: bold;
 }
 
@@ -280,18 +280,18 @@
 }
 
 .status-messages::-webkit-scrollbar-track {
-    background: rgba(10, 8, 6, 0.3);
+    background: rgba(43, 36, 27, 0.05);
     border-radius: 4px;
 }
 
 .status-messages::-webkit-scrollbar-thumb {
-    background: #d9b876;
+    background: #b8934a;
     border-radius: 4px;
 }
 
 /* Error Message */
 .error-message {
-    color: var(--text-muted);
+    color: #857659;
     max-width: 450px;
     margin: 20px auto;
     text-align: center;
@@ -324,7 +324,7 @@
 
 .btn-adventure:hover {
     transform: translateY(-3px);
-    filter: brightness(1.1);
+    filter: brightness(1.05);
 }
 
 
@@ -422,27 +422,27 @@
     display: inline-block;
 }
 
-
+/* CHANGED: пергаментов search input */
 
 .search-input {
-    background: #241e17;
-    border: 1px solid var(--border-default);
-    color: var(--text-primary);
+    background: #faf6ec;
+    border: 1px solid rgba(43, 36, 27, 0.14);
+    color: #2b241b;
     border-radius: 50px;
     padding: 10px 20px;
 }
 
     .search-input:focus {
-        border-color: #d9b876;
-        box-shadow: 0 0 0 2px rgba(217, 184, 118, 0.2);
+        border-color: #b8934a;
+        box-shadow: 0 0 0 3px rgba(184, 147, 74, 0.15);
         outline: none;
     }
 
-
+/* CHANGED: златен tag hover */
 
 .tag-link {
-    background: #241e17;
-    color: var(--text-muted);
+    background: #faf6ec;
+    color: #857659;
     padding: 5px 12px;
     border-radius: 20px;
     text-decoration: none;
@@ -451,21 +451,21 @@
 }
 
     .tag-link:hover {
-        background: #d9b876;
-        color: #1a1611;
+        background: #b8934a;
+        color: #faf6ec;
     }
 
 
 
 /*=== Not Allowed ===*/
-
+/* CHANGED: топъл пергаментов градиент */
 
 .access-denied {
-    background: linear-gradient(135deg, #1a1611 0%, #2b1a17 100%);
+    background: linear-gradient(135deg, #f5efe2 0%, #f0e3d2 100%);
     position: relative;
 }
 
-
+/* CHANGED: златна grid overlay */
 
 .grid-overlay {
     position: absolute;
@@ -473,7 +473,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(217, 184, 118, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(217, 184, 118, 0.1) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(184, 147, 74, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(184, 147, 74, 0.15) 1px, transparent 1px);
     background-size: 40px 40px;
     animation: gridMove 20s linear infinite;
 }
@@ -488,7 +488,7 @@
     }
 }
 
-
+/* CHANGED: златна scan line */
 
 .scan-line {
     position: absolute;
@@ -496,7 +496,7 @@
     left: 0;
     width: 100%;
     height: 50%;
-    background: linear-gradient(to bottom, transparent, rgba(217, 184, 118, 0.2), transparent);
+    background: linear-gradient(to bottom, transparent, rgba(184, 147, 74, 0.2), transparent);
     animation: scan 8s linear infinite;
     pointer-events: none;
 }
@@ -518,7 +518,7 @@
     margin: 0 auto 30px;
 }
 
-
+/* CHANGED: earth-danger цвят */
 
 .lock-body {
     position: absolute;
@@ -526,7 +526,7 @@
     left: 50%;
     transform: translateX(-50%);
     font-size: 80px;
-    color: #b8604f;
+    color: #a34d3f;
 }
 
 .lock-shackle {
@@ -536,7 +536,7 @@
     transform: translateX(-50%);
     width: 40px;
     height: 50px;
-    border: 8px solid #b8604f;
+    border: 8px solid #a34d3f;
     border-bottom: none;
     border-radius: 20px 20px 0 0;
     animation: shake 1s infinite;
@@ -556,7 +556,7 @@
     }
 }
 
-
+/* CHANGED: earth-danger pulse */
 
 .lock-pulse {
     position: absolute;
@@ -566,33 +566,33 @@
     height: 120px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(184, 96, 79, 0.2), transparent);
+    background: radial-gradient(circle, rgba(163, 77, 63, 0.2), transparent);
     animation: pulse 2s infinite;
 }
 
-
+/* CHANGED: пергаментов terminal със златен border */
 
 .terminal {
-    background: rgba(10, 8, 6, 0.5);
+    background: rgba(250, 246, 236, 0.9);
     border-radius: 10px;
     padding: 20px;
     margin: 30px auto;
     max-width: 400px;
     text-align: left;
     font-family: 'Courier New', monospace;
-    border: 1px solid #d9b876;
+    border: 1px solid #b8934a;
 }
 
-
+/* CHANGED: златен terminal text вместо неоново зелено */
 
 .terminal-line {
-    color: #d9b876;
+    color: #b8934a;
     font-size: 14px;
     margin-bottom: 10px;
 }
 
     .terminal-line .invalid {
-        color: #b8604f;
+        color: #a34d3f;
     }
 
 .blink {
@@ -631,13 +631,13 @@
     }
 }
 
-
+/* CHANGED: златен cursor вместо неоново зелен */
 
 .cursor {
     display: inline-block;
     width: 10px;
     height: 14px;
-    background: #d9b876;
+    background: #b8934a;
     animation: cursorBlink 1s infinite;
     margin-left: 2px;
 }
@@ -652,35 +652,35 @@
     }
 }
 
-
+/* CHANGED: earth-danger error code */
 
 .error-code {
     font-size: 100px;
     font-weight: 900;
-    color: #b8604f;
-    text-shadow: 0 0 20px rgba(184, 96, 79, 0.5);
+    color: #a34d3f;
+    text-shadow: 0 0 20px rgba(163, 77, 63, 0.3);
     letter-spacing: 10px;
 }
 
 .error-title {
     font-size: 36px;
     letter-spacing: 8px;
-    color: var(--text-primary);
+    color: #2b241b;
     margin: 20px 0;
 }
 
 .error-message {
-    color: var(--text-muted);
+    color: #857659;
     max-width: 500px;
     margin: 20px auto;
 }
 
 
 /* ===BAD REQUEST  ===== */
-
+/* CHANGED: топъл пергаментов градиент */
 
 .bad-request {
-    background: linear-gradient(135deg, #1a1611 0%, #2b241b 100%);
+    background: linear-gradient(135deg, #f5efe2 0%, #ede4d2 100%);
     position: relative;
     overflow: hidden;
 }
@@ -698,11 +698,13 @@
     pointer-events: none;
 }
 
+/* CHANGED: кафяви stars вместо бели (за светъл фон) */
+
 .stars {
-    background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="15" cy="15" r="1.5" fill="white"/><circle cx="65" cy="85" r="1" fill="white"/><circle cx="120" cy="40" r="1.8" fill="white"/><circle cx="180" cy="120" r="1.2" fill="white"/><circle cx="45" cy="160" r="1.4" fill="white"/><circle cx="95" cy="180" r="0.8" fill="white"/><circle cx="150" cy="70" r="1.1" fill="white"/><circle cx="30" cy="100" r="0.9" fill="white"/></svg>') repeat;
+    background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="15" cy="15" r="1.5" fill="%232b241b"/><circle cx="65" cy="85" r="1" fill="%232b241b"/><circle cx="120" cy="40" r="1.8" fill="%232b241b"/><circle cx="180" cy="120" r="1.2" fill="%232b241b"/><circle cx="45" cy="160" r="1.4" fill="%232b241b"/><circle cx="95" cy="180" r="0.8" fill="%232b241b"/><circle cx="150" cy="70" r="1.1" fill="%232b241b"/><circle cx="30" cy="100" r="0.9" fill="%232b241b"/></svg>') repeat;
     background-size: 200px 200px;
     animation: starMove 200s linear infinite;
-    opacity: 0.6;
+    opacity: 0.25;
 }
 
 @keyframes starMove {
@@ -715,20 +717,22 @@
     }
 }
 
+/* CHANGED: кафяви twinkling */
+
 .twinkling {
-    background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><circle cx="25" cy="25" r="2" fill="white" opacity="0.8"/><circle cx="100" cy="130" r="1.5" fill="white" opacity="0.6"/><circle cx="180" cy="60" r="2.5" fill="white" opacity="0.9"/><circle cx="250" cy="180" r="1.8" fill="white" opacity="0.7"/><circle cx="70" cy="240" r="2" fill="white" opacity="0.8"/></svg>') repeat;
+    background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><circle cx="25" cy="25" r="2" fill="%232b241b" opacity="0.8"/><circle cx="100" cy="130" r="1.5" fill="%232b241b" opacity="0.6"/><circle cx="180" cy="60" r="2.5" fill="%232b241b" opacity="0.9"/><circle cx="250" cy="180" r="1.8" fill="%232b241b" opacity="0.7"/><circle cx="70" cy="240" r="2" fill="%232b241b" opacity="0.8"/></svg>') repeat;
     background-size: 300px 300px;
     animation: twinkle 4s ease-in-out infinite;
-    opacity: 0.3;
+    opacity: 0.15;
 }
 
 @keyframes twinkle {
     0%, 100% {
-        opacity: 0.3;
+        opacity: 0.15;
     }
 
     50% {
-        opacity: 0.6;
+        opacity: 0.3;
     }
 }
 
@@ -738,39 +742,39 @@
     margin-bottom: 20px;
 }
 
-
+/* CHANGED: златен градиент */
 
 .bad-request .error-code {
     font-size: 100px;
     font-weight: 900;
     font-family: 'Orbitron', monospace;
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
+    background: linear-gradient(135deg, #b8934a, #a86238);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     line-height: 1;
 }
 
-
+/* CHANGED: пергаментов badge със златен border */
 
 .bad-request .error-badge {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    background: rgba(10, 8, 6, 0.6);
+    background: rgba(43, 36, 27, 0.06);
     padding: 8px 20px;
     border-radius: 50px;
-    border: 1px solid #d9b876;
+    border: 1px solid #b8934a;
     margin-top: 10px;
 }
 
     .bad-request .error-badge i {
-        color: #d9b876;
+        color: #b8934a;
         font-size: 14px;
     }
 
     .bad-request .error-badge span {
-        color: #d9b876;
+        color: #b8934a;
         font-size: 12px;
         letter-spacing: 2px;
         font-weight: bold;
@@ -780,14 +784,14 @@
     font-size: 36px;
     letter-spacing: 6px;
     margin: 15px 0 10px;
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
+    background: linear-gradient(135deg, #b8934a, #a86238);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
 .bad-request .error-subtitle {
-    color: var(--text-muted);
+    color: #857659;
     font-size: 16px;
     margin-bottom: 30px;
 }
@@ -800,13 +804,13 @@
     margin: 20px auto;
 }
 
-
+/* CHANGED: златен compass ring */
 
 .compass-ring {
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 3px solid rgba(217, 184, 118, 0.3);
+    border: 3px solid rgba(184, 147, 74, 0.3);
     border-radius: 50%;
     animation: spin 8s linear infinite;
 }
@@ -821,7 +825,7 @@
     }
 }
 
-
+/* CHANGED: златна needle */
 
 .compass-needle {
     position: absolute;
@@ -829,7 +833,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 45px;
-    color: #d9b876;
+    color: #b8934a;
     animation: wobble 0.8s ease-in-out infinite;
 }
 
@@ -852,7 +856,7 @@
 
     .compass-circle span {
         position: absolute;
-        color: var(--text-muted);
+        color: #857659;
         font-family: 'Orbitron', monospace;
         font-size: 12px;
         font-weight: bold;
@@ -882,7 +886,7 @@
             transform: translateY(-50%);
         }
 
-
+/* CHANGED: earth-danger glitch text */
 
 .compass-glitch {
     position: absolute;
@@ -891,7 +895,7 @@
     transform: translateX(-50%);
     font-size: 11px;
     letter-spacing: 3px;
-    color: #b8604f;
+    color: #a34d3f;
     white-space: nowrap;
     font-family: 'Orbitron', monospace;
     animation: glitchText 0.5s infinite;
@@ -910,15 +914,15 @@
 }
 
 /* Tips Panel */
-
+/* CHANGED: пергаментов bg със златен border */
 
 .tips-panel {
     max-width: 400px;
     margin: 25px auto;
-    background: rgba(10, 8, 6, 0.4);
+    background: rgba(250, 246, 236, 0.7);
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid rgba(217, 184, 118, 0.2);
+    border: 1px solid rgba(184, 147, 74, 0.3);
 }
 
 .tips-header {
@@ -927,18 +931,18 @@
     justify-content: center;
     gap: 8px;
     padding: 12px;
-    background: rgba(10, 8, 6, 0.5);
-    border-bottom: 1px solid rgba(217, 184, 118, 0.2);
+    background: rgba(43, 36, 27, 0.04);
+    border-bottom: 1px solid rgba(184, 147, 74, 0.25);
     font-size: 11px;
     letter-spacing: 2px;
 }
 
     .tips-header i {
-        color: #d9b876;
+        color: #b8934a;
     }
 
     .tips-header span {
-        color: var(--text-muted);
+        color: #857659;
         font-weight: bold;
     }
 
@@ -951,9 +955,9 @@
     align-items: center;
     gap: 12px;
     padding: 8px 0;
-    border-bottom: 1px solid rgba(240, 230, 210, 0.05);
+    border-bottom: 1px solid rgba(43, 36, 27, 0.08);
     font-size: 12px;
-    color: var(--text-muted);
+    color: #5a4f3e;
 }
 
     .tip-item:last-child {
@@ -962,7 +966,7 @@
 
     .tip-item i {
         width: 24px;
-        color: #d9b876;
+        color: #b8934a;
         font-size: 14px;
     }
 
@@ -983,16 +987,16 @@
     margin: 0 auto 10px;
 }
 
-
+/* CHANGED: златен radar sweep */
 
 .radar-sweep {
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0deg, rgba(217, 184, 118, 0.4) 360deg);
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(184, 147, 74, 0.4) 360deg);
     animation: radarSweep 2s linear infinite;
-    border: 1px solid rgba(217, 184, 118, 0.3);
+    border: 1px solid rgba(184, 147, 74, 0.3);
     border-radius: 50%;
 }
 
@@ -1006,7 +1010,7 @@
     }
 }
 
-
+/* CHANGED: златна radar dot */
 
 .radar-dot {
     position: absolute;
@@ -1014,18 +1018,18 @@
     left: 50%;
     width: 6px;
     height: 6px;
-    background: #d9b876;
+    background: #b8934a;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px #d9b876;
+    box-shadow: 0 0 10px #b8934a;
     animation: radarBlip 1s infinite;
 }
 
     .radar-dot.dot2 {
         width: 4px;
         height: 4px;
-        background: #c17a4a;
-        box-shadow: 0 0 8px #c17a4a;
+        background: #a86238;
+        box-shadow: 0 0 8px #a86238;
         animation: radarBlip 1.5s infinite;
         opacity: 0;
     }
@@ -1044,14 +1048,14 @@
 
 .radar-text {
     font-size: 10px;
-    color: var(--text-muted);
+    color: #857659;
     letter-spacing: 2px;
     font-family: 'Orbitron', monospace;
 }
 
 /* Error Message */
 .bad-request .error-message {
-    color: var(--text-muted);
+    color: #857659;
     max-width: 450px;
     margin: 20px auto;
     text-align: center;
@@ -1081,30 +1085,32 @@
     border: none;
 }
 
-/* CHANGED: златен градиент */
+/* CHANGED: златен градиент с пергаментов текст */
 
 .bad-request .btn-primary {
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
-    color: #1a1611;
+    background: linear-gradient(135deg, #b8934a, #a86238);
+    color: #faf6ec;
 }
+
+/* CHANGED: златен outline */
 
 .bad-request .btn-secondary {
     background: transparent;
-    border: 2px solid #d9b876;
-    color: #d9b876;
+    border: 2px solid #b8934a;
+    color: #b8934a;
 }
 
 .bad-request .btn-adventure:hover {
     transform: translateY(-3px);
-    filter: brightness(1.1);
+    filter: brightness(1.05);
 }
 
 .bad-request .btn-primary:hover {
-    box-shadow: 0 10px 25px rgba(217, 184, 118, 0.3);
+    box-shadow: 0 10px 25px rgba(43, 36, 27, 0.2);
 }
 
 .bad-request .btn-secondary:hover {
-    background: rgba(217, 184, 118, 0.1);
+    background: rgba(184, 147, 74, 0.12);
 }
 
 /* Floating Particles */
@@ -1186,14 +1192,14 @@
 
 
 /*=== Server Error ===*/
-
+/* CHANGED: топъл пергаментов градиент */
 
 .server-error {
-    background: linear-gradient(135deg, #1a1611 0%, #2b1a17 100%);
+    background: linear-gradient(135deg, #f5efe2 0%, #f0e3d2 100%);
     position: relative;
 }
 
-
+/* CHANGED: златна glitch overlay */
 
 .glitch-overlay {
     position: absolute;
@@ -1201,7 +1207,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient( 0deg, transparent, transparent 2px, rgba(217, 184, 118, 0.05) 2px, rgba(217, 184, 118, 0.05) 4px );
+    background: repeating-linear-gradient( 0deg, transparent, transparent 2px, rgba(184, 147, 74, 0.06) 2px, rgba(184, 147, 74, 0.06) 4px );
     pointer-events: none;
     animation: glitchScan 0.2s infinite;
 }
@@ -1216,25 +1222,27 @@
     }
 }
 
+/* CHANGED: кафява статична шум (за светъл фон) */
+
 .static-noise {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="10" height="10" fill="rgba(240,230,210,0.02)"/><rect x="20" y="30" width="5" height="5" fill="rgba(240,230,210,0.03)"/><rect x="50" y="10" width="8" height="8" fill="rgba(240,230,210,0.02)"/><rect x="70" y="60" width="6" height="6" fill="rgba(240,230,210,0.03)"/><rect x="30" y="80" width="12" height="12" fill="rgba(240,230,210,0.02)"/></svg>') repeat;
-    opacity: 0.1;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="10" height="10" fill="rgba(43,36,27,0.03)"/><rect x="20" y="30" width="5" height="5" fill="rgba(43,36,27,0.04)"/><rect x="50" y="10" width="8" height="8" fill="rgba(43,36,27,0.03)"/><rect x="70" y="60" width="6" height="6" fill="rgba(43,36,27,0.04)"/><rect x="30" y="80" width="12" height="12" fill="rgba(43,36,27,0.03)"/></svg>') repeat;
+    opacity: 0.3;
     pointer-events: none;
     animation: staticFlicker 0.1s infinite;
 }
 
 @keyframes staticFlicker {
     0%, 100% {
-        opacity: 0.1;
+        opacity: 0.3;
     }
 
     50% {
-        opacity: 0.05;
+        opacity: 0.15;
     }
 }
 
@@ -1250,6 +1258,7 @@
     overflow: hidden;
 }
 
+/* CHANGED: топли кафяви планини */
 
 .mountain {
     position: absolute;
@@ -1259,7 +1268,7 @@
     height: 0;
     border-left: 80px solid transparent;
     border-right: 80px solid transparent;
-    border-bottom: 120px solid #4a3d2a;
+    border-bottom: 120px solid #8a7a5f;
 }
 
     .mountain::before {
@@ -1271,7 +1280,7 @@
         height: 0;
         border-left: 40px solid transparent;
         border-right: 40px solid transparent;
-        border-bottom: 60px solid #6b5a3f;
+        border-bottom: 60px solid #a89a7f;
     }
 
 .mountain-back {
@@ -1280,13 +1289,15 @@
     opacity: 0.5;
 }
 
+/* CHANGED: пергаментов сняг */
+
 .snow-slab {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 20px;
-    background: linear-gradient(to bottom, #f0e6d2, #d4c4a4);
+    background: linear-gradient(to bottom, #faf6ec, #e8dcc4);
     animation: shake 0.3s infinite;
 }
 
@@ -1299,13 +1310,16 @@
     pointer-events: none;
 }
 
+/* CHANGED: пергаментови снежни топки */
+
 .snowball {
     position: absolute;
     width: 10px;
     height: 10px;
-    background: #f0e6d2;
+    background: #faf6ec;
     border-radius: 50%;
-    opacity: 0.8;
+    opacity: 0.9;
+    box-shadow: 0 1px 3px rgba(43, 36, 27, 0.15);
     animation: avalanche 1.5s infinite;
 }
 
@@ -1351,11 +1365,11 @@
     }
 
     20% {
-        opacity: 0.8;
+        opacity: 0.9;
     }
 
     80% {
-        opacity: 0.8;
+        opacity: 0.9;
     }
 
     100% {
@@ -1392,25 +1406,25 @@
         display: inline-block;
     }
 
-
+/* CHANGED: златен градиент */
 
 .code-5 {
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
+    background: linear-gradient(135deg, #b8934a, #a86238);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: shakeCode 0.5s infinite;
 }
 
-
+/* CHANGED: earth-danger + злато */
 
 .code-0-1 {
-    color: #b8604f;
+    color: #a34d3f;
     animation: glitchCode 1s infinite;
 }
 
 .code-0-2 {
-    color: #d9b876;
+    color: #b8934a;
     animation: glitchCode 1s infinite reverse;
 }
 
@@ -1436,29 +1450,29 @@
     }
 }
 
-
+/* CHANGED: пергаментов bg + earth-danger border */
 
 .system-error {
-    background: rgba(10, 8, 6, 0.6);
+    background: rgba(250, 246, 236, 0.9);
     border-radius: 10px;
     padding: 15px;
     max-width: 400px;
     margin: 20px auto;
     font-family: 'Courier New', monospace;
-    border-left: 3px solid #b8604f;
+    border-left: 3px solid #a34d3f;
     text-align: left;
 }
 
-
+/* CHANGED: златен log text */
 
 .log-line {
     font-size: 12px;
     margin-bottom: 8px;
-    color: #d9b876;
+    color: #b8934a;
 }
 
 .error-text {
-    color: #b8604f;
+    color: #a34d3f;
     animation: blink 0.5s infinite;
 }
 
@@ -1485,26 +1499,28 @@
     text-align: center;
 }
 
+/* CHANGED: пергаментов фон */
+
 .rescue-progress {
     height: 4px;
-    background: #241e17;
+    background: rgba(43, 36, 27, 0.1);
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 8px;
 }
 
-
+/* CHANGED: златен градиент */
 
 .rescue-bar {
     width: 0%;
     height: 100%;
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
+    background: linear-gradient(135deg, #b8934a, #a86238);
     transition: width 0.1s linear;
 }
 
 .rescue-text {
     font-size: 10px;
-    color: var(--text-muted);
+    color: #857659;
     letter-spacing: 1px;
 }
 
