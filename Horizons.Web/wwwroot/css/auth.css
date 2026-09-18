@@ -1,5 +1,5 @@
 /* auth page */
-
+/* CHANGED: топли radial gradient-и върху пергаментов фон */
 
 .auth-page {
     position: relative;
@@ -17,20 +17,20 @@
     background:
         radial-gradient(
             circle at 18% 25%,
-            rgba(217, 184, 118, 0.055),
+            rgba(184, 147, 74, 0.08),
             transparent 30%
         ),
         radial-gradient(
             circle at 82% 75%,
-            rgba(193, 122, 74, 0.035),
+            rgba(168, 98, 56, 0.05),
             transparent 28%
         ),
-        var(--background);
+        var(--bg-primary);
 }
 
 
 /* cartographic grid */
-
+/* CHANGED: топли кафяви линии вместо студено бели */
 
 .auth-page::before {
     content: "";
@@ -40,16 +40,16 @@
 
     pointer-events: none;
 
-    opacity: 0.2;
+    opacity: 0.4;
 
     background-image:
         linear-gradient(
-            rgba(240, 230, 210, 0.025) 1px,
+            rgba(43, 36, 27, 0.06) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(240, 230, 210, 0.025) 1px,
+            rgba(43, 36, 27, 0.06) 1px,
             transparent 1px
         );
 
@@ -58,7 +58,7 @@
 
 
 /* contour circle */
-
+/* CHANGED: златни contour кръгове */
 
 .auth-page::after {
     content: "";
@@ -71,19 +71,21 @@
     left: -280px;
     bottom: -320px;
 
-    border: 1px solid rgba(217, 184, 118, 0.07);
+    border: 1px solid rgba(184, 147, 74, 0.12);
 
     border-radius: 50%;
 
     box-shadow:
-        0 0 0 40px rgba(217, 184, 118, 0.015),
-        0 0 0 85px rgba(217, 184, 118, 0.01);
+        0 0 0 40px rgba(184, 147, 74, 0.04),
+        0 0 0 85px rgba(184, 147, 74, 0.02);
 
     pointer-events: none;
 }
 
 
-/* auth container */
+/* ============================
+   AUTH CONTAINER
+   ============================ */
 
 .auth-container {
     position: relative;
@@ -91,28 +93,38 @@
 
     width: 100%;
     max-width: 440px;
+
+    margin-inline: auto;
+}
+
+/* Register page - по-широк контейнер */
+.auth-container:has(.auth-card-wide) {
+    max-width: 520px;
 }
 
 
-/* auth card */
-
+/* ============================
+   AUTH CARD
+   ============================ */
 
 .auth-card {
     position: relative;
 
+    width: 100%;
+
     padding: 2rem;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(52, 44, 33, 0.98),
-            rgba(26, 22, 17, 0.99)
-        );
+    background: var(--surface-1);
 
     border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
 
     box-shadow: var(--shadow-3);
+}
+
+/* Register page - по-широка карта (fallback) */
+.auth-card-wide {
+    max-width: 520px;
 }
 
 
@@ -129,11 +141,13 @@
     width: 42px;
     height: 2px;
 
-    background: var(--primary);
+    background: var(--color-primary);
 }
 
 
-/* auth header */
+/* ============================
+   AUTH HEADER
+   ============================ */
 
 .auth-header {
     margin-bottom: 1.75rem;
@@ -142,7 +156,7 @@
 }
 
 
-
+/* CHANGED: златна прозрачност */
 
 .auth-icon {
     width: 52px;
@@ -154,12 +168,12 @@
 
     margin-bottom: 1rem;
 
-    background: rgba(217, 184, 118, 0.07);
+    background: rgba(184, 147, 74, 0.12);
 
-    border: 1px solid rgba(217, 184, 118, 0.18);
+    border: 1px solid rgba(184, 147, 74, 0.25);
     border-radius: var(--radius-sm);
 
-    color: var(--primary);
+    color: var(--color-primary);
 
     font-size: 1.15rem;
 }
@@ -194,6 +208,10 @@
 }
 
 
+/* ============================
+   FORM STRUCTURE
+   ============================ */
+
 /* form group */
 
 .auth-form .form-group,
@@ -203,7 +221,36 @@
 }
 
 
-/* labels*/
+/* CHANGED: form-row за две колони (First/Last Name, Password/Confirm) */
+
+.auth-form .form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 1rem;
+}
+
+.auth-form .form-row .form-group {
+    margin-bottom: 0 !important;
+}
+
+
+/* CHANGED: form-options за Remember me + Forgot password */
+
+.auth-form .form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    margin-bottom: 1.25rem;
+    margin-top: -0.25rem;
+}
+
+
+/* labels */
 
 .auth-form label,
 .auth-form .form-label {
@@ -211,7 +258,7 @@
 
     margin-bottom: 0.45rem;
 
-    color: var(--secondary);
+    color: var(--text-secondary);
 
     font-size: 0.75rem;
     font-weight: 600;
@@ -224,13 +271,28 @@
 .auth-form .form-label i {
     margin-right: 0.35rem;
 
-    color: var(--primary);
+    color: var(--color-primary);
 
     font-size: 0.7rem;
 }
 
 
-/* inputs    */
+/* CHANGED: label-optional за (Optional) */
+
+.auth-form .label-optional {
+    margin-left: 0.35rem;
+
+    color: var(--text-muted);
+
+    font-size: 0.68rem;
+    font-weight: 400;
+
+    font-style: italic;
+}
+
+
+/* inputs */
+/* CHANGED: пергаментов input с топъл border */
 
 .auth-form .form-control,
 .auth-form input[type="text"],
@@ -242,7 +304,7 @@
 
     padding: 0.7rem 0.85rem;
 
-    background: var(--surface-3);
+    background: var(--surface-1);
 
     border: 1px solid var(--border-default);
     border-radius: var(--radius-sm);
@@ -264,7 +326,7 @@
 
 
 .auth-form .form-control::placeholder {
-    color: var(--muted);
+    color: var(--text-muted);
 }
 
 
@@ -273,17 +335,17 @@
 }
 
 
-
+/* CHANGED: златен focus ring */
 
 .auth-form .form-control:focus {
-    background: var(--surface-4);
+    background: var(--surface-2);
 
-    border-color: rgba(217, 184, 118, 0.55);
+    border-color: rgba(184, 147, 74, 0.6);
 
     color: var(--text-primary);
 
     box-shadow:
-        0 0 0 3px rgba(217, 184, 118, 0.08);
+        0 0 0 3px rgba(184, 147, 74, 0.15);
 }
 
 
@@ -291,13 +353,15 @@
 .auth-form .form-control[readonly] {
     background: var(--surface-2);
 
-    color: var(--muted);
+    color: var(--text-muted);
 
     opacity: 0.7;
 }
 
 
-/* check  */
+/* ============================
+   CHECKBOX
+   ============================ */
 
 .auth-form .form-check {
     display: flex;
@@ -311,6 +375,44 @@
 }
 
 
+/* CHANGED: checkbox-label за Remember me */
+
+.auth-form .checkbox-label {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 0.5rem;
+
+    cursor: pointer;
+
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.78rem;
+    font-weight: 500;
+
+    user-select: none;
+}
+
+.auth-form .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+
+    margin: 0;
+
+    accent-color: var(--color-primary);
+
+    cursor: pointer;
+}
+
+.auth-form .checkbox-text {
+    color: var(--text-secondary);
+
+    font-size: 0.78rem;
+}
+
+
 .auth-form .form-check-input {
     float: none;
 
@@ -319,7 +421,7 @@
 
     margin: 0;
 
-    background-color: var(--surface-3);
+    background-color: var(--surface-1);
 
     border: 1px solid var(--border-strong);
 
@@ -329,27 +431,29 @@
 }
 
 
-.auth-form .form-check-input:checked {
-    background-color: var(--primary);
+/* CHANGED: златен checked */
 
-    border-color: var(--primary);
+.auth-form .form-check-input:checked {
+    background-color: var(--color-primary);
+
+    border-color: var(--color-primary);
 }
 
 
-
+/* CHANGED: златен focus ring */
 
 .auth-form .form-check-input:focus {
-    border-color: var(--primary);
+    border-color: var(--color-primary);
 
     box-shadow:
-        0 0 0 3px rgba(217, 184, 118, 0.08);
+        0 0 0 3px rgba(184, 147, 74, 0.15);
 }
 
 
 .auth-form .form-check-label {
     margin: 0;
 
-    color: var(--secondary);
+    color: var(--text-secondary);
 
     font-size: 0.78rem;
 
@@ -357,11 +461,13 @@
 }
 
 
-/* links */
+/* ============================
+   LINKS
+   ============================ */
 
 .auth-form a,
 .auth-links a {
-    color: var(--primary);
+    color: var(--color-primary);
 
     text-decoration: none;
 
@@ -372,7 +478,32 @@
 
 .auth-form a:hover,
 .auth-links a:hover {
-    color: var(--primary-hover);
+    color: var(--color-primary-hover);
+
+    text-decoration: underline;
+
+    text-underline-offset: 3px;
+}
+
+
+/* CHANGED: forgot-link за Login */
+
+.auth-form .forgot-link {
+    color: var(--color-primary);
+
+    font-size: 0.78rem;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition:
+        color var(--transition-fast);
+}
+
+.auth-form .forgot-link:hover {
+    color: var(--color-primary-hover);
 
     text-decoration: underline;
 
@@ -396,16 +527,20 @@
 }
 
 
-/* validation */
+/* ============================
+   VALIDATION
+   ============================ */
 
+/* CHANGED: earth-danger тонове */
 
 .auth-form .text-danger,
+.auth-form .field-validation,
 .auth-form .field-validation-error {
     display: block;
 
     margin-top: 0.4rem;
 
-    color: var(--danger) !important;
+    color: var(--color-danger) !important;
 
     font-size: 0.72rem;
     line-height: 1.4;
@@ -414,39 +549,58 @@
 
 .auth-form .input-validation-error,
 .auth-form .form-control.input-validation-error {
-    border-color: rgba(184, 96, 79, 0.55);
+    border-color: rgba(163, 77, 63, 0.55);
 }
 
 
 .auth-form .input-validation-error:focus,
 .auth-form .form-control.input-validation-error:focus {
-    border-color: var(--danger);
+    border-color: var(--color-danger);
 
     box-shadow:
-        0 0 0 3px rgba(184, 96, 79, 0.08);
+        0 0 0 3px rgba(163, 77, 63, 0.15);
 }
 
 
-.auth-validation-summary {
+/* CHANGED: validation-summary (за asp-validation-summary) */
+
+.auth-form .validation-summary,
+.auth-form .auth-validation-summary {
     margin-bottom: 1rem;
 
     padding: 0.75rem 0.85rem;
 
-    background: rgba(184, 96, 79, 0.06);
+    background: rgba(163, 77, 63, 0.08);
 
-    border: 1px solid rgba(184, 96, 79, 0.18);
+    border: 1px solid rgba(163, 77, 63, 0.25);
     border-radius: var(--radius-sm);
 
-    color: var(--danger);
+    color: var(--color-danger);
 
     font-size: 0.76rem;
+
+    list-style: none;
+}
+
+.auth-form .validation-summary ul,
+.auth-form .auth-validation-summary ul {
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.auth-form .validation-summary:empty,
+.auth-form .auth-validation-summary:empty {
+    display: none;
 }
 
 
-/* auth submit */
+/* ============================
+   SUBMIT
+   ============================ */
 
 .auth-submit,
-.auth-form button[type="submit"] {
+.auth-form button[type="submit"],
+.auth-form .btn-block {
     width: 100%;
 
     min-height: 46px;
@@ -455,7 +609,9 @@
 }
 
 
-/* divider */
+/* ============================
+   DIVIDER
+   ============================ */
 
 .auth-divider {
     display: flex;
@@ -480,7 +636,7 @@
 
 
 .auth-divider span {
-    color: var(--muted);
+    color: var(--text-muted);
 
     font-size: 0.65rem;
     font-weight: 600;
@@ -490,7 +646,9 @@
 }
 
 
-/* auth footer */
+/* ============================
+   FOOTER
+   ============================ */
 
 .auth-footer {
     margin-top: 1.5rem;
@@ -503,50 +661,59 @@
 }
 
 
-.auth-footer p {
+.auth-footer p,
+.auth-footer .footer-text {
     margin: 0;
 
-    color: var(--muted);
+    color: var(--text-muted);
 
     font-size: 0.78rem;
 }
 
 
-.auth-footer a {
-    color: var(--primary);
+.auth-footer a,
+.auth-footer .auth-link {
+    color: var(--color-primary);
 
     font-weight: 600;
 
     text-decoration: none;
+
+    margin-left: 0.25rem;
 }
 
 
-.auth-footer a:hover {
-    color: var(--primary-hover);
+.auth-footer a:hover,
+.auth-footer .auth-link:hover {
+    color: var(--color-primary-hover);
+
+    text-decoration: underline;
+
+    text-underline-offset: 3px;
 }
 
 
-/* register page */
+/* ============================
+   REGISTER PAGE
+   ============================ */
 
-.register-page .auth-container {
-    max-width: 480px;
+.auth-container:has(.auth-card-wide) {
+    max-width: 520px;
 }
 
 
-.register-page .auth-card {
-    padding: 2rem;
-}
+/* ============================
+   PASSWORD REQUIREMENTS
+   ============================ */
 
-
-/* password requirements */
-
+/* CHANGED: топла пергаментова прозрачност */
 
 .password-requirements {
     margin-top: 0.65rem;
 
     padding: 0.75rem;
 
-    background: rgba(240, 230, 210, 0.015);
+    background: rgba(43, 36, 27, 0.03);
 
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-sm);
@@ -556,7 +723,7 @@
 .password-requirements-title {
     margin-bottom: 0.4rem;
 
-    color: var(--secondary);
+    color: var(--text-secondary);
 
     font-size: 0.7rem;
     font-weight: 600;
@@ -572,7 +739,7 @@
 .password-requirements li {
     margin-bottom: 0.2rem;
 
-    color: var(--muted);
+    color: var(--text-muted);
 
     font-size: 0.68rem;
 }
@@ -583,18 +750,21 @@
 }
 
 
-/* auth success/status */
+/* ============================
+   AUTH SUCCESS / ERROR
+   ============================ */
 
+/* CHANGED: златна прозрачност */
 
 .auth-success {
     padding: 0.85rem;
 
-    background: rgba(217, 184, 118, 0.055);
+    background: rgba(184, 147, 74, 0.10);
 
-    border: 1px solid rgba(217, 184, 118, 0.18);
+    border: 1px solid rgba(184, 147, 74, 0.3);
     border-radius: var(--radius-sm);
 
-    color: var(--primary);
+    color: var(--color-primary-dark);
 
     font-size: 0.78rem;
 }
@@ -605,24 +775,25 @@
 }
 
 
-/* auth error */
-
+/* CHANGED: earth-danger тонове */
 
 .auth-error {
     padding: 0.85rem;
 
-    background: rgba(184, 96, 79, 0.055);
+    background: rgba(163, 77, 63, 0.08);
 
-    border: 1px solid rgba(184, 96, 79, 0.18);
+    border: 1px solid rgba(163, 77, 63, 0.25);
     border-radius: var(--radius-sm);
 
-    color: var(--danger);
+    color: var(--color-danger);
 
     font-size: 0.78rem;
 }
 
 
-/* login meta */
+/* ============================
+   LOGIN META
+   ============================ */
 
 .login-meta {
     display: flex;
@@ -635,7 +806,9 @@
 }
 
 
-/* account management */
+/* ============================
+   ACCOUNT MANAGEMENT
+   ============================ */
 
 .account-page {
     width: min(
@@ -678,7 +851,7 @@
 .account-card {
     padding: 1.5rem;
 
-    background: var(--surface-2);
+    background: var(--surface-1);
 
     border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
@@ -687,12 +860,14 @@
 }
 
 
-/* bootstrap compatibility */
+/* ============================
+   BOOTSTRAP COMPATIBILITY
+   ============================ */
 
 .auth-page .form-text {
     margin-top: 0.4rem;
 
-    color: var(--muted) !important;
+    color: var(--text-muted) !important;
 
     font-size: 0.7rem;
 }
@@ -703,25 +878,25 @@
 }
 
 
-
+/* CHANGED: earth-danger alert */
 
 .auth-page .alert-danger {
-    background: rgba(184, 96, 79, 0.06);
+    background: rgba(163, 77, 63, 0.08);
 
-    border-color: rgba(184, 96, 79, 0.18);
+    border-color: rgba(163, 77, 63, 0.25);
 
-    color: var(--danger);
+    color: var(--color-danger);
 }
 
 
-
+/* CHANGED: златна alert прозрачност */
 
 .auth-page .alert-success {
-    background: rgba(217, 184, 118, 0.06);
+    background: rgba(184, 147, 74, 0.10);
 
-    border-color: rgba(217, 184, 118, 0.18);
+    border-color: rgba(184, 147, 74, 0.3);
 
-    color: var(--primary);
+    color: var(--color-primary-dark);
 }
 
 
@@ -732,7 +907,9 @@
 }
 
 
-/* mobile */
+/* ============================
+   RESPONSIVE — mobile
+   ============================ */
 
 @media (max-width: 767.98px) {
 
@@ -745,11 +922,15 @@
             3rem;
     }
 
-    .auth-container {
+    .auth-container,
+    .auth-container:has(.auth-card-wide) {
         max-width: 100%;
     }
 
-    .auth-card {
+    .auth-card,
+    .auth-card-wide {
+        max-width: 100%;
+
         padding: 1.5rem;
     }
 
@@ -770,18 +951,35 @@
 }
 
 
+/* CHANGED: form-row става едноколонен на mobile */
+
 @media (max-width: 575.98px) {
 
     .auth-page {
         padding-inline: 0.5rem;
     }
 
-    .auth-card {
+    .auth-card,
+    .auth-card-wide {
         padding: 1.25rem;
     }
 
     .auth-card::before {
         left: 1rem;
+    }
+
+    .auth-form .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+    .auth-form .form-row .form-group {
+        margin-bottom: 1.15rem !important;
+    }
+
+    .auth-form .form-row .form-group:last-child {
+        margin-bottom: 0 !important;
     }
 
     .login-meta {
@@ -795,6 +993,13 @@
         justify-content: flex-start;
     }
 
+    .auth-form .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 0.65rem;
+    }
+
     .account-page {
         width: calc(100% - 1rem);
     }
@@ -805,7 +1010,9 @@
 }
 
 
-/* reduced motion */
+/* ============================
+   REDUCED MOTION
+   ============================ */
 
 @media (prefers-reduced-motion: reduce) {
 

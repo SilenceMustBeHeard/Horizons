@@ -2,34 +2,34 @@
 
 
 /* Reset */
-
+/* CHANGED: топъл пергаментов градиент вместо cyberpunk синьо-лилаво */
 
 .email-reset-body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #1a1611 0%, #2b241b 100%);
+    background: linear-gradient(135deg, #f5efe2 0%, #ede4d2 100%);
     padding: 40px 20px;
 }
 
 /* Container */
-
+/* CHANGED: пергаментова карта със златен border и топла сянка */
 
 .email-reset-container {
     max-width: 550px;
     margin: 0 auto;
-    background: rgba(36, 30, 23, 0.95);
+    background: #faf6ec;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(10, 8, 6, 0.55);
-    border: 1px solid rgba(217, 184, 118, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(43, 36, 27, 0.18);
+    border: 1px solid rgba(184, 147, 74, 0.3);
 }
 
 /* Header */
-
+/* CHANGED: златно-меден градиент вместо неоново червено-оранжево-циан */
 
 .email-reset-header {
-    background: linear-gradient(135deg, #d9b876 0%, #c17a4a 50%, #b8975a 100%);
+    background: linear-gradient(135deg, #b8934a 0%, #a86238 50%, #96763a 100%);
     padding: 30px;
     text-align: center;
 }
@@ -44,37 +44,37 @@
     font-size: 24px;
     font-weight: 800;
     letter-spacing: 3px;
-    color: #1a1611;
+    color: #faf6ec;
     margin: 0;
-    text-shadow: 0 2px 4px rgba(10, 8, 6, 0.2);
+    text-shadow: 0 2px 4px rgba(43, 36, 27, 0.25);
 }
 
 .email-reset-subtitle {
     font-size: 12px;
-    color: rgba(26, 22, 17, 0.75);
+    color: rgba(250, 246, 236, 0.85);
     margin-top: 8px;
     letter-spacing: 1px;
 }
 
 /* Content */
-
+/* CHANGED: тъмно кафяв текст върху пергамент */
 
 .email-reset-content {
     padding: 35px;
-    color: #c4b69a;
+    color: #5a4f3e;
 }
 
 .email-greeting {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 20px;
-    color: #f0e6d2;
+    color: #2b241b;
 }
 
-
+/* CHANGED: златно-меден градиент за името */
 
 .email-greeting-name {
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
+    background: linear-gradient(135deg, #b8934a, #a86238);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -84,27 +84,28 @@
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 20px;
-    color: #a8b4af;
+    color: #5a4f3e;
 }
 
-
+/* CHANGED: златна alert кутия върху пергамент */
 
 .email-alert-box {
-    background: rgba(217, 184, 118, 0.1);
-    border-left: 3px solid #d9b876;
+    background: rgba(184, 147, 74, 0.12);
+    border-left: 3px solid #b8934a;
     padding: 15px;
     border-radius: 8px;
     margin: 25px 0;
     font-size: 13px;
+    color: #5a4f3e;
 }
 
 .email-alert-icon {
-    color: #d9b876;
+    color: #b8934a;
     margin-right: 10px;
 }
 
 /* Button */
-
+/* CHANGED: златно-меден бутон с пергаментов текст */
 
 .email-button-container {
     text-align: center;
@@ -116,8 +117,8 @@
     align-items: center;
     gap: 10px;
     padding: 14px 32px;
-    background: linear-gradient(135deg, #d9b876, #c17a4a);
-    color: #1a1611;
+    background: linear-gradient(135deg, #b8934a, #a86238);
+    color: #faf6ec;
     text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
@@ -126,18 +127,19 @@
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(43, 36, 27, 0.15);
 }
 
     .email-btn-reset:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(217, 184, 118, 0.35);
+        box-shadow: 0 10px 25px rgba(43, 36, 27, 0.22);
     }
 
 /* Fallback Link */
-
+/* CHANGED: топла пергаментова прозрачност */
 
 .email-fallback-link {
-    background: rgba(10, 8, 6, 0.3);
+    background: rgba(43, 36, 27, 0.05);
     border-radius: 12px;
     padding: 15px;
     margin: 20px 0;
@@ -146,14 +148,14 @@
 
 .email-fallback-text {
     font-size: 12px;
-    color: #8f8065;
+    color: #857659;
     margin-bottom: 8px;
 }
 
-
+/* CHANGED: златен link вместо циан */
 
 .email-fallback-link a {
-    color: #d9b876;
+    color: #b8934a;
     text-decoration: none;
     font-size: 12px;
 }
@@ -163,46 +165,47 @@
     }
 
 /* Divider */
-
+/* CHANGED: златно-меден divider вместо червено-циан */
 
 .email-divider {
     width: 50px;
     height: 2px;
-    background: linear-gradient(90deg, #d9b876, #c17a4a);
+    background: linear-gradient(90deg, #b8934a, #a86238);
     margin: 20px auto;
     border-radius: 2px;
 }
 
 /* Notes */
-
+/* CHANGED: топъл пергаментов divider */
 
 .email-note {
     font-size: 12px;
-    color: #8f8065;
+    color: #857659;
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 1px solid rgba(240, 230, 210, 0.1);
+    border-top: 1px solid rgba(43, 36, 27, 0.1);
 }
 
+/* CHANGED: златен note icon вместо неоново червено */
 
 .email-note-icon {
-    color: #d9b876;
+    color: #b8934a;
     margin-right: 5px;
 }
 
 /* Footer */
-
+/* CHANGED: топла пергаментова прозрачност */
 
 .email-footer {
     text-align: center;
     padding: 20px;
-    background: rgba(10, 8, 6, 0.3);
-    border-top: 1px solid rgba(240, 230, 210, 0.05);
+    background: rgba(43, 36, 27, 0.05);
+    border-top: 1px solid rgba(43, 36, 27, 0.08);
 }
 
 .email-footer-text {
     font-size: 11px;
-    color: #635741;
+    color: #a89a7f;
     margin: 5px 0;
 }
 
