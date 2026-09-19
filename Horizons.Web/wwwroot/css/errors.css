@@ -1,5 +1,5 @@
-/*==== Not Implemented ====*/
-/* CHANGED: топъл пергаментов градиент */
+/* Not Implemented */
+
 
 .under-construction {
     background: linear-gradient(135deg, #f5efe2 0%, #ede4d2 100%);
@@ -12,7 +12,7 @@
     margin-bottom: 20px;
 }
 
-/* CHANGED: златен градиент за code-а */
+
 
 .error-code {
     font-size: 100px;
@@ -25,7 +25,6 @@
     line-height: 1;
 }
 
-/* CHANGED: пергаментов badge със златен border */
 
 .error-badge {
     display: inline-flex;
@@ -67,7 +66,7 @@
 }
 
 /* Construction Sign */
-/* CHANGED: пергаментов bg със златен border */
+
 
 .construction-sign {
     display: flex;
@@ -106,7 +105,7 @@
 }
 
 /* Progress Section */
-/* CHANGED: пергаментов bg със златен border */
+
 
 .progress-section {
     max-width: 400px;
@@ -148,7 +147,7 @@
     overflow: hidden;
 }
 
-/* CHANGED: златен градиент */
+
 
 .progress-bar-fill {
     width: 0%;
@@ -201,7 +200,7 @@
     }
 
 /* Status Panel */
-/* CHANGED: пергаментов bg със златен border */
+
 
 .status-panel {
     max-width: 400px;
@@ -402,7 +401,7 @@
     }
 }
 
-/*=== Not Found ===*/
+/* Not Found */
 @keyframes lostPulse {
     0%, 100% {
         transform: translateX(0);
@@ -422,7 +421,7 @@
     display: inline-block;
 }
 
-/* CHANGED: пергаментов search input */
+
 
 .search-input {
     background: #faf6ec;
@@ -438,7 +437,7 @@
         outline: none;
     }
 
-/* CHANGED: златен tag hover */
+
 
 .tag-link {
     background: #faf6ec;
@@ -457,15 +456,15 @@
 
 
 
-/*=== Not Allowed ===*/
-/* CHANGED: топъл пергаментов градиент */
+/*Not Allowed */
+
 
 .access-denied {
     background: linear-gradient(135deg, #f5efe2 0%, #f0e3d2 100%);
     position: relative;
 }
 
-/* CHANGED: златна grid overlay */
+
 
 .grid-overlay {
     position: absolute;
@@ -488,7 +487,7 @@
     }
 }
 
-/* CHANGED: златна scan line */
+
 
 .scan-line {
     position: absolute;
@@ -518,7 +517,7 @@
     margin: 0 auto 30px;
 }
 
-/* CHANGED: earth-danger цвят */
+
 
 .lock-body {
     position: absolute;
@@ -556,7 +555,6 @@
     }
 }
 
-/* CHANGED: earth-danger pulse */
 
 .lock-pulse {
     position: absolute;
@@ -570,7 +568,7 @@
     animation: pulse 2s infinite;
 }
 
-/* CHANGED: пергаментов terminal със златен border */
+
 
 .terminal {
     background: rgba(250, 246, 236, 0.9);
@@ -583,7 +581,7 @@
     border: 1px solid #b8934a;
 }
 
-/* CHANGED: златен terminal text вместо неоново зелено */
+
 
 .terminal-line {
     color: #b8934a;
@@ -631,7 +629,7 @@
     }
 }
 
-/* CHANGED: златен cursor вместо неоново зелен */
+
 
 .cursor {
     display: inline-block;
@@ -652,7 +650,7 @@
     }
 }
 
-/* CHANGED: earth-danger error code */
+
 
 .error-code {
     font-size: 100px;
@@ -676,8 +674,8 @@
 }
 
 
-/* ===BAD REQUEST  ===== */
-/* CHANGED: топъл пергаментов градиент */
+/* BAD REQUEST */
+
 
 .bad-request {
     background: linear-gradient(135deg, #f5efe2 0%, #ede4d2 100%);
@@ -698,7 +696,7 @@
     pointer-events: none;
 }
 
-/* CHANGED: кафяви stars вместо бели (за светъл фон) */
+
 
 .stars {
     background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="15" cy="15" r="1.5" fill="%232b241b"/><circle cx="65" cy="85" r="1" fill="%232b241b"/><circle cx="120" cy="40" r="1.8" fill="%232b241b"/><circle cx="180" cy="120" r="1.2" fill="%232b241b"/><circle cx="45" cy="160" r="1.4" fill="%232b241b"/><circle cx="95" cy="180" r="0.8" fill="%232b241b"/><circle cx="150" cy="70" r="1.1" fill="%232b241b"/><circle cx="30" cy="100" r="0.9" fill="%232b241b"/></svg>') repeat;
@@ -717,7 +715,7 @@
     }
 }
 
-/* CHANGED: кафяви twinkling */
+
 
 .twinkling {
     background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><circle cx="25" cy="25" r="2" fill="%232b241b" opacity="0.8"/><circle cx="100" cy="130" r="1.5" fill="%232b241b" opacity="0.6"/><circle cx="180" cy="60" r="2.5" fill="%232b241b" opacity="0.9"/><circle cx="250" cy="180" r="1.8" fill="%232b241b" opacity="0.7"/><circle cx="70" cy="240" r="2" fill="%232b241b" opacity="0.8"/></svg>') repeat;
@@ -742,7 +740,7 @@
     margin-bottom: 20px;
 }
 
-/* CHANGED: златен градиент */
+
 
 .bad-request .error-code {
     font-size: 100px;
@@ -755,7 +753,7 @@
     line-height: 1;
 }
 
-/* CHANGED: пергаментов badge със златен border */
+
 
 .bad-request .error-badge {
     display: inline-flex;
@@ -804,7 +802,7 @@
     margin: 20px auto;
 }
 
-/* CHANGED: златен compass ring */
+
 
 .compass-ring {
     position: absolute;
@@ -825,7 +823,7 @@
     }
 }
 
-/* CHANGED: златна needle */
+
 
 .compass-needle {
     position: absolute;
@@ -886,7 +884,7 @@
             transform: translateY(-50%);
         }
 
-/* CHANGED: earth-danger glitch text */
+
 
 .compass-glitch {
     position: absolute;
@@ -914,7 +912,7 @@
 }
 
 /* Tips Panel */
-/* CHANGED: пергаментов bg със златен border */
+
 
 .tips-panel {
     max-width: 400px;
@@ -987,7 +985,7 @@
     margin: 0 auto 10px;
 }
 
-/* CHANGED: златен radar sweep */
+
 
 .radar-sweep {
     position: absolute;
@@ -1085,7 +1083,7 @@
     border: none;
 }
 
-/* CHANGED: златен градиент с пергаментов текст */
+
 
 .bad-request .btn-primary {
     background: linear-gradient(135deg, #b8934a, #a86238);
@@ -1191,15 +1189,15 @@
 
 
 
-/*=== Server Error ===*/
-/* CHANGED: топъл пергаментов градиент */
+/* Server Error */
+
 
 .server-error {
     background: linear-gradient(135deg, #f5efe2 0%, #f0e3d2 100%);
     position: relative;
 }
 
-/* CHANGED: златна glitch overlay */
+
 
 .glitch-overlay {
     position: absolute;
@@ -1222,7 +1220,7 @@
     }
 }
 
-/* CHANGED: кафява статична шум (за светъл фон) */
+
 
 .static-noise {
     position: absolute;
@@ -1258,7 +1256,7 @@
     overflow: hidden;
 }
 
-/* CHANGED: топли кафяви планини */
+
 
 .mountain {
     position: absolute;
@@ -1289,7 +1287,7 @@
     opacity: 0.5;
 }
 
-/* CHANGED: пергаментов сняг */
+
 
 .snow-slab {
     position: absolute;
@@ -1310,7 +1308,7 @@
     pointer-events: none;
 }
 
-/* CHANGED: пергаментови снежни топки */
+
 
 .snowball {
     position: absolute;
@@ -1406,7 +1404,7 @@
         display: inline-block;
     }
 
-/* CHANGED: златен градиент */
+
 
 .code-5 {
     background: linear-gradient(135deg, #b8934a, #a86238);
@@ -1416,7 +1414,7 @@
     animation: shakeCode 0.5s infinite;
 }
 
-/* CHANGED: earth-danger + злато */
+
 
 .code-0-1 {
     color: #a34d3f;
@@ -1450,7 +1448,7 @@
     }
 }
 
-/* CHANGED: пергаментов bg + earth-danger border */
+
 
 .system-error {
     background: rgba(250, 246, 236, 0.9);
@@ -1463,7 +1461,7 @@
     text-align: left;
 }
 
-/* CHANGED: златен log text */
+
 
 .log-line {
     font-size: 12px;
@@ -1499,7 +1497,7 @@
     text-align: center;
 }
 
-/* CHANGED: пергаментов фон */
+
 
 .rescue-progress {
     height: 4px;
@@ -1509,7 +1507,7 @@
     margin-bottom: 8px;
 }
 
-/* CHANGED: златен градиент */
+
 
 .rescue-bar {
     width: 0%;

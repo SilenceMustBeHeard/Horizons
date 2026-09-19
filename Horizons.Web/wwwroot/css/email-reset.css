@@ -2,7 +2,7 @@
 
 
 /* Reset */
-/* CHANGED: топъл пергаментов градиент вместо cyberpunk синьо-лилаво */
+
 
 .email-reset-body {
     margin: 0;
@@ -13,7 +13,7 @@
 }
 
 /* Container */
-/* CHANGED: пергаментова карта със златен border и топла сянка */
+
 
 .email-reset-container {
     max-width: 550px;
@@ -26,7 +26,7 @@
 }
 
 /* Header */
-/* CHANGED: златно-меден градиент вместо неоново червено-оранжево-циан */
+
 
 .email-reset-header {
     background: linear-gradient(135deg, #b8934a 0%, #a86238 50%, #96763a 100%);
@@ -57,7 +57,7 @@
 }
 
 /* Content */
-/* CHANGED: тъмно кафяв текст върху пергамент */
+
 
 .email-reset-content {
     padding: 35px;
@@ -71,7 +71,7 @@
     color: #2b241b;
 }
 
-/* CHANGED: златно-меден градиент за името */
+
 
 .email-greeting-name {
     background: linear-gradient(135deg, #b8934a, #a86238);
@@ -87,7 +87,7 @@
     color: #5a4f3e;
 }
 
-/* CHANGED: златна alert кутия върху пергамент */
+
 
 .email-alert-box {
     background: rgba(184, 147, 74, 0.12);
@@ -105,7 +105,7 @@
 }
 
 /* Button */
-/* CHANGED: златно-меден бутон с пергаментов текст */
+
 
 .email-button-container {
     text-align: center;
@@ -136,7 +136,6 @@
     }
 
 /* Fallback Link */
-/* CHANGED: топла пергаментова прозрачност */
 
 .email-fallback-link {
     background: rgba(43, 36, 27, 0.05);
@@ -152,7 +151,7 @@
     margin-bottom: 8px;
 }
 
-/* CHANGED: златен link вместо циан */
+
 
 .email-fallback-link a {
     color: #b8934a;
@@ -165,7 +164,7 @@
     }
 
 /* Divider */
-/* CHANGED: златно-меден divider вместо червено-циан */
+
 
 .email-divider {
     width: 50px;
@@ -176,7 +175,7 @@
 }
 
 /* Notes */
-/* CHANGED: топъл пергаментов divider */
+
 
 .email-note {
     font-size: 12px;
@@ -186,7 +185,7 @@
     border-top: 1px solid rgba(43, 36, 27, 0.1);
 }
 
-/* CHANGED: златен note icon вместо неоново червено */
+
 
 .email-note-icon {
     color: #b8934a;
@@ -194,7 +193,7 @@
 }
 
 /* Footer */
-/* CHANGED: топла пергаментова прозрачност */
+
 
 .email-footer {
     text-align: center;
