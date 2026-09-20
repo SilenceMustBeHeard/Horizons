@@ -470,7 +470,7 @@
 
     overflow: hidden;
 
-    background: var(--surface-2);
+    background: #ede4d4;
 
     border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
@@ -532,7 +532,7 @@
 
     background: rgba(184, 147, 74, 0.10);
 
-    border: 1px solid rgba(184, 147, 74, 0.25);
+    border: 1px solid rgba(119, 81, 5, 0.25);
     border-radius: var(--radius-sm);
 
     color: var(--text-secondary);
