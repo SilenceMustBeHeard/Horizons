@@ -4,448 +4,108 @@
     ViewData["Title"] = "Travel Map - Horizons";
 }
 
-<div class="map-hero-section">
-    <div class="hero-overlay">
-        <h1 class="hero-title animate-text">Explore the World</h1>
-        <p class="hero-subtitle">Every pin tells a story. Every route is an adventure.</p>
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-number" id="destinationCount">0</span>
-                <span class="stat-label">Destinations</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number" id="countriesCount">0</span>
-                <span class="stat-label">Countries</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number" id="totalDistance">0</span>
-                <span class="stat-label">KM Traveled</span>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="map-page">
 
-<div class="map-container-wrapper">
-    <div class="map-sidebar">
-        <div class="sidebar-header">
+    <!-- Header -->
+    <div class="map-header">
+        <span class="map-header-label">
             <i class="fas fa-map-marked-alt"></i>
-            <h3>Destinations</h3>
-            <button class="btn-filter" id="toggleFilter" title="Toggle filters">
-                <i class="fas fa-filter"></i>
-            </button>
-        </div>
+            Explore
+        </span>
 
-        <div class="filter-panel" id="filterPanel">
-            <input type="text" id="searchDestinations" placeholder="Search destinations..." class="search-input">
-            <div class="filter-tags">
-                <button class="filter-tag active" data-filter="all">All</button>
-                <button class="filter-tag" data-filter="asia">🌏 Asia</button>
-                <button class="filter-tag" data-filter="europe">🇪🇺 Europe</button>
-                <button class="filter-tag" data-filter="north america">🌎 North America</button>
-                <button class="filter-tag" data-filter="south america">🌎 South America</button>
-                <button class="filter-tag" data-filter="africa">🦁 Africa</button>
-                <button class="filter-tag" data-filter="oceania">🏝️ Oceania</button>
-                <button class="filter-tag" data-filter="antarctica">❄️ Antarctica</button>
-            </div>
-        </div>
+        <h1>Explore the World</h1>
 
-        <div class="destinations-list" id="destinationsList">
-            <div class="loading-spinner">
-                <i class="fas fa-spinner fa-spin"></i> Loading destinations...
-            </div>
-        </div>
+        <p>Every pin tells a story. Every route is an adventure.</p>
     </div>
 
-    <div id="travelMap" class="interactive-map"></div>
-</div>
+    <!-- Map with sidebar -->
+    <div class="map-layout">
 
-<!-- Leaflet CSS & JS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <!-- Sidebar -->
+        <aside class="map-sidebar">
+
+            <h2 class="map-sidebar-title">
+                Destinations
+            </h2>
+
+            <!-- Search -->
+            <div class="map-search">
+                <div class="map-search-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text"
+                           id="searchDestinations"
+                           placeholder="Search destinations..." />
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="map-legend">
+                <div class="map-legend-title">Filter</div>
+
+                <div class="filter-tags">
+                    <button class="filter-tag active" data-filter="all">All</button>
+                    <button class="filter-tag" data-filter="asia">🌏 Asia</button>
+                    <button class="filter-tag" data-filter="europe">🇪🇺 Europe</button>
+                    <button class="filter-tag" data-filter="north america">🌎 North America</button>
+                    <button class="filter-tag" data-filter="south america">🌎 South America</button>
+                    <button class="filter-tag" data-filter="africa">🦁 Africa</button>
+                    <button class="filter-tag" data-filter="oceania">🏝️ Oceania</button>
+                    <button class="filter-tag" data-filter="antarctica">❄️ Antarctica</button>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="map-legend">
+                <div class="map-legend-title">Stats</div>
+
+                <div class="map-legend-item">
+                    <span class="map-legend-marker"></span>
+                    <span>
+                        <strong id="destinationCount">0</strong> Destinations
+                    </span>
+                </div>
+
+                <div class="map-legend-item">
+                    <span class="map-legend-marker accent"></span>
+                    <span>
+                        <strong id="countriesCount">0</strong> Countries
+                    </span>
+                </div>
+
+                <div class="map-legend-item">
+                    <span class="map-legend-marker info"></span>
+                    <span>
+                        <strong id="totalDistance">0</strong> KM Traveled
+                    </span>
+                </div>
+            </div>
+
+            <!-- Destinations list -->
+            <div class="destinations-list" id="destinationsList">
+                <div class="map-loading-content">
+                    <div class="map-loading-spinner"></div>
+                    <span>Loading destinations...</span>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Map -->
+        <div class="map-wrapper"
+             style="margin: 0; border: 0; border-radius: 0; box-shadow: none; width: 100%;">
+
+            <div id="map" class="map-container"></div>
+
+            <div class="map-status">
+                <span class="map-status-dot"></span>
+                <span>Interactive map</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 @section Scripts {
-    <script>
-      
-        //  GLOBAL VARIABLES
-
-        let map = null;
-        let markerLayer = null;
-        let destinations = [];
-        let isMapInitialized = false;
-        let currentFilter = 'all';
-        let isLoading = false;
-
-   
-        //  HELPER FUNCTIONS (GLOBAL)
-    
-        function escapeHtml(str) {
-            if (!str) return '';
-            return String(str).replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-
-        function getMarkerColor(continent) {
-            var colors = {
-                'asia': '#ff6b6b',
-                'europe': '#4ecdc4',
-                'north america': '#45b7d1',
-                'south america': '#96ceb4',
-                'africa': '#f9ca24',
-                'oceania': '#f0932b',
-                'antarctica': '#95a5a6'
-            };
-            return colors[(continent || '').toLowerCase()] || '#78c2ad';
-        }
-
-        function animateNumber(element, start, end, duration) {
-            if (!element) return;
-            var range = end - start;
-            var increment = range / (duration / 16);
-            var current = start;
-            var timer = setInterval(function() {
-                current += increment;
-                if (current >= end) {
-                    clearInterval(timer);
-                    element.textContent = Math.round(end).toLocaleString();
-                } else {
-                    element.textContent = Math.round(current).toLocaleString();
-                }
-            }, 16);
-        }
-
-        function formatDate(dateString) {
-            if (!dateString) return 'Unknown';
-            try {
-                return new Date(dateString).toLocaleDateString();
-            } catch {
-                return 'Unknown';
-            }
-        }
-
-    
-        //  GLOBAL FUNCTIONS (called from inline onclick)
-       
-        window.goToDestination = function(id) {
-            if (id) {
-                window.location.href = '/Destination/Details/' + id;
-            }
-        };
-
-        window.locateOnMap = function(lat, lng) {
-            if (map && !isNaN(lat) && !isNaN(lng)) {
-                map.setView([lat, lng], 12);
-            }
-        };
-
-     
-        //  INITIALIZATION
- 
-        document.addEventListener('DOMContentLoaded', function() {
-            initMap();
-            loadDestinations();
-            setupFilters();
-            setupSearch();
-            setupToggleFilter();
-        });
-
-      
-        //  MAP INIT
-  
-        function initMap() {
-            if (map !== null) return;
-
-            map = L.map('travelMap', {
-                minZoom: 2,
-                maxZoom: 18,
-                zoomControl: true,
-                fadeAnimation: true,
-                zoomAnimation: true,
-                markerZoomAnimation: true
-            }).setView([20, 0], 2);
-
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
-                subdomains: 'abcd',
-                maxZoom: 19
-            }).addTo(map);
-
-            L.control.scale().addTo(map);
-
-            markerLayer = L.layerGroup().addTo(map);
-
-            isMapInitialized = true;
-
-            // Handle resize
-            setTimeout(function() {
-                if (map) map.invalidateSize();
-            }, 300);
-        }
-
-  
-        //  DATA LOADING
-   
-        async function loadDestinations() {
-            if (isLoading) return;
-            isLoading = true;
-
-            var listEl = document.getElementById('destinationsList');
-            if (listEl) {
-                listEl.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading destinations...</div>';
-            }
-
-            try {
-                var response = await fetch('/api/destinations/map-data');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok: ' + response.status);
-                }
-                var data = await response.json();
-
-                // Ensure data is array
-                destinations = Array.isArray(data) ? data : [];
-
-                if (destinations.length === 0) {
-                    if (listEl) {
-                        listEl.innerHTML = '<div class="text-center p-4" style="color: var(--text-muted);"><i class="fas fa-map-pin" style="font-size: 2rem; display: block; margin-bottom: 1rem;"></i> No destinations found</div>';
-                    }
-                    return;
-                }
-
-                updateStats(destinations);
-                renderMarkers(destinations);
-                renderSidebar(destinations);
-
-            } catch (error) {
-                console.error('Error fetching destinations:', error);
-                if (listEl) {
-                    listEl.innerHTML = '<div class="text-center p-4" style="color: #dc3545;"><i class="fas fa-exclamation-triangle" style="font-size: 2rem; display: block; margin-bottom: 1rem;"></i> Failed to load destinations<br><small style="color: var(--text-muted);">' + error.message + '</small></div>';
-                }
-            } finally {
-                isLoading = false;
-            }
-        }
-
-      
-        //  UPDATE STATS
-   
-        function updateStats(destinationsToRender) {
-            var uniqueCountries = [];
-            var countrySet = {};
-            var totalKm = 0;
-
-            destinationsToRender.forEach(function(d) {
-                if (d.country && !countrySet[d.country]) {
-                    countrySet[d.country] = true;
-                    uniqueCountries.push(d.country);
-                }
-                if (d.distance) {
-                    totalKm += d.distance;
-                }
-            });
-
-            var destCount = document.getElementById('destinationCount');
-            var countriesCount = document.getElementById('countriesCount');
-            var totalDistance = document.getElementById('totalDistance');
-
-            if (destCount) animateNumber(destCount, 0, destinationsToRender.length, 1000);
-            if (countriesCount) animateNumber(countriesCount, 0, uniqueCountries.length, 1000);
-            if (totalDistance) animateNumber(totalDistance, 0, totalKm, 1500);
-        }
-
-    
-        //  MARKER RENDERING
-      
-        function renderMarkers(destinationsToRender) {
-            if (!markerLayer) return;
-
-            markerLayer.clearLayers();
-
-            var filtered = currentFilter === 'all'
-                ? destinationsToRender
-                : destinationsToRender.filter(function(d) {
-                    return (d.continent || '').toLowerCase() === currentFilter;
-                });
-
-            filtered.forEach(function(dest) {
-                if (!dest.latitude || !dest.longitude) return;
-
-                var markerColor = getMarkerColor(dest.continent);
-                var customIcon = L.divIcon({
-                    className: 'custom-marker',
-                    html: '<div class="marker-content" style="background: ' + markerColor + ';">' +
-                        '<i class="fas fa-map-pin"></i>' +
-                        '</div>',
-                    iconSize: [30, 30],
-                    popupAnchor: [0, -15]
-                });
-
-                var marker = L.marker([dest.latitude, dest.longitude], { icon: customIcon });
-
-                marker.bindPopup(createPopupContent(dest), {
-                    maxWidth: 300,
-                    minWidth: 260,
-                    autoPan: true
-                });
-
-                marker.addTo(markerLayer);
-            });
-        }
-
-        function createPopupContent(dest) {
-            var description = dest.description ? dest.description.substring(0, 100) : 'No description available';
-            var imageUrl = dest.imageUrl || '/images/default-image.jpg';
-            var escapedName = escapeHtml(dest.name);
-            var escapedCountry = escapeHtml(dest.country || 'Unknown');
-            var escapedContinent = escapeHtml(dest.continent || 'Unknown');
-            var escapedDescription = escapeHtml(description);
-            var likes = dest.likes || 0;
-
-            return '<div class="custom-popup-wrapper">' +
-                '<div class="popup-image-container">' +
-                '<img src="' + imageUrl + '" alt="' + escapedName + '" class="popup-image" onerror="this.src=\'/images/default-image.jpg\'">' +
-                '</div>' +
-                '<div class="popup-content">' +
-                '<h4 class="popup-title">' + escapedName + '</h4>' +
-                '<p class="popup-location"><i class="fas fa-map-marker-alt"></i> ' + escapedCountry + ', ' + escapedContinent + '</p>' +
-                '<p class="popup-description">' + escapedDescription + '...</p>' +
-                '<div class="popup-stats">' +
-                '<span class="popup-likes"><i class="fas fa-heart"></i> ' + likes + '</span>' +
-                '</div>' +
-                '<a href="/Destination/Details/' + dest.id + '" class="popup-btn">Explore Journey <i class="fas fa-arrow-right"></i></a>' +
-                '</div>' +
-                '</div>';
-        }
-
-  
-        //  SIDEBAR RENDERING
-     
-        function renderSidebar(destinationsToRender) {
-            var container = document.getElementById('destinationsList');
-            if (!container) return;
-
-            if (destinationsToRender.length === 0) {
-                container.innerHTML = '<div class="text-center p-4" style="color: var(--text-muted);">No destinations found</div>';
-                return;
-            }
-
-            var html = '';
-            for (var i = 0; i < destinationsToRender.length; i++) {
-                var dest = destinationsToRender[i];
-                var escapedName = escapeHtml(dest.name);
-                var escapedCountry = escapeHtml(dest.country || 'Unknown');
-                var escapedDescription = escapeHtml((dest.description || '').substring(0, 80));
-                var imageUrl = dest.imageUrl || '/images/default-image.jpg';
-                var createdAt = formatDate(dest.createdAt);
-                var continent = (dest.continent || '').toLowerCase();
-                var rank = dest.rank ? '#' + dest.rank : 'featured';
-                var id = dest.id;
-
-                html += '<div class="dest-card" data-id="' + id + '" data-continent="' + continent + '" onclick="goToDestination(\'' + id + '\')">' +
-                    '<div class="dest-card-image">' +
-                    '<img src="' + imageUrl + '" alt="' + escapedName + '" loading="lazy" onerror="this.src=\'/images/default-image.jpg\'">' +
-                    '<div class="dest-card-overlay">' +
-                    '<span class="dest-rank">' + rank + '</span>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="dest-card-content">' +
-                    '<h4>' + escapedName + '</h4>' +
-                    '<p class="dest-location"><i class="fas fa-map-marker-alt"></i> ' + escapedCountry + '</p>' +
-                    '<p class="dest-excerpt">' + escapedDescription + '...</p>' +
-                    '<div class="dest-meta">' +
-                    '<span><i class="fas fa-calendar"></i> ' + createdAt + '</span>' +
-                    '<button class="btn-locate" data-lat="' + dest.latitude + '" data-lng="' + dest.longitude + '" onclick="event.stopPropagation(); window.locateOnMap(' + dest.latitude + ', ' + dest.longitude + ')">' +
-                    '<i class="fas fa-crosshairs"></i> Locate' +
-                    '</button>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>';
-            }
-
-            container.innerHTML = html;
-        }
-
- 
-        //  FILTERS
-            
-        function setupFilters() {
-            var filterTags = document.querySelectorAll('.filter-tag');
-            filterTags.forEach(function(tag) {
-                tag.addEventListener('click', function(e) {
-                    var filter = tag.dataset.filter;
-                    if (currentFilter === filter) return;
-
-                    currentFilter = filter;
-
-                    filterTags.forEach(function(t) {
-                        t.classList.remove('active');
-                    });
-                    tag.classList.add('active');
-
-                    // Filter sidebar cards
-                    var cards = document.querySelectorAll('.dest-card');
-                    cards.forEach(function(card) {
-                        if (filter === 'all') {
-                            card.style.display = '';
-                        } else {
-                            var cardContinent = card.dataset.continent;
-                            card.style.display = cardContinent === filter ? '' : 'none';
-                        }
-                    });
-
-                    // Re-render markers
-                    renderMarkers(destinations);
-                });
-            });
-        }
-
-       
-        //  SEARCH
-       
-        function setupSearch() {
-            var searchInput = document.getElementById('searchDestinations');
-            if (searchInput) {
-                searchInput.addEventListener('input', function(e) {
-                    var searchTerm = e.target.value.toLowerCase();
-                    var cards = document.querySelectorAll('.dest-card');
-                    cards.forEach(function(card) {
-                        var title = card.querySelector('h4')?.textContent?.toLowerCase() || '';
-                        var location = card.querySelector('.dest-location')?.textContent?.toLowerCase() || '';
-                        card.style.display = (title.includes(searchTerm) || location.includes(searchTerm)) ? '' : 'none';
-                    });
-                });
-            }
-        }
-
-        
-        //  TOGGLE FILTER
-       
-        function setupToggleFilter() {
-            var toggleBtn = document.getElementById('toggleFilter');
-            var filterPanel = document.getElementById('filterPanel');
-            if (toggleBtn && filterPanel) {
-                toggleBtn.addEventListener('click', function() {
-                    if (filterPanel.style.display === 'none') {
-                        filterPanel.style.display = 'block';
-                    } else {
-                        filterPanel.style.display = 'none';
-                    }
-                });
-            }
-        }
-
-        
-        //  HANDLE WINDOW RESIZE
-       
-        window.addEventListener('resize', function() {
-            if (map) {
-                setTimeout(function() {
-                    map.invalidateSize();
-                }, 100);
-            }
-        });
-    </script>
+    <script src="~/js/map.js" asp-append-version="true"></script>
 }
-
