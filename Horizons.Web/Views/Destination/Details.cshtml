@@ -257,15 +257,22 @@
             @if (Model.Latitude.HasValue && Model.Longitude.HasValue)
             {
                 <div class="destination-map"
-                     data-latitude="@Model.Latitude.Value"
-                     data-longitude="@Model.Longitude.Value">
-                    <div class="map-placeholder">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="coordinates">
-                            <span>@Model.Latitude.Value.ToString("0.0000")°</span>
-                            <span>@Model.Longitude.Value.ToString("0.0000")°</span>
-                        </div>
-                    </div>
+                     id="destinationMap"
+                     data-latitude="@Model.Latitude.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                     data-longitude="@Model.Longitude.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                     data-name="@Model.Name"
+                     data-country="@Model.Country"
+                     data-continent="@Model.Continent">
+                </div>
+
+                <div class="destination-map-coords">
+
+                    <span class="coordinates">
+                        <i class="fas fa-crosshairs"></i>
+                        <span>@Model.Latitude.Value.ToString("0.0000")°</span>
+                        <span>@Model.Longitude.Value.ToString("0.0000")°</span>
+                    </span>
+
                 </div>
             }
             else
@@ -318,3 +325,7 @@
     </div>
 
 </div>
+
+@section Scripts {
+    <script src="~/js/destination-details.js" asp-append-version="true"></script>
+}
