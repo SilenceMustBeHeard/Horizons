@@ -45,17 +45,15 @@
             markerZoomAnimation: true
         });
 
-        // Tile layer — light CartoDB (matches Aged Parchment)
-        L.tileLayer(
-            'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-            {
-                attribution:
-                    '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> ' +
-                    '&copy; <a href="https://carto.com/attributions">CARTO</a>',
-                subdomains: 'abcd',
-                maxZoom: 19
-            }
-        ).addTo(map);
+        // Tile layer — OpenStreetMap
+    L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+    }
+).addTo(map);
 
         // Custom marker (matches Horizons marker style)
         const customIcon = L.divIcon({
