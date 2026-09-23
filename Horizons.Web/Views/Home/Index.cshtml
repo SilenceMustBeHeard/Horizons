@@ -5,211 +5,450 @@
     ViewData["Title"] = "Horizons - Modern Travel Stories";
 }
 
-<!-- Hero Section -->
+<!-- hero -->
 <section class="hero-section">
-    <div class="container">
+    <div class="horizons-container">
+
         <div class="hero-content">
-            <span class="hero-tag">TRAVEL STORIES</span>
-            <h1 class="hero-title">Stories That<br>Inspire Adventure</h1>
-            <p class="hero-description">Discover the world's most breathtaking destinations through the eyes of fellow travelers. Get inspired, plan your journey, and share your own stories.</p>
+
+            <span class="section-tag">TRAVEL STORIES</span>
+
+            <h1 class="hero-title">
+                Stories That<br />
+                Inspire Adventure
+            </h1>
+
+            <p class="hero-description">
+                Discover the world's most breathtaking destinations through
+                the eyes of fellow travelers. Get inspired, plan your journey,
+                and share your own stories.
+            </p>
+
             <div class="hero-buttons">
-                <a asp-controller="Destination" asp-action="Index" class="btn btn-primary">
-                    <i class="fas fa-globe-americas"></i> Explore Destinations
+                <a asp-controller="Destination"
+                   asp-action="Index"
+                   class="btn btn-primary">
+                    <i class="fas fa-globe-americas"></i>
+                    Explore Destinations
+                </a>
+
+                <a asp-controller="Destination"
+                   asp-action="Map"
+                   class="btn btn-secondary">
+                    <i class="fas fa-map-marked-alt"></i>
+                    View on Map
                 </a>
             </div>
+
         </div>
+
         <div class="hero-stats">
+
             <div class="stat-item">
                 <span class="stat-number">@Model.TotalDestinations</span>
                 <span class="stat-label">Destinations</span>
             </div>
+
             <div class="stat-item">
                 <span class="stat-number">@Model.TotalCountries</span>
                 <span class="stat-label">Countries</span>
             </div>
+
             <div class="stat-item">
                 <span class="stat-number">@Model.TotalStories</span>
                 <span class="stat-label">Travel Stories</span>
             </div>
+
         </div>
+
     </div>
 </section>
 
-<!-- Categories Section -->
+
+<!-- categories -->
 <section class="categories-section">
-    <div class="container">
+    <div class="horizons-container">
+
         <div class="section-header text-center">
             <span class="section-tag">DISCOVER BY</span>
             <h2 class="section-title">Travel Categories</h2>
-            <p class="section-subtitle">Find your next adventure based on your favorite terrain</p>
+            <p class="section-subtitle">
+                Find your next adventure based on your favorite terrain
+            </p>
         </div>
 
         <div class="categories-grid">
-            <div class="category-card" data-category="mountains">
+
+            <a class="category-card"
+               asp-controller="Destination"
+               asp-action="Index"
+               asp-route-terrain="mountains">
+
                 <div class="category-icon">
                     <i class="fas fa-mountain"></i>
                 </div>
-                <h3 class="category-title">Mountains</h3>
-                <p class="category-count">@Model.MountainsCount destinations</p>
-            </div>
 
-            <div class="category-card" data-category="beaches">
+                <div class="category-content">
+                    <h3 class="category-title">Mountains</h3>
+                    <p class="category-count">@Model.MountainsCount destinations</p>
+                </div>
+
+                <i class="fas fa-arrow-right category-arrow"></i>
+            </a>
+
+            <a class="category-card"
+               asp-controller="Destination"
+               asp-action="Index"
+               asp-route-terrain="beaches">
+
                 <div class="category-icon">
                     <i class="fas fa-umbrella-beach"></i>
                 </div>
-                <h3 class="category-title">Beaches</h3>
-                <p class="category-count">@Model.BeachesCount destinations</p>
-            </div>
 
-            <div class="category-card" data-category="forests">
+                <div class="category-content">
+                    <h3 class="category-title">Beaches</h3>
+                    <p class="category-count">@Model.BeachesCount destinations</p>
+                </div>
+
+                <i class="fas fa-arrow-right category-arrow"></i>
+            </a>
+
+            <a class="category-card"
+               asp-controller="Destination"
+               asp-action="Index"
+               asp-route-terrain="forests">
+
                 <div class="category-icon">
                     <i class="fas fa-tree"></i>
                 </div>
-                <h3 class="category-title">Forests</h3>
-                <p class="category-count">@Model.ForestsCount destinations</p>
-            </div>
 
-            <div class="category-card" data-category="urban">
+                <div class="category-content">
+                    <h3 class="category-title">Forests</h3>
+                    <p class="category-count">@Model.ForestsCount destinations</p>
+                </div>
+
+                <i class="fas fa-arrow-right category-arrow"></i>
+            </a>
+
+            <a class="category-card"
+               asp-controller="Destination"
+               asp-action="Index"
+               asp-route-terrain="urban">
+
                 <div class="category-icon">
                     <i class="fas fa-city"></i>
                 </div>
-                <h3 class="category-title">Urban</h3>
-                <p class="category-count">@Model.UrbanCount destinations</p>
-            </div>
 
-            <div class="category-card" data-category="deserts">
+                <div class="category-content">
+                    <h3 class="category-title">Urban</h3>
+                    <p class="category-count">@Model.UrbanCount destinations</p>
+                </div>
+
+                <i class="fas fa-arrow-right category-arrow"></i>
+            </a>
+
+            <a class="category-card"
+               asp-controller="Destination"
+               asp-action="Index"
+               asp-route-terrain="deserts">
+
                 <div class="category-icon">
                     <i class="fas fa-sun"></i>
                 </div>
-                <h3 class="category-title">Deserts</h3>
-                <p class="category-count">@Model.DesertsCount destinations</p>
-            </div>
 
-            <div class="category-card" data-category="lakes">
+                <div class="category-content">
+                    <h3 class="category-title">Deserts</h3>
+                    <p class="category-count">@Model.DesertsCount destinations</p>
+                </div>
+
+                <i class="fas fa-arrow-right category-arrow"></i>
+            </a>
+
+            <a class="category-card"
+               asp-controller="Destination"
+               asp-action="Index"
+               asp-route-terrain="lakes">
+
                 <div class="category-icon">
                     <i class="fas fa-water"></i>
                 </div>
-                <h3 class="category-title">Lakes</h3>
-                <p class="category-count">@Model.LakesCount destinations</p>
-            </div>
+
+                <div class="category-content">
+                    <h3 class="category-title">Lakes</h3>
+                    <p class="category-count">@Model.LakesCount destinations</p>
+                </div>
+
+                <i class="fas fa-arrow-right category-arrow"></i>
+            </a>
+
         </div>
+
     </div>
 </section>
-<!-- Featured Destinations Section -->
+
+
+<!-- map preview -->
+<section class="home-map-section">
+    <div class="horizons-container">
+
+        <div class="section-header text-center">
+            <span class="section-tag">EXPLORE THE WORLD</span>
+            <h2 class="section-title">Where Our Stories Live</h2>
+            <p class="section-subtitle">
+                Every pin is a journey shared by our community
+            </p>
+        </div>
+
+        <div class="home-map-wrapper">
+
+            <div id="homeMap"
+                 class="home-map"
+                 data-destinations="@Model.FeaturedDestinations.Count()">
+            </div>
+
+            <div class="home-map-overlay">
+
+                <div class="home-map-info">
+                    <span class="home-map-label">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Featured destinations
+                    </span>
+
+                    <a asp-controller="Destination"
+                       asp-action="Map"
+                       class="home-map-link">
+                        Open full map
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- featured destinations -->
 <section class="featured-section">
-    <div class="container">
+    <div class="horizons-container">
+
         <div class="section-header text-center">
             <span class="section-tag">CURATED FOR YOU</span>
             <h2 class="section-title">Top Destinations</h2>
-            <p class="section-subtitle">Most loved destinations by our community</p>
+            <p class="section-subtitle">
+                Most loved destinations by our community
+            </p>
         </div>
 
         @{
-            // Determine how many to show based on authentication
-            int maxToShow = User.Identity.IsAuthenticated ? 6 : 3;
+            int maxToShow = User.Identity?.IsAuthenticated == true ? 6 : 3;
             var featuredToShow = Model.FeaturedDestinations.Take(maxToShow);
         }
 
         @if (featuredToShow.Any())
         {
             <div class="destinations-grid">
+
                 @foreach (var dest in featuredToShow)
                 {
-                    <div class="destination-card">
-                        <div class="destination-image">
-                            <img src="@(string.IsNullOrEmpty(dest.ImageUrl) ? "/images/default-image.jpg" : dest.ImageUrl)"
+                    <article class="card">
+
+                        <div class="featured-card-image">
+                            <img src="@(string.IsNullOrEmpty(dest.ImageUrl)
+                                        ? "/images/default-image.jpg"
+                                        : dest.ImageUrl)"
                                  alt="@dest.Name"
                                  loading="lazy"
-                                 onerror="this.src='/images/default-image.jpg'">
-                            <span class="destination-badge">
-                                <i class="fas fa-heart"></i> @dest.Likes
+                                 onerror="this.src='/images/default-image.jpg'" />
+                        </div>
+
+                        <div class="card-body">
+
+                            <span class="featured-card-likes">
+                                <i class="fas fa-heart"></i>
+                                @dest.Likes
                             </span>
-                        </div>
-                        <div class="destination-content">
+
                             <div class="destination-location">
-                                <i class="fas fa-map-marker-alt"></i> @(string.IsNullOrEmpty(dest.Country) ? "Unknown" : dest.Country)
+                                <i class="fas fa-map-marker-alt"></i>
+                                @(string.IsNullOrEmpty(dest.Country)
+                                    ? "Unknown"
+                                    : dest.Country)
                             </div>
-                            <h3 class="destination-title">@dest.Name</h3>
-                            <p class="destination-description">
-                                @(string.IsNullOrEmpty(dest.Description) ? "No description available" : dest.Description)
-                            </p>
-                            <div class="destination-meta">
-                                <span><i class="fas fa-calendar"></i> @dest.CreatedAt.ToString("MMM dd, yyyy")</span>
-                                <a href="/Destination/Details/@dest.Id" class="btn-link">
-                                    Read Story <i class="fas fa-arrow-right"></i>
+
+                            <h3 class="card-title featured-card-title">
+                                <a asp-controller="Destination"
+                                   asp-action="Details"
+                                   asp-route-id="@dest.Id">
+                                    @dest.Name
                                 </a>
+                            </h3>
+
+                            <p class="card-text">
+                                @(string.IsNullOrEmpty(dest.Description)
+                                    ? "No description available"
+                                    : dest.Description.Length > 120
+                                        ? dest.Description.Substring(0, 120) + "..."
+                                        : dest.Description)
+                            </p>
+
+                            <div class="featured-card-footer">
+
+                                <span class="featured-card-date">
+                                    <i class="fas fa-calendar"></i>
+                                    @dest.CreatedAt.ToString("MMM dd, yyyy")
+                                </span>
+
+                                <a asp-controller="Destination"
+                                   asp-action="Details"
+                                   asp-route-id="@dest.Id"
+                                   class="btn btn-outline-primary btn-sm">
+                                    Read Story
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+
                             </div>
+
                         </div>
-                    </div>
+
+                    </article>
                 }
+
             </div>
 
-            @if (!User.Identity.IsAuthenticated && Model.FeaturedDestinations.Count() > 3)
+            @if (User.Identity?.IsAuthenticated != true &&
+                 Model.FeaturedDestinations.Count() > 3)
             {
-                <div class="view-all-container text-center mt-5">
-                    <div class="d-flex flex-column align-items-center gap-3">
-                        <a asp-controller="Account" asp-action="Login"
-                         class="btn btn-primary w-100" style="max-width: 280px;">
-                            <i class="fas fa-sign-in-alt"></i> Sign in to share yours
+                <div class="featured-login-prompt">
+
+                    <div class="featured-login-content">
+                        <i class="fas fa-sign-in-alt"></i>
+
+                        <div>
+                            <h3>Sign in to see more</h3>
+                            <p>Unlock 3 more featured destinations and share your own stories.</p>
+                        </div>
+                    </div>
+
+                    <div class="featured-login-actions">
+                        <a asp-controller="Account"
+                           asp-action="Login"
+                           class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign In
                         </a>
-                        <a asp-controller="Destination" asp-action="Index" 
-                        class="btn btn-secondary w-100" style="max-width: 280px;">
-                            <i class="fas fa-globe"></i> See all destinations →
+
+                        <a asp-controller="Destination"
+                           asp-action="Index"
+                           class="btn btn-secondary">
+                            <i class="fas fa-globe"></i>
+                            See all
                         </a>
                     </div>
-                   
+
                 </div>
             }
         }
         else
         {
             <div class="empty-state">
-                <i class="fas fa-compass"></i>
-                <p>No destinations yet. Be the first to share your journey!</p>
-                <a asp-controller="Destination" asp-action="Add" class="btn btn-primary">Share Your Story</a>
+
+                <div class="empty-state-icon">
+                    <i class="fas fa-compass"></i>
+                </div>
+
+                <h3>No destinations yet</h3>
+                <p>Be the first to share your journey with the community.</p>
+
+                <a asp-controller="Destination"
+                   asp-action="Add"
+                   class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i>
+                    Share Your Story
+                </a>
+
             </div>
         }
-    </div>
-</section>
-<!-- CTA Section -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-content">
-            <div class="cta-text">
-                <span class="cta-tag">JOIN THE COMMUNITY</span>
-                <h2 class="cta-title">Share Your Travel Story</h2>
-                <p class="cta-description">Every journey has a story worth telling. Share your adventures, inspire others, and become part of a growing community of travel enthusiasts.</p>
-                <div class="cta-buttons">
-                    <a asp-controller="Destination" asp-action="Add" class="btn btn-primary">
-                        <i class="fas fa-plus-circle"></i> Share Your Story
-                    </a>
-                    <a asp-controller="Account" asp-action="Register" class="btn btn-secondary">
-                        <i class="fas fa-user-plus"></i> Join for Free
-                    </a>
-                </div>
-            </div>
-            <div class="cta-image">
-                <div class="image-stack">
-                    <div class="stack-item stack-1"></div>
-                    <div class="stack-item stack-2"></div>
-                    <div class="stack-item stack-3">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </section>
 
+<!-- CTA -->
+<section class="cta-section">
+    <div class="horizons-container">
+
+        <div class="cta-content">
+
+            <div class="cta-text">
+
+                <span class="cta-eyebrow">
+                    <i class="fas fa-users"></i>
+                    JOIN THE COMMUNITY
+                </span>
+
+                <h2 class="cta-title">
+                    Share Your Travel Story
+                </h2>
+
+                <p class="cta-description">
+                    Every journey has a story worth telling.
+                    Share your adventures, inspire others, and become
+                    part of a growing community of travel enthusiasts.
+                </p>
+
+                <div class="cta-actions">
+
+                    <a asp-controller="Destination"
+                       asp-action="Add"
+                       class="btn btn-primary">
+                        <i class="fas fa-plus-circle"></i>
+                        Share Your Story
+                    </a>
+
+                    <a asp-controller="Account"
+                       asp-action="Register"
+                       class="btn btn-secondary">
+                        <i class="fas fa-user-plus"></i>
+                        Join for Free
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="cta-visual">
+
+                <div class="cta-map-decoration">
+                    <span class="map-line line-one"></span>
+                    <span class="map-line line-two"></span>
+                    <span class="map-line line-three"></span>
+
+                    <span class="map-marker marker-one">
+                        <i class="fas fa-map-pin"></i>
+                    </span>
+
+                    <span class="map-marker marker-two">
+                        <i class="fas fa-map-pin"></i>
+                    </span>
+
+                    <span class="map-marker marker-three">
+                        <i class="fas fa-map-pin"></i>
+                    </span>
+                </div>
+
+                <span class="map-compass">
+                    <i class="fas fa-compass"></i>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
 
 @section Scripts {
-    <script>
-        // Category card click handlers - redirect to destination index with terrain filter
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const category = card.dataset.category;
-                window.location.href = `/Destination/Index?terrain=${category}`;
-            });
-        });
-    </script>
+    <script src="~/js/home.js" asp-append-version="true"></script>
 }
