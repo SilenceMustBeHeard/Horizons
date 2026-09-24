@@ -2,69 +2,145 @@
 @model IEnumerable<DestinationIndexViewModel>
 
 @{
-    ViewData["Title"] = "Home - Adventure Dashboard";
+    ViewData["Title"] = "Explore Destinations - Horizons";
 }
 
-<!-- Hero Section -->
-<section class="welcome-section text-center py-5">
-    <div class="container">
-        <h1>EXPLORE THE WORLD<br>WITH HORIZONS</h1>
-        <p class="lead">Discover amazing destinations, conquer new challenges, and start your adventure today!</p>
-        <a asp-controller="Destination" asp-action="Index" class="btn btn-primary btn-lg mt-3 hero-btn">
-            <i class="fas fa-compass me-2"></i> START EXPLORING
+<!-- Hero -->
+<section class="welcome-section">
+    <div class="horizons-container">
+
+        <span class="section-tag">EXPLORE THE WORLD</span>
+
+        <h1 class="hero-title">
+            With Horizons
+        </h1>
+
+        <p class="hero-description">
+            Discover amazing destinations, conquer new challenges,
+            and start your adventure today.
+        </p>
+
+        <a asp-controller="Destination"
+           asp-action="Map"
+           class="btn btn-primary btn-lg">
+            <i class="fas fa-map-marked-alt"></i>
+            View on Map
         </a>
+
     </div>
 </section>
 
-<!-- Featured Destinations -->
-<section class="explore-section py-5">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">⚡ FEATURED DESTINATIONS ⚡</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            @foreach (var dest in Model)
-            {
-                <div class="col">
-                    <div class="card hover-scale h-100">
-                        <img src="@(string.IsNullOrEmpty(dest.ImageUrl) ? "https://cdn-icons-png.freepik.com/512/11542/11542598.png" : dest.ImageUrl)"
-                             class="card-img-top" alt="@dest.Name" />
-                        <div class="card-body text-center">
-                            <h5 class="card-title">@dest.Name</h5>
-                            <p class="card-text text-muted small">@dest.TerrainName</p>
 
-                            <div class="d-flex justify-content-center gap-2 mt-3">
-                                <a asp-action="Details" asp-route-id="@dest.Id" class="btn btn-primary btn-lg">
-                                    <i class="fas fa-eye me-1"></i> EXPLORE
+<!-- Featured Destinations -->
+<section class="explore-section">
+    <div class="horizons-container">
+
+        <div class="section-header text-center">
+            <span class="section-tag">CURATED COLLECTION</span>
+            <h2 class="section-title">Featured Destinations</h2>
+            <p class="section-subtitle">
+                Hand-picked adventures from our community
+            </p>
+        </div>
+
+        @if (Model.Any())
+        {
+            <div class="destinations-grid">
+
+                @foreach (var dest in Model)
+                {
+                    <article class="card hover-scale">
+
+                        <img src="@(string.IsNullOrEmpty(dest.ImageUrl)
+                                    ? "/images/default-image.jpg"
+                                    : dest.ImageUrl)"
+                             class="card-img-top"
+                             alt="@dest.Name"
+                             loading="lazy"
+                             onerror="this.src='/images/default-image.jpg'" />
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                @dest.Name
+                            </h3>
+
+                            @if (!string.IsNullOrWhiteSpace(dest.TerrainName))
+                            {
+                                <p class="card-text">
+                                    <i class="fas fa-mountain"></i>
+                                    @dest.TerrainName
+                                </p>
+                            }
+
+                            <div class="card-actions">
+
+                                <a asp-action="Details"
+                                   asp-route-id="@dest.Id"
+                                   class="btn btn-primary">
+                                    <i class="fas fa-eye"></i>
+                                    Explore
                                 </a>
 
-                                @if (User.Identity.IsAuthenticated)
+                                @if (User.Identity?.IsAuthenticated == true &&
+                                     !dest.IsUserPublisher)
                                 {
-                                    if (!dest.IsUserPublisher)
-                                    {
-                                        if (!dest.IsUserFavourite)
-                                        {
-                                            <form asp-action="AddToFavorites" method="post" class="d-inline">
-                                                <input type="hidden" name="id" value="@dest.Id" />
-                                                <button type="submit" class="btn btn-warning btn-heart">
-                                                    <i class="fas fa-heart"></i>
-                                                </button>
-                                            </form>
-                                        }
-                                        else
-                                        {
-                                            <form asp-action="RemoveFromFavorites" method="post" class="d-inline">
-                                                <input type="hidden" name="id" value="@dest.Id" />
-                                                <button type="submit" class="btn btn-danger btn-heart active-heart">
-                                                    <i class="fas fa-heart-broken"></i>
-                                                </button>
-                                            </form>
-                                        }
-                                    }
+                                    <form asp-action="@(dest.IsUserFavourite
+                                                       ? "RemoveFromFavorites"
+                                                       : "AddToFavorites")"
+                                          method="post"
+                                          class="card-favorite-form">
+
+                                        <input type="hidden"
+                                               name="id"
+                                               value="@dest.Id" />
+
+                                        <button type="submit"
+                                                class="btn-heart @(dest.IsUserFavourite
+                                                                  ? "btn-danger active-heart"
+                                                                  : "btn-warning")"
+                                                aria-label="@(dest.IsUserFavourite
+                                                             ? "Remove from favorites"
+                                                             : "Add to favorites")">
+
+                                            <i class="@(dest.IsUserFavourite
+                                                        ? "fas fa-heart-broken"
+                                                        : "fas fa-heart")"></i>
+
+                                        </button>
+
+                                    </form>
                                 }
+
                             </div>
+
                         </div>
-                    </div>
+
+                    </article>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+
+                <div class="empty-state-icon">
+                    <i class="fas fa-compass"></i>
                 </div>
-            }
-        </div>
+
+                <h3>No destinations yet</h3>
+                <p>Be the first to share your journey with the community.</p>
+
+                <a asp-controller="Destination"
+                   asp-action="Add"
+                   class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i>
+                    Share Your Story
+                </a>
+
+            </div>
+        }
+
     </div>
 </section>
