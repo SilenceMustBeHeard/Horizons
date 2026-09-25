@@ -5,77 +5,163 @@
     ViewData["Title"] = "Share Your Story";
 }
 
-<div class="form-page-wrapper">
-    <div class="container">
-        <div class="form-header text-center">
-            <span class="form-tag">SHARE YOUR JOURNEY</span>
-            <h1 class="form-title">Add New Destination</h1>
-            <p class="form-subtitle">Tell the world about your adventure. Every story inspires someone else to explore.</p>
+<div class="form-page">
+
+    <div class="horizons-container">
+
+        <!-- Header -->
+        <div class="form-header">
+
+            <span class="section-tag">SHARE YOUR JOURNEY</span>
+
+            <h1 class="section-title">
+                Add New Destination
+            </h1>
+
+            <p class="section-subtitle">
+                Tell the world about your adventure.
+                Every story inspires someone else to explore.
+            </p>
+
         </div>
 
-        <div class="form-container">
-            <form asp-action="Add" method="post">
+
+        <!-- Form -->
+        <div class="form-card form-card-compact">
+
+            <form asp-action="Add" method="post" class="horizons-form">
+
                 @Html.AntiForgeryToken()
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-                <!-- Basic Information -->
-                <div class="form-section">
-                    <h3 class="form-section-title">
-                        <i class="fas fa-info-circle"></i> Basic Information
-                    </h3>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label asp-for="Name" class="form-label">Destination Name</label>
-                            <input asp-for="Name" class="form-control" placeholder="e.g., Everest Base Camp" />
-                            <span asp-validation-for="Name" class="error-message"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="TerrainId" class="form-label">Terrain Type</label>
-                            <select asp-for="TerrainId" class="form-control" asp-items="@(new SelectList(Model.Terrains, "Id", "Name"))">
-                                <option value="">Select terrain</option>
-                            </select>
-                            <span asp-validation-for="TerrainId" class="error-message"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="Description" class="form-label">Your Story</label>
-                        <textarea asp-for="Description" class="form-control" rows="6" placeholder="Describe your adventure... What made it special? What did you learn?"></textarea>
-                        <span asp-validation-for="Description" class="error-message"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="ImageUrl" class="form-label">Photo URL</label>
-                        <input asp-for="ImageUrl" class="form-control" placeholder="https://..." />
-                        <small class="input-hint">Share a high-quality image of your destination</small>
-                        <span asp-validation-for="ImageUrl" class="error-message"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="PublishedOn" class="form-label">Date of Adventure</label>
-                        <input asp-for="PublishedOn" class="form-control" type="date" />
-                        <span asp-validation-for="PublishedOn" class="error-message"></span>
-                    </div>
+                <div asp-validation-summary="ModelOnly"
+                     class="form-validation-summary">
                 </div>
 
-                <!-- Location Information -->
-                <div class="form-section">
+
+                <!-- Basic Information -->
+                <section class="form-section">
+
                     <h3 class="form-section-title">
-                        <i class="fas fa-map-marked-alt"></i> Location
+                        <i class="fas fa-info-circle"></i>
+                        Basic Information
                     </h3>
 
                     <div class="form-row">
+
                         <div class="form-group">
-                            <label asp-for="Country" class="form-label">Country</label>
-                            <input asp-for="Country" class="form-control" placeholder="e.g., Nepal, Japan, Italy" />
-                            <span asp-validation-for="Country" class="error-message"></span>
+                            <label asp-for="Name" class="form-label">
+                                Destination Name
+                            </label>
+
+                            <input asp-for="Name"
+                                   class="form-control"
+                                   placeholder="e.g., Everest Base Camp" />
+
+                            <span asp-validation-for="Name"
+                                  class="form-error">
+                            </span>
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="Continent" class="form-label">Continent</label>
+                            <label asp-for="TerrainId" class="form-label">
+                                Terrain Type
+                            </label>
+
+                            <select asp-for="TerrainId"
+                                    class="form-control"
+                                    asp-items="@(new SelectList(Model.Terrains, "Id", "Name"))">
+
+                                <option value="">Select terrain</option>
+                            </select>
+
+                            <span asp-validation-for="TerrainId"
+                                  class="form-error">
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Description" class="form-label">
+                            Your Story
+                        </label>
+
+                        <textarea asp-for="Description"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Describe your adventure..."></textarea>
+
+                        <span asp-validation-for="Description"
+                              class="form-error">
+                        </span>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label asp-for="ImageUrl" class="form-label">
+                                Photo URL
+                            </label>
+
+                            <input asp-for="ImageUrl"
+                                   class="form-control"
+                                   placeholder="https://..." />
+
+                            <span asp-validation-for="ImageUrl"
+                                  class="form-error">
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="PublishedOn" class="form-label">
+                                Date of Adventure
+                            </label>
+
+                            <input asp-for="PublishedOn"
+                                   class="form-control"
+                                   type="date" />
+
+                            <span asp-validation-for="PublishedOn"
+                                  class="form-error">
+                            </span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Location -->
+                <section class="form-section">
+
+                    <h3 class="form-section-title">
+                        <i class="fas fa-map-marked-alt"></i>
+                        Location
+                    </h3>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label asp-for="Country" class="form-label">
+                                Country
+                            </label>
+
+                            <input asp-for="Country"
+                                   class="form-control"
+                                   placeholder="e.g., Nepal" />
+
+                            <span asp-validation-for="Country"
+                                  class="form-error">
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Continent" class="form-label">
+                                Continent
+                            </label>
+
                             <select asp-for="Continent" class="form-control">
+
                                 <option value="">Select continent</option>
                                 <option value="Asia">🌏 Asia</option>
                                 <option value="Europe">🇪🇺 Europe</option>
@@ -84,46 +170,89 @@
                                 <option value="Africa">🦁 Africa</option>
                                 <option value="Oceania">🏝️ Oceania</option>
                                 <option value="Antarctica">❄️ Antarctica</option>
+
                             </select>
-                            <span asp-validation-for="Continent" class="error-message"></span>
+
+                            <span asp-validation-for="Continent"
+                                  class="form-error">
+                            </span>
                         </div>
+
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label asp-for="Latitude" class="form-label">Latitude</label>
-                            <input asp-for="Latitude" class="form-control" placeholder="e.g., 27.9881" step="any" />
-                            <small class="input-hint">Range: -90 to 90 (negative for South)</small>
-                            <span asp-validation-for="Latitude" class="error-message"></span>
-                        </div>
+                    <div class="form-row form-row-3">
 
                         <div class="form-group">
-                            <label asp-for="Longitude" class="form-label">Longitude</label>
-                            <input asp-for="Longitude" class="form-control" placeholder="e.g., 86.9250" step="any" />
-                            <small class="input-hint">Range: -180 to 180 (negative for West)</small>
-                            <span asp-validation-for="Longitude" class="error-message"></span>
+                            <label asp-for="Latitude" class="form-label">
+                                Latitude
+                            </label>
+
+                            <input asp-for="Latitude"
+                                   class="form-control"
+                                   placeholder="27.9881"
+                                   step="any" />
+
+                            <span asp-validation-for="Latitude"
+                                  class="form-error">
+                            </span>
                         </div>
+
+                        <div class="form-group">
+                            <label asp-for="Longitude" class="form-label">
+                                Longitude
+                            </label>
+
+                            <input asp-for="Longitude"
+                                   class="form-control"
+                                   placeholder="86.9250"
+                                   step="any" />
+
+                            <span asp-validation-for="Longitude"
+                                  class="form-error">
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="TravelDistance" class="form-label">
+                                Distance (km)
+                            </label>
+
+                            <input asp-for="TravelDistance"
+                                   class="form-control"
+                                   placeholder="150"
+                                   step="any" />
+
+                            <span asp-validation-for="TravelDistance"
+                                  class="form-error">
+                            </span>
+                        </div>
+
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="TravelDistance" class="form-label">Travel Distance (km)</label>
-                        <input asp-for="TravelDistance" class="form-control" placeholder="e.g., 150" step="any" />
-                        <small class="input-hint">Optional: How far you traveled to reach this destination</small>
-                        <span asp-validation-for="TravelDistance" class="error-message"></span>
-                    </div>
-                </div>
+                </section>
 
-                <!-- Form Actions -->
+
+                <!-- Actions -->
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> Share My Story
-                    </button>
-                    <a asp-controller="Destination" asp-action="Index" class="btn btn-secondary">
-                        <i class="fas fa-times"></i> Cancel
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Share My Story
+                    </button>
+
+                    <a asp-controller="Destination"
+                       asp-action="Index"
+                       class="btn btn-secondary">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
