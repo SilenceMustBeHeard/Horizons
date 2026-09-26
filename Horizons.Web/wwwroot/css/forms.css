@@ -358,6 +358,7 @@ input[type="number"].form-control::-webkit-inner-spin-button {
 }
 
 input[type="number"].form-control {
+    appearance: textfield;
     -moz-appearance: textfield;
 }
 
@@ -590,4 +591,39 @@ input[type="number"].form-control {
     .form-control {
         transition: none;
     }
+}
+
+/* image preview (for edit) */
+
+.form-image-preview {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.5rem;
+
+    margin-top: 1rem;
+}
+
+.form-image-preview .image-preview {
+    display: block;
+
+    width: 100%;
+    max-width: 320px;
+    height: 180px;
+
+    object-fit: cover;
+
+    background: var(--surface-2);
+
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+
+    box-shadow: var(--shadow-1);
+}
+
+.form-image-preview-label {
+    color: var(--text-muted);
+
+    font-size: 0.72rem;
+    font-style: italic;
 }

@@ -252,4 +252,45 @@ public class DestinationService : IDestinationService
 
         return destination?.PublisherId == userId;
     }
+public async Task<DestinationDeleteViewModel?> GetDestinationForDeleteAsync(Guid id, string userId)
+{
+    if (string.IsNullOrEmpty(userId))
+        return null;
+
+    return await _context.Destinations
+        .AsNoTracking()
+        .Where(d => d.Id == id && d.PublisherId == userId && !d.IsDeleted)
+        .Select(d => new DestinationDeleteViewModel
+        {
+            Id = d.Id,
+            Name = d.Name,
+            ImageUrl = d.ImageUrl,
+            Country = d.Country,
+            Continent = d.Continent,
+            PublishedOn = d.CreatedAt.ToString("MMMM dd, yyyy")
+        })
+        .FirstOrDefaultAsync();
+}
+
+public async Task<bool> DeleteDestinationAsync(Guid id, string userId)
+{
+    var destination = await _context.Destinations
+        .FirstOrDefaultAsync(d => d.Id == id && d.PublisherId == userId);
+
+    if (destination == null)
+        return false;
+
+    destination.IsDeleted = true;
+    destination.DeletedAt = DateTime.UtcNow;
+
+    return await _context.SaveChangesAsync() > 0;
+}
+
+
+
+
+
+
+
+
 }

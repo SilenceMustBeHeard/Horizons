@@ -24,4 +24,16 @@ public interface IDestinationService
 
     // Helper methods
     Task<bool> IsUserPublisherAsync(Guid destinationId, string userId);
+// Delete
+Task<DestinationDeleteViewModel?> GetDestinationForDeleteAsync(Guid id, string userId);
+Task<bool> DeleteDestinationAsync(Guid id, string userId); 
+
+
+
+
+
+
+
+
+
 }

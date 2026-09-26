@@ -35,7 +35,6 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
     options.SignIn.RequireConfirmedAccount = true;
     options.SignIn.RequireConfirmedEmail = true;
 
-    // password settings
     options.Password.RequireDigit = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireUppercase = true;
@@ -43,12 +42,10 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
     options.Password.RequiredLength = 10;
     options.Password.RequiredUniqueChars = 4;
 
-    // lockout settings
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.AllowedForNewUsers = true;
 
-    // user settings
     options.User.RequireUniqueEmail = true;
     options.User.AllowedUserNameCharacters =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
@@ -114,6 +111,11 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
+
+
+// MIDDLEWARE PIPELINE
+
+
 // Seed Roles, Users and Data
 using (var scope = app.Services.CreateScope())
 {
@@ -121,15 +123,14 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<AppDbContext>();
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    var configuration = services.GetRequiredService<IConfiguration>(); // <-- ДОБАВИ ТОВА
+    var configuration = services.GetRequiredService<IConfiguration>();
 
     await context.Database.MigrateAsync();
 
     await IdentitySeeder.SeedRolesAsync(roleManager);
-    await IdentitySeeder.SeedAdminAsync(userManager, configuration); // <-- ПРОМЕНЕНО
-    await IdentitySeeder.SeedManagerAsync(userManager, configuration); // <-- ПРОМЕНЕНО
+    await IdentitySeeder.SeedAdminAsync(userManager, configuration);
+    await IdentitySeeder.SeedManagerAsync(userManager, configuration);
 
-    // Seed Destinations - ONLY if table is empty
     if (!await context.Destinations.AnyAsync())
     {
         try
@@ -148,11 +149,12 @@ using (var scope = app.Services.CreateScope())
         Console.WriteLine("📦 Destinations already exist. Skipping data seeding.");
     }
 }
+
 // Static files with .glb support
 var provider = new FileExtensionContentTypeProvider();
 provider.Mappings[".glb"] = "model/gltf-binary";
 
-// Configure error handling middleware
+// Error handling middleware
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error/500");
@@ -163,7 +165,6 @@ else
     app.UseDeveloperExceptionPage();
 }
 
-app.UseStatusCodePagesWithReExecute("/Error/{0}");
 app.UseHttpsRedirection();
 
 app.UseStaticFiles(new StaticFileOptions
@@ -171,24 +172,17 @@ app.UseStaticFiles(new StaticFileOptions
     ContentTypeProvider = provider
 });
 
-app.UseRouting();
-app.UseAuthentication();
+
+app.UseRouting();                                    
+
+app.UseStatusCodePagesWithReExecute("/Error/{0}");  
+
+app.UseAuthentication();                            
 app.UseAuthorization();
-app.UseSession();
 
-// Custom error handling for 404
-app.Use(async (context, next) =>
-{
-    await next();
-    if (context.Response.StatusCode == 404 && !context.Response.HasStarted)
-    {
-        context.Items["originalPath"] = context.Request.Path;
-        context.Request.Path = "/Error/404";
-        await next();
-    }
-});
+app.UseSession();                                    
 
-// Routing
+
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -197,7 +191,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Health Check endpoint
 app.MapHealthChecks("/health");
 
 await app.RunAsync();
