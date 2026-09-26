@@ -124,7 +124,8 @@
             <!-- Actions -->
             <div class="destination-hero-actions">
 
-                <a asp-controller="Destination"
+                <a
+                 asp-controller="Destination"
                    asp-action="Index"
                    class="btn btn-secondary">
 
@@ -133,26 +134,24 @@
 
                 </a>
 
-                @if (Model.IsUserPublisher)
-                {
-                    <a asp-action="Edit"
-                       asp-route-id="@Model.Id"
-                       class="btn btn-outline-primary">
+          @if (Model.IsUserPublisher)
+{
+    <a asp-controller="Destination"
+       asp-action="Edit"
+         asp-route-id="@Model.Id"
+       class="btn btn-outline-primary">
+        <i class="fas fa-edit"></i>
+        Edit Story
+    </a>
 
-                        <i class="fas fa-edit"></i>
-                        Edit Story
-
-                    </a>
-
-                    <a asp-action="Delete"
-                       asp-route-id="@Model.Id"
-                       class="btn btn-outline-danger">
-
-                        <i class="fas fa-trash"></i>
-                        Delete
-
-                    </a>
-                }
+    <a asp-controller="Destination"
+       asp-action="Delete"
+       asp-route-id="@Model.Id"
+       class="btn btn-outline-danger">
+        <i class="fas fa-trash"></i>
+        Delete
+    </a>
+}
 
             </div>
 
