@@ -259,6 +259,7 @@ public async Task<DestinationDeleteViewModel?> GetDestinationForDeleteAsync(Guid
 
     return await _context.Destinations
         .AsNoTracking()
+        .Include(d => d.Publisher)                          
         .Where(d => d.Id == id && d.PublisherId == userId && !d.IsDeleted)
         .Select(d => new DestinationDeleteViewModel
         {
@@ -267,11 +268,13 @@ public async Task<DestinationDeleteViewModel?> GetDestinationForDeleteAsync(Guid
             ImageUrl = d.ImageUrl,
             Country = d.Country,
             Continent = d.Continent,
-            PublishedOn = d.CreatedAt.ToString("MMMM dd, yyyy")
+            PublishedOn = d.CreatedAt.ToString("MMMM dd, yyyy"),
+            Publisher = d.Publisher != null
+                ? d.Publisher.UserName
+                : "Unknown"                                  
         })
         .FirstOrDefaultAsync();
 }
-
 public async Task<bool> DeleteDestinationAsync(Guid id, string userId)
 {
     var destination = await _context.Destinations
