@@ -250,27 +250,28 @@ IDestinationService destinationService,
         }
     }
 
-    [HttpPost]
-    [Authorize]
-    public async Task<IActionResult> DeleteConfirmed(Guid id)
+    
+[HttpPost]
+[Authorize]
+public async Task<IActionResult> DeleteConfirmed(Guid id)
+{
+    try
     {
-        try
-        {
-            string? userId = GetUserId();
+        string? userId = GetUserId();
 
-            if (string.IsNullOrEmpty(userId))
-                return RedirectToAction("Login", "Account");
+        if (string.IsNullOrEmpty(userId))
+            return RedirectToAction("Login", "Account");
 
-            await _destinationService.DeleteDestinationAsync(id, userId);
+        await _destinationService.DeleteDestinationAsync(id, userId);
 
-            TempData["SuccessMessage"] = "Destination deleted successfully!";
+        TempData["SuccessMessage"] = "Destination deleted successfully!";
 
-            return RedirectToAction(nameof(Index));
-        }
-        catch (Exception)
-        {
-            return RedirectToAction("Index", "Home");
-        }
+        return RedirectToAction(nameof(Index));
     }
+    catch (Exception)
+    {
+        return RedirectToAction("Index", "Home");
+    }
+}
 }
 
