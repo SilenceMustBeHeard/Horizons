@@ -1,0 +1,250 @@
+@using Horizons.Web.ViewModels.Account.Profile
+@model ProfileViewModel
+
+@{
+    ViewData["Title"] = "My Profile - Horizons";
+}
+
+<div class="profile-page">
+
+    <div class="horizons-container">
+
+        <!-- profile header -->
+        <section class="profile-header">
+
+            <div class="profile-header-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+
+            <div class="profile-header-info">
+
+                <h1 class="profile-header-name">
+                    @if (!string.IsNullOrWhiteSpace(Model.FirstName) ||
+                         !string.IsNullOrWhiteSpace(Model.LastName))
+                    {
+                        @($"{Model.FirstName} {Model.LastName}".Trim())
+                    }
+                    else
+                    {
+                        @Model.Email
+                    }
+                </h1>
+
+                <p class="profile-header-email">
+                    <i class="fas fa-envelope"></i>
+                    @Model.Email
+                </p>
+
+                @if (!string.IsNullOrWhiteSpace(Model.AlternateEmail))
+                {
+                    <p class="profile-header-email">
+                        <i class="fas fa-envelope-open-text"></i>
+                        @Model.AlternateEmail
+                        <span class="profile-header-badge">Alternate</span>
+                    </p>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.Address))
+                {
+                    <p class="profile-header-address">
+                        <i class="fas fa-map-marker-alt"></i>
+                        @Model.Address
+                    </p>
+                }
+
+            </div>
+
+            <div class="profile-header-actions">
+
+                <a asp-controller="Account"
+                   asp-action="ChangePassword"
+                   class="btn btn-secondary">
+                    <i class="fas fa-key"></i>
+                    Change Password
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- quick actions -->
+        <section class="profile-section">
+
+            <h2 class="profile-section-title">
+                <i class="fas fa-bolt"></i>
+                Quick Actions
+            </h2>
+
+            <div class="profile-quick-actions">
+
+                <a asp-controller="Destination"
+                   asp-action="Favorites"
+                   class="profile-quick-action">
+                    <i class="fas fa-heart"></i>
+                    <span>My Favorites</span>
+                </a>
+
+                <a asp-controller="Destination"
+                   asp-action="Add"
+                   class="profile-quick-action">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Add Destination</span>
+                </a>
+
+                <a asp-controller="Destination"
+                   asp-action="Index"
+                   class="profile-quick-action">
+                    <i class="fas fa-globe-americas"></i>
+                    <span>Explore</span>
+                </a>
+
+                <a asp-controller="Destination"
+                   asp-action="Map"
+                   class="profile-quick-action">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>View Map</span>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- system inbox -->
+        @if (Model.SystemInbox != null && Model.SystemInbox.Any())
+        {
+            <section class="profile-section">
+
+                <h2 class="profile-section-title">
+                    <i class="fas fa-inbox"></i>
+                    System Inbox
+                    <span class="profile-section-badge">
+                        @Model.SystemInbox.Count()
+                    </span>
+                </h2>
+
+                <div class="profile-messages">
+
+                    @foreach (var message in Model.SystemInbox)
+                    {
+                        <a asp-controller="Profile"
+                           asp-action="SystemMessageDetails"
+                           asp-route-id="@message.Id"
+                           class="profile-message-item">
+
+                            <div class="profile-message-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+
+                            <div class="profile-message-content">
+
+                                <h3 class="profile-message-title">
+                                    @message.Title
+                                </h3>
+
+                                <p class="profile-message-preview">
+                                    @(message.Description?.Length > 100
+                                        ? message.Description.Substring(0, 100) + "..."
+                                        : message.Description)
+                                </p>
+
+                                <span class="profile-message-date">
+                                    <i class="fas fa-clock"></i>
+                                    @message.CreatedOn.ToString("MMM dd, yyyy")
+                                </span>
+
+                            </div>
+
+                            <i class="fas fa-chevron-right profile-message-arrow"></i>
+
+                        </a>
+                    }
+
+                </div>
+
+            </section>
+        }
+
+
+        <!-- contact messages -->
+        @if (Model.ContactMessages != null && Model.ContactMessages.Any())
+        {
+            <section class="profile-section">
+
+                <h2 class="profile-section-title">
+                    <i class="fas fa-comments"></i>
+                    Contact Messages
+                    <span class="profile-section-badge">
+                        @Model.ContactMessages.Count()
+                    </span>
+                </h2>
+
+                <div class="profile-messages">
+
+                    @foreach (var message in Model.ContactMessages)
+                    {
+                        <a asp-controller="Profile"
+                           asp-action="ContactMessageDetails"
+                           asp-route-id="@message.Id"
+                           class="profile-message-item">
+
+                            <div class="profile-message-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+
+                            <div class="profile-message-content">
+
+                                <h3 class="profile-message-title">
+                                    @message.Subject
+                                </h3>
+
+                                @* <p class="profile-message-preview">
+                                    @(message?.Description?.Length > 100
+                                        ? message.Description.Substring(0, 100) + "..."
+                                        : message.Description)
+                                </p> *@
+
+                                <span class="profile-message-date">
+                                    <i class="fas fa-clock"></i>
+                                    @message!.CreatedOn.ToString("MMM dd, yyyy")
+                                </span>
+
+                            </div>
+
+                            <i class="fas fa-chevron-right profile-message-arrow"></i>
+
+                        </a>
+                    }
+
+                </div>
+
+            </section>
+        }
+
+
+        <!-- empty state -->
+        @if ((Model.SystemInbox == null || !Model.SystemInbox.Any()) &&
+             (Model.ContactMessages == null || !Model.ContactMessages.Any()))
+        {
+            <section class="profile-section">
+
+                <div class="profile-empty">
+
+                    <i class="fas fa-inbox"></i>
+
+                    <h3>No messages yet</h3>
+
+                    <p>
+                        When you receive system notifications or contact messages,
+                        they'll appear here.
+                    </p>
+
+                </div>
+
+            </section>
+        }
+
+    </div>
+
+</div>
