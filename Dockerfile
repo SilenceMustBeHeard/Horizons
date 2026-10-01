@@ -8,6 +8,7 @@ COPY ["Horizons.Data/Horizons.Data.csproj", "Horizons.Data/"]
 COPY ["Horizons.Services.Common/Horizons.Services.Common.csproj", "Horizons.Services.Common/"]
 COPY ["Horizons.Services.Core/Horizons.Services.Core.csproj", "Horizons.Services.Core/"]
 COPY ["Horizons.Web.Infrastructure/Horizons.Web.Infrastructure.csproj", "Horizons.Web.Infrastructure/"]
+COPY ["Horizons.Web.ViewModels/Horizons.Web.ViewModels.csproj", "Horizons.Web.ViewModels/"]
 COPY ["Horizons.Web/Horizons.Web.csproj", "Horizons.Web/"]
 COPY ["Horizons.API/Horizons.API.Web.csproj", "Horizons.API/"]
 
