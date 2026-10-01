@@ -18,6 +18,24 @@ using SendGrid;
 
 var builder = WebApplication.CreateBuilder(args);
 
+   // secrets (Render)
+var secretsPath = "/etc/secrets/appsettings.Production.json";
+
+if (File.Exists(secretsPath))
+{
+    builder.Configuration.AddJsonFile(
+        secretsPath,
+        optional: true,
+        reloadOnChange: false);
+
+    Console.WriteLine($"✅ Loaded config from {secretsPath}");
+}
+else
+{
+    Console.WriteLine($"ℹ️ {secretsPath} not found");
+}
+
+
 // Connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
