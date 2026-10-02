@@ -15,18 +15,17 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false">
 
-                <i class="fas fa-user-circle user-avatar-icon"></i>
+                <i class="fas fa-user-circle"></i>
 
                 <span class="user-name">
                     @{
                         var userName = UserManager.GetUserName(User);
                         var displayName = userName?.Split('@')[0] ?? "Explorer";
                     }
-
                     @displayName
                 </span>
 
-                <i class="fas fa-chevron-down user-dropdown-arrow"></i>
+                <i class="fas fa-chevron-down"></i>
 
             </button>
 
@@ -34,22 +33,10 @@
 
                 <li>
                     <a class="dropdown-item"
-                       asp-controller="Account"
-                       asp-action="Manage">
-
-                        <i class="fas fa-user-cog"></i>
-                        <span>Profile Settings</span>
-
-                    </a>
-                </li>
-                   <li>
-                    <a class="dropdown-item"
                        asp-controller="Profile"
                        asp-action="Index">
-
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-user"></i>
                         <span>My Profile</span>
-
                     </a>
                 </li>
 
@@ -57,10 +44,8 @@
                     <a class="dropdown-item"
                        asp-controller="Destination"
                        asp-action="Favorites">
-
                         <i class="fas fa-heart"></i>
                         <span>My Favorites</span>
-
                     </a>
                 </li>
 
@@ -68,10 +53,8 @@
                     <a class="dropdown-item"
                        asp-controller="Destination"
                        asp-action="Add">
-
                         <i class="fas fa-plus-circle"></i>
                         <span>Add Destination</span>
-
                     </a>
                 </li>
 
@@ -83,15 +66,10 @@
                     <form asp-controller="Account"
                           asp-action="Logout"
                           method="post">
-
-                        <button type="submit"
-                                class="dropdown-item logout-item">
-
+                        <button type="submit" class="dropdown-item logout-item">
                             <i class="fas fa-sign-out-alt"></i>
                             <span>Sign Out</span>
-
                         </button>
-
                     </form>
                 </li>
 
@@ -106,20 +84,16 @@ else
 
         <a asp-controller="Account"
            asp-action="Login"
-           class="nav-link login-link">
-
+           class="login-link">
             <i class="fas fa-sign-in-alt"></i>
             <span>Sign In</span>
-
         </a>
 
         <a asp-controller="Account"
            asp-action="Register"
            class="btn btn-primary btn-sm">
-
             <i class="fas fa-user-plus"></i>
             <span>Join</span>
-
         </a>
 
     </div>
