@@ -1,11 +1,36 @@
-/* Not Implemented */
+/* fullscreen error */
 
+.fullscreen-error {
+    position: relative;
+
+    min-height: calc(100vh - var(--header-height));
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 3rem var(--content-padding);
+
+    overflow: hidden;
+}
+
+.error-content {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 560px;
+
+    text-align: center;
+}
+
+
+/* Not Implemented */
 
 .under-construction {
     background: linear-gradient(135deg, #f5efe2 0%, #ede4d2 100%);
     position: relative;
 }
-
 /* Header Section */
 .error-header {
     text-align: center;
